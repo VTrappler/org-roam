@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       ea4143c4-696d-43e2-adee-f11ffce97095
+:END:
+#+title: 3DVar and 4DVar
+#+filetags: :DataAssimilation:
+#+STARTUP: latexpreview
+
+* Short intro
+In [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]] we cover 3D-Var as the equivalent variational
+paradigm for the BLUE, which can be readily adapted for non-linear cases.
+
+4D-Var combines some aspects of the Kalman filter (especially for its
+sequential aspect), while adopting a variational approach
+
+* Cost function in the 3D-Var and 4D-Var
+
+\begin{align}
+  J_{3D}(x) &= \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x) \\
+J_{4D}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2
+\end{align}
+
+* Optimisation
+[[id:f867396d-b033-4fa7-b99a-b4dd551ae37b][Adjoint Method]]

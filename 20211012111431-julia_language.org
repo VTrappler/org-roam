@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       882e2b5a-d43f-4679-9ce1-ce64530c116a
+:END:
+#+title: Julia Language
+#+filetags: :ProgrammingLanguage:
+
+Julia is a high-level, high-performance, dynamic programming
+language. While it is a general-purpose language and can be used to
+write any application, many of its features are well suited for
+numerical analysis and computational science.
+https://julialang.org/ 

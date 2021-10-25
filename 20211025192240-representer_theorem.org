@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       387aff20-0b35-46e2-a71e-60f40ad341b4
+:END:
+#+title: Representer Theorem
+#+STARTUP: latexpreview
+
+Representer theorem states that the minimizer $f^*$ of a [[id:4fe0221e-366f-4442-ac99-542bc63f2eb4][Regularized]]
+empirical risk functional defined over a [[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][RKHS]] can be represented as a
+finite linear combination of kernels.
+
+* TODO Theorem
+

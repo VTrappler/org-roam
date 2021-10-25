@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       b055093c-ed5e-4e0e-b285-458744821241
+:ROAM_ALIASES: MCMC
+:END:
+#+title: Markov Chain Monte-Carlo
+#+STARTUP: latexpreview
+
+* Short intro
+[[id:b055093c-ed5e-4e0e-b285-458744821241][MCMC]] is a class of [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][Sampling methods]] from a probability
+distribution, which consists in creating a [[id:463a3501-d30d-4a4d-81b3-664ee6a2063e][Markov Chain]], whose
+stationary distribution is the desired distribution.
+
+
+
+

@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       5067b3e2-838b-4ca6-a765-a28fc640fd29
+:END:
+#+title: Importance Sampling
+
+Importance sampling is a [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][sampling method]]

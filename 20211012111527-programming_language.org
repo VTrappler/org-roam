@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       7dc0abda-dd7f-45cc-9273-58fe223f55df
+:END:
+#+title: Programming Language 
+
+
+
+[[id:64ffacea-1c8f-4338-81a4-c6e1daffccba][GO Language]], [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python Language]], [[id:882e2b5a-d43f-4679-9ce1-ce64530c116a][Julia Language]], [[id:d301bcd7-1fdc-4c49-a79f-0d503bf003fd][Cython]], [[id:58653cd1-0719-4de2-9b14-6b3222c9d27e][Fortran Language]]
+			

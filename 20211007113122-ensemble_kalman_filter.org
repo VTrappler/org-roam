@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       e82fb2bb-6b38-4cb9-9d02-ad02c82575cb
+:ROAM_ALIASES: "Stochastic Ensemble Kalman Filter" EnKF
+:END:
+#+title: Ensemble Kalman Filter
+#+filetags: :DataAssimilation:EnKF:
+
+* Short intro
+The EnKF is a reduced-order [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], as it only handles error
+statistics up to the second order. It is then not a [[id:9da81fb6-71ba-458c-85d0-d8c5c840faf5][Particle Filter]],
+but a Gaussian Filter.
+
+#+begin_quote
+The EnKF seeks to mimic the analysis step of the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]],
+but with an ensemble of limited size instead of manipulating
+covariance matrices
+#+end_quote
+
+* Analysis step
+For each member of the ensemble, we want to perform
+\begin{equation}
+x_i^a = x_i^f + \mathbf{K}^*\left(y_i - H(x_i^f)\right)
+\end{equation}
+where $i=1\dots N_e$ is the index of the member of the ensemble.
+The Kalman gain $\mathbf{K}^*$ is usually given by
+\begin{equation}
+\mathbf{K}^* = \mathbf{P}^f\mathbf{H}^T(\mathbf{HP^fH}^T + \mathbf{R})^{-1}
+\end{equation}
+Since $\mathbf{R}$ is assumed known (observation covariance matrix),
+we empirically get $\mathbf{P}^f$ as
+
+Once the posterior ensemble has been obtained, we have  
+
+\begin{align}
+\bar{x}^f &= \frac{1}{N_e} \sum_{i = 1}^{N_e} x_i^f \\
+  \mathbf{P}^f &= \frac{1}{N_e -1} \sum _{i=1}^{N_e} (x_i^f - \bar{x}^f)(x_i^f - \bar{x}^f)^T
+\end{align}
+\begin{align}
+  \bar{x}^a &= \frac{1}{N_e} \sum_{i = 1}^{N_e} x_i^a \\
+  \mathbf{P}^a &= \frac{1}{N_e -1} \sum _{i=1}^{N_e} (x_i^a - \bar{x}^a)(x_i^a - \bar{x}^a)^T \\
+            &= \left(\mathbf{I} - \mathbf{K}^*\mathbf{H}\right) \mathbf{P}^f\left(\mathbf{I} - \mathbf{K}^*\mathbf{H}\right)^T
+\end{align}
+
+which is different from the covariance matrix in the BLUE analysis of
+the KF, where a term $\mathbf{K^*RK^*}^T$ is present.  To correct
+this, we can "perturbate" the observations by a Gaussian noise $u$ which follows
+$\mathcal{N}(0, \mathbf{R})$, and use the empirical covariance matrix
+\begin{equation}
+\mathbf{R}_u = \frac{1}{N_e -1} \sum_{i=1}^{N_e} u_i u_i^T
+\end{equation}
+The Kalman gain is then computed using $\mathbf{R}_u$ instead of $\mathbf{R}$.

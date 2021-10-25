@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       503edbd9-35d0-4352-89a5-b0fe2613b878
+:END:
+#+title: Python Language
+#+filetags: :ProgrammingLanguage:
+

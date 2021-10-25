@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       4c2833a0-5351-4fba-b25e-4985acbd205f
+:ROAM_ALIASES: "sampling method"
+:END:
+#+title: Sampling methods
+#+STARTUP: latexpreview
+
+* Motivation
+Being able to get samples $\{x_i\}_i$ from a given probability
+distribution, say $p_X$ is crucial in many applications.
+
+Indeed, it can be used for the computation of integrals:
+\begin{equation}
+\int_{\mathcal{X}} f(x) p_X(x)\,\mathrm{d}x \approx \frac{1}{N} \sum_{i=1}^N f(x_i)
+\end{equation}
+
+
+[[id:96fe84de-a56b-4a09-a0dc-c289aa18fd42][Rejection Sampling]]
+[[id:5067b3e2-838b-4ca6-a765-a28fc640fd29][Importance Sampling]]

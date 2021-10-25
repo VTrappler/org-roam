@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       2c88b6ee-ba2b-42ab-a830-7199d018d7c8
+:ROAM_ALIASES: "Feature space" "Feature map" RKHS
+:END:
+#+title: Reproducing Kernel Hilbert Space
+#+filetags: :FunctionalAnalysis:RKHS:
+#+LaTeX_HEADER: \newcommand{\inner}[2]{\langle #1, #2 \rangle}
+#+STARTUP: latexpreview
+
+* Definition
+A RKHS is a [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]], which possesses a kernel linked to
+pointwise evaluations of functions.
+
+** Reproducing Kernel
+Let $X$ be a set, and $H$ a [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]] of complex-valued functions
+on $X$.
+$H$ is said to be a [[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][RKHS]] if *every* linear map of the form
+\begin{equation}
+\begin{array}{rcl}
+L_x: H &\rightarrow& \mathbb{C} \\
+f &\mapsto& f(x)
+\end{array}
+\end{equation}
+(pointwise evaluation) is *continuous* for any $x\in X$.
+
+By [[id:6b0ea663-e526-4416-b290-adea0a3d9fd5][Riesz representation theorem]], for every $x\in X$, there exists $K_x
+\in H$ such that
+\begin{equation}
+f(x) = \inner{f}{K_x} \quad \forall f \in H
+\end{equation}
+ 
+$K_x$ is the point-evaluation functional at $x$, and is a function defined on $X$.
+
+\begin{equation}
+\begin{array}{rcl}
+K: H \times H &\longrightarrow& \mathbb{C} \\
+x, y & \longmapsto& K(x,y) = \overline{K_x(y)}
+\end{array}
+\end{equation}
+$K$ is the *Reproducing Kernel* for the [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]] $H$, and is unique.
+
+We have then
+\begin{equation}
+K(x,y) = \inner{K_y}{K_x} 
+\end{equation}
+
+$K_x = \phi(x)$ is sometimes called the *Feature map*, and $H$ the *feature space*
+Thus a kernel is a function that can be written as an inner product in the feature space.
+
+** Example
+$L_2$ spaces are not RKHS
+
+* Constructing a RKHS from a Kernel
+
+[[id:36f1dc46-b6fb-4e16-b36d-f6dd10c3dace][Mercer's theorem]]

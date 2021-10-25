@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       c0b12568-1f49-4871-b9a5-604548a59a4e
+:END:
+#+title: Machine Learning
+#+filetags: :ML:
+
+As put in cite:guido_introduction_2016:
+#+begin_quote
+Machine learning is about extracting knowledge from data. It is a
+research field at the intersection of statistics, artificial
+intelligence, and computer science and is also known as predictive
+analytics or statistical learning.
+#+end_quote
+
+ML encompasses a lot of different techniques, algorithms and methods such as
+ * [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]]
+ * [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]]
+ * [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoders]]
+   

@@ -1,0 +1,69 @@
+:PROPERTIES:
+:ID:       bc5efd27-c136-4dc2-a014-bbe643ea1073
+:ROAM_ALIASES: Eigenvalues Eigenvectors "Generalized Eigenvectors"
+:END:
+#+title: Eigenvectors, eigenvalues
+#+STARTUP: latexpreview
+
+* Definition
+Let $T$ be a linear transformation from a vector space onto itself.  A
+non-zero vector $v$ is said to be an eigenvector of $T$ if there
+exists a $\lambda$ such that
+\begin{equation}
+T(v) = \lambda v
+\end{equation}
+If the vector space is finite dimensional, the linear transformation
+can be expressed as a square matrix $A$, and the definition becomes
+\begin{equation}
+Av = \lambda v
+\end{equation}
+
+* Characteristic polynomial
+In finite dimension, eigenvalues are the roots of the polynomial given by
+\begin{equation}
+\lambda \mapsto \mathrm{det}\left(A - \lambda I\right)
+\end{equation}
+
+
+* Diagonalization of a square matrix
+Let us suppose that the eigenvectors $v_1, \dots, v_n$ of $A$ form a
+basis, with asssociated eigenvalues $\lambda_1, \dots,\lambda_n$.
+Let $P$ be a square matrix which consists in the (column) eigenvectors
+\begin{align}
+P &= [v_1, \dots, v_n] \\
+AP &= [\lambda_1 v_1, \dots \lambda_n v_n] \\
+AP &= P \Lambda = \left[v_1, \dots, v_n\right]
+     \begin{bmatrix}
+       \lambda_1 & 0 & 0 \\
+       0 & \ddots & 0 \\
+       0 & 0 & \lambda_n
+     \end{bmatrix}
+\end{align}
+
+Thus
+\begin{equation}
+A = P \Lambda P^{-1}
+\end{equation}
+or equivalently
+\begin{equation}
+\Lambda = P^{-1} A P
+\end{equation}
+
+
+* Symmetric matrices
+Every *real* symmetric matrix can be diagonalized. Moreover, the eigenvalues form an *orthogonal* basis:
+\begin{equation}
+A \text{ real symmetric} \Rightarrow \Lambda = P^T A P
+\end{equation}
+where $P$ is an orthogonal matrix.
+
+
+* Generalized eigenvalues
+A generalized eigenvalue problem is the problem of finding $(v, \lambda)$ verifying
+\begin{equation}
+Av= \lambda Bv
+\end{equation}
+where $A$, $B$, are matrices. It is also called the eigenvalues
+associated with the *stencil* $(A, B)$.
+
+

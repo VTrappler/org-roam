@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       f867396d-b033-4fa7-b99a-b4dd551ae37b
+:END:
+#+title: Adjoint Method
+#+STARTUP: latexpreview

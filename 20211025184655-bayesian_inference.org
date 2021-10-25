@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       8dcedd6a-85dc-4af5-afde-5936cef961d6
+:ROAM_ALIASES: "Bayesian Inverse Problem" "Bayes' theorem" Bayes
+:END:
+#+title: Bayesian Inference
+#+STARTUP: latexpreview
+#+filetags: :Bayes:
+
+
+[[id:24be8ceb-d6db-467e-acec-76c9cc19c981][Probabilistic Graphical Models]]
+

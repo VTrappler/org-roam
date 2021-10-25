@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       96fe84de-a56b-4a09-a0dc-c289aa18fd42
+:END:
+#+title: Rejection Sampling
+
+* Rejection Sampling
+Rejection Sampling is a [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][sampling method]] based on a proposal
+distribution $q(x)$, from which it is easier to sample. We have the
+following assumptions:
++ $p_X(x) \leq M q(x)$ for $M < 0$
++ we are able to evaluate $p_X(x)$
+
+* Algorithm
+
++ Generate a sample $x_i$ using $q$
++ Accept the sample $x_i$ with probability $\frac{p_X(x_i)}{Mq(x_i)}$
+
+* Drawbacks
+
++ Finding a value $M$ valid 
++ Acceptance probability $\propto \frac{1}{M}$, so harder in higher
+  dimensions when $M$ is large

@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       6cee23ab-0d25-40b3-9b73-ba44fc730b39
+:END:
+#+title: Cholesky Decomposition
+#+STARTUP: latexpreview
+
+
+The Cholesky decomposition is the factorization of an Hermitian ($A =
+\bar{A^T}$), positive-definite matrix into the product of a lower
+triangular matrix and its conjugate transpose.
+
+Let $A$ be such a matrix, then there exists $L$ such that
+\begin{equation}
+A = L^* L
+\end{equation}
+ and $L$'s elements on the diagonal are real and positive.
+
+ In the real case, $L$ is lower triangular, and $L$'s elements on the diagonal are positive.
+\begin{equation}
+A = L^T L
+\end{equation}
+

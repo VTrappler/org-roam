@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       463a3501-d30d-4a4d-81b3-664ee6a2063e
+:END:
+#+title: Markov Chain
+#+STARTUP: latexpreview
+
+* Definition
+Let us consider a state process $\mathbf{X} = \{\mathbf{X}_k\}_k$,
+with values in a continuous state space $\mathcal{X}$.
+The distribution of $\mathbf{X} = \{\mathbf{X}_k\}_k$ is $p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k})$
+Using conditional probabilities, we have
+\begin{align}
+p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k}) = p_{\mathbf{X}_{0}}(\mathbf{x}_0) &\cdot p_{\mathbf{X}_1 \mid \mathbf{X}_0}(\mathbf{x}_1 \mid \mathbf{x}_0) \\ & \cdot p_{\mathbf{X}_2 \mid \mathbf{X}_{0:1}}(\mathbf{x}_2 \mid \mathbf{x}_{0:1}) \\ \dots & \cdot p_{\mathbf{X}_k \mid \mathbf{X}_{0:(k-1)}}(\mathbf{x}_k \mid \mathbf{x}_{0:(k-1)})
+\end{align}
+
+The process is said to be *Markovian* when
+
+\begin{equation}
+p_{\mathbf{X}_k \mid \mathbf{X}_{0:(k-1)}}(\mathbf{x}_k \mid \mathbf{x}_{0:(k-1)}) = p_{\mathbf{X}_k \mid \mathbf{X}_{k-1}}(\mathbf{x}_k \mid \mathbf{x}_{k-1})
+\end{equation}
+and thus
+\begin{equation}
+p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k}) = p_{\mathbf{X}_{0}}(\mathbf{x}_0) \prod_{l=1}^{k}  p_{\mathbf{X}_l \mid \mathbf{X}_{l-1}}(\mathbf{x}_l \mid \mathbf{x}_{l-1})
+\end{equation}
+
+* Properties
+A Markov chain is then uniquely defined by 
++ its initial state distribution $p_{\mathbf{X}_0}$
++ the transition probabilities $p_{\mathbf{X}_l \mid \mathbf{X}_{l-1}}(\mathbf{x}_l \mid \mathbf{x}_{l-1})$
+
+* Markov Kernel
+

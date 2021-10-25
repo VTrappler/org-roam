@@ -1,0 +1,111 @@
+:PROPERTIES:
+:ID:       6677e8d8-70de-4236-ab2f-3ac48dfba2a4
+:END:
+#+title: Kalman Filter
+#+filetags: :DataAssimilation: :KalmanFilter:
+
+The Kalman filter is an essential method of [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]. It
+relies on linearity and Gaussian assumptions. 
+
+* Kalman Filter
+** Stochastic modelling
+Such a system is described by
+\begin{equation}
+\left\{
+  \begin{array}{rcl}
+    x_k&=& M_k(x_{k-1}) + w_k \\
+    y_k&=& H_k(x_k) + v_k
+  \end{array}\right.
+\end{equation}
+
++ First equation is the forecast step
+  + $x_k$ is the system state at time $t_k$
+  + $M_k$ simulates the system from time $t_{k-1}$ to $t_k$
+  + $w_k$ is the model error within $M_k$, unbiased, *uncorrelated in time*
+  + $\mathbb{E}[w_k] = 0$ and $\mathbb{E}[w_k w_l^T] = \mathbf{Q}_k \cdot \delta_{kl}$ (kronecker delta)
++ Second equation: observation equation
+  + $H_k$ observation operator at time $t_k$
+  + $v_k$ is the observation error, unbiased, *uncorrelated in time*
+  + $\mathbb{E}[v_k] = 0$ and $\mathbb{E}[v_k v_l^T] = \mathbf{R}_k \cdot \delta_{kl}$ (kronecker delta)
++ $\mathbb{E}[v_k w_l^T] = 0$: no correlation between model and observation error.
+[[xournalpp:images/kalman_filter.xop.xopp][Illustration of notations for the kalman filter]]
+** Analysis step
++ At $t_k$, we have $x_k^f$ forecast, assumed unbiased, that acts as a background
++ Assocated covariance matrix is $\mathbf{P}^f_k$.
+
++ Observation $y_k$
+
+BLUE analysis results in
+\begin{equation}
+x_k^a= x_k^f + \mathbf{K}_k\left(y_k - \mathbf{H}_k x_k^f\right)
+\end{equation}
+
++ Analysis covariance matrix:
+\begin{equation}
+\mathbf{P}_k^a = (\mathbf{I} - \mathbf{K}_k\mathbf{H}_k)\mathbf{P}_k^f(\mathbf{I} - \mathbf{K}_k\mathbf{H}_k)^T + \mathbf{K}_k \mathbf{R}_k \mathbf{K}_k^T
+\end{equation}
+
+Optimal gain matrix (=Kalman gain) is given by
+\begin{equation}
+\mathbf{K}^*_k = \mathbf{P}^f_k\mathbf{H}_k^T(\mathbf{H}_k\mathbf{P}^f_k\mathbf{H}_k^T + \mathbf{R}_k)^-1
+\end{equation}
+
+and finally the /optimal/ analysis covariance matrix is
+\begin{equation}
+\mathbf{P}_k^a = (\mathbf{I} - \mathbf{K}_k^*\mathbf{H}_k)\mathbf{P}^f_k
+\end{equation}
+** Forecast step
+
+Because of the linearity, we can use
+\begin{equation}
+x_{k+1}^f + M_{k+1}x^a_k
+\end{equation}
+ as a prediction since it is then unbiased
+
+ 
+The forecast error cov matrix is given by
+
+\begin{equation}
+\mathbf{P}_{k+1}^f = \mathbf{M}_{k+1} \mathbf{P}^a_k \mathbf{M}_{k+1}^T + \mathbf{Q}_{k+1}
+\end{equation}
+
+** Algorithm
+
+*** Initialisation
++ Initial system state $x_0^f$ and error covariance matrix $P_0^f
+  
+*** At every step $k$
+
+**** Analysis
++ Compute optimal gain
++ Compute analysis $x_{k}^a$ using the observation $y_k$
++ Compute error covariance matrix $\mathbf{P}_k^a$
+
+**** Forecast
++ Compute forecast $x_{k+1}^f$ (based on the analysis)
++ Compute error covariance matrix $\mathbf{P}_{k+1}^f$
+
+
+
+** Limits
+Relies on linearity assumptions
++ What if observation operator *non-linear* ?
++ What if evolution model *non-linear* ?
+
+* Extended Kalman Filter
+We can linearize the forecast and analysis step
+We can use the tangent linear as approximations
+
+** Forecast
+\begin{equation}
+x_{k+1}^f = \nabla M_{k+1} x_k^a
+\end{equation}
+
+** Analysis
+\begin{equation}
+\label{}
+x_k^a = x_k^f + \mathbf{K}_k (y_k - H_k(x_k^f))
+\end{equation}
+
+
+

@@ -1,0 +1,240 @@
+:PROPERTIES:
+:ID:       30f05970-bcf5-4fb2-b6d7-13fa4209e968
+:END:
+#+title: Data Assimilation
+#+filetags: :DataAssimilation:
+#+STARTUP: latexpreview
+
+* Short summary and map
+Data assimilation aims at improving the knowledge of the past, present
+and future systems, using both theoretical considerations upon this system, and the observed quantities
+This is largely based on cite:bocquet_introduction_nodate.
+
+[[~/org-roam/images/DA_map.png]]
+[[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]]
+[[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]]
+[[id:ea4143c4-696d-43e2-adee-f11ffce97095][3DVar and 4DVar]]
+
+* Vocabulary and notations
++ $x$ is the *state* 
++ $x^t$ is its numerical counterpart ($\in \mathbb{R}^p$) discretized for instance ($t$ for truth)
++ $x^a$ is the *analysis*, ie the estimated state vector
++ $x^b$ is the *background*, an a priori value used as a "starting point"
+
++ $y$ are the observations $\in \mathbb{R}^n$
+  
+* Observation operator, observational errors
+Knowing the true state, one could get the observations, by introducing an *instrumental error* $e^\mu$
+\begin{equation} y = h[x] + e^\mu \end{equation}
+
+Introducing instead the "truth" $x^t$,
+
+\begin{equation}
+y = H(x^t)+ e^\mu + e^r = H(x^t) + e^o
+\end{equation}
+where $e^r$ is the *representation error*, and $e^o$ is the *model error*
+
+[[xournalpp:scheme_DA.xop.xopp][schema_DA]]
+
+* Error statistics
+** Observation error
+We assume that
+  + $\mathbb{E}[e^o] = 0$: no bias
+  + $\mathbf{R} = \mathrm{Cov}[e^o]$: observation error covariance
+    matrix, positive definite, so invertible
+*Often assumed to be known, and diagonal*
+** Background error
+Defined as the discrepancy between the truth and the background
+  + $e^b = x^b - x^t$ 
+  + $\mathbb{E}[e^b] = 0$: no bias
+  + $\mathbf{B} = \mathrm{Cov}[e^b]$
+
+** Analysis error
+Defined as the difference between the analysis and the truth
+  + $e^a = x^a - x^t$
+  + $\mathbf{P^a} = \mathrm{Cov}[e^a]$
+  + We assume that $e^o$ and $e^b$ are uncorrelated
+ 
+** Model error
+The propagation through the numerical model can be written as
+#+begin_LaTeX
+\begin{equation}
+  x^t(\tau + 1) = M(x^t(\tau)) + e^m
+\end{equation}
+#+end_LaTeX
+
+where the model error is $e^m$.
+
+* Statistical interpolation
+** Tangent linear operator
+Assuming an observation operator $H$
+The variations of the output is given by
+\begin{equation}
+\label{}
+\delta y_i =\sum_{j=1}^{N_x} \frac{\partial H_i}{\partial x_j}  \delta x_j
+\end{equation}
+
+
+So the tangent linear operator (which depends on the evaluation point) is
+
+\begin{equation}
+\mathbf{H} = \nabla H = \left[\mathbf{H}\right]_{i,j} = \frac{\partial H_i}{\partial x_j}
+\end{equation}
+
+** Linear combination
+We are looking for a linear combination of the analysis and of the TLO
+\begin{equation}
+\label{}
+\left\{
+\begin{array}{lll}
+x^a &=& \mathbf{L}x^b + \mathbf{K}y \\
+y &=& \mathbf{H}x^t + e^o
+\end{array}
+\right.
+\end{equation}
+
+So combining this leads to
+\begin{align}
+\label{}
+  x^a - x^t &= \mathbf{L}(x^b - x^t + x^t) + \mathbf{K}\left(\mathbf{H}x^t + e^o\right) - x^t \\
+  e^a &= \mathbf{L}e^b + \mathbf{K}e^o + (\mathbf{L} + \mathbf{KH} - I)x^t
+\end{align}
+
+Because of the unbiasedness of $e^o$ and $e^b$, $\mathbf{L} = \mathbf{I} - \mathbf{KH}$
+and finally
+
+\begin{equation}
+\label{eq:Ansatz}
+x^a = x^b + \mathbf{K}(y - \mathbf{H}x^b)
+\end{equation}
+
++ $(y - \mathbf{H}x^b)$ is the innovation vector
++ $\mathbf{K}$ is the gain vector
+
+** Posterior error
+Rewriting [[eqref:eq:Ansatz]] using the error vectors, we have
+
+\begin{equation}
+\label{}
+e^a = e^b + \mathbf{K}(e^o - \mathbf{H}e^b)
+\end{equation}
+
+and we can get
+\begin{equation}
+\label{}
+\mathbf{P}^a = \mathbf{LBL}^T + \mathbf{KRK}^T
+\end{equation}
+
+** BLUE Analysis
+*** Derivation
+We are looking for the BLUE: *Best Linear Unbiased Estimator*.  Hence,
+we seek to minimize the error committed in the analysis, which is
+measured as $Tr(\mathbf{P}^a)$.
+
+Using the fact that $\mathbf{B}$ and $\mathbf{R}$ are symmetric, that $\mathbf{L} = \mathbf{I - KH}$, and
+with respect to infinitesimal variations $\delta \mathbf{K}$, we have
+
+\begin{equation}
+\delta \mathrm{Tr}(\mathbf{P}^a) = 2 \mathrm{Tr}\left((-\mathbf{LBH}^T + \mathbf{KR})(\delta \mathbf{K})^T\right)
+\end{equation}
+
+So at optimality, we have
+\begin{equation}
+-(\mathbf{I} - \mathbf{K}^*\mathbf{H})\mathbf{BH}^T + \mathbf{K}^*\mathbf{R} = 0
+\end{equation}
+and thus
+\begin{equation}
+\mathbf{K}^* = \mathbf{BH}^T ( \mathbf{R} + \mathbf{HBH}^T)^{-1}
+\end{equation}
+
++ Best: Optimal
++ Unbiased: $\mathbf{L} = \mathbf{I - KH}$
++ Linear: $\mathbf{L}$ and $\mathbf{K}$
+
+
+
+*** Optimal analysis
+We have, for the posterior error covariance:
+\begin{equation}
+\label{}
+\mathbf{P}^a = (\mathbf{I} - \mathbf{K}^*\mathbf{H})\mathbf{B}
+\end{equation}
+
+$(\mathbf{I} - \mathbf{K}^*\mathbf{H})$ measures the *shrinkage* of the innovation vector into the *analysis residue*
+
+\begin{equation}
+y - \mathbf{H}x^a = (\mathbf{I} - \mathbf{K}^*\mathbf{H})(y-\mathbf{H}x^b)
+\end{equation}
+
+*** Alternative and useful formulations
+\begin{align}
+  \mathbf{P}^a &= (\mathbf{I} - \mathbf{K}^*\mathbf{H})\mathbf{B} \\
+               &= \left(\mathbf{B} + \mathbf{H}^{T}\mathbf{R}^{-1}\mathbf{H}\right)^{-1}
+\end{align}
+
+and
+\begin{equation}
+\mathbf{K}^* = \mathbf{P}^a\mathbf{H}^T \mathbf{R}^{-1}
+\end{equation}
+
+
+* Variational equivalence
+** Cost function
+We define the cost function $J$ as
+\begin{equation}
+J(x) = \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x)
+\end{equation}
+As $\mathbf{H}$ is linear, $J$ is quadratic, and since $\mathbf{B}$ is positive definite, it is strictly convex.
+Taking the infinitesimal variation with respect to $x$:
+\begin{equation}
+\delta J(x) = (\delta x)^T \nabla J
+\end{equation}
+so
+\begin{align}
+  \nabla J &= \mathbf{B}^{-1}(x^* - x^b) - \mathbf{H}^T\mathbf{R}^{-1}(y - \mathbf{H}x^*) = 0 \\
+  x^* &= x^b + (\mathbf{B}^{-1} + \mathbf{H}^T\mathbf{R}^{-1}\mathbf{H})^{-1} \mathbf{H}^T \mathbf{R}^{-1}(y - \mathbf{H}x^b)\\
+  &= x^b + \mathbf{K}^*(y - \mathbf{H}x^b)
+\end{align}
+
+** Precision and Hessian
+\begin{equation}
+\nabla J(x) = \mathbf{B}^{-1}(x - x^b) - \mathbf{H}^T\mathbf{R}^{-1}(y - \mathbf{H}x)
+\end{equation}
+Since $J$ is quadratic, the Hessian is
+\begin{equation}
+\mathrm{Hess} J = (\mathbf{P}^a)^{-1}
+\end{equation}
+The Hessian is then the precision matrix.
+
+** Non-linear observation operator
+Everything holds, by taking the tangent linear of the observation
+operator. This time instead, the Hessian depends on the evaluation point
+** Dual formalism
+Observation operator is assumed linear. Starting from the cost function, we can instead enforce the observation equation through the Lagrangian
+\begin{equation}
+J(x) = \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x)
+\end{equation}
+becomes
+\begin{equation}
+L(x, \epsilon, w) = \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}\epsilon^T\mathbf{R}^{-1}\epsilon + w^T(y - \mathbf{H}x - \epsilon) 
+\end{equation}
+
+The optimum wrt $w$ is equivalent to J(x). Using minmax theorem:
+\begin{align}
+x^* &= x^b + \mathbf{BH}^Tw \\
+\epsilon^* &= \mathbf{R}w
+\end{align}
+And this leads to the *dual* cost function
+\begin{equation}
+G(w)= - L(x^*,\epsilon^*, w) = \frac{1}{2}\left(\mathbf{R+HBH}^T\right)w - w^T\left(y - \mathbf{H}x\right)
+\end{equation}
+This is *Physical Statistical space Assimilation System* (PSAS)
+And the optimisation takes place in the observatino space rather than the state space.
+
+* Sequential Data assimilation
+
+[[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]] is a central example of sequential data assimilation,
+that relies on linearity assumptions of the model and of the
+observation operator.
+[[id:ea4143c4-696d-43e2-adee-f11ffce97095][3DVar and 4DVar]] as well.
+

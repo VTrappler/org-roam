@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       24be8ceb-d6db-467e-acec-76c9cc19c981
+:END:
+#+title: Probabilistic Graphical Models
+#+filetags: :Bayesian:graph:
+
+
+
+We can use directed graphs in order to represent probability distributions. cite:bishop_pattern_2006
+
+* Simple example
+The probability distribution
+\begin{align}
+p(a, b, c) &= p(c \mid a, b) p(a, b)\\
+           &= p(c \mid a, b) p(b \mid a) p(a)
+\end{align}
+is represented as
+[[xournalpp:images/probabilistic-graphical-model.xop.xopp][Example of graphical model]]
++ A node without parents indicates something with only the prior distribution ($a$)
++ An arrow indicates that the distribution of the pointed node depends on the tail of the arrow
+
+
+
+* Repeated variables, plates
+
+[[xournalpp:images/plate_probabilistic_graphical_model.xopp]]

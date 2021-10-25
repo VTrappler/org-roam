@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d
+:ROAM_ALIASES: "Complete space"
+:END:
+#+title: Cauchy sequence
+
+* Definition
+Let $(u_n)_n$ be a sequence on a metric space $(X, d)$
+$(u_n)$ is said to be a Cauchy sequence if
+\begin{equation}
+\forall \epsilon > 0\quad \exists N \in \mathbb{N} \quad \forall p,q \geq N \quad d(x_p, x_q) < \epsilon
+\end{equation}
+
+* Properties
++ In a metric space, converging sequence $\Rightarrow$ Cauchy
++ in *complete* spaces, Cauchy $\Rightarrow$ Converging
++ A Cauchy sequence is bounded
++ A Cauchy sequence has *at most* one accumulation point
+

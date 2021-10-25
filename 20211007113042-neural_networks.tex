@@ -1,0 +1,68 @@
+% Created 2021-10-08 ven. 19:13
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Victor}
+\date{\today}
+\title{Neural Networks}
+\hypersetup{
+ pdfauthor={Victor},
+ pdftitle={Neural Networks},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.0.50 (Org mode 9.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+x = np.linspace(-10, 10, 100)
+os.getcwd()
+\end{verbatim}
+
+\section{Neurons}
+\label{sec:orgea582a2}
+
+\subsection{Activation functions}
+\label{sec:orgae47956}
+
+
+\begin{verbatim}
+def logit(x): return 1. / (1 + np.exp(-x))
+plt.plot(x, logit(x))
+plt.xlabel(r'$x$')
+plt.ylabel(r'$\mathrm{logit}$(x)')
+plt.title(r'Logit activation function')
+plt.tight_layout()
+fname = '/home/victor/org-roam/images/logit_activation.png'
+plt.savefig(fname)
+fname
+\end{verbatim}
+
+\begin{verbatim}
+def tanh(x): return np.tanh(x)
+plt.plot(x, tanh(x))
+plt.xlabel(r'$x$')
+plt.ylabel(r'$\tan h$(x)')
+plt.title(r'Tanh activation function')
+plt.tight_layout()
+fname = '/home/victor/org-roam/images/tanh_activation.png'
+plt.savefig(fname)
+fname
+\end{verbatim}
+\end{document}

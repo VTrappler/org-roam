@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       713b6a9f-24f1-4bf2-9dd9-92af579c3a35
+:END:
+#+title: Lagrangian
+#+STARTUP: latexpreview
+
+* Short definition
+
+In an optimization paradigm, the Lagrangian appears as a modified
+version of the objective function, which incorporate the constraints
+directly in its formulation, in order to yield an *unconstrained*
+optimisation problem
+
+* Calculus of variations and physics
+** Lagrangian and Action
+In physics, the Lagrangian refers to
+\begin{equation}
+L(t, y(t), \dot{y}(t))= \text{Kinetic Energy} - \text{Potential Energy}
+\end{equation}
+
+It is an "instantaneous" quantity, and the *action* is
+\begin{equation}
+S = \int_{t_1}^{t_2} L \,\mathrm{d}t = \int_{t_1}^{t_2} L(t, y(t), \dot{y}(t)) \,\mathrm{d}t
+\end{equation}
+and we wish to minimize it.
+** Hamilton's principle
+At optimality, the true path is *stationary*:
+\begin{equation}
+  \frac{\delta S}{\delta y(t)} =0
+\end{equation}
+
+and this leads to the Euler-Lagrange Equations:
+\begin{equation}
+\frac{\partial L}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{y}}=0
+\end{equation}
+

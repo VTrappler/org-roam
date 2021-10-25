@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       4a033759-84da-4099-b6dc-1df50308f966
+:ROAM_ALIASES: SVD
+:END:
+#+title: Singular Value Decomposition
+#+STARTUP: latexpreview
+
+* Definition
+Singular Value Decomposition is a factorization method for rectangular
+matrices. It generalizes the eigendecomposition of square *normal* matrices
+** Formulation
+Let $\bf M$ be a $m \times n$ matrix (real or complex).
+SVD consists in the factorization of $M$ into
+\begin{equation}
+\mathbf{M = U \Sigma V^*}
+\end{equation}
+where $\mathbf{U}, \mathbf{V}$ are unitary matrices (ie
+$\mathbf{U}\mathbf{U}^*=\mathbf{I}$), and $\mathbf{\Sigma}$ is a
+$m\times n$ rectangular matrix with *non-negative* real numbers on the
+diagonal.
+** Sum form
+\begin{equation}
+\mathbf{M} = \sum_{i=1}^{\min(m,n)} \sigma_i u_i v_i^T
+\end{equation}
+
+** Low-rank approximation(s)
+
+
+* Singular values and vectors
+$\sigma$ is called a *singular value* for $\mathbf{M}$ iff there
+exists unit-length $\mathbf{u} \in K^m$ and $\mathbf{v} \in K^n$ such
+that
+\begin{equation}
+\mathbf{Mv} = \sigma \mathbf{u} \quad \text{ and } \mathbf{M^*u} = \sigma \mathbf{v}
+\end{equation}
+$\mathbf{u}$, $\mathbf{v}$ are called *left-singular* and *right-singular* vectors for $\sigma$
+
+
+
+* Eigenvalue decomposition
+
+Since
+
+\begin{align}
+\mathbf{M^*M} &= \mathbf{V\Sigma^* U^* U\Sigma V^*} = \mathbf{V (\Sigma^* \Sigma) V^*} \\
+\mathbf{MM^*} &= \mathbf{U \Sigma V^* V \Sigma^* U^*} = \mathbf{U( \Sigma \Sigma^*) U^*}
+\end{align}
+So the columns of $\mathbf{V}$ are the eigenvectors (which are then orthonormal)  of $\mathbf{M^*M}$, and
+the columns of $\mathbf{U}$ are the ones of $\mathbf{M M^*}$.
+
+
+* Link with PCA
+Let $\mathbf{X}$ be a matrix of size $m\times n$ ($m$ features, $n$
+samples) (already centered). The covariance matrix
+$\mathbf{C}=\frac{1}{n-1}\mathbf{X^TX}$
+is real and symmetric and then can be [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][diagonalized]].
+
+\begin{equation}
+\mathbf{C} = \mathbf{VLV^T} 
+\end{equation}
+
+
+We perform a SVD on $X$:
+\begin{equation}
+\mathbf{X} = \mathbf{U \Sigma V^T}
+\end{equation}
+where $\mathbf{U}$ is unitary
+
+\begin{align}
+\mathbf{C} &= \frac{1}{n-1}\mathbf{X^TX} = \frac{1}{n-1}\mathbf{V \Sigma U^T \, U \Sigma V^T} \\
+&= \frac{1}{n-1} \mathbf{V\Sigma^2 V^T}
+\end{align}
+Thus
+\begin{equation}
+\mathbf{L} = \frac{1}{n-1} \mathbf{\Sigma}^2
+\end{equation}
+So the eigenvalues in the PCA (ie those of the covariance matrix) are
+proportional to the squares of the singular values.

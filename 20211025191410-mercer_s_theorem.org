@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       36f1dc46-b6fb-4e16-b36d-f6dd10c3dace
+:END:
+#+title: Mercer's theorem
+#+STARTUP: latexpreview
+
+
+
+* Mercer's condition
+
+
