@@ -16,4 +16,4 @@ ML encompasses a lot of different techniques, algorithms and methods such as
  * [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]]
  * [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]]
  * [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoders]]
-   
+ * [[id:84864b95-b98d-4b3e-b0c2-e0d1519ca101][Random forest]]

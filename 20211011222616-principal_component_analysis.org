@@ -3,7 +3,7 @@
 :ROAM_ALIASES: PCA
 :END:
 #+title: Principal Component Analysis
-#+filetags: :KLT:SVD:PCA:
+#+filetags: :DimensionReduction:PCA:
 #+STARTUP: latexpreview
 
 * Short Intro
@@ -55,11 +55,11 @@ This matrix $\bar{M}^T \bar{M}$ can then be diagonalized, since it is symmetric,
 \bar{M}^T \bar{M} = W \Lambda W^T
 \end{equation}
 
-Where $W$ is the matrix containing the eigenvectors as columns, and
+Where $W$ is the matrix containing the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvectors]] as columns, and
 $\Lambda$ is a diagonal matrix of the associated eigenvalues
 
 * For dimensionality reduction
-
+By truncating the PCA, this can be used as a [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]] method.
 The transformation $T = WX$ maps an original data vector (of $N$ components) 
 
 

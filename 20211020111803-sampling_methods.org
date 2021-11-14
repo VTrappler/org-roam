@@ -17,3 +17,4 @@ Indeed, it can be used for the computation of integrals:
 
 [[id:96fe84de-a56b-4a09-a0dc-c289aa18fd42][Rejection Sampling]]
 [[id:5067b3e2-838b-4ca6-a765-a28fc640fd29][Importance Sampling]]
+[[id:02bb393e-a570-464c-94d8-3a3e2e28ec87][Sampling using transport maps]]

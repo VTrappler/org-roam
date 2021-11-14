@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       26f6d8a1-2859-4cf6-95c1-5e1187098969
+:ROAM_ALIASES: EM-algorithm EM
+:END:
+#+title: Expectation-Maximization algorithm
+
+In [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Inference]], the EM algorithm is a technique to find the MAP or the
+MLE of a statistical model.
+
+

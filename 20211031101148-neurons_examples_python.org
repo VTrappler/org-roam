@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       08f437b7-d690-4b27-bc60-99a8c9857ba0
+:END:
+#+title: Neurons examples - python
+
+This is a [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python]] illustrated file about neurons and [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]].
+
+#+begin_src python :session
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import os
+  x = np.linspace(-10, 10, 100)
+  os.getcwd()
+#+end_src
+
+#+RESULTS:
+: /home/victor/org-roam
+
+
+** Activation functions
+*** Logit / Sigmoid 
+
+#+begin_src python :session :results file
+  def logit(x): return 1. / (1 + np.exp(-x))
+  plt.figure(figsize=(4, 4))
+  plt.plot(x, logit(x))
+  plt.xlabel(r'$x$')
+  plt.ylabel(r'$\mathrm{logit}$(x)')
+  plt.title(r'Logit activation function')
+  plt.tight_layout()
+  fname = '/home/victor/org-roam/images/logit_activation.png'
+  plt.savefig(fname, transparent=True)
+  plt.close()
+  fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/logit_activation.png]]
+
+*** Hyperbolic tangent
+#+begin_src python :session :results file
+  def tanh(x): return np.tanh(x)
+  plt.figure(figsize=(4, 4))
+  plt.plot(x, tanh(x))
+  plt.xlabel(r'$x$')
+  plt.ylabel(r'$\tan h$(x)')
+  plt.title(r'Tanh activation function')
+  plt.tight_layout()
+  fname = '/home/victor/org-roam/images/tanh_activation.png'
+  plt.savefig(fname, transparent=True)
+  plt.close()
+  fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/tanh_activation.png]]
+
+

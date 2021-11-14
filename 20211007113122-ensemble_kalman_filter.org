@@ -4,6 +4,7 @@
 :END:
 #+title: Ensemble Kalman Filter
 #+filetags: :DataAssimilation:EnKF:
+#+STARTUP: latexpreview
 
 * Short intro
 The EnKF is a reduced-order [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], as it only handles error
@@ -49,3 +50,6 @@ $\mathcal{N}(0, \mathbf{R})$, and use the empirical covariance matrix
 \mathbf{R}_u = \frac{1}{N_e -1} \sum_{i=1}^{N_e} u_i u_i^T
 \end{equation}
 The Kalman gain is then computed using $\mathbf{R}_u$ instead of $\mathbf{R}$.
+
+
+* Forecast step

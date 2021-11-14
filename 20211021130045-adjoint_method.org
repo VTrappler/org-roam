@@ -1,5 +1,18 @@
 :PROPERTIES:
 :ID:       f867396d-b033-4fa7-b99a-b4dd551ae37b
+:ROAM_ALIASES: Backpropagation
 :END:
 #+title: Adjoint Method
 #+STARTUP: latexpreview
+
+
+A review on the adjoint method can be found in
+cite:plessix_review_2006, but also in cite:kumar_adjoint_nodate
+
+* Perturbation theory
+
+
+
+* Lagrangian based
+
+Another "proof" is based on the [[id:713b6a9f-24f1-4bf2-9dd9-92af579c3a35][Lagrangian]].

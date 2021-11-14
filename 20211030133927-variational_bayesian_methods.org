@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e
+:ROAM_ALIASES: "Variational Inference" "Variational Bayes"
+:END:
+#+title: Variational Bayesian methods
+#+filetags: :Bayesian:
+
+Variational [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] relies on the approximation of the
+posterior distribution of *unobserved* variables $Z$, given some data
+$X$, by a simpler distribution.
+
+\begin{equation}
+p(Z \mid X) \approx q(Z)
+\end{equation}
+
+$p$ is the posterior distribution, while $q$ is the variational distribution.
+$q$ is selected so that it minimizes a dissimilarity measure between $p$ and $q$.
+
+* KL-divergence
+
+The [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] can be used as a dissimilarity measure, thus
+\begin{equation}
+D_{\mathrm{KL}}( q \| p) = \int q(z) \log \frac{q(z)}{p(z\mid x)} \,\mathrm{d}z
+\end{equation}
+

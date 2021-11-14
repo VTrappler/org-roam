@@ -1,5 +1,7 @@
 :PROPERTIES:
 :ID:       33a6b5ee-82e8-489a-858d-a634db231132
+:ROAM_ALIASES: "Relative Entropy"
 :END:
 #+title: KL-divergence
 
+cite:kullback_information_1951

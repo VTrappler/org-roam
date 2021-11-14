@@ -4,6 +4,7 @@
 :END:
 #+title: Singular Value Decomposition
 #+STARTUP: latexpreview
+#+filetags: :MatrixFactorization:DimensionReduction:
 
 * Definition
 Singular Value Decomposition is a factorization method for rectangular

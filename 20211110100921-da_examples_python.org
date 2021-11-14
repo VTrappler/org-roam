@@ -1,0 +1,84 @@
+:PROPERTIES:
+:ID:       24798c1a-8966-465f-b4d0-4ecae972e3c1
+:END:
+#+title: DA examples - python
+#+filetags: :DataAssimilation:
+
+
+* Introduction
+In this file, we are going to present a few [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]
+algorithm in [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python Language]].
+
+First, some imports
+#+begin_src python :session
+import numpy as np
+import matplotlib.pyplot as plt
+#+end_src
+
+#+RESULTS:
+
+* System modelling
+We are going to use the nonlinear oscillator, as in cite:bocquet_introduction_nodate
+
+\begin{equation}
+\left\{
+  \begin{array}{rcl}
+    x_0 & = & 0 \\
+    x_1 &= & 1 \\
+    x_{k+1} - 2x_k + x_{k-1} &=& \omega^2 x_k + \lambda^2 x_k^3 + \xi_k
+  \end{array}
+\right.
+\end{equation}
+and
+\begin{equation}
+\omega = 0.035\quad \lambda = 3.10^{-5}
+\end{equation}
+
+#+begin_src python :session
+def nonlinear_oscillator_step(xk, xkm1, xi=None, omega=0.035, lam=3e-5):
+    if xi is None:
+        xi = np.random.randn(1) * np.sqrt(0.0025)
+    return 2 * xk - xkm1 + (omega**2) * xk - (lam**2) * xk**3 + xi
+
+N_iter = 10_000
+
+#+end_src
+
+#+RESULTS:
+
+
+#+begin_src python :session
+  x = np.empty((N_iter,))
+  x[0], x[1] = 0, 1
+  k = 1
+  obs = []
+  obs_index = []
+  while k < (N_iter - 1):
+      x[k + 1] = nonlinear_oscillator_step(x[k], x[k-1])
+      k = k + 1
+      if k % 50 == 0:
+          obs_index.append(k)
+          _obs = x[k] + np.random.randn(1) * np.sqrt(49) # Observation error
+          obs.append(_obs)
+#+end_src
+
+#+RESULTS:
+
+We can plot the trajectory obtained
+
+#+begin_src python :session :results file
+  plt.figure(figsize=(6, 4))
+  plt.plot(x)
+  plt.xlabel(r'Iteration')
+  plt.ylabel(r'Trajectory')
+  plt.plot(obs_index, obs, '.r')
+  # plt.title(r'Logit activation function')
+  plt.tight_layout()
+  fname = '/home/victor/org-roam/images/trajectory_nonlinear.png'
+  plt.savefig(fname, transparent=True)
+  plt.close()
+  fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/trajectory_nonlinear.png]]

@@ -3,6 +3,7 @@
 :END:
 #+title: Cholesky Decomposition
 #+STARTUP: latexpreview
+#+filetags: :MatrixFactorization:
 
 
 The Cholesky decomposition is the factorization of an Hermitian ($A =

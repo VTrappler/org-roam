@@ -2,53 +2,105 @@
 :ID:       7a245cfe-dcaa-47d6-a318-5574fab3b7ac
 :END:
 #+title: Neural Networks
-#+filetags: :ML:NN:
+#+filetags: :MachineLearning:ML:NN:
+#+STARTUP: latexpreview
 
-
-
-#+begin_src python :session
-  import numpy as np
-  import matplotlib.pyplot as plt
-  import os
-  x = np.linspace(-10, 10, 100)
-  os.getcwd()
-#+end_src
-
-#+RESULTS:
-: /home/victor/MachineLearning
+A Neural network is a set of neurons, which /communicates/ with each other.
 
 * Neurons
 
-** Activation functions
+[[./images/schema_neuron.png]]
+
+A neuron is the building block of Neural Networks.
+A neuron can be represented as a function $f$
+\begin{equation}
+  \begin{array}{rcl}
+    f: \mathbb{R}^d&\longrightarrow & \mathbb{R} \\
+    x & \longmapsto & f(x) = \sigma\left(w^Tx + b\right)
+  \end{array}
+\end{equation}
+where $\sigma$ is an activation function, $w\in\mathbb{R}^d$ is the weights, and $b\in\mathbb{R}$ is the bias
+
+** Activation function
+An activation function is a function that mdoels the fact that the neuron is either *ON* or *OFF*
+*** Examples
+**** Sigmoid / Logit
+\begin{equation}
+\sigma(x) = \frac{1}{1 + e^{-x}} \in [0, 1]
+\end{equation}
+**** Tanh
+\begin{equation}
+\sigma(x) = \mathrm{tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \in [-1, 1]
+\end{equation}
+**** ReLU
+Rectified Linear Unit
+\begin{equation}
+\sigma(x) = \max\left(x, 0\right) \in [0, +\infty[
+\end{equation}
+ReLU is not differentiable at $O$, and is not centered
+***** Leaky ReLU
+For $\lambda \ll 1$
+\begin{equation}
+\sigma(x) = \left\{
+\begin{array}{rcl}
+  x& \text{ if }& x > 0 \\
+  \lambda x & \text{ else }
+\end{array} \right.
+\end{equation}
+***** Softplus: smooth approximation of the ReLU
+\begin{equation}
+\sigma(x) = \ln \left( 1 + e^x \right)
+\end{equation}
+**** Softmax
+Softmax (or softargmax) is a particular activation function, as it is a generalization
+of the logistic function to multiple dimensions. It is often used as
+the last activation before the output, in order to normalize the
+output to a probability distribution.
+\begin{equation}
+\left(f(x)\right)_i =  \frac{e^{x_i}}{\sum_{j=1}^d e^{x_j}}
+\end{equation}
+
+**** Softplus /LogSumExp
+The LogSumExp is a smooth approximation of the max function. Similarly
+to the softmax, it is often used as a last activation function.
+\begin{equation}
+f(x) = \log\left(\sum_{i=1}^d e^{x_i}\right)
+\end{equation}
 
 
-#+begin_src python :session :results file
-def logit(x): return 1. / (1 + np.exp(-x))
-plt.plot(x, logit(x))
-plt.xlabel(r'$x$')
-plt.ylabel(r'$\mathrm{logit}$(x)')
-plt.title(r'Logit activation function')
-plt.tight_layout()
-fname = '/home/victor/org-roam/images/logit_activation.png'
-plt.savefig(fname)
-fname
-#+end_src
+** TODO Choosing an activation function
 
-#+RESULTS:
-[[file:/home/victor/org-roam/images/logit_activation.png]]
+* Topologies
+The *topology* (or design) of a NN refers to the organization of the neurons.
+** Feedforward networks
+Feedforward networks can be usually split in three parts:
+ * One input layer
+ * One or more processing layer(s) (or hidden layers)
+ * One output layer
+ The neurons are exclusively connected to the neurons in the next
+layer.
 
-#+begin_src python :session :results file
-def tanh(x): return np.tanh(x)
-plt.plot(x, tanh(x))
-plt.xlabel(r'$x$')
-plt.ylabel(r'$\tan h$(x)')
-plt.title(r'Tanh activation function')
-plt.tight_layout()
-fname = '/home/victor/org-roam/images/tanh_activation.png'
-plt.savefig(fname)
-fname
-#+end_src
+[[file:images/feedforward_NN.png]]
 
-#+RESULTS:
-[[file:/home/victor/org-roam/images/tanh_activation.png]]
 
+If every neuron is connected to the previous ones and to all the next
+ones, the network is said to be *completely linked*.  There may be some
+/shortcuts/, when a neuron is connected to others while skipping some
+layers.
+** Recurrent networks
+
+* Learning / Training
+Training of a NN usually refers to the adjustement of the weights (and
+bias as a /unit/ neuron).  This encompasses also the addition or
+deletion of connections or neurons in the topology.
+
+Training requires a training set, which depends on the paradigm used.
+ * Unsupervised learning: Unsupervised learning provides only the *input pattern*, and the network
+tries to identify and categorizes similar patterns
+ * Reinforcement learning: Reinforcement learning provides a feedback
+   on the task achieved, whether it is right or wrong, and possibly
+   how much
+ * Supervised learning: It provides the desired result, thus we can
+   directly compute an error statistic on the prediction.
+
+[[id:f867396d-b033-4fa7-b99a-b4dd551ae37b][Adjoint Method]]

@@ -18,6 +18,7 @@ sequential aspect), while adopting a variational approach
   J_{3D}(x) &= \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x) \\
 J_{4D}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2
 \end{align}
-
+The quadratic error associated with the background knowledge (ie the prior) can be seen as a
+$L_2$ [[id:4fe0221e-366f-4442-ac99-542bc63f2eb4][Regularization]]
 * Optimisation
 [[id:f867396d-b033-4fa7-b99a-b4dd551ae37b][Adjoint Method]]

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       45750514-e78c-42cf-ba99-a98446a8b02e
+:END:
+#+title: Likelihood-free inference
+
+Usually, [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] require the evaluation of the likelihood
+function, which can be computationally expensive.
+
+
+An example of Likelihood-free inference is [[id:4a5d9fa2-2475-4e3a-bc37-77ae75c40b27][Approximate Bayesian Computation]].

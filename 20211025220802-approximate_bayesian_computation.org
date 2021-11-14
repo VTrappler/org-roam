@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       4a5d9fa2-2475-4e3a-bc37-77ae75c40b27
+:ROAM_ALIASES: ABC
+:END:
+#+title: Approximate Bayesian Computation
+#+STARTUP: latexpreview
+
+Approximate Bayesian Computation is a [[id:45750514-e78c-42cf-ba99-a98446a8b02e][Likelihood-free inference]] method

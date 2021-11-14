@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       e54b7744-7271-446b-94e8-7305de8b3ede
+:ROAM_ALIASES: "Hotelling transform" "KL decomposition"
+:END:
+#+title: Karhunen-Loève theorem
+#+filetags: :DimensionReduction:
+
+The KL theorem allows for the representation of a stochastic process
+as an infinite linear combination of orthogonal functions, based on
+the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] of a specific linear operator.
+
+* 
+
+* See also
+ * [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]
+ * [[id:1e877da6-7c82-4a7a-8c0f-8f42fa3b332b][Fourier Analysis]]

@@ -3,3 +3,7 @@
 :END:
 #+title: Clustering
 #+STARTUP: latexpreview
+
+
+Clustering is the task of grouping elements of a set in different
+groups called *clusters*, constructed upon some sort of similarity.

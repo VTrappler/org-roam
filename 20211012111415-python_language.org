@@ -4,3 +4,25 @@
 #+title: Python Language
 #+filetags: :ProgrammingLanguage:
 
+Python is an interpreted programming language.
+
+
+* General informations
+ * [[https://sinclert.github.io/packaging/][Overview on packaging]]
+
+
+* Packages for different usage 
+** DataViz
+ * Matplotlib
+ * Bokeh
+ * Plotly
+   
+** Data manipulation
+ * pandas
+ * numpy
+
+** [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]]
+ * scikit-learn
+ * pytorch
+ * keras
+ * tensorflow

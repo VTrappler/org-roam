@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       811cd0d3-6e04-48fa-a0a6-108c4d131041
+:ROAM_ALIASES: SVM
+:END:
+#+title: Support Vector Machine
+#+filetags: :MachineLearning:
+
+SVM is a supervised [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][learning]] model for classification/regression, as a
+non-probabilistic binary linear classifier.  Such model aims at
+maximizing the width of the gap between the two categories.
