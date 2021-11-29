@@ -14,7 +14,7 @@ Or Thikhonov cite:tikhonov_solutions_1977
 * Sparsity
 ** $L_0$ norm
 \begin{equation}
-$\|x\|_0 = \# \{\text{non-zero elements of }x \}
+\|x\|_0 = \# \{\text{non-zero elements of }x \}
 \end{equation}
 
 but NP-hard problem
