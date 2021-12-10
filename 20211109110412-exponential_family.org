@@ -11,7 +11,7 @@ A single-parameter $\theta$ exponential family is a distribution whose density c
 \begin{align}
 f_X(x \mid \theta) &= h(x) \exp \left[\eta(\theta)T(x) + A(\theta)\right]\\
                    &=h(x) \exp\left(A(\theta)\right) \exp \left[\eta(\theta)T(x)\right]\\
-                   &=\exp \left[\eta(\theta)T(x) + A(\theta) + \ln h(x)\right]\right]
+                   &=\exp \left[\eta(\theta)T(x) + A(\theta) + \ln h(x)\right]
 \end{align}
 Its nature allows for factorization, with functions only of the data
 $x$ and the parameter $x$.

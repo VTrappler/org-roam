@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       374176e2-82ec-4332-9e11-d11878d238be
+:END:
+#+title: PyTorch - Lightning
+#+filetags: :MachineLearning:
+
+Lightning is a framework for easier implementation of pytorch

@@ -2,6 +2,7 @@
 :ID:       6677e8d8-70de-4236-ab2f-3ac48dfba2a4
 :END:
 #+title: Kalman Filter
+#+startup: latexpreview
 #+filetags: :DataAssimilation: :KalmanFilter:
 
 The Kalman filter is an essential method of [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]. It
@@ -91,8 +92,12 @@ The forecast error cov matrix is given by
 Relies on linearity assumptions
 + What if observation operator *non-linear* ?
 + What if evolution model *non-linear* ?
-
+  
 * Extended Kalman Filter
+:PROPERTIES:
+:ID:       4938fc89-e82a-4477-8031-3ca42430e755
+:ROAM_ALIASES: EKF
+:END:
 We can linearize the forecast and analysis step
 We can use the tangent linear as approximations
 
@@ -102,9 +107,32 @@ x_{k+1}^f = \nabla M_{k+1} x_k^a
 \end{equation}
 
 ** Analysis
+
 \begin{equation}
 \label{}
 x_k^a = x_k^f + \mathbf{K}_k (y_k - H_k(x_k^f))
+\end{equation}
+
+
+
+
+
+
+* Reduced Rank square root filter
+:PROPERTIES:
+:ID:       17e80e86-f937-4f56-8d35-3990d4f4ea11
+:ROAM_ALIASES: RRSQRF
+:END:
+
+The RRSQRF is obtained by keeping only the leading [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Values]] of the covariance error matrix:
+\begin{equation}
+\mathbf{P}^f = \mathbf{S}_f \mathbf{S}_f^T
+\end{equation}
+where $\mathbf{S}_f$ is of reduced rank.
+By defining $\mathbf{Y}_f = \mathbf{H}\mathbf{S}_f$,
+the Kalman gain can be written as
+\begin{equation}
+\mathbf{K}^* = \mathbf{S}_f \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}
 \end{equation}
 
 

@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       ddf8d1c0-d102-47d7-914c-24a708bd34e4
+:END:
+#+title: Slurm
+#+filetags: :HPC:
+
+Slurm (Simple Linux Utility for Resource Management) is a tool for
+cluster management and job scheduling
+
+* Common commands
+
+ * sbatch: submit a job in the queue (called partition)
+ * scancel: cancel a job
+ * squeue: view info abt jobs in Slurm scheduling queue
+ * scontrol: view or modify config and state
+ * sinfo: view information about slurm nodes and partitions
+ * srun: executes immediatly a command
+ * salloc: interactive batch, creates a shell
+ * sprio: relative priorities between pending jobs
+
+
+
+* Submitting a Job
+A job can be submitted using
+#+begin_src bash
+  sbatch my_script
+#+end_src
+
+* Options
+Options are added as header on files
+#+begin_src bash
+  #SBATCH -N 5
+  #SBATCH --tasks-per-node 16
+#+end_src
+means we ask for 5 nodes, with 16 core each (since by default 1 task ~ 1 core)
+
+ * -p: which partition to use
+ * -A: Slurm account to use
+ * -N: Number of Nodes
+ * -n: number of tasks (1 by node by default)
+ * --cpus-per-task: number of cores by tasks
+ * --tasks-per-node: number of tasks by nodes
+ * -t J-HH:MM:SS: Allocated time
+ * --gres=gpu:N: Number of GPUs by node (1 leq N leq 4)
+ * --mail-type=: send email (END for end of job, BEGIN, for start, ALL for every step
+ * --mail-user=: email to use

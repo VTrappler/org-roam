@@ -21,11 +21,12 @@ https://en.wikipedia.org/wiki/Autoencoder
 The encoder and decoder are then defined as
 \begin{align}
 \left(\phi, \psi\right) &= \mathrm{argmin}_{\phi,\psi} \| \mathcal{X} - (\psi \circ \phi)\mathcal{X} \| \\
- &= \mathrm{argmin}_{\phi,\psi} \| (\mathcal{Id} - (\psi \circ \phi))\mathcal{X} \|
+ &= \mathrm{argmin}_{\phi,\psi} \| (\mathcal{I}d - (\psi \circ \phi))\mathcal{X} \|
 \end{align}
 
 
 
 * Latent space in practice
 
-Latent space have been used in [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]], in cite:peyron_latent_2021
+Latent space have been used in [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]], in
+cite:peyron_latent_2021

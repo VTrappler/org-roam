@@ -10,8 +10,15 @@ A review on the adjoint method can be found in
 cite:plessix_review_2006, but also in cite:kumar_adjoint_nodate
 
 * Perturbation theory
-
-
+Let us define a function
+\begin{equation}
+x \mapsto J(x)= h(u(x), x)
+\end{equation}
+The state variable $x$ satisfy the state equation $F(u(x), x)=0$
+ * $F$ is called the forward equation
+ * A state variable $u$ is an "admissible" state vector and is a
+   *physical* realization if $\exists x$ such that $F(u, x)=0$
+ * 
 
 * Lagrangian based
 

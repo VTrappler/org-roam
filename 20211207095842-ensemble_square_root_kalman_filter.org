@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       5032deea-65f3-42b2-a5be-bf0054e94ee5
+:END:
+#+title: Ensemble Square Root Kalman Filter
+
+The ESQRKF is a variation of the [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][EnKF]].
+
+* TODO

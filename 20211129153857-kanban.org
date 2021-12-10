@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       aad864b7-58a9-4da2-bcb5-35fecab9060b
+:END:
+#+title: Kanban
+#+filetags: :Management:
+
+

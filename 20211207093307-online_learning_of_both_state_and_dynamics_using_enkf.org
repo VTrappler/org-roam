@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       a9a008e5-d588-472f-b331-e8947d72608f
+:ROAM_REFS: cite:bocquet_online_2021
+:END:
+#+title: Online Learning of both state and dynamics using EnKF
+
+
+* Learning the dynamics
+Let us assume that we have a surrogate based on a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]],
+where $\mathbf{p}$ are its input parameters (weights and biases)
+Given a set of observations $\mathbf{y}_{0:K} \in \mathbb{R}^{(K+1)\times N_y}$
+the cost function would be written as
+\begin{equation}
+\mathcal{J}(\mathbf{p}) = \frac{1}{2}\sum_{k=1}^{K} \|\mathbf{y}_k - \mathbf{F}^{k-1}(\mathbf{p}, \mathbf{y}_{k-1})\|^2 + \mathcal{L}(\mathbf{p})
+\end{equation}
+so $\mathbf{F}^{k-1}(\mathbf{p}, \cdot)$ is the surrogate that
+integrates the model from time $k-1$ to time $k$.
+And $\mathcal{L}$ i a regularization term.
+
+The surrogate is assumed to be autonomous, that is independent of time.
+When taking into account the state vector instead, we can extend the previous cost function as
+
+\begin{align}
+\mathcal{J}(\mathbf{p}, \mathbf{x}_{0:K}) =& \frac{1}{2}\sum_{k=0}^{K} \|\mathbf{y}_k - \mathbf{H}_k(\mathbf{x}_k)\|^2_{\mathbf{R}_k^{-1}}\\
+                                           & + \frac{1}{2}\sum_{k=1}^{K} \|\mathbf{x}_k - \mathbf{F}^{k-1}(\mathbf{p}, \mathbf{x}_{k-1})\|^2_{\mathbf{Q}_{k}^{-1}} + \mathcal{L}(\mathbf{p}, \mathbf{x}_0)
+\end{align}
+
+ * $\mathbf{R}_k$: observation covariance matrix
+ * $\mathbf{Q}_k$: model error covariance matrix
+
+   
+
+* [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]] based methods
+The augmented EnKF consists in extending the state vector to
+\begin{equation}
+\mathbf{z} =
+\begin{bmatrix}
+  \mathbf{x} \\ \mathbf{p}
+\end{bmatrix}
+\end{equation}
+
+** Formulation with the augmented state vector
+At time $t_k$, the analysis is built using
+\begin{equation}
+\mathcal{J}_k(\mathbf{z}_k) = \frac{1}{2}\|\mathbf{y}_k - \Theta_k(\mathbf{z_k})\|^2_{\mathbf{R}_k^{-1}} + \frac{1}{2}\|\mathbf{z}_k - \mathbf{z}_k^f\|^2_{\mathbf{B}_k^{-1}}
+\end{equation}
+where $\Theta_k = [\mathbf{H}_k \quad \mathbf{0}]$ is the augmented
+observation operator, and $\mathbf{B}_k$ is the error covariance
+matrix of $\mathbf{z}_k$ estimated using sample statistics.
+
+We assume either [[id:f86a37b6-b4d4-4104-a896-e7d13d27ea28][Ensemble Transform Kalman Filter]] (ETKF) or [[id:5032deea-65f3-42b2-a5be-bf0054e94ee5][Ensemble
+Square Root Kalman Filter]] (EnSRF).
+

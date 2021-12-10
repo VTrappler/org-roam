@@ -87,6 +87,11 @@ If every neuron is connected to the previous ones and to all the next
 ones, the network is said to be *completely linked*.  There may be some
 /shortcuts/, when a neuron is connected to others while skipping some
 layers.
+
+Rule of thumb for topology
+ * # of hidden neurons between # of input and # outputs
+ * 
+
 ** Recurrent networks
 
 * Learning / Training

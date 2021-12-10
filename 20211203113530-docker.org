@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       40a941fb-16c5-40c9-9954-5ac0668f872c
+:END:
+#+title: Docker
+#+filetags: :Dev:ReproducibleResearch:
+
+Docker packages an application and its dependencies in a virtual
+container that can run on any computer with any OS.
+
+* Review of Fireship's tutorial on Docker
+
+[[https://www.youtube.com/watch?v=gAkwW2tuIqE&t=427s][Youtube Tutorial 11 minutes]]
+** Components
+ * Dockerfile: Blueprint for building a Docker image
+ * Image: Template for running a Docker Container
+ * Container: Running process
+So the natural steps are:
+ 1. Define the environment by writing a dockerfile
+ 2. Any developer can build the image (immutable snapshot) based on the dockerfile
+    This can be pushed to a cloud
+ 3. Pull the image, and create the container
+
+** Commands
+ * docker ps: list all running containers
+ * docker build -t (-t to name it)
+ * docker push: push image to a registry
+ * docker run ...
+   
+** Dockerfile
+ * FROM: image
+ * WORKDIR: app directory
+ * RUN: term commands
+ * CMD: term command, but does not create a shell session
+
+  
+** Registry
+Stores and distributes Docker images
+
+* Example of dockerfile for python
+myimage:
+#+begin_src dockerfile
+  # Get base image
+  FROM python:3.9
+
+  # Set working dir in the container
+  WORKDIR /code
+
+  # Copy and install dependencies
+  COPY requirements.txt .
+  RUN pip install -r requirements.txt
+
+  #Copy content of the local src directory to the wd
+  COPY src/ .
+
+  #Command to run when container starts
+  CMD ["python", "./main.py"]
+#+end_src
+
+Build the dockerfike
+#+begin_src sh
+  docker build -t myimage
+#+end_src
+
+#+begin_src sh
+  docker images
+#+end_src
+
+   
+
+
+See also [[id:1cafa262-254a-4040-9916-7143e6d6c3c8][Singularity]].
+
+** 
+
