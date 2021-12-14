@@ -4,4 +4,4 @@
 #+title: PyTorch - Lightning
 #+filetags: :MachineLearning:
 
-Lightning is a framework for easier implementation of pytorch
+Lightning is a framework for easier implementation of [[id:40086648-2e0c-4bad-aaa3-ad0e146f8ee6][PyTorch]].

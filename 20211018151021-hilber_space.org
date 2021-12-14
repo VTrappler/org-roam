@@ -3,6 +3,7 @@
 :END:
 #+title: Hilbert Space
 #+filetags: :FunctionalAnalysis:
+#+startup: latexpreview
 #+LaTeX_HEADER: \newcommand{\inner}[2]{\langle #1, #2 \rangle}
 
 * Definition
@@ -19,8 +20,8 @@ We have thus
 
 * Properties
 ** Hilbert Projection theorem
-  + For every $x\in H$, and every non-empty *closed* convec $C\subseteq
-H$, there exists a unique $m\in C$ such that \begin{equation}
+  + For every $x\in H$, and every non-empty *closed* convex $C\subseteq H$, there exists a unique $m\in C$ such that
+ \begin{equation}
 \|x-m \| = \inf_{c\in C} \|x - c \|
 \end{equation}
   + If $C$ is a vector subspace,  $x-m$ is orthogonal to $C$.

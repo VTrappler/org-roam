@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       c2754736-4675-4a5c-a6e5-8886fb9f303d
+:ROAM_REFS: cite:abdar_review_2021 cite:geer_learning_2020 cite:sonnewald_bridging_2021
+:END:
+#+title: Data Assimilation and Machine Learning
+#+filetags: :MachineLearning:DataAssimilation:
+#+startup: latexpreview
+
+
+This page is a tentative of a general review of reviews linking
+[[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] and [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]].
+
+* DA or ML ? (ECMWF)
+cite:geer_learning_2020
+
+** ML and DA under Bayesian framework
+The forward problem is
+\begin{equation}
+ y =h(x, w)
+\end{equation}
+where $y$ is the observations, $x$ the state, and $w$ some additional
+parameters, while the "model" is $h$.  Both DA and ML solve an [[id:2ebe5ba7-5c85-4d2b-9121-afee1d9d7223][Inverse
+Problem]], ie infer the value of the state $x$ and/or the parameters $w$
+given the observations and the model $h$.
+In ML: $x$ are features, $y$ are "labels", $w$ are weights (for instance)
+
+Using [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayes' theorem]],
+\begin{equation}
+p(x, w \mid y)= \frac{p(y\mid x, w)p(x)p(w)}{p(y)}
+\end{equation}
+
+** Cycling through time: Sequential DA and RNN ?
+*** In DA
+Given $x_t$, $y_$ and $w$
+  1. Filtering: From prior $p(x_t, w)$, incorporate the obs to get $p(x_t, w \mid y_t)$
+  2. Forecasting: Use the forward model to get $p(x_{t+1}, w \mid y_t)$
+*** In ML
+
+** How ML could benefit from approaches of DA
+  * real obs are sparse and irregular. In DA, use of Bayesian inverse methods to extract informations.
+    ML could incorporate physical observations models as output layers
+  * physical model layers could be incorporated in NN for constraints
+  * ML could benefit from quantification of uncertainties in features,
+    labels, instead of ad-hoc regularization.
+  * Bayesian equivalence between cycling DA and RNN.
+
+
+** DA could benefit from ML:
+  * DA has relied on *perfect model assumptions*
+    * Learning model and observation systematic errors
+  * Accelerates for making part of processes faster (Ensemble or
+    variational need repeated runs of the forward model)
+
+
+* A review on UQ and ML
+cite:abdar_review_2021
+
+* Bridging obs, theory and ML for oceans
+cite:sonnewald_bridging_2021

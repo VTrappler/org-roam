@@ -3,6 +3,8 @@
 :ROAM_REFS: cite:bocquet_online_2021
 :END:
 #+title: Online Learning of both state and dynamics using EnKF
+#+filetags: :DataAssimilation:
+#+startup: latexpreview
 
 
 * Learning the dynamics

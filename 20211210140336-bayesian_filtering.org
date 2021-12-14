@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       a4d2b279-e48d-4b23-8dd2-a359f386037c
+:END:
+#+title: Bayesian Filtering
+#+filetags: :DataAssimilation:
+#+startup:latexpreview
+
+We will tackle [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]], thus filtering, in a pure probabilistic framework, using mainly [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]].
+
+Let $Y_k = \{y_k, \dot,y_0 \}$ be the set of all past observations.
+We are interested in the distribution of $p(x_k \mid Y_k)$
+
+* Forecast step
+We wish to compute the pdf $p(x_{k+1} \mid Y_k)$ based on $p(x_k \mid
+Y_k)$. By introducing the transition probability $p(x_{k+1}\mid x_k)$,
+we can write:
+\begin{equation}
+p(x_{k+1} \mid Y_k) = \int p(x_{k+1} \mid x_{k}) p(x_k \mid Y_k) \,\mathrm{d}x_k
+\end{equation}
+Generally, we can assume that (stochastic modelling of the dynamical system)
+\begin{equation}
+x_{k+1} = F(x_k, w_k)
+\end{equation}
+where $w_k$ is meant to be a white noise of density $p_W$.
+The transition probability can be written as
+\begin{equation}
+p(x_{k+1} \mid x_k) = \int \delta(x_{k+1} - F(x_k, w_k)) p_W(w_k) \,\mathrm{w_k}
+\end{equation}
+thus
+\begin{equation}
+p(x_{k+1} \mid Y_k) = \int p(x_k \mid Y_k)\delta(x_{k+1} - F(x_k, w_k)) p_W(w_k) \,\mathrm{w_k} \,\mathrm{d}x_k
+\end{equation}
+
+Assuming that the noise is additive:
+\begin{equation}
+x_{k+1} = M(x_k) + w_k
+\end{equation}
+The convolution rewrites as
+\begin{equation}
+p(x_{k+1} \mid Y_k) = \int p_W(x_{k+1} - M(x_k))p(x_k \mid Y_k) \,\mathrm{d}x_k
+\end{equation}
+If the model error is null, we have
+\begin{equation}
+p_W(x_{k+1} - M(x_k)) = \delta(x_{k+1} - M(x_k))
+\end{equation}
+and
+\begin{align}
+p(x_{k+1} \mid Y_k) &= \int \delta(x_{k+1} - M(x_k))p(x_k \mid Y_k) \,\mathrm{d}x_k \\
+&{=} \frac{1}{\det(M^{'} \circ M^{-1} (x_{k+1}))} p\left(M^{-1}(x_{k+1}) \mid Y_k\right)
+\end{align}
+
+* Analysis step
+Let us assume that the observation equation is
+\begin{equation}
+y_k = H(x_k, v_k)
+\end{equation}
+Let us assimilate the observation using the forecast distribution $p(x_{k+1} \mid Y_k)$
+\begin{equation}
+p(x_{k+1} \mid Y_{k+1}) = p(x_{k+1} \mid y_{k+1},Y_{k}) = p(y_{k+1} \mid x_{k+1}, Y_k) \cdot \frac{p(x_{k+1} \mid Y_{k})}{p(y_{k+1} \mid Y_{k})}
+\end{equation}
+Moreover,
+\begin{align}
+p(y_{k+1} \mid Y_k) &= \int p(y_{k+1}, x_{k+1} \mid Y_k) \,\mathrm{d}x_{k+1} \\
+&= \int p(y_{k+1}\mid x_{k+1}, Y_k) p(x_{k+1} \mid Y_k) \,\mathrm{d}x_{k+1}
+\end{align}
+
+If we assume the observation errors $v_k$ to be uncorrelated in time,
+\begin{equation}
+p(y_{k+1} \mid x_{k+1}, Y_k) = p(y_{k+1} \mid x_{k+1})
+\end{equation}

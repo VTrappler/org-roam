@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       043b6c35-c43f-4400-9469-a68762265217
+:END:
+#+title: Self-Organizing Map
+
+* TODO to write

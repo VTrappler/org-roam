@@ -2,7 +2,7 @@
 :ID:       c0b12568-1f49-4871-b9a5-604548a59a4e
 :END:
 #+title: Machine Learning
-#+filetags: :ML:
+#+filetags: :MachineLearning:ML:
 
 As put in cite:guido_introduction_2016:
 #+begin_quote

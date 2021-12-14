@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       0c9b7e88-dc56-4a39-953a-177a708eb55a
+:END:
+#+title: High Performance Computing
+
+HPC clusters are intended to utilize parallel computing.
+HPC clusters have a large number of computers, called *nodes*.
+Each node may contain some *cores*, ie some *processors*.
+
+
+* Scheduler
+Due to the complexity, the use of scheduler like [[id:ddf8d1c0-d102-47d7-914c-24a708bd34e4][Slurm]] is common.
+
+* Contenarization
+ see [[id:40a941fb-16c5-40c9-9954-5ac0668f872c][Docker]], [[id:1cafa262-254a-4040-9916-7143e6d6c3c8][Singularity]]

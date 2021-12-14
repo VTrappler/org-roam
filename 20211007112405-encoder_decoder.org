@@ -4,7 +4,7 @@
 :END:
 #+title: Autoencoders
 #+STARTUP: latexpreview
-#+filetags: :EncoderDecoder:MachineLearning:AutoEncoders:
+#+filetags: :DimensionReduction:MachineLearning:AutoEncoders:
 
 An autoencoder is a type of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] used for unsupervised
 learning.  This relies on the training at the same time of an *encoder*,
@@ -29,4 +29,4 @@ The encoder and decoder are then defined as
 * Latent space in practice
 
 Latent space have been used in [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]], in
-cite:peyron_latent_2021
+[[id:8bb3c55b-aa88-4763-bcec-e3e73227992a][Latent Space Data Assimilation using Deep Learning]] for instance.

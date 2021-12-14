@@ -5,13 +5,13 @@
 
 This is a [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python]] illustrated file about neurons and [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]].
 
-#+begin_src python :session
+#+BEGIN_SRC python :session
   import numpy as np
   import matplotlib.pyplot as plt
   import os
   x = np.linspace(-10, 10, 100)
   os.getcwd()
-#+end_src
+#+END_SRC
 
 #+RESULTS:
 : /home/victor/org-roam

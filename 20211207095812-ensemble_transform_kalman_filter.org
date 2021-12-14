@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       f86a37b6-b4d4-4104-a896-e7d13d27ea28
-:END:
-#+title: Ensemble Transform Kalman Filter
-
-The ETKF is a variation of the [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][EnKF]].
-
-* TODO

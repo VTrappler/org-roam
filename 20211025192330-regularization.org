@@ -2,6 +2,7 @@
 :ID:       4fe0221e-366f-4442-ac99-542bc63f2eb4
 :END:
 #+title: Regularization
+#+filetags: :DimensionReduction:
 
 
 Regularization is the process of adding information in order to solve

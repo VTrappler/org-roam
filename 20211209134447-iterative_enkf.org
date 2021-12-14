@@ -5,7 +5,13 @@
 #+title: Iterative EnKF
 #+filetags: :DataAssimilation:
 #+startup: latexpreview
-The [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]]
+The [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]] can be modified to be "iterative" in order
+to be more efficient for strongly non-linear dynamical systems.  The
+term *iterative* in this context means that iterations of the Newton's
+method are performed in order to find a root of a specific functional.
+
+More precisely, it filters the state vector with lag 1, since the
+observations at time $t_{n+1}$ are used to get information at time $t_{n}$.
 
 * IEnKF scheme
 

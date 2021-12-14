@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       8967d386-179f-4b66-8514-3e4269fb2db2
-:END:
-#+title: QR decomposition
-#+filetags: :MatrixDecomposition:
-

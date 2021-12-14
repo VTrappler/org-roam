@@ -26,7 +26,7 @@ R(M,x) = x^TMx \quad \text{ with } x^Tx = 1
 Introducing the [[id:713b6a9f-24f1-4bf2-9dd9-92af579c3a35][Lagrangian]], we are looking for the critical points of
 \begin{align}
 \mathcal{L}(x) &= x^TMx - \lambda (x^Tx -1 )\\
-\frac{\mathrm{d} \mathcal{L}}{\mathrm{d}x}(x) &= 2x^TM - 2\lambdax^T = 0\\
+\frac{\mathrm{d} \mathcal{L}}{\mathrm{d}x}(x) &= 2x^TM - 2\lambda x^T = 0\\
 \Rightarrow Mx &= \lambda x
 \end{align}
 

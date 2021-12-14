@@ -27,8 +27,6 @@ The Kalman gain $\mathbf{K}^*$ is usually given by
 \begin{equation}
 \mathbf{K}^* = \mathbf{P}^f\mathbf{H}^T(\mathbf{HP^fH}^T + \mathbf{R})^{-1}
 \end{equation}
-Since $\mathbf{R}$ is assumed known (observation covariance matrix),
-we empirically get $\mathbf{P}^f$ as
 
 Once the posterior ensemble has been obtained, we have  
 
@@ -43,7 +41,7 @@ Once the posterior ensemble has been obtained, we have
 \end{align}
 
 which is different from the covariance matrix in the BLUE analysis of
-the KF, where a term $\mathbf{K^*RK^*}^T$ is present.  To correct
+the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], where a term $\mathbf{K^*RK^*}^T$ is present.  To correct
 this, we can "perturbate" the observations by a Gaussian noise $u$ which follows
 $\mathcal{N}(0, \mathbf{R})$, and use the empirical covariance matrix
 \begin{equation}
@@ -53,3 +51,7 @@ The Kalman gain is then computed using $\mathbf{R}_u$ instead of $\mathbf{R}$.
 
 
 * Forecast step
+In the forecast step, we propagate the analysis through the model:
+\begin{equation}
+x_i^f = \mathcal{M}(x_i^a)
+\end{equation}

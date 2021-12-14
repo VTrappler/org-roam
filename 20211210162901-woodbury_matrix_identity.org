@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       12704449-cdb1-49ab-bc77-c9de0200bb3e
+:END:
+#+title: Woodbury matrix identity
+This identity says that the inverse of a rank $k$ correction of some
+matrix can be computed by doing a rank $k$ correction to the inverse of the original matrix
+
+\begin{equation}
+\left(A + UCV\right)^{-1} = A^{-1} - A^{-1}U\left(C^{-1} + VA^{-1}U\right)^{-1}VA^{-1}
+\end{equation}
+
+We have also the *push-through identity*
+\begin{equation}
+(I + UV)^{-1} = U\left(I + VU\right)^{-1}
+\end{equation}
+

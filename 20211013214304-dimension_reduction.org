@@ -3,6 +3,7 @@
 :END:
 #+title: Dimension Reduction
 #+STARTUP: latexpreview
+#+filetags: :DimensionReduction:
 
 
 * Curse of dimensionality

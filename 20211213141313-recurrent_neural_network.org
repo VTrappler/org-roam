@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       f73cda73-3c82-43f4-9636-b2e409682afd
+:ROAM_ALIASES: RNN
+:END:
+#+title: Recurrent Neural Network
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+RNN are a class of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], where connections between nodes form a graph along a temporal sequence. Those NN show recurrent connections. They are particularly useful for time series.
+
+* Elman and Jordan Networks
+Let us consider a 3 layered Neural Network:
+ * $x$ is the input layer
+ * $h$ the hidden layer
+ * $y$ the output layer
+
+   The hidden layer comprises classical neurons, but also a set of
+   "context unit", which record the state of the hidden layer.
+
+** Elman Network
+Given the input layer at time $t$: $x_t$,
+\begin{align}
+h_t &= \sigma_h\left(w_h^T x_t + u_h^T h_{t-1} + b_h\right) \\
+y_t &= \sigma_y\left(w_y^T h_t + b_y\right) \\
+\end{align}
+
+So $w$ are the weight matrices, $b$ the biases
+
+** Jordan Networks
+Similarly as for the Elman network, the hidden layer comprises the context unit, but the retroaction is on the output layer:
+\begin{align}
+h_t &= \sigma_h\left(w_h^T x_t + u_h^T y_{t-1} + b_h\right) \\
+y_t &= \sigma_y\left(w_y^T h_t + b_y\right) \\
+\end{align}
+
+* Cons
+ * Notoriously hard to train due to the vanishing gradient problems

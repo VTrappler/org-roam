@@ -3,7 +3,7 @@
 :END:
 #+title: DA examples - python
 #+filetags: :DataAssimilation:
-
+#+startup: latexpreview
 
 * Introduction
 In this file, we are going to present a few [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]
@@ -66,7 +66,7 @@ N_iter = 10_000
 
 We can plot the trajectory obtained
 
-#+begin_src python :session :results file
+#+BEGIN_SRC python :session :results file
   plt.figure(figsize=(6, 4))
   plt.plot(x)
   plt.xlabel(r'Iteration')
@@ -78,7 +78,7 @@ We can plot the trajectory obtained
   plt.savefig(fname, transparent=True)
   plt.close()
   fname
-#+end_src
+#+END_SRC
 
 #+RESULTS:
 [[file:/home/victor/org-roam/images/trajectory_nonlinear.png]]

@@ -180,7 +180,6 @@ and
 \mathbf{K}^* = \mathbf{P}^a\mathbf{H}^T \mathbf{R}^{-1}
 \end{equation}
 
-
 * Variational equivalence
 ** Cost function
 We define the cost function $J$ as
@@ -235,9 +234,10 @@ This is *Physical Statistical space Assimilation System* (PSAS)
 And the optimisation takes place in the observatino space rather than the state space.
 
 * Sequential Data assimilation
-
+[[id:a4d2b279-e48d-4b23-8dd2-a359f386037c][Bayesian Filtering]]
 [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]] is a central example of sequential data assimilation,
 that relies on linearity assumptions of the model and of the
 observation operator.
 [[id:ea4143c4-696d-43e2-adee-f11ffce97095][3DVar and 4DVar]] as well, and [[id:9da81fb6-71ba-458c-85d0-d8c5c840faf5][Particle Filter]].
+
 
