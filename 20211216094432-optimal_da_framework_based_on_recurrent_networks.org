@@ -1,0 +1,199 @@
+:PROPERTIES:
+:ID:       ed21d4df-9723-4502-8d77-7b37cf8381c7
+:ROAM_REFS: cite:boudier_dan_2020
+:END:
+#+title: Optimal DA framework based on recurrent networks
+#+filetags: :MachineLearning:DataAssimilation:
+#+startup: latexpreview
+
+In cite:boudier_dan_2020, the authors propose a data-driven [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine
+Learning]] architecture generalizing [[id:f73cda73-3c82-43f4-9636-b2e409682afd][Recurrent Neural Networks]] and [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data
+Assimilation]].  They let a learning process estimate what is the *best
+internal representation of the densities* in [[id:a4d2b279-e48d-4b23-8dd2-a359f386037c][Bayesian data
+assimilation.]]
+
+* Data assimilation
+** Observed Dynamical System (ODS)
+The classical state space model:
+\begin{align}
+x_t &= \mathcal{M}(x_{t-1}) + \eta_t \\
+y_t &= \mathcal{H}(x_t) + \epsilon_t \\
+x_t &\in \mathbb{X} \subseteq \mathbb{R}^n \\
+x_0 &\sim \mathcal{N}(\mu_0^b, \Sigma_0^b) \\
+\eta_t &\sim \mathcal{N}(0, Q) \\
+y_t &\in \mathbb{Y} \subseteq \mathbb{R}^d \\
+\epsilon_t &\sim \mathcal{N}(0, R)
+\end{align}
+
+
+In terms of pdf,
+we have
+ * Observation equation
+\begin{equation}
+  \begin{array}{rcl}
+    p_{y_t \mid x_t}: \mathbb{X}&\longrightarrow& \mathbb{P}_{\mathbb{Y}} \\
+     x& \longmapsto & \mathcal{N}(\mathcal{H}(x), R)
+  \end{array}
+\end{equation}
+where $\mathbb{P}_\mathbb{Y}$ is the set of pdf over $\mathbb{Y}$
+ * Propagation equation
+\begin{equation}
+  \begin{array}{rcl}
+    p_{x_t\mid x_{t-1}}: \mathbb{X}&\longrightarrow&\mathbb{P}_{\mathbb{Y}} \\
+    x& \longmapsto & \mathcal{N}(\mathcal{M}(x), Q)
+  \end{array}
+\end{equation}
+ * Using the Markovian property of the error,
+\begin{equation}
+p_{x_{0:T},y_{0:T}} = p_{y_T \mid x_T}p_{x_T\mid x_{T-1}} \dots p_{y_0 \mid x_0}p_{x_0} \in \mathbb{P}_{\mathbb{X}^{T+1} \times \mathbb{Y}^{T+1}}
+\end{equation}
+
+** Sequential Bayesian DA (BDA)
+ * Current state pdf based on the previous observations
+\begin{equation}
+p_{x_t \mid y_{0:T}} = \frac{p_{x_t,y_{0:T}}}{p_{y_{0:T}}}
+\end{equation}
+From a functional point of view:
+\begin{equation}
+p_{x_t \mid y_{0:T}} : y_{0:T} \mapsto \left[x_t \mapsto \frac{p_{x_t,y_{0:T}}(x_t, y_{0:T})}{p_{y_{0:T}}(y_{0:T})}\right] \in \mathbb{Y}^{T+1} \rightarrow \mathbb{P}_{\mathbb{X}}
+\end{equation}
+(ie given the observations, we have a pdf)
+ * Recursive estimation: Analysis step
+   At cycle $t$, the *analysis* step, computes the posterior $p_{x_t\mid y_{0:t}}(\cdot \mid y_{0:t})$ given the prior $p_{x_t \mid y_{0:t-1}}$ and the current observation $p(y_t \mid x_t)$
+
+\begin{align}
+p_{x_t \mid y_{0:t}}(\cdot \mid y_{0:t}) &= \left(x_t \mapsto \frac{p_{y_t\mid x_t}(y_t \mid x_t)p_{x_t \mid y_{0:{t-1}}}(x_t \mid y_{0: t-1})}{\text{normalization cst wrt }x_t}\right)\\
+&\in \mathbb{P}_{\mathbb{X}}
+\end{align}
+
+This step can be rewritten as an application:
+\begin{equation}
+p_{x_t \mid y_{0:t}}(\cdot \mid y_{0:t}) = a^{\mathrm{BDA}}\left(p_{x_t \mid y_{0:{t-1}}}(\cdot \mid y_{0:t-1}), y_t\right)
+\end{equation}
+so that
+\begin{equation}
+  \begin{array}{rcl}
+    a^{\mathrm{BDA}}: \mathbb{P}_{\mathbb{X}} \times \mathbb{Y} & \longrightarrow & \mathbb{P}_{\mathbb{X}}\\
+    (q^b, y)&\longmapsto & \left(x\mapsto \frac{p_{y\mid x}(x\mid y)q^b(x)}{\int p_{y\mid x}(z\mid y)q^b(z)\,\mathrm{d}z}\right)
+  \end{array}
+\end{equation}
+so its argument is the prior distribution of $x$ and the observation $y$.
+
+ * Propagation step
+   Get the next "prior" $p_{x_{t+1} \mid y_{0:t}} (\cdot \mid y_{0:t})$ from the posterior $p_{x_t \mid y_{0:t}}(\cdot \mid y_{0:t})$ by marginalization
+\begin{align}
+p_{x_{t+1} \mid y_0}(\cdot \mid y_{0:t}) &= \left(x_{t+1} \mapsto \int p_{x_{t+1}\mid x_t}(x_{t+1} \mid z) p_{x_t \mid y_{0:t}}(z \mid y_{0:t}) \,\mathrm{d}z\right) \in \mathbb{P}_{\mathbb{X}} \\
+&= b^{\mathrm{BDA}}\left(p_{x_t \mid y_{0:t}}(\cdot  \mid y_{0:t})\right)
+\end{align}
+and finally: $b^{\mathrm{BDA}} \in \left(\mathbb{P}_{\mathbb{X}}\rightarrow \mathbb{P}_{\mathbb{X}}\right)$
+
+** The KF
+In the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], $\mathcal{M}$ is affine with $M$ linear part,
+$\mathcal{H}$ affine with $H$ linear part. Analysis and propagation
+tranformations are Gaussian, so completely characterized by mean anc
+covariance matrices.
+
+Let $c^\mathrm{KF}$ be the mapping which associates a mean and
+covariance matrix to a Gaussian distribution:
+\begin{equation}
+  \begin{array}{rcl}
+    c^{\mathrm{KF}}: \mathbb{S}_{\mathbb{X}}& \longrightarrow&\mathbb{P}_{\mathbb{X}} \\
+    (\mu, \Sigma)& \longmapsto & \mathcal{N}(\cdot; \mu, \Sigma)
+  \end{array}
+\end{equation}
+with $\mathbb{S}_{\mathbb{X}}$ the set of mean and covariance matrices over $\mathbb{X}$.
+
+*** Analysis
+The KF analysis transforms the mean-covariance pair of the prior and an observation into the mean-covariance of the posterior:
+\begin{equation}
+  \begin{array}{rcl}
+    a^{\mathrm{KF}}: \mathbb{S}_{\mathbb{X}} \times \mathbb{Y}&\longrightarrow & \mathbb{S}_{\mathbb{X}} \\
+                                                              \left((\mu^b, \Sigma^b), y\right)& \longmapsto & \left(\mu^a, \Sigma^a\right)
+  \end{array}
+\end{equation}
+with
+\begin{align}
+\Sigma^a &= \left(H^T R^{-1}H + (\Sigma^b)^{-1}\right)^{-1}\\
+\mu^a &=  \mu^b + \Sigma^a H^T R^{-1} \left(y-\mathcal{H}(\mu^b)\right)
+\end{align}
+
+*** Propagation
+The KF propagation transforms the mean-cov pair of the posterior into the next cycle prior:
+
+\begin{equation}
+  \begin{array}{rcl}
+    b^{\mathrm{KF}}:\mathbb{S}_{\mathbb{X}}&\longrightarrow &\mathbb{S}_{\mathbb{X}} \\
+    (\mu^a, \Sigma^a)&\longmapsto & (\mu^b, \Sigma^b)
+  \end{array}
+\end{equation}
+with
+\begin{align}
+\Sigma^b &= M\Sigma M^T + Q \\
+\mu^b &= \mathcal{M}(\mu^a)
+\end{align}
+
+* DA networks (DAN)
+** DAN
+Given a set $\mathbb{H}$, a DAN is a triplet of transformations such that
+\begin{align}
+ \text{Analyzer: } &\quad a \in \mathbb{H} \times \mathbb{Y} \rightarrow \mathbb{H} \\
+ \text{Propagater: } &\quad b \in \mathbb{H} \rightarrow \mathbb{H} \\
+ \text{Procoder: } &\quad c \in \mathbb{H} \rightarrow \mathbb{P}_{\mathbb{X}}
+\end{align}
+Procoder means Probability Coder, which maps the internal state $\mathbb{H}$ to the set of pdf.
+
+$\mathbb{H}$ is an internal set of representation of pdf:
+ * in BDA: $c$ is the identity, since all pdf are propagated as is
+ * in KF: $c$ is $c^{\mathrm{KF}}$
+ * in EnKF: $c$ is composed of the ensemble members.
+** Recurrent Neural Network
+In [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]], this network is similar to Elman Network (see [[id:f73cda73-3c82-43f4-9636-b2e409682afd][RNN]]
+but the role of $x$ and $y$ is reversed), made of
+\begin{align}
+f &\in \mathbb{H} \times \mathbb{Y} \rightarrow \mathbb{H} \\
+g &\in \mathbb{H} \rightarrow \mathbb{X}
+\end{align}
+where $\mathbb{Y}$ is the set of inputs, $\mathbb{X}$ is some set of
+outputs, and $\mathbb{H}$ is the "internal memory".
+Given an input $y_t \in \mathbb{Y}$, the function $f$ updates the memory $h_{t-1} \in \mathbb{H}$:
+\begin{equation}
+h_t = f(h_{t-1}, y_t)
+\end{equation}
+and the function $g$ decodes the memory into the new output
+\begin{equation}
+x_t = g(h_t)
+\end{equation}
+** Links and motivation
+Highlighted by $f = b \circ a$ and $g=c$.
+ * The RNN cannot make
+predictions without observations: the Elman network only produces
+posterior outputs, thus no priors for the next cycle, so no prediction
+ * $f$ performs both propagation and analysis at once
+ * DAN provides a probabilistic representation at the state, by producing a pdf instead of value.
+
+
+ Similarities between the two allow to adapt the training of a RNN to a DAN: we can train a NN from the data in order to perform DA directly.
+* Training of a DAN
+** Cost function
+In order to train the DAN using samples from the state space model
+(ODS), we wish to quantify the *information lost* each cycle by the DAN
+prior and posterior approximation of the ideal BDA prior and
+posterior.
+
+Given a set of observations $y_{0:T} \in \mathbb{Y}^{T+1}$, a DAN outputs a trajectory of prior and posterior cdfs over $\mathbb{X}$. In other words, any DAN $(a, b, c) \in \left(\mathbb{H} \times \mathbb{Y} \rightarrow \mathbb{H}\right) \times \left(\mathbb{H} \rightarrow \mathbb{H}\right) \times \left(\mathbb{H} \rightarrow \mathbb{P}_{\mathbb{X}}\right)$ outputs an element $(q^b_{0:T},q^a_{0:T})$ in $\mathbb{P}$
+
+\begin{align}
+h^b_t &= b \circ h^a_{t-1}&\quad \mathbb{Y}^t \rightarrow \mathbb{H} \\
+q^b_t &= c \circ h^b_t& \quad \mathbb{Y}^t \rightarrow \mathbb{P}_{\mathbb{X}}\\
+h_t^a &= \left[y_{0:t} \mapsto a\left(h_t^b(y_{0:t-1}), y_t\right)\right]& \quad \mathbb{Y}^{t+1} \rightarrow \mathbb{H} \\
+q_t^a &= c \circ h_t^a& \quad \mathbb{Y}^{t+1} \rightarrow \mathbb{P}_{\mathbb{X}}
+\end{align}
+
+with the initialization $h_{-1}^a \in \mathbb{H}$ is associated with the function $h_{-1}^a: \mathbb{Y}^0 = \varnothing\rightarrow \mathbb{H}$
+
+We want the DAN to generate trajectories of pdfs $(q^b_{0:T},
+q^b_{0:T})$ close enough to the ideal Bayesian ones $(p^b_{0:T}, p^a_{0:T})$, in the [[id:33a6b5ee-82e8-489a-858d-a634db231132][Relative Entropy]] sense.
+
+In cite:boudier_dan_2020, the authors show that this objective is
+equivalent to the minimization of the sampled time averaged cross
+entropy:

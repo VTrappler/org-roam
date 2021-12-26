@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       0bf81a71-2733-4c22-8bad-ae65378a66dd
+:END:
+#+title: Estimation Theory
+#+startup: latexpreview
+
+* Estimators
+ * An estimator (or point estimate) $\hat{\lamba}$ is a function of the data, thus is a random variable
+ * $\theta$, the unknown parameter being estimated is called the *estimand*
+ * A realization of the estimator is called the estimate
+
+* Derived quantities
+** Error
+For an estimate (ie for a sample of the data $x$), the error is $e(x) = \hat{\theta}(x) - \theta$
+
+** Variance
+The Variance of $\hat{\theta}$ is $\mathbb{V}\mathrm{ar}\left[\hat{\theta}\right]=\mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat{\theta}])^2\right]$
+** Bias
+The bias is $B(\hat{\theta}) = \mathbb{E}\left[\hat{\theta}\right] - \theta$
+** MSE
+The Mean Squared Error of $\hat{\theta}$ is $\mathrm{MSE}(\hat{\theta}) =\mathbb{E}\left[(\hat{\theta}(X) - \theta)^2\right]$
+Furthermore we can decompose the MSE into bias and variance:
+\begin{equation}
+\mathrm{MSE}(\hat{\theta}) = \mathbb{V}\mathrm{ar}[\hat{\theta}] + B(\hat{\theta})^2
+\end{equation}
+
+* Properties
+** Consistency
+A consistent sequence of estimators is a sequence that converges in probability:
+for any $\epsilon > 0$:
+\begin{equation}
+\lim_{n \to \infty} \mathbb{P}\left[ | \theta_n - \theta | < \epsilon \right] = 1
+\end{equation}
+
+
+[[id:cb79c172-b92a-436d-a708-d018933f7b6d][Bayesian Point Estimation]]

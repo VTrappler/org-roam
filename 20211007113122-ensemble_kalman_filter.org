@@ -55,3 +55,14 @@ In the forecast step, we propagate the analysis through the model:
 \begin{equation}
 x_i^f = \mathcal{M}(x_i^a)
 \end{equation}
+
+
+* E-dimension
+In cite:oczkowski_mechanisms_2005, the authors introduce the E-dimension:
+a local measure that varies in space and time which quantifies the distribution of the variance between phase space directions.
+ * It is maximal ($=$ to the number of ensemble members), when the variance is equally distributed between all directions.
+ * It is lower when the variance is distributed in unevenly.
+\begin{equation}
+E = \frac{\left(\sum_{i=1}^{k} \sqrt{\lambda}_i\right)^2}{\sum_{i=1}^{k} \lambda_i}
+\end{equation}
+where $\lambda$ are the eigenvalues of the covariance matrix.

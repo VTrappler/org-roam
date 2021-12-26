@@ -3,7 +3,9 @@
 :ROAM_ALIASES: "Variational Inference" "Variational Bayes"
 :END:
 #+title: Variational Bayesian methods
+#+startup: latexpreview
 #+filetags: :Bayesian:
+
 
 Variational [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] relies on the approximation of the
 posterior distribution of *unobserved* variables $Z$, given some data

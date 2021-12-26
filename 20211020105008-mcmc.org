@@ -10,6 +10,8 @@
 distribution, which consists in creating a [[id:463a3501-d30d-4a4d-81b3-664ee6a2063e][Markov Chain]], whose
 stationary distribution is the desired distribution.
 
-
+This is particularly useful when trying to get samples from a
+distribution, whose point evaluation is known up to a normalizing
+constant.
 
 

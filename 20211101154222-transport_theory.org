@@ -15,7 +15,6 @@ Let $X$, $Y$ be separable metric spaces, and $c: X \times Y
 \rightarrow \mathbb{R}^+$ a Borel-measurable function.  Let $\mu$ be a
 measure on $X$, $\nu$ measure on $Y$.
 
-\\begin{equation}
 \begin{equation}
 \label{Monge_optimal}
 \inf_{T} \left\{\int_{X} c(x, T(x)) \,\mathrm{d} \mu(x) \mid T_{\sharp}(\mu) = \nu\right\}

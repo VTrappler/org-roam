@@ -94,13 +94,13 @@ The $u_i$ are then maximizers of the [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][
 \end{equation}
 over $\mathbb{X} \setminus \mathrm{span}(u_1, \dots, u_{i-1})$
 
-$U_r$ diagonalizes both $H$ and $\Gamma_{pr}^-1$
+$U_r$ diagonalizes both $H$ and $\Gamma_{pr}^{-1}$
 * LIS construction for non-linear inverse problems
 ** Local LIS
 The model is assumed to be differentiable.  The linearized forward
 model at a parameter $x$ is $J(x) = \nabla G(x)$ where $J(x) \in
 \mathbb{R}^{d\times n}$
-The Gauss-Newtom approximation of the Hessian of $\eta$ is now
+The Gauss-Newton approximation of the Hessian of $\eta$ is now
 \begin{equation}
 H(x) = J(x)^T \Gamma_{obs}^{-1} J(x)
 \end{equation}
@@ -122,6 +122,7 @@ directions are balances, so we would typically choose a threshold less
 than $1$.
 ** Global LIS
 *** Monte-Carlo approximation and expectations of the Rayleigh quotient
+
 We consider the expectation of the local Rayleigh quotient [[eqref:localRayleigh]] over the *posterior*
 \begin{equation}
 \mathbb{E}_{pi}\left[\mathcal{R}(u;x)\right] = \mathbb{E}_{pi}\left[\tilde{\mathcal{R}}(v;x)\right] = \frac{\langle v, Sv \rangle}{\langle v, v \rangle}
@@ -139,10 +140,10 @@ $S$ can be approximated using the Monte-Carlo estimator
 \end{equation}
 where the $x^{(k)} \sim \pi(x\mid y)$ are posterior samples.
 *** Construction of the global LIS
-Since the local Hessian $H(x^{(k)}$ is not explicitly available, and
+Since the local Hessian $H(x^{(k)})$ is not explicitly available, and
 too large to store in practice, we can use the *prior-conditioned
 low-rank approximation*:
-For each sample $x^{(k)}$, we use the [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][low-rank approximation]]:
+For each posterior sample $x^{(k)}$, we use the [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][low-rank approximation]]:
 \begin{equation}
 L^TH(x^{(k)})L \approx \sum_{i=1}^{l(k)} \lambda_i^{(k)} v_i^{(k)} {v_i^{(k)}}^T
 \end{equation}
@@ -156,3 +157,7 @@ of the Monte-carlo estimator of the low-rank approximation of $S$
 \left(\frac{1}{m}\sum_{k=1}^m \sum_{i=1}^{l(k)} \lambda_i^{(k)} v_i^{(k)} v_i^{(k)T}\right) \psi_j = \gamma_j \psi_j
 \end{equation}
 
+
+
+* Data-free version ?
+cite:cui_data-free_2021

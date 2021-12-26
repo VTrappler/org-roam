@@ -25,8 +25,24 @@ The encoder and decoder are then defined as
 \end{align}
 
 
+* Variational Autoencoders (VAE)
+:PROPERTIES:
+:ID:       fcf00225-0d0a-492a-a6f5-179fc401e1b3
+:END:
+
+This method is based on the construction of an autoencoder, which
+minimizes the [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] between the distribution of the input and
+the output, in a [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Bayes']] fashion
+
+** Formulation
+Given an input $x \sim P(x)$ where $P$ is unknown, and a latent
+encoding vector $z$, the objective is to model the data as a
+parametric distribution, $p_{\theta}$ with $\theta$ the set of network
+parameters
+
 
 * Latent space in practice
 
-Latent space have been used in [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]], in
 [[id:8bb3c55b-aa88-4763-bcec-e3e73227992a][Latent Space Data Assimilation using Deep Learning]] for instance.
+
+

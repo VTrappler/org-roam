@@ -6,7 +6,7 @@
 #+filetags: :DimensionReduction:PCA:
 #+STARTUP: latexpreview
 
-* Short Intro
+* Overview
 PCA is used in order to
   - *Describe* data
   - *Decorrelate* them
@@ -16,9 +16,9 @@ PCA is used in order to
 * Ressources:
 https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
 
-  
-* Matrix form
-** Sample matrix
+
+* Derivation
+** Matrix form
 Let's consider $N$ random variables $X_1,\dots, X_N$, known through $K$ realisations
 This can be summarised as a matrix of $N$ columns and $K$ rows.
 \begin{equation}
@@ -29,8 +29,6 @@ X_{1, 1} &\dots & X_{1, N} \\
 X_{K, 1} & \dots & X_{K, N}
 \end{bmatrix}
 \end{equation}
-
-** Transform and center of mass
 
 Let $g=(\bar{X}_{1}, \dots,\bar{X}_N)$ the center of mass of the matrix
 
@@ -56,12 +54,38 @@ This matrix $\bar{M}^T \bar{M}$ can then be diagonalized, since it is symmetric,
 \end{equation}
 
 Where $W$ is the matrix containing the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvectors]] as columns, and
-$\Lambda$ is a diagonal matrix of the associated eigenvalues
+$\Lambda$ is a diagonal matrix of the associated eigenvalues, and we can assume that they are arranged in descending order.
 
-* For dimensionality reduction
+** An an optimisation problem
+\begin{align}
+w_1 &= \operatorname{\mathrm{argmax}}_{\|w\|=1} \{\|Xw\|^2\} \\
+&= \operatorname{\mathrm{argmax}}_{\|w\|=1} \{w^T X^TX w\} \\
+&= \operatorname{\mathrm{argmax}} \left\{\frac{w^T X^TX w}{w^Tw}\right\} \\
+&= \operatorname{\mathrm{argmax}} R(X^TX, w)
+\end{align}
+which is a [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][Rayleigh quotient]].
+
+and iteratively, the $k$-th component can be found by substracting the previous $k-1$ rank-1 matrices:
+\begin{equation}
+\tilde{X}_k = X - \sum_{i=1}^{{k-1}} Xw_i w_i^T
+\end{equation}
+and
+\begin{equation}
+w_k = \operatorname{\mathrm{argmax}} \left\{\frac{w^T\tilde{X}_k^T\tilde{X}_kw}{w^Tw}\right\}
+\end{equation}
+
+** Probabilistic PCA
+See [[id:171c9790-a2d1-41aa-8d31-e21650e9830f][Probabilistic PCA]]
+
+ 
+* Usage: dimensionality reduction
 By truncating the PCA, this can be used as a [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]] method.
 The transformation $T = WX$ maps an original data vector (of $N$ components) 
 
+
+
+* See also
+[[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]
 
 
 * Python example
@@ -166,5 +190,3 @@ The transformation $T = WX$ maps an original data vector (of $N$ components)
 [[file:/home/victor/org-roam/images/PCA_samples_scikit.png]]
 
 
-* See also
-[[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]

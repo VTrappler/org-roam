@@ -1,9 +1,26 @@
 :PROPERTIES:
 :ID:       f867396d-b033-4fa7-b99a-b4dd551ae37b
-:ROAM_ALIASES: Backpropagation
+:ROAM_ALIASES: TLM Backpropagation
 :END:
 #+title: Adjoint Method
 #+STARTUP: latexpreview
+
+
+
+* Tangent Linear Model
+** Linear approximation
+Let us consider a function $f$, derivable at a point $a$.
+The linear approximation of $f$ around $a$ is
+\begin{align}
+f(x) &= f(a) + f'(a)(x-a) + o(x-a)\\
+f(a + h) &= f(a) + f'(x)h + o(h)
+\end{align}
+
+In terms of increments, we write
+$\delta f = f(a+h) - f(a)$, and $\delta x = h$, so the approximation becomes
+\begin{equation}
+\delta f = f'(x) \delta x
+\end{equation}
 
 
 A review on the adjoint method can be found in

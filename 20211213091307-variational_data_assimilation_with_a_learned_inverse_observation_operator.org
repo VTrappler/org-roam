@@ -4,6 +4,8 @@
 :END:
 #+title: Variational Data Assimilation with a Learned Inverse Observation Operator
 #+filetags: :MachineLearning:DataAssimilation:
+#+startup: latexpreview
+
 
 * In this paper
 

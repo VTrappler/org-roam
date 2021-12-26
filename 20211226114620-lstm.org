@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       5dad8327-136a-4de1-8756-bf2520e442ff
+:END:
+#+title: LSTM
+#+filetags: :MachineLearning:
+
+A Long short-term memory is a special architecture of [[id:f73cda73-3c82-43f4-9636-b2e409682afd][RNN]].
+It is based on 4 components:
+ * Cell
+ * Input Gate
+ * Output Gate
+ * Forget gate
+
+The cell acts as registry, which remembers values over arbitrary time intervals, while the gate regulate the flow of information.

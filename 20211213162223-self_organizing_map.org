@@ -1,6 +1,27 @@
 :PROPERTIES:
 :ID:       043b6c35-c43f-4400-9469-a68762265217
+:ROAM_ALIASES: "Kohonen map" SOM
 :END:
 #+title: Self-Organizing Map
+#+filetags: :DimensionReduction:MachineLearning:
 
-* TODO to write
+A SOM is a [[id:ee87a4bb-2518-4c38-bf15-77525e382003][Unsupervised]] [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] technique used to produce a low-dimensional representation (see [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]]), while preserving the *topological structure of the data*
+
+* Principle
+In general, training the SOM means to represent the input space of dimension $p$ as a map space with dimension 2.
+ * Input space: dimension $p$
+ * Map space: composed of "nodes" or "neurons" arranged as hexagonal or rectangular grid (2D)
+   * Each node has a "weight vector", which is the position of the node in the input space.
+   * To each node corresponds a set of instances from the input data
+   * The position of "nodes" in the map are important
+     * neighbouring nodes have similar weight vector
+     * contiguous neurons correspond to particular pattern
+
+* Architecture
+Depending on rectangular or hexagonal grid, the neighbourhood are not the same
+
+[[xournalpp:images/SOM_architecture.xopp][SOM architecture and neighborhood]]
+
+
+* TODO Algorithm
+

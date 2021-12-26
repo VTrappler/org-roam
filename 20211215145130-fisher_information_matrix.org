@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       376e898d-36f4-4f8f-96eb-be7d0d8d8b5e
+:END:
+#+title: Fisher Information Matrix
+#+startup: latexpreview
+
+In stats, and [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimation Theory]], the FIM is a way of measuring the information carried by a r.v. abount an unknown parameter $\theta$.
+* Definition
+Let $p(x;\theta)$ be a pdf of a rv $X$ given the value of $\theta$. The log-likelihood is defined as
+$l(\theta;x): \theta \mapsto \log p(x;\theta)$
+We assume that $X$ is is distributed as $p(x, \theta)$.
+** Score
+The score is defined as the partial derivative:
+\begin{equation}
+s(\theta; x) = \frac{\partial}{\partial \theta} l(\theta;x)
+\end{equation}
+
+For a value $\tilde{\theta}$, averaging wrt $X$, we have
+\begin{align}
+\mathbb{E}\left[s(\tilde{\theta},X) \right] &= \int \frac{\partial}{\partial {\theta}} l(\tilde{\theta};x) p(x;\theta)\,\mathrm{d}x \\
+&= \int \frac{\frac{\partial}{\partial {\theta}}p(x;\tilde{\theta})}{p(x;\tilde{\theta})}
+ p(x;\theta)\,\mathrm{d}x \\
+\end{align}
+So, if $\tilde{\theta} = \theta$,
+the expected value of the score is 0.
+** Fisher Information
+
+*** Definition
+The FIM is defined as the variance of the score
+\begin{equation}
+\mathcal{I}(\theta) = \mathbb{E}\left[\left(\frac{\partial}{\partial \theta}l(\theta, X)\right)^2 \mid \theta\right]
+\end{equation}
+A rv with high information means that the score is often high.
+
+if $l$ is twice differentiable, and under some regularity conditions, we have
+
+\begin{align}
+\mathcal{I}(\theta) &= \mathbb{E}\left[\left(\frac{\partial}{\partial \theta}l(\theta, X)\right)^2 \mid \theta\right]  \\
+&= - \mathbb{E}\left[\frac{\partial^2}{\partial \theta^2}l(\theta, X)\right]
+\end{align}
+
+*** Proof
+\begin{align}
+\frac{\partial^2}{\partial \theta^2}\log p(x;\theta) &= \frac{\frac{\partial^2}{\partial \theta^2} p(x;\theta)}{p(x;\theta)} - \left(\frac{\frac{\partial}{\partial \theta} p(x;\theta)}{p(x;\theta)}\right)^2 \\
+                                                     &=\frac{\frac{\partial^2}{\partial \theta^2} p(x;\theta)}{p(x;\theta)} - \left(\frac{\partial}{\partial \theta}\log p(x;\theta)\right)^2 \\
+\end{align}
+averaging the first term yields 0, QED.
+
+** FIM for vector parameters
+In the case of vector parameters $\theta = [\theta_1,\dots,\theta_N]$, the FIM is a matrix of size $N\times N$, of general term
+\begin{align}
+[\mathcal{I}(\theta)]_{i,j} &= \mathbb{E}\left[\left(\frac{\partial}{\partial \theta_i}l(\theta;X)\right)\left(\frac{\partial}{\partial \theta_j}l(\theta;X)\right)\mid \theta\right] \\
+&= \mathbb{E}\left[\left(\frac{\partial}{\partial \theta} l(\theta;x)\right)\left(\frac{\partial}{\partial \theta} l(\theta;x)\right)^T\right] \\ &= -\mathbb{E}\left[\frac{\partial^2}{\partial \theta_i \theta_j} l(\theta;x)\mid \theta\right]
+\end{align}
+
+
+* Estimation
+Classical MC estimation can be performed. The estimation using the hessian (second derivatives) is sometimes called the *observed FIM*, but requires additional regularity assumptions.
+
+* Links with other topics
+The FIM is the Hessian of the [[id:33a6b5ee-82e8-489a-858d-a634db231132][Relative Entropy]].

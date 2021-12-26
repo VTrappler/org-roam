@@ -30,3 +30,7 @@ A Markov chain is then uniquely defined by
 
 * Markov Kernel
 
+
+
+* Markovian property
+[[id:24be8ceb-d6db-467e-acec-76c9cc19c981][Probabilistic Graphical Models]]

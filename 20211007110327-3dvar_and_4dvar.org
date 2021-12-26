@@ -19,7 +19,18 @@ sequential aspect), while adopting a variational approach
 J_{4D}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2
 \end{align}
 The quadratic error associated with the background knowledge (ie the prior) can be seen as a
-$L_2$ [[id:4fe0221e-366f-4442-ac99-542bc63f2eb4][Regularization]]
+$L_2$ [[id:4fe0221e-366f-4442-ac99-542bc63f2eb4][Regularization]].
+
+
+* Weak-constraint 4D-Var
+\begin{align}
+J_{4D,\mathrm{Strong}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 \\
+J_{4D,\mathrm{Weak}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 + \frac{1}{2}\sum_{k=1}^{K} \|x_k - \mathbf{M}_k x_{k-1}\|_{\mathbf{Q_k}^{-1}}^2
+\end{align}
+The weak constraint 4DVar incorporates the model error in the cost
+function.  In the case of strong constraints, the "model" is a strong
+constraint: $x_{k+1} = M(x_k)$, while this equality is relaxed in the
+weak constrained case.
 
 * Optimisation
 The [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] of the cost function can be performed with
@@ -60,9 +71,3 @@ So
 
 
 
-* Weak-constraint 4D-Var
-\begin{align}
-J_{4D,\mathrm{Strong}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 \\
-J_{4D,\mathrm{Weak}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 + \frac{1}{2}\sum_{k=1}^{K} \|x_k - \mathbf{M}_k x_{k-1}\|_{\mathbf{Q_k}^{-1}}^2
-\end{align}
-The weak constraint 4DVar incorporates the model error in the cost function

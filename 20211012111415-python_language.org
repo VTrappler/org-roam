@@ -7,10 +7,6 @@
 Python is an interpreted programming language.
 
 
-* General informations
- * [[https://sinclert.github.io/packaging/][Overview on packaging]]
-
-
 * Packages for different usage 
 ** DataViz
  * Matplotlib
@@ -26,3 +22,20 @@ Python is an interpreted programming language.
  * pytorch
  * keras
  * tensorflow
+ * jax
+
+
+* Packaging
+ * [[https://sinclert.github.io/packaging/][Overview on packaging]]
+ * Python wheels
+#+begin_src 
+{dist}-{version}(-{build})?-{python}-{abi}-{platform}.whl  
+#+end_src
+   
+
+
+* Deployment
+** Containerization
+   * [[id:40a941fb-16c5-40c9-9954-5ac0668f872c][Docker]]
+   * [[id:1cafa262-254a-4040-9916-7143e6d6c3c8][Singularity]]
+

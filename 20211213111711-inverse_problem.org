@@ -3,6 +3,7 @@
 :ROAM_REFS: cite:tarantola_inverse_2005
 :END:
 #+title: Inverse Problem
+#+filetags: :Bayes:
 
 
 Inverse problems can be linked to [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]].

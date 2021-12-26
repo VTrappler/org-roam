@@ -3,4 +3,5 @@
 :END:
 #+title: Pyro
 
-Pyro is a flexible, scalable deep probabilistic programming library built on [[id:40086648-2e0c-4bad-aaa3-ad0e146f8ee6][PyTorch]].	
+Pyro is a flexible, scalable deep probabilistic programming library
+built on [[id:40086648-2e0c-4bad-aaa3-ad0e146f8ee6][PyTorch]], especially suited for [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]

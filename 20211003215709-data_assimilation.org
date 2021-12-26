@@ -4,7 +4,7 @@
 :END:
 #+title: Data Assimilation
 #+filetags: :DataAssimilation:
-#+STARTUP: latexpreview
+#+STARTUP: latexpreview overview
 
 * Short summary and map
 Data assimilation aims at improving the knowledge of the past, present
@@ -17,7 +17,7 @@ A few classical examples of DA methods are:
  * [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]]
  * [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]]
  * [[id:ea4143c4-696d-43e2-adee-f11ffce97095][3DVar and 4DVar]]
-
+   
 * Vocabulary and notations
 + $x$ is the *state* 
 + $x^t$ is its numerical counterpart ($\in \mathbb{R}^p$) discretized for instance ($t$ for truth)
@@ -36,9 +36,6 @@ Introducing instead the "truth" $x^t$,
 y = H(x^t)+ e^\mu + e^r = H(x^t) + e^o
 \end{equation}
 where $e^r$ is the *representation error*, and $e^o$ is the *model error*
-
-[[xournalpp:scheme_DA.xop.xopp][schema_DA]]
-
 * Error statistics
 ** Observation error
 We assume that
@@ -130,7 +127,7 @@ and we can get
 
 ** BLUE Analysis
 *** Derivation
-We are looking for the BLUE: *Best Linear Unbiased Estimator*.  Hence,
+We are looking for the BLUE: *Best Linear Unbiased [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimator]]*.  Hence,
 we seek to minimize the error committed in the analysis, which is
 measured as $Tr(\mathbf{P}^a)$.
 
@@ -154,7 +151,7 @@ and thus
 + Unbiased: $\mathbf{L} = \mathbf{I - KH}$
 + Linear: $\mathbf{L}$ and $\mathbf{K}$
 
-
+  
 
 *** Optimal analysis
 We have, for the posterior error covariance:

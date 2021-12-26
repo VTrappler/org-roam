@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       18cd8519-dfa2-4eb6-b032-e3f85241f95b
+:ROAM_ALIASES: SWE
+:END:
+#+title: Shallow-Water Equations
+
+The SWE are obtained from the [[id:f8d097df-a37c-4bc7-bffe-5409cb9432ed][Primitive Equations]] of the ocean, when
+averaging over the vertical component.
