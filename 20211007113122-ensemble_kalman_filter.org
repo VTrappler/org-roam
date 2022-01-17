@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       e82fb2bb-6b38-4cb9-9d02-ad02c82575cb
-:ROAM_ALIASES: "Stochastic Ensemble Kalman Filter" EnKF
+:ROAM_ALIASES: EnKF
 :END:
 #+title: Ensemble Kalman Filter
 #+filetags: :DataAssimilation:EnKF:
@@ -16,8 +16,8 @@ The EnKF seeks to mimic the analysis step of the [[id:6677e8d8-70de-4236-ab2f-3a
 but with an ensemble of limited size instead of manipulating
 covariance matrices
 #+end_quote
-
-* Analysis step
+* General principle of ensemble methods
+** Analysis step
 For each member of the ensemble, we want to perform
 \begin{equation}
 x_i^a = x_i^f + \mathbf{K}^*\left(y_i - H(x_i^f)\right)
@@ -41,20 +41,31 @@ Once the posterior ensemble has been obtained, we have
 \end{align}
 
 which is different from the covariance matrix in the BLUE analysis of
-the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], where a term $\mathbf{K^*RK^*}^T$ is present.  To correct
-this, we can "perturbate" the observations by a Gaussian noise $u$ which follows
-$\mathcal{N}(0, \mathbf{R})$, and use the empirical covariance matrix
-\begin{equation}
-\mathbf{R}_u = \frac{1}{N_e -1} \sum_{i=1}^{N_e} u_i u_i^T
-\end{equation}
-The Kalman gain is then computed using $\mathbf{R}_u$ instead of $\mathbf{R}$.
-
-
-* Forecast step
+the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], where a term $\mathbf{K^*RK^*}^T$ is present. To
+ensure consistency with the KF, different methods can be applied.
+** Forecast step
 In the forecast step, we propagate the analysis through the model:
 \begin{equation}
 x_i^f = \mathcal{M}(x_i^a)
 \end{equation}
+cite:bocquet_introduction_nodate
+
+* Stochastic EnKF
+:PROPERTIES:
+:ID:       e01c5f2d-6c81-460a-b3e5-ed92340744c6
+:END:
+
+We can "perturbate" the observations by a Gaussian noise $u$ which follows
+$\mathcal{N}(0, \mathbf{R})$, and use the empirical covariance matrix
+\begin{equation}
+\mathbf{R}_u = \frac{1}{N_e -1} \sum_{i=1}^{N_e} u_i u_i^T
+\end{equation}
+we have then
+\begin{equation}
+y_i = y + u_i
+\end{equation}
+
+The Kalman gain is then computed using $\mathbf{R}_u$ instead of $\mathbf{R}$.
 
 
 * E-dimension

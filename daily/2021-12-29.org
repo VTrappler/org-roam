@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       e3d08383-74d4-439c-9f06-ba54e72d4706
+:END:
+#+title: 2021-12-29
+
+
+* MCMC metropolis Hastings proof
+[[id:b055093c-ed5e-4e0e-b285-458744821241][MCMC]]

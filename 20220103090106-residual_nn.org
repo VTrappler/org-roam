@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       bfc9e8e6-312e-43ed-bd9e-e1de91b9dcda
+:ROAM_ALIASES: ResNet
+:END:
+#+title: Residual NN
+#+filetags: :MachineLearning:
+
+A residual Neural Network (ResNet) is a kind of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] which
+utilize *skip connections* to jump over some layers
+
+Two main reasons:
+ * Avoid the problem of vanishing gradients
+
+
+ 

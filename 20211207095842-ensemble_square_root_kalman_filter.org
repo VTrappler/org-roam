@@ -59,15 +59,18 @@ we have
 \end{equation}
 
 * Generating the posterior ensemble
-Similarly as in the derivation of the [[id:17e80e86-f937-4f56-8d35-3990d4f4ea11][Reduced Rank square root filter]], we can get
+We want to factorise $\mathbf{P}^a = \mathbf{X}_a\mathbf{X}_a^T$. Similarly as in the derivation of the [[id:17e80e86-f937-4f56-8d35-3990d4f4ea11][Reduced Rank square root filter]], we can get
 
 \begin{align}
 \mathbf{X}_a &= \mathbf{X}_f\left(\mathbf{I} + \mathbf{Y}_f^T\mathbf{R}^{-1}\mathbf{Y}_f\right)^{-1/2} \\
 &= \mathbf{X}_f \mathbf{T}
 \end{align}
+Since
+\begin{equation}
+[\mathbf{X}_a]_i = \frac{\mathbf{x}^a_i - \bar{\mathbf{x}}^a}{\sqrt{N_e - 1}}
+\end{equation}
 
-
-and the posterior ensemble is
+the posterior ensemble is
 \begin{align}
 \mathbf{x}_i^a &= \bar{\mathbf{x}}^a + \sqrt{N_e-1}\mathbf{X}_f [\mathbf{T}]_i \\
 &= \bar{\mathbf{x}} + \mathbf{X}_f\left(\mathbf{w}^a + \sqrt{N_e -1}[\mathbf{T}]_i\right)

@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       af81e00e-4613-497d-b8f8-8ecdc9ce7ab3
+:END:
+#+title: Matrix Norms
+#+startup: latexpreview
+
+* Matrix norms induced by vector norms
+
+Let $A\in \mathbb{R}^{m \times n}$ be a matrix, ie a linear operator from $\mathbb{R}^n$ to $\mathbb{R}^m$
+
+The operator norm is defined as
+\begin{align}
+\| A \| &= \sup \left\{\|Ax\| \text{ with } \|x\| = 1\right\} \\
+&= \sup \left\{\frac{\|Ax\|}{\|x\|} \text{ with } \|x\| \neq 0\right\} \\
+\end{align}

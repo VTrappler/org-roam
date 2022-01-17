@@ -100,7 +100,7 @@ $U_r$ diagonalizes both $H$ and $\Gamma_{pr}^{-1}$
 The model is assumed to be differentiable.  The linearized forward
 model at a parameter $x$ is $J(x) = \nabla G(x)$ where $J(x) \in
 \mathbb{R}^{d\times n}$
-The Gauss-Newton approximation of the Hessian of $\eta$ is now
+The [[id:c3cbe92c-47c5-464d-97fa-ac508e593b82][Gauss-Newton]] approximation of the Hessian of $\eta$ is now
 \begin{equation}
 H(x) = J(x)^T \Gamma_{obs}^{-1} J(x)
 \end{equation}
@@ -109,10 +109,12 @@ The [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][local Rayleigh quotient]] can be 
 \mathcal{R}(u;x) = \frac{\langle u, H(x)u\rangle}{\langle u, \Gamma_{pr}^{-1} u \rangle}
 \end{equation}
 or by using $v = L^{-1}u$, we have
+
+#+name: localrayleigh
 \begin{equation}
-\label{localRayleigh}
 \tilde{\mathcal{R}}(v;x) = \frac{\langle v, (L^TH(x)L)v\rangle}{\langle v, v \rangle} = \mathcal{R}(Lv;x)
 \end{equation}
+
 which is useful to quantify the local impact of the likelihood
 (numerator) relative to the prior (denominator).
 
@@ -123,9 +125,9 @@ than $1$.
 ** Global LIS
 *** Monte-Carlo approximation and expectations of the Rayleigh quotient
 
-We consider the expectation of the local Rayleigh quotient [[eqref:localRayleigh]] over the *posterior*
+We consider the expectation of the local Rayleigh quotient [[localrayleigh][(See eq)]] over the *posterior*
 \begin{equation}
-\mathbb{E}_{pi}\left[\mathcal{R}(u;x)\right] = \mathbb{E}_{pi}\left[\tilde{\mathcal{R}}(v;x)\right] = \frac{\langle v, Sv \rangle}{\langle v, v \rangle}
+\mathbb{E}_{\pi(x\mid y)}\left[\mathcal{R}(u;x)\right] = \mathbb{E}_{\pi}\left[\tilde{\mathcal{R}}(v;x)\right] = \frac{\langle v, Sv \rangle}{\langle v, v \rangle}
 \end{equation}
 where
 \begin{equation}
@@ -157,6 +159,7 @@ of the Monte-carlo estimator of the low-rank approximation of $S$
 \left(\frac{1}{m}\sum_{k=1}^m \sum_{i=1}^{l(k)} \lambda_i^{(k)} v_i^{(k)} v_i^{(k)T}\right) \psi_j = \gamma_j \psi_j
 \end{equation}
 
+The global LIS has the non-orthogonal basis $\Phi_r = L \Psi_r = L [\psi_1,\dots,\psi_r]$.
 
 
 * Data-free version ?

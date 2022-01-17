@@ -57,11 +57,9 @@ Defined as the difference between the analysis and the truth
  
 ** Model error
 The propagation through the numerical model can be written as
-#+begin_LaTeX
 \begin{equation}
   x^t(\tau + 1) = M(x^t(\tau)) + e^m
 \end{equation}
-#+end_LaTeX
 
 where the model error is $e^m$.
 

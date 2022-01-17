@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       51abdddc-fb2b-41f6-843d-f1f484cf4f0c
+:END:
+#+title: Rust Language
+#+filetags: :ProgrammingLanguage:
+

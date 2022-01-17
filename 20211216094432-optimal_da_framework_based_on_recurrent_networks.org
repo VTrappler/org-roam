@@ -1,6 +1,7 @@
 :PROPERTIES:
 :ID:       ed21d4df-9723-4502-8d77-7b37cf8381c7
 :ROAM_REFS: cite:boudier_dan_2020
+:ROAM_ALIASES: DAN
 :END:
 #+title: Optimal DA framework based on recurrent networks
 #+filetags: :MachineLearning:DataAssimilation:
@@ -49,6 +50,7 @@ p_{x_{0:T},y_{0:T}} = p_{y_T \mid x_T}p_{x_T\mid x_{T-1}} \dots p_{y_0 \mid x_0}
 \end{equation}
 
 ** Sequential Bayesian DA (BDA)
+This redefines [[id:a4d2b279-e48d-4b23-8dd2-a359f386037c][Bayesian Filtering]].
  * Current state pdf based on the previous observations
 \begin{equation}
 p_{x_t \mid y_{0:T}} = \frac{p_{x_t,y_{0:T}}}{p_{y_{0:T}}}
@@ -92,7 +94,7 @@ In the [[id:6677e8d8-70de-4236-ab2f-3ac48dfba2a4][Kalman Filter]], $\mathcal{M}$
 $\mathcal{H}$ affine with $H$ linear part. Analysis and propagation
 tranformations are Gaussian, so completely characterized by mean anc
 covariance matrices.
-
+*** Representation
 Let $c^\mathrm{KF}$ be the mapping which associates a mean and
 covariance matrix to a Gaussian distribution:
 \begin{equation}
@@ -132,6 +134,80 @@ with
 \mu^b &= \mathcal{M}(\mu^a)
 \end{align}
 
+** EnKF
+*** Ensemble representation
+This rewrites the (stochastic) [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][EnKF]] in the notation introduced above:
+It is based on an Ensemble matrix of $m$ ensemble members $X \in \mathbb{X}^m \subseteq \mathbb{R}^{n \times m}$:
+The statistics $(\mu, \Sigma) \in \mathbb{S}_{\mathbb{X}}$ are estimated from thos ensemble members
+\begin{align}
+\mu &= X 1_m \quad \text{ with } 1_m = (\frac{1}{m},\dots,\frac{1}{m})^T \in \mathbb{R}^m \\
+\Sigma &= X U X^T \quad \text{ with } U = \frac{1}{m-1} (I_m  - m 1{_m} 1{_m}^T)
+\end{align}
+
+we have then
+\begin{equation}
+  \begin{array}{rcl}
+    c^{\mathrm{EnKF}}: \mathbb{X}^m& \longrightarrow& \mathbb{P}_{\mathbb{X}} \\
+    X & \longmapsto & \mathcal{N}(\cdot; X 1_m, X U X^T)
+  \end{array}
+\end{equation}
+*** Analysis
+The analysis takes the background (or prior) ensemble into the posterior ensemble using the observation $y$:
+
+\begin{equation}
+  \begin{array}{rcl}
+    a^{\mathrm{EnKF}}: (\mathbb{X}^m \times \mathbb{Y}) & \longrightarrow & \mathbb{X}^m \\
+    (X^b, y)&\longmapsto & X^b + K(Y - \mathcal{H}(X^b))
+  \end{array}
+\end{equation}
+where
+\begin{align}
+K &= X^b U ({Y^b}^T) \left(Y^b U ({Y^b}^T) + R \right)^{-1} \\
+&= X^b U (\mathcal{H}{X^b})^T \left(\mathcal{H}X^b U (\mathcal{H}{X^b})^T + R \right)^{-1} \\
+&= X^b U {X^b}^T\mathcal{H}^T \left(\mathcal{H}X^b U{X^b}^T \mathcal{H}^T + R \right)^{-1} \\
+&= \Sigma \mathcal{H}^T \left(\mathcal{H} \Sigma \mathcal{H}^T + R\right)^{-1}
+\end{align}
+which is the Kalman gain in the linear case, using $Y^b = \mathcal{H}\mathcal{X}^b \in \mathbb{Y}^m$ and $Y$ is sampled according to $\mathcal{N}(y;R)$
+
+*** Propagation
+Finally, the propagation can be written as
+\begin{equation}
+
+\begin{array}{rcl}
+  b^{\mathrm{EnKF}}:\mathbb{X}^m : &\longrightarrow&\mathbb{X}^m \\
+  X & \longmapsto & \mathcal{M}(X) + N
+\end{array}
+\end{equation}
+where $N \sim \mathcal{N}(0, Q)$
+
+** Particle Filter
+*** Internal representation
+The pdf are approximated using a discrete representation comprising $m$ particles $(\{x^{(i)}, w_i\})_{1\leq i \leq m}$ $:
+\begin{equation}
+p_{x}(x) = \sum_{i=1}^{m} w_i \delta_{x^{(i)}}(x)
+\end{equation}
+We have then
+\begin{equation}
+
+  \begin{array}{rcl}
+    c^{\mathrm{PF}}: \mathbb{H}&\longrightarrow & \mathbb{P}_{\mathbb{X}} \\
+    (x^{(i)}, w^{(i)}) & \longmapsto &\frac{1}{m} \sum_{i=1}^{m} w^{(i)} \delta_{x^{(i)}}(\cdot)
+  \end{array}
+\end{equation}
+*** Analysis
+The analysis is computed using the likelihood:
+$p(y_t \mid x_t)$, so that the weigts are adjusted and normalized
+
+\begin{equation}
+  \begin{array}{rcl}
+    a^{\mathrm{PF}}: \mathbb{H} \times \mathbb{Y} &\longrightarrow& \mathbb{H} \\
+    (x^{(i)}, w^{(i)}) \times y & \longmapsto (x^{(i)}, \tilde{w}^{(i)})
+  \end{array}
+\end{equation}
+
+*** Propagation
+The propagation acts only on the particles.
+
 * DA networks (DAN)
 ** DAN
 Given a set $\mathbb{H}$, a DAN is a triplet of transformations such that
@@ -142,10 +218,17 @@ Given a set $\mathbb{H}$, a DAN is a triplet of transformations such that
 \end{align}
 Procoder means Probability Coder, which maps the internal state $\mathbb{H}$ to the set of pdf.
 
+
+#+DOWNLOADED: screenshot @ 2022-01-03 16:25:55
+[[file:images/DA_networks_(DAN)/2022-01-03_16-25-55_screenshot.png]]
+
+
+
 $\mathbb{H}$ is an internal set of representation of pdf:
  * in BDA: $c$ is the identity, since all pdf are propagated as is
  * in KF: $c$ is $c^{\mathrm{KF}}$
  * in EnKF: $c$ is composed of the ensemble members.
+ * $\mathbb{H}$ can be assimilated as a latent space
 ** Recurrent Neural Network
 In [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]], this network is similar to Elman Network (see [[id:f73cda73-3c82-43f4-9636-b2e409682afd][RNN]]
 but the role of $x$ and $y$ is reversed), made of
@@ -172,7 +255,7 @@ posterior outputs, thus no priors for the next cycle, so no prediction
  * DAN provides a probabilistic representation at the state, by producing a pdf instead of value.
 
 
- Similarities between the two allow to adapt the training of a RNN to a DAN: we can train a NN from the data in order to perform DA directly.
+Similarities between the two allow to adapt the training of a RNN to a DAN: we can train a NN from the data in order to perform DA directly.
 * Training of a DAN
 ** Cost function
 In order to train the DAN using samples from the state space model

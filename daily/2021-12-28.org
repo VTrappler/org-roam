@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       3aa54036-379c-4cd6-871f-98afef57083b
+:END:
+#+title: 2021-12-28
+
+* Implementation of the particle filter
+[[id:9da81fb6-71ba-458c-85d0-d8c5c840faf5][Particle Filter]]
+* Back on DAN for the EnKF
+[[id:ed21d4df-9723-4502-8d77-7b37cf8381c7][DAN]]
+* review on IENKF again
+[[id:48b02f70-914f-4887-a18d-45a928e51c45][Iterative EnKF]]

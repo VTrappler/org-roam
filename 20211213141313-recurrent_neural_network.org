@@ -6,7 +6,10 @@
 #+filetags: :MachineLearning:
 #+startup: latexpreview
 
-RNN are a class of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], where connections between nodes form a graph along a temporal sequence. Those NN show recurrent connections. They are particularly useful for time series.
+RNN are a class of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], where connections between nodes
+form a graph along a temporal sequence. Those NN show recurrent
+connections. They are particularly useful for time series.
+
 
 * Elman and Jordan Networks
 Let us consider a 3 layered Neural Network:

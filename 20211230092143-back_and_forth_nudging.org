@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       190ac782-2f62-4837-b1f4-e04916bf750f
+:ROAM_REFS: cite:auroux_back_2005
+:END:
+#+title: Back and Forth Nudging
+#+filetags: :DataAssimilation:
+#+startup: latexpreview
+
+
+* Nudging for linear model
+** Forward nudging
+Let us consider the forward model governed by a linear ODE
+\begin{equation}
+  \left\{
+  \begin{array}{rl}
+    \frac{\mathrm{d} X}{\mathrm{d} t} &= AX \quad \text{ for } \quad 0 <t < T \\
+    X(0) &= x_0
+  \end{array}\right.
+\end{equation}
+
+Let us assume that we have an observation $X_{\mathrm{obs}}(t)$.
+Nudging the ODE gives the following system:
+
+\begin{equation}
+  \left\{
+  \begin{array}{rl}
+    \frac{\mathrm{d} X}{\mathrm{d} t} &= AX + K (X_{\mathrm{obs}} - X)\quad \text{ for } \quad 0 <t < T \\
+    X(0) &= x_0
+  \end{array}\right.
+\end{equation}
+
+In integral form, we can prove that a solution verifies
+\begin{equation}
+X(t) = e^{-(K-A)t}\left(x_0 +  \int_{0}^t e^{(K-A)s}KX_{\mathrm{obs}}(s) \,\mathrm{d}s \right)
+\end{equation}
+
+If $K$ is symmetric definite positive, and large enough for $K-A$ to
+be definite, $X(t) \rightarrow_{K \to \infty} X_{\mathrm{obs}}(t)$
+(meaning that we tend to pointwise convergence to the obs when
+eigenvalues of $K$ tend to infinity)
+
+** Backward nudging
+We have now a final condition:
+\begin{equation}
+  \left\{
+  \begin{array}{rl}
+    \frac{\mathrm{d} \tilde{X}}{\mathrm{d} t} &= A\tilde{X} \quad \text{ for } \quad T >t > 0 \\
+    \tilde{X}(T) &= \tilde{x}_T
+  \end{array}\right.
+\end{equation}
+Nudging gives
+\begin{equation}
+  \left\{
+  \begin{array}{rl}
+    \frac{\mathrm{d} \tilde{X}}{\mathrm{d} t} &= A\tilde{X} - K(X_{\mathrm{obs}} - \tilde{X})\quad \text{ for } \quad T >t > 0 \\
+    \tilde{X}(T) &= \tilde{x}_T
+  \end{array}\right.
+\end{equation}

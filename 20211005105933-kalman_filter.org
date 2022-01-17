@@ -3,7 +3,7 @@
 :END:
 #+title: Kalman Filter
 #+startup: latexpreview
-#+filetags: :DataAssimilation: :KalmanFilter:
+#+filetags: :DataAssimilation:
 
 The Kalman filter is an essential method of [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]. It
 relies on linearity and Gaussian assumptions. 
@@ -32,7 +32,7 @@ Such a system is described by
 [[xournalpp:images/kalman_filter.xop.xopp][Illustration of notations for the kalman filter]]
 ** Analysis step
 + At $t_k$, we have $x_k^f$ forecast, assumed unbiased, that acts as a background
-+ Assocated covariance matrix is $\mathbf{P}^f_k$.
++ Associated covariance matrix is $\mathbf{P}^f_k$.
 
 + Observation $y_k$
 
@@ -48,7 +48,7 @@ x_k^a= x_k^f + \mathbf{K}_k\left(y_k - \mathbf{H}_k x_k^f\right)
 
 Optimal gain matrix (=Kalman gain) is given by
 \begin{equation}
-\mathbf{K}^*_k = \mathbf{P}^f_k\mathbf{H}_k^T(\mathbf{H}_k\mathbf{P}^f_k\mathbf{H}_k^T + \mathbf{R}_k)^-1
+\mathbf{K}^*_k = \mathbf{P}^f_k\mathbf{H}_k^T(\mathbf{H}_k\mathbf{P}^f_k\mathbf{H}_k^T + \mathbf{R}_k)^{-1}
 \end{equation}
 
 and finally the /optimal/ analysis covariance matrix is
@@ -73,7 +73,7 @@ The forecast error cov matrix is given by
 ** Algorithm
 
 *** Initialisation
-+ Initial system state $x_0^f$ and error covariance matrix $P_0^f
++ Initial system state $x_0^f$ and error covariance matrix $P_0^f$
   
 *** At every step $k$
 

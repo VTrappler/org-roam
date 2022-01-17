@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       e85a718e-773c-4732-b02e-6fdbab7def25
+:END:
+#+title: R Language
+#+filetags: :ProgrammingLanguage:
+
+

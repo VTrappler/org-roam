@@ -7,12 +7,28 @@
 
 
 * Curse of dimensionality
-Coverage
+Methods may be analytically sound in low dimension, but can be impossible to scale up.
 
-* Techniques
-
+* Matrix decomposition
  * [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][Principal Component Analysis]]
+   Given a matrix of sample, we can compute its covariance matrix, and using its eigendecomposition
  * [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]
+       
+* In a Bayesian Inference framework
  * [[id:516b5f8f-6158-47eb-b7f9-757cc5402c35][Likelihood Informed Subspace]]
  * [[id:9ff95f2d-88c7-4d67-a72a-5248f65235e6][Certified Dimension Reduction]]
-       
+Many methods have been developed, which are based on the partition of
+the input space using projectors based on eigendecompositions of specific matrices of the form
+\begin{equation}
+H = \int G(x) \pi(\mathrm{d}x)
+\end{equation}
+For LIS and Active subspace, it has the form
+\begin{align}
+H_{\mathrm{LIS}} &= \int (\nabla F(x))^T \Gamma_{\mathrm{obs}}^{-1} (\nabla F(x)) \pi_{\mathrm{pos}}(\mathrm{d}x \mid y) \\
+H_{\mathrm{AS}} &= \int (\nabla \pi_{\mathrm{lik}}(x \mid y))(\nabla \pi_{\mathrm{lik}}(x \mid y))^T \pi_{0}(\mathrm{d}x)
+\end{align}
+
+
+* Data-driven
+ * [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoders]]
+     

@@ -28,9 +28,42 @@ A Markov chain is then uniquely defined by
 + its initial state distribution $p_{\mathbf{X}_0}$
 + the transition probabilities $p_{\mathbf{X}_l \mid \mathbf{X}_{l-1}}(\mathbf{x}_l \mid \mathbf{x}_{l-1})$
 
-* Markov Kernel
+* Markov Kernels
+** Definition
+A Markov kernel is a function $P(x, A)$, defined as
+\begin{align}
+P(x,A) &= \mathbb{P}\left[x_{t+1} \in A \mid x_t = x\right] \\
+&= \int_A p_{x_{t+1} \mid x_t}(x_{t+1} \mid x_t)\,\mathrm{d}x_{t+1}
+\end{align}
+Such kernels may contain atoms, so that the probability of staying in place is not null:
+\begin{equation}
+P(x, \{x\}) \neq 0
+\end{equation}
 
 
+Say that the distribution of $x_t$ is $p_{x_t}$, then the distribution of the next point in the chain $y=y_{t+1}$ is
+\begin{equation}
+p_{x_{t+1}}(y)\,\mathrm{d}y = \int_{\mathcal{X}} p_{x_t}(x) P(x, \mathrm{d}y) \,\mathrm{d}x
+\end{equation}
+** Invariant Measures
+A [[id:ed5ca3ef-6b5c-4f01-beec-a7d42c7f6d0b][Measure]] $\pi$ is said to be invariant wrt to the Markov Kernel if
+\begin{equation}
+\pi(y) \,\mathrm{d}y = \int_{\mathcal{X}} \pi(x)P(x,\mathrm{d}y)\,\mathrm{d}x
+\end{equation}
+
+Let us add some assumptions
+ * The chain is aperiodic ("connected graph")
+ * and irreducible (no loops)
+then 
+ * There exists an unique invariant measure $\pi$
+ * The marginal distribution of an element $x_t$ converges toward $\pi$ when $t\rightarrow \infty$
+
+Because of this convergence property, we can try to construct
+appropriate Markov Chains, thus appropriate Markov Kernels in order to
+converge toward specific distributions, as in [[id:63d4a8c6-f142-47e1-9865-9db05b18a3ea][Metropolis-Hastings]].
+
+** Reversible kernel
+A kernel is said to be reversible if $\pi(x)\rho(x,y) = \pi(y)\rho(y,x)$
 
 * Markovian property
 [[id:24be8ceb-d6db-467e-acec-76c9cc19c981][Probabilistic Graphical Models]]

@@ -36,6 +36,9 @@ taken by the quotient.
 
 
 * Generalized Rayleigh quotient
+The Generalized Rayleigh quotient of the matrix pencil $(A, B)$ is defined as
 \begin{equation}
 R((A,B),x) = \frac{x^*Ax}{x^*Bx} = \frac{\langle x, Ax \rangle}{\langle x, Bx\rangle}
 \end{equation}
+It is then tied to the generalized [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalue]] problem of the pencil.
+ 

@@ -4,6 +4,17 @@
 #+title: Programming Language 
 
 
+* Compiled languages
+ * [[id:882e2b5a-d43f-4679-9ce1-ce64530c116a][Julia Language]] using JIT
+ * [[id:64ffacea-1c8f-4338-81a4-c6e1daffccba][GO Language]]
+ * [[id:58653cd1-0719-4de2-9b14-6b3222c9d27e][Fortran Language]]
+ * [[id:51abdddc-fb2b-41f6-843d-f1f484cf4f0c][Rust Language]]
+   
 
-[[id:64ffacea-1c8f-4338-81a4-c6e1daffccba][GO Language]], [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python Language]], [[id:882e2b5a-d43f-4679-9ce1-ce64530c116a][Julia Language]], [[id:d301bcd7-1fdc-4c49-a79f-0d503bf003fd][Cython]], [[id:58653cd1-0719-4de2-9b14-6b3222c9d27e][Fortran Language]]
-			
+
+* Interpreted languages
+ * [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python Language]]
+ * [[id:882e2b5a-d43f-4679-9ce1-ce64530c116a][Julia Language]]
+ * [[id:e85a718e-773c-4732-b02e-6fdbab7def25][R Language]]
+ * [[id:f732e09f-c8a7-46ff-a49d-a7f9baa4c178][Javascript Language]]
+

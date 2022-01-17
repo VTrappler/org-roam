@@ -3,8 +3,10 @@
 :END:
 #+title: Particle Filter
 #+STARTUP: latexpreview
+#+filetags: :DataAssimilation:
 
 The particle filter is a [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][Sampling method]] adapted for non-linear dynmamics
+
 * Particle Filtering
 ** State space model
 
@@ -22,7 +24,7 @@ The full distribution is approximated using a set of weighted
 p(x_0,\dots,x_k \mid y_1,\dots, y_k) \approx \sum_{i=1}^P w_k^i \delta_{x_k^i}(x_k)
 \end{equation}
 where $\delta$ is the Dirac delta
-   
+
 ** Sampling Importance Resampling
 
 [[id:5067b3e2-838b-4ca6-a765-a28fc640fd29][Sampling Importance Resampling]] can be used to determine the weights.
@@ -41,7 +43,7 @@ where
 * Sequential algorithm
 Let us assume that the approximation of $p(x_0,\dots x_{k-1} \mid y_1,
 \dots y_{k-1})$ is known. How to approximate $p(x_0,\dots x_{k} \mid
-y_1, \dots y_{k})$ ?
+y_1, \dots y_{k})$ ? This is a [[id:a4d2b279-e48d-4b23-8dd2-a359f386037c][Bayesian Filtering]] problem
 ** Sampling
 We make the following assumption:
 \begin{equation}
@@ -69,3 +71,45 @@ The Effective Sample Size (ESS) is then often used in order to decide on a resam
 If below a specified threshold, we generate $N$ new particles among
 $(x_{0}^i, \dots, x_k^i)$ depending on their probabilities given by
 the weights $(w_k^i)$. Afterwards, set all weights to $1/ N$.
+
+
+* Generic Particle Filter algorithm
+Given the observations $\mathcal{Y}_n = \{y_1,\dots,y_n}$, the joint posterior density of all the states is
+\begin{align}
+  p(x_{0:k} \mid \mathcal{Y}_k) &= p(x_{0:k} \mid \mathcal{Y}_{k-1}, y_k)  = \frac{p(y_k \mid \mathcal{Y}_{k-1}, x_{0:k})p(x_{0:k} \mid \mathcal{Y}_{k-1})}{p(y_k \mid \mathcal{Y}_{k-1})} \\
+                                &= \frac{p(y_k \mid \mathcal{Y}_{k-1}, x_{0:k})p(x_{0:k} \mid \mathcal{Y}_{k-1})}{p(y_k \mid \mathcal{Y}_{k-1})} \\
+                                &=\frac{p(y_k \mid \mathcal{Y}_{k-1}, x_{0:k})p(x_k, x_{0:k-1} \mid \mathcal{Y}_{k-1})}{p(y_k \mid \mathcal{Y}_{k-1})} \\
+                                &=\frac{p(y_k \mid \mathcal{Y}_{k-1}, x_{0:k})p(x_k\mid x_{0:k-1},\mathcal{Y}_{k-1})}{p(y_k \mid \mathcal{Y}_{k-1})}p(x_{0:k-1} \mid \mathcal{Y}_{k-1}) \\
+                                &= \frac{p(y_k \mid x_{k})p(x_k\mid x_{k-1})}{p(y_k \mid \mathcal{Y}_{k-1})}p(x_{0:k-1} \mid \mathcal{Y}_{k-1})
+\end{align}
+
+and finally the weight updates can be written as
+\begin{equation}
+w_k^i = w^i_{k-1}\frac{p(y_k \mid x^i_k)p(x_{k}^i \mid x^i_{k-1})}{q(x^i_k \mid x^i_{0:{k-1}}, \mathcal{Y}_k)}
+\end{equation}
+
+where the proposal density as assumed to be the form of
+\begin{equation}
+q(x^i_k \mid x^i_{0:{k-1}}, \mathcal{Y}_k) = q(x_k \mid x_{k-1}, y_k)
+\end{equation}
+which is the proposal density.
+
+The generic particle filter iteration is then
+ 1. Sample the particles $x_k^i \sim q(x_k \mid x_{k-1}, y_k)$ from the proposal density
+ 2. Update the weights as $w_k^i = w^i_{k-1}\frac{p(y_k \mid x^i_k)p(x_{k}^i \mid x^i_{k-1})}{q(x^i_k \mid x^i_{k-1},y_k)}$
+ 3. Normalize the weights
+ 4. Resample if needed
+
+** Choice of the proposal density
+*** Bayesian Bootstrap filter (Standard)
+$q(x_k \mid x_{k-1}, y_k) = p(x_{k} \mid x_{k-1})$ gives an update
+\begin{equation}
+w^i_k \propto w_{k-1}^i p(y_k \mid x^i_k)
+\end{equation}
+*** Optimal importance density
+The optimal (minimizes the variance of weights given previous states and all available observations),
+$q(x_k \mid x_{k-1}, y_k) = p(x_{k} \mid x_{k-1}, y_k)$
+Thus
+\begin{equation}
+w^i_k \propto w_{k-1}^i p(y_k \mid x^i_{k-1})
+\end{equation}

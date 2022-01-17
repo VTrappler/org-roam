@@ -36,9 +36,10 @@ Assuming that the noise is additive:
 x_{k+1} = M(x_k) + w_k
 \end{equation}
 The convolution rewrites as
-\begin{equation}
-p(x_{k+1} \mid Y_k) = \int p_W(x_{k+1} - M(x_k))p(x_k \mid Y_k) \,\mathrm{d}x_k
-\end{equation}
+\begin{align}
+p(x_{k+1} \mid Y_k) &= \int p_W(x_{k+1} - M(x_k))p(x_k \mid Y_k) \,\mathrm{d}x_k \\
+ &= \int p(x_{k+1}  \mid x_k)p(x_k \mid Y_k) \,\mathrm{d}x_k
+\end{align}
 If the model error is null, we have
 \begin{equation}
 p_W(x_{k+1} - M(x_k)) = \delta(x_{k+1} - M(x_k))

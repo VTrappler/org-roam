@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       a418a541-d87f-44d7-b044-577bf6deef46
+:END:
+#+title: 2021-12-30
+
+* Bayesian Data assimilation
+See [[id:a4d2b279-e48d-4b23-8dd2-a359f386037c][Bayesian Filtering]]
+
+Given a prior $p(x_0)$:
+ * Forward: $p(x_1) = \int p(x_1 \mid x_0)p(x_0) \,\mathrm{d}x_0$
+ * Analysis $p(x_1 \mid y_1) \propto p(y_1 \mid x_1)p(x_1)$
