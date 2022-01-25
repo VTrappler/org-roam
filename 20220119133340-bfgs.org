@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       91cb151f-5dce-4723-8d1d-8766ab952965
+:END:
+#+title: BFGS
+#+filetags: :Optimization:
+#+startup: latexpreview
+
+BFGS method is an [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] method, which is a Quasi-[[id:c3cbe92c-47c5-464d-97fa-ac508e593b82][Newton method]]. The approximation of inverse Hessian is performed by using a rank 2 update, in order to preserve positive definiteness.x
+
+* Quasi Newton methods
+
+Since the Hessian is difficult to get in practice, it is often replaced by an approximation $B_{k+1}$, which should satisfy the *quasi-newton condition*:
+\begin{equation}
+B_{k+1} \underbrace{(x_{k+1} - x_k)}_{\Delta x_k} = \underbrace{\nabla f(x_{k+1})- \nabla f(x_k)}_{y_k}
+\end{equation}
+And we want $B_{k+1}$ to be positive definite.
+
+* Update properties
+We want the updated matrix to be close to the previous one, while verifying symmetry and the QN condition. The new matrix is then solution of:
+
+\begin{align}
+\min_B \|B - B_k \| \\
+B^T = B \\
+B \Delta x_k = y_k
+\end{align}
+or, by working in the inverse space.
+
+\begin{align}
+\min_{B^{-1}} \|B^{-1} - B^{-1}_k \| \\
+(B^{-1})^T = B^{-1} \\
+\Delta x_k = B^{-1} y_k
+\end{align}
+In the BFGS algorithm, the [[id:af81e00e-4613-497d-b8f8-8ecdc9ce7ab3][Matrix Norm]] used is the Frobenus norm, $\| \cdot \| = \| \mathrm{vec}(\cdot) \|_2$
+And solving this problem is equivalent to updating the matrix using a rank 2 update, so
+\begin{equation}
+B_{k+1} = B_k + \alpha u u^T + \beta v v^T
+\end{equation}
+Imposing the secant condition means
+\begin{equation}
+B_k \Delta x_k + \alpha u u^T \Delta x_k + \beta v v^T \Delta x_k = y_k
+\end{equation}
+and setting $u=  y_k$ and $v= B_k\Delta x_k$ yields
+\begin{equation}
+B_k \Delta x_k + \alpha y_k y_k^T\Delta x_k + \beta B_k\Delta x_k (\Delta x_k)^T B_k \Delta x_k = y_k
+\end{equation}
+so
+\begin{equation}
+y_k(1 - \alpha y_k^T\Delta x_k) = B_k \Delta x_k\left(1 + \beta (\Delta x_k)^T B_k (\Delta x_k)\right)
+\end{equation}
+and
+\begin{equation}
+\alpha = \frac{1}{y_k^T \Delta x_k} \quad \beta = -\frac{1}{(\Delta x_k)^T B_k (\Delta x_k)}
+\end{equation}
+
+So finally, when using BFGS, the update becomes
+
+\begin{equation}
+B_{k+1} = B_k + \frac{y_k y_k^T}{y_k^T (\Delta x_k)} - \frac{B_k \Delta x_k (\Delta x_k^T) B_k}{\Delta x_k^T B_k \Delta x_k}
+\end{equation}
+
+This can be written for the inverse as well, using [[id:12704449-cdb1-49ab-bc77-c9de0200bb3e][Woodbury matrix identity]]:
+
+\begin{equation}
+B_{k+1}^{-1} = \left(I - \frac{\Delta x_k y_k^T}{y_k^T \Delta x_k} \right)B_k^{-1} \left(I - \frac{y_k \Delta x_k^T}{y_k^T\Delta x_k}\right) + \frac{\Delta x_k \Delta x_k^T}{y_k^T \Delta x_k}
+\end{equation}
+
+We can see how it preserves positive-definitess by computing $z^T B_{k+1}^{-1} z$

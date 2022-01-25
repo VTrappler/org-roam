@@ -71,3 +71,30 @@ So
 
 
 
+
+
+* Incremental 4DVar
+\begin{align}
+J(x) &= \frac{1}{2}\|x - x_0^b \|^2_{\mathbf{B}^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathcal{H}_k\circ \mathcal{M}_k (x_k)\|_{\mathbf{R_k}^{-1}}^2 \\
+J(x) &= \frac{1}{2}\|x - x^b \|^2_{\mathbf{B}^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathcal{G}_k (x)\|_{\mathbf{R_k}^{-1}}^2 
+\end{align}
+
+Let us linearize $\mathcal{G}_k$ around $x$:
+\begin{equation}
+\mathcal{G}_k(x + \delta x) \approx \mathcal{G}_k(x) + G_k\delta x
+\end{equation}
+and we can solve (iteratively) the linearized problem:
+\begin{equation}
+\min_{\delta x^{(k)}} \frac{1}{2} \|x^{(k)} + \delta x^{(k)} - x^b\|_{B^{-1}} + \frac{1}{2} \sum_{j=0}^{N} \|\mathcal{G}_j(x^{(k)}) + G_j \delta x^{(k)} - y_j \|_{R^{-1}_j}
+\end{equation}
+which can be rewritten as
+\begin{equation}
+\min_{\delta x^{(k)}} \frac{1}{2} \|\delta x^{(k)} + (x^{(k)}- x^b)\|^2_{B^{-1}} + \frac{1}{2}\|G \delta x^{(k)} - d^{(k)} \|^2_{R^{-1}}
+\end{equation}
+
+so that $G = [G_1, \cdots, G_N]^T$, $d^{(k)} = [y_1 - \mathcal{G}_1(x^{(k)}), \dots y_N - \mathcal{G}_N(x^{(k)})]^T$ and $R^{-1} = \mathrm{diag}(R_1^{-1}, \dots, R_N^{-1})$ 
+This minimization can be done by solving the linear system
+
+\begin{equation}
+\left(B^{-1} + G^T R^{-1} G\right) \delta x^{(k)} = B^{-1}(x^b - x^{(k)}) + G^TR^{-1}d
+\end{equation}

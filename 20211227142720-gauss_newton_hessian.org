@@ -45,8 +45,16 @@ x_{k+1} &= x_k - (\nabla^2 g(x_k))^{-1} \nabla g(x_k) \\
         &= x_k - \underbrace{\left((\nabla f(x))^T (\nabla f(x)) + \sum_i f^{''}_i(x)f_i(x)\right)^{-1}}_{H^{-1}} \nabla g(x_k)
 \end{align}
 
+* Quasi-Newton methods
+Since the Hessian is difficult to get in practice, it is often replaced by an approximation $B_{k+1}$, which should satisfy the *quasi-newton condition*:
+\begin{equation}
+B_{k+1} (x_{k+1} - x_k) = \nabla g(x_{k+1})- \nabla g(x_k)
+\end{equation}
+And we want $B_{k+1}$ to be positive definite.
+
 * Gauss-Newton
-A more in-depth study of Gauss-Newton is introduced in [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Approximati GN methods for non-linear least-square problems]]
+See 
+A more in-depth study of Gauss-Newton is introduced in [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Approximate GN methods for non-linear least-square problems]]
 The increment considered in the Gauss-Newton method is
 \begin{align}
 x_{k+1} &= x_k - \underbrace{2\left(\nabla f(x)^T \nabla f(x)\right)^{-1}}_{H_{GN}^{-1}} \nabla g(x_k)
