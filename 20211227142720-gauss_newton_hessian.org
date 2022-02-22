@@ -59,3 +59,5 @@ The increment considered in the Gauss-Newton method is
 \begin{align}
 x_{k+1} &= x_k - \underbrace{2\left(\nabla f(x)^T \nabla f(x)\right)^{-1}}_{H_{GN}^{-1}} \nabla g(x_k)
 \end{align}
+
+

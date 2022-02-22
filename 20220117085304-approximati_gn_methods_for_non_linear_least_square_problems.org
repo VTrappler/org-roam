@@ -1,8 +1,7 @@
-
 :PROPERTIES:
 :ID:       6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8
 :ROAM_REFS: cite:gratton_approximate_2007
-:ROAM_ALIASES: "Gauss-Newton method"
+:ROAM_ALIASES: Quasi-Newton "Gauss-Newton method"
 :END:
 #+title: Approximate GN methods for non-linear least-square problems
 #+startup: latexpreview
@@ -75,7 +74,7 @@ and let $\rho(A)$ be the spectral radius of a square matrix $A$ (the largest eig
 
 *** Theorem1
 if $\varrho<1$, the GN method converges locally to $x^*$, ie there exist a basin of attraction $\mathcal{D} = \{ x \mid \|x - x^*\|<\epsilon\}$ so that it converges for all $x_0 \in \mathcal{D}$
-
+In other words, is in terms of eigenvalues, the product $J J^T$ is "larger" than $Q$, its fine.
 * Truncated Gauss-Newton (TGN)
 Each *outer* iteration $k$ of the GN method implies the resolution of
 the linearized method. However, since $f$ is non linear, and $x_k$ far
@@ -114,3 +113,4 @@ first order term is approximated, so that the fixed point iteration is again a s
 
 
 * Truncated Perturbated GN method
+

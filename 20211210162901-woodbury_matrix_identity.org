@@ -2,15 +2,31 @@
 :ID:       12704449-cdb1-49ab-bc77-c9de0200bb3e
 :END:
 #+title: Woodbury matrix identity
+
+* Woodbury matrix identity
 This identity says that the inverse of a rank $k$ correction of some
 matrix can be computed by doing a rank $k$ correction to the inverse of the original matrix
 
 \begin{equation}
 \left(A + UCV\right)^{-1} = A^{-1} - A^{-1}U\left(C^{-1} + VA^{-1}U\right)^{-1}VA^{-1}
 \end{equation}
-
+** Corollaries
 We have also the *push-through identity*
 \begin{equation}
-(I + UV)^{-1} = U\left(I + VU\right)^{-1}
+(I + UV)^{-1}U = U\left(I + VU\right)^{-1}
+\end{equation}
+\begin{equation}
+(I + UV)^{-1} =I - U\left(I + VU\right)^{-1}V
 \end{equation}
 
+\begin{equation}
+(A + B)^{-1} = A^{-1} - (A + AB^{-1} A)^{-1}
+\end{equation}
+\begin{equation}
+(A - B)^{-1} = A^{-1} + A^{-1}B(A -B)^{-1}
+\end{equation}
+
+* Sherman-Morrison formula
+\begin{equation}
+(A + u v^T)^{-1} = A^{-1} - \frac{A^{-1} uv^T A^{-1}}{1 + v^T A^{-1} u}
+\end{equation}

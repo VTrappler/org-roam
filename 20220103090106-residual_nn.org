@@ -12,4 +12,28 @@ Two main reasons:
  * Avoid the problem of vanishing gradients
 
 
- 
+
+* Invertible ResNets
+Given the state at a layer $t$, the ResNet architecture reads
+\begin{equation}
+x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t)
+\end{equation}
+which is quite similar to an explicit Euler step for the resolution of an ODE.
+By writing it Backward in time, we have
+\begin{equation}
+x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t)
+\end{equation}
+which corresponds to an implicit Euler scheme.  In particular, by
+solving the dynamics backward in time, we would have the inverse of
+the corresponding ResNet.
+We can then have a sufficient condition:
+
+Let $F_\theta = F_{\theta_1} \circ \dots F_{\theta_T}$ be a ResNet
+with blocks of the form $F_{\theta_i} = I + g_{\theta_i}$
+$F_\theta$ is invertible if for all layers, if
+\begin{equation}
+\mathrm{Lip}(g_{\theta_i}) < 1
+\end{equation}
+but this condition is sufficient, not necessary.  However, we do not
+have an analytic form of the inverse, but it guarantees that
+fixed-point iterations will converge.

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       17383d23-7ad0-4b99-a99f-660cd2984878
+:END:
+#+title: Normalizing flows
+#+startup: latexpreview
+
+Let us recall the equation of  change of variables:
+$p(x)\mathrm{d}x = p(y) \mathrm{d}y$
+for a given random variable $x$ with pdf $p_X$, we can write the pdf of $y = f(x)$
+\begin{equation}
+p_X(x) = p_Y(f(x)) \left|\frac{\mathrm{d}f}{\mathrm{d}x}(x)\right|
+\end{equation}
+Taking logarithms, and going in multidimensional space, we have
+
+\begin{equation}
+\log p_X(x) = \log p_Y(f(x)) + \log \left|\det J_f(x) \right|
+\end{equation}
+where $J_f$ is the jacobian matrix of $f$.
+
+Using [[id:70c7bb7b-a147-42b3-adf5-cd17b22dce7f][Pushforward Measure]] notation, we have that the measure $p_X$ is pushforward by $f$, giving $p_Y$
+\begin{equation}
+f_{\sharp} p_X = p_Y
+\end{equation}
+and for any measurable set $B$ (measurable with respect to $p_X$)
+\begin{equation}
+f_{\sharp} p_X(B) = p_Y(B) = p_X(f^{-1}(B))
+\end{equation}
+
+* Generative direction
+  When $p_X$ is "simple", $f$ flows in the generative direction, and
+  keeping the transformation invertible
+  \begin{equation}
+\log p_Y(y) =\log p_X(f^{-1}(y)) + \log | \det J_{f^{-1}}(y) |
+  \end{equation}
+
+  If $f = f_N \circ \dots \circ f_1$, that is a composition of simple non-linear bijective functions, we have $f^{-1} = f_1^{-1} \circ \dots \cric f^{-1}_N$,
+  and $J_{f^{-1}} = J_{f}^{-1}$, thus since
+  \begin{equation}
+J_f = J_{f_N}J_{f_{N-1}} \cdots J_{f_1} 
+  \end{equation}
+we have
+$J_{f^{-1}} =  \prod_{i=1}^N J_{f_i}$ and taking the determinants, we have
+
+\begin{align}
+\log |\det J_f| &= \sum_{i=1}^N \log |\det J_{f_i}| \\
+\log |\det J_{f^{-1}}| &= -\sum_{i=1}^N \log |\det J_{f_i}|
+\end{align}

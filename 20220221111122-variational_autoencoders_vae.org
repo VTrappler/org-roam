@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       fcf00225-0d0a-492a-a6f5-179fc401e1b3
+:ROAM_ALIASES: VAE
+:END:
+#+title: Variational Autoencoders (VAE)
+#+STARTUP: latexpreview
+#+filetags: :DimensionReduction:MachineLearning:AutoEncoders:
+
+This method is based on the construction of an autoencoder, which
+
+minimizes the [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] between the distribution of the input and
+the output, in a [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Bayes']] fashion
+
+* Formulation
+Given an input $x \sim P(x)$ where $P$ is unknown, and a latent
+encoding vector $z$, the objective is to model the data as a
+parametric distribution, $p_{\theta}$ with $\theta$ the set of network
+parameters
+
+Say we have a family of functions $f(z; \theta) = f_\theta(z)$, which
+are parameterized by parameters $\theta$, such that the transformed
+samples of $Z$ are close to samples of $X$. More precisely, we introduce the density
+$p(X \mid z,theta)$
+and we try to maximize the probability of having the data set:
+\begin{equation}
+p(x) = \int_\mathcal{Z} p(x \mid z,\theta) p(z) \,\mathrm{d}z
+\end{equation}
+and in VAE,
+$p(x\mid z, \theta) = \mathcal{N}(x, \mid f(z;\theta), \sigma^2 I)$
+
+* ELBO
+  
+
+* Latent space
+  We make the assumption that the latent variable are normally distributed $z \sim \mathcal{N}(0, I)$
+
+

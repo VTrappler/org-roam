@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e
-:ROAM_ALIASES: "Variational Inference" "Variational Bayes"
+:ROAM_ALIASES: ELBO "Variational Inference" "Variational Bayes"
 :END:
 #+title: Variational Bayesian methods
 #+startup: latexpreview
@@ -21,7 +21,22 @@ $q$ is selected so that it minimizes a dissimilarity measure between $p$ and $q$
 * KL-divergence
 
 The [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] can be used as a dissimilarity measure, thus
-\begin{equation}
-D_{\mathrm{KL}}( q \| p) = \int q(z) \log \frac{q(z)}{p(z\mid x)} \,\mathrm{d}z
-\end{equation}
+\begin{align}
+D_{\mathrm{KL}}( q \| p) &= \int q(z) \log \frac{q(z)}{p(z\mid x)} \,\mathrm{d}z \\
+&= \mathbb{E}_{z \sim q} \left[\log \frac{q(z)}{p(z\mid x)}\right]
+\end{align}
 
+* ELBO
+  The Evidence Lower Bound is an inequality which bounds the evidence,
+  associated with a random variable, ie in this case,
+  $p(x) \geq \mathrm{ELBO}$
+
+    \begin{align}
+  \mathrm{D}_{\mathrm{KL}}(q(\cdot) \| p(\cdot \mid x)) &= \mathbb{E}_{z\sim q} \left[ \log \frac{q(z)}{p(z\mid x)}\right] \\
+    &= \mathbb{E}_{z\sim q} \left[\log \frac{q(z)p(x)}{p(z,x)} \right] \\
+&= \mathbb{E}_{z\sim q} \left[\log p(x) - \log \frac{p(z, x)}{q(z)} \right] \\
+&= \underbrace{\log p(x)}_{\mathrm{evidence}} - \mathbb{E}_{z\sim q}\left[\log \frac{p(z, x)}{q(z)} \right] \geq 0
+    \end{align}
+
+    Minimizing the KL-Divergence is equivalent to maximizing the ELBO, which can then be taken as an objective in ML for instance.
+    This ELBO is in practice more tractable, since the evidence is quite hard to compute
