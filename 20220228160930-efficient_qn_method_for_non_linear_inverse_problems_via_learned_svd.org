@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       8ee0efe8-3d49-4a88-aefd-5408be698351
+:ROAM_REFS: cite:smyl_efficient_2021
+:END:
+#+title: Efficient QN method for non-linear inverse problems via learned SVD
+#+startup: latexpreview
+
+In this paper, the authors propose to learn a mapping from the model output to the [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Values]]  of the jacobian.
+* Setting
+We are interested in the [[id:2ebe5ba7-5c85-4d2b-9121-afee1d9d7223][Inverse Problem]] of the form:
+\begin{equation}
+g = \mathcal{A}(f) + \delta g
+\end{equation}
+and we are looking to minimize
+\begin{equation}
+\mathcal{L}(f) = \|g - \mathcal{A}(f)\|_2^2 + R(f)
+\end{equation}
+For this purpose, we are looking to use second-order methods, such as [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Quasi-Newton]] and [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Gauss-Newton methods]].
+The approximation of the Hessian in GN is $\mathbf{H} =  \mathbf{J}^T\mathbf{J}$, where $\mathbf{J} = \frac{\partial \mathcal{A}}{\partial f}$
+
+and the iteration reads
+\begin{align}
+f_{k+1} &= f_k + \lambda_k \Delta f_k \\
+\Delta f_k &= (\mathbf{J^TWJ} + \Gamma_R)^{-1} \left(\mathbf{J^TW}(g - \mathcal{A}(f_k)-  \partial R\right)
+\end{align}
+
+
+* Principle
+  Let consider the [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]] of the Jacobian matrix:
+  \begin{equation}
+\mathbf{J} = \mathbf{USV^T}
+\end{equation}
+So given an initial $f_0$, we compute its SVD: $\mathbf{J}(f_0) = \mathbf{U_0S_0V^T_0}$, and then fix the left and right singular vectors:
+\begin{equation}
+\mathbf{J} \approx \mathbf{U_0SV_0^T}
+\end{equation}

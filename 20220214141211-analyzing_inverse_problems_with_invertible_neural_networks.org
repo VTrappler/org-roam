@@ -1,7 +1,6 @@
 :PROPERTIES:
 :ID:       f20c0632-b263-467a-98e6-016ac18003e5
 :ROAM_REFS: cite:ardizzone_analyzing_2019
-:ROAM_ALIASES: "Invertible Neural Networks"
 :END:
 #+title: Analyzing Inverse Problems with Invertible Neural Networks
 #+filetags: :MachineLearning:
@@ -102,3 +101,21 @@ p(y = s(x)) = p(x) / | \det J_s |
 y_1 &= x_1 \quad \text{(untouched)} \\
 y_2 &= (x_2 + t(x_1))\exp s(x_1)
     \end{align}
+
+\begin{equation}
+\left\{
+\begin{array}{rl}
+y_1 =& x_1 + \mathrm{NN}(x_2) \\
+y_2 =& x_2
+\end{array}
+\right.
+\end{equation}
+donc en inversant
+\begin{equation}
+\left\{
+\begin{array}{rl}
+x_1 =& y_1 - \mathrm{NN}(x_2) = y_1 - \mathrm{NN}(y_2)  \\
+x_2 =& y_2
+\end{array}
+\right.
+\end{equation}

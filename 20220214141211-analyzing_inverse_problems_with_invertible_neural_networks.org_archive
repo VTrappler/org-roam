@@ -1,0 +1,36 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file c:/Users/a846735/org-roam/20220214141211-analyzing_inverse_problems_with_invertible_neural_networks.org
+
+
+* Coupling layers
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2022-02-24 jeu. 15:59
+  :ARCHIVE_FILE: c:/Users/a846735/org-roam/20220214141211-analyzing_inverse_problems_with_invertible_neural_networks.org
+  :ARCHIVE_OLPATH: Invertible Architecture/How to inverse a neural network
+  :ARCHIVE_CATEGORY: 20220214141211-analyzing_inverse_problems_with_invertible_neural_networks
+  :ARCHIVE_ITAGS: MachineLearning
+  :END:
+    Take the input, and split it into two parts: $x = [x_1, x_2]$
+    \begin{align}
+y_1 &= x_1 \quad \text{(untouched)} \\
+y_2 &= (x_2 + t(x_1))\exp s(x_1)
+    \end{align}
+
+\begin{equation}
+\left\{
+\begin{array}{rl}
+y_1 =& x_1 + \mathrm{NN}(x_2) \\
+y_2 =& x_2
+\end{array}
+\right.
+\end{equation}
+donc en inversant
+\begin{equation}
+\left\{
+\begin{array}{rl}
+x_1 =& y_1 - \mathrm{NN}(x_2) = y_1 - \mathrm{NN}(y_2)  \\
+x_2 =& y_2
+\right.
+\end{equation}

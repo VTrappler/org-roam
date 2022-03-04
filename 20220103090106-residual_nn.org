@@ -4,6 +4,7 @@
 :END:
 #+title: Residual NN
 #+filetags: :MachineLearning:
+#+startup: latexpreview
 
 A residual Neural Network (ResNet) is a kind of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] which
 utilize *skip connections* to jump over some layers
@@ -26,7 +27,7 @@ x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t)
 which corresponds to an implicit Euler scheme.  In particular, by
 solving the dynamics backward in time, we would have the inverse of
 the corresponding ResNet.
-We can then have a sufficient condition:
+We can then have a sufficient condition: 
 
 Let $F_\theta = F_{\theta_1} \circ \dots F_{\theta_T}$ be a ResNet
 with blocks of the form $F_{\theta_i} = I + g_{\theta_i}$

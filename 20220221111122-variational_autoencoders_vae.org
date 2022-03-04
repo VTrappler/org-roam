@@ -15,7 +15,7 @@ the output, in a [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Bayes']]
 Given an input $x \sim P(x)$ where $P$ is unknown, and a latent
 encoding vector $z$, the objective is to model the data as a
 parametric distribution, $p_{\theta}$ with $\theta$ the set of network
-parameters
+parameters.
 
 Say we have a family of functions $f(z; \theta) = f_\theta(z)$, which
 are parameterized by parameters $\theta$, such that the transformed

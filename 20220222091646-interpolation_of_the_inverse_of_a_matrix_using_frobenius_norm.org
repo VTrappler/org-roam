@@ -49,3 +49,4 @@ where $\Theta \in \mathbb{R}^{n \times K}$. $B \mapsto \|B\Theta\|_F$
 defines a semi-norm, and we assume that $P \mapsto PA(\xi)\Theta$ is
 injective, so that the solution is unique. This requires that $K \geq
 m$ and is satisfied whe, $\mathrm{rk}(\Theta) \geq m$
+See also [[id:41ffa2aa-c1b6-4320-b461-0f2447cc43f4][Statistical Estimation of the Frobenius norm]]
