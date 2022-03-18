@@ -40,7 +40,7 @@ The gradient of $J$ is then
 Per, [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Approximate GN methods for non-linear least-square problems]], we
 Gauss-Newton method relies on the knowledge of the GN-Hessian
 \begin{equation}
-\nabla G(x)^T R^{-1} \nabla G(x) + R^{-1}
+\nabla G(x)^T R^{-1} \nabla G(x) + B^{-1}
 \end{equation}
 
 
