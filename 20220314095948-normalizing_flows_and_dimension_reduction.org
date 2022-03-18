@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       b8d60e4d-73bb-49a2-967e-111768fd59e7
+:END:
+#+title: Normalizing Flows and Dimension reduction
+#+startup:latexpreview
+
+[[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] and [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]]
+
+#+COLUMNS: %25ITEM %3PRIORITY %TODO %TAGS
+* Dimensionality Reduction flows
+  cite:das_dimensionnality_2019
+
+  
+* Normalizing Flows accross Dimensions
+  cite:
+** Noisy injective flows
+*** Change of variable across dimensions
+
+    Let $z\sim p_Z$ where $z \in \mathcal{Z}\subseteq\mathbb{R}^M$, and let $f_{\theta}: \mathcal{Z} \rightarrow \mathcal{X} \subseteq \mathbb{R}^N$ be *injective* parametrized by $\theta$.
+
+    For $x' = f_\theta(z)$, the marginal distribution of $x'$ can be obtained by
+    \begin{equation}
+p_{X'}(x') = \int_{\mathbb{R}^M} p_Z(z) \delta(x - f_\theta(z)) \,\mathrm{d}z
+\end{equation}
+when $N = M$, we can recognize the usual change of variable formula. Let $u = f_\theta(z)$, $z = f^{-1}_\theta(u)$, and $\mathrm{d}z = \frac{\mathrm{d}f^{-1}_\theta}{\mathrm{d}u}(u)\mathrm{d}u$
+\begin{align}
+p_{X'}(x') &= \int_{\mathbb{R}^M} p_Z(z) \delta(x' - f_\theta(z)) \,\mathrm{d}z \\
+&= \int_{\mathbb{R}^M} p_Z(f^{-1}_\theta(u)) \delta(x' - u) \frac{\mathrm{d}f^{-1}_\theta}{\mathrm{d}u}(u) \,\mathrm{d}u \\
+&= p_Z(f^{-1}_\theta(x'))\frac{\mathrm{d}f^{-1}_\theta}{\mathrm{d}x'}(x')
+\end{align}
+
+when the dimensionality of $x$ is greater than the one of $z$: $N > M$, we must now integrate over $\mathcal{M}_\theta$, which is te manifold defined by the transformation $f_\theta$
+    \begin{equation}
+p_{X'}(x') = \int_{\mathcal{M}_\theta} p_Z(f^{-1}_\theta(u)) \delta(x' - u) \bigg\lvert \frac{\mathrm{d}f^{-1}_\theta(u)}{\mathrm{d}u}\frac{\mathrm{d}f^{-1}_\theta(u)}{\mathrm{d}u}^T \bigg\rvert^{1/2} \,\mathrm{d}u \\
+\end{equation}
+
+If $x' \in \mathcal{M}_\theta$, it can be simplified to
+\begin{equation}
+p_{X'}(x') = p_Z(f^{-1}_\theta(x')) \bigg\lvert \frac{\mathrm{d}f^{-1}_\theta(x')}{\mathrm{d}x'}\frac{\mathrm{d}f^{-1}_\theta(x')}{\mathrm{d}x'}^T \bigg\rvert^{1/2}
+\end{equation}
+However, $x'$ does not necessarily lies on the manifold, but close to it instead.
+*** Additive noise to injective flows
+
+We define $x = x' + \epsilon$, where $\epsilon \sim p_{\epsilon}$
+\begin{equation}
+p_X(x) = p_{X'}(x') \star p_{\epsilon}(\epsilon) = \int_{\mathbb{R}^M} p_Z(z)p_{\epsilon}(x - f_\theta(z))\,\mathrm{d}z = \int_{\mathbb{R}^M} p(x,z)\,\mathrm{d}z
+\end{equation}
+so it can be seen as the marginalisation over the joint distribution
+of $z$ the latent variable and $x$ the observed variable.
+So the data generation is: for a given $z$, evaluate $x'= f_{\theta}(z)$ and return $x = x+\epsilon$
+
+There is then no deterministic method to invert $x$, but instead, we
+must construct a distribution $q(z \mid x)$ to map to the latent space
+*** Stochastic inverse
+    For $q(z \mid x)$, we propose
+    \begin{equation}
+q_\theta(z\mid x) = \frac{p_\theta(x \mid z)}{\int p_\theta(x \mid z')\mathrm{d}z'}
+\end{equation}
+ie the posterior distribution with an improper prior.

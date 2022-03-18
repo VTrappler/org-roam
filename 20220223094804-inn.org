@@ -6,8 +6,8 @@
 
 Invertible Neural Networks are [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] which are bijective:
 \begin{align}
-x &\mapsto F_\theta(x)=y \\
-y &\mapsto F^{-1}_\theta(y) = x
+x &\mapsto f_\theta(x)=y \\
+y &\mapsto f^{-1}_\theta(y) = x
 \end{align}
 where $x$ and $y$ have the same dimension.
 * Examples of INN
@@ -18,3 +18,6 @@ where $x$ and $y$ have the same dimension.
    [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] make the best use of a change of variable
    formula, by imposing some particular form of the Jacobian, in order
    to keep its determinant easily tractable.
+
+
+   

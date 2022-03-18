@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       ffe59c0b-d738-4c0c-ad78-d45e802d5b8c
+:ROAM_REFS: cite:chung_optimal_2015
+:END:
+#+title: Optimal Regularized low-rank inverse approximation
+
+* Introduction
+** Classical Low rank approximation
+
+   Let $A\in\mathbb{R}^{m \times n}$ be a rank $r$ matrix, with $m \geq
+   n$, for which we seek an approximation of rank $\hat{r} \leq r$
+
+ This approximation is obtained by using the [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value
+ Decomposition]] of $A = U\Sigma V^T$, where $U =
+ [u_1,\dots,u_m]\in\mathbb{R}^{m \times m}$ and
+ $V=[v_1,\dots,v_n]\in\mathbb{R}^{n \times n}$ are orthonormal and
+ $\Sigma = \mathrm{diag}(\sigma_1, \dots,\sigma_n)$ in the decreasing
+ order, and positive, and exactly $r$ non zero singular values.
+
+ An optimal low-rank approximation of $A$ is the solution of
+ \begin{equation}
+ \min_{\mathrm{rk}(\bar{A}) \leq \hat{r}} \|A - \bar{A} \|_F
+ \end{equation}
+  and is given by $\hat{A}$
+** Low rank approximation of the left inverse
+
+ \begin{equation}
+ \min_{\mathrm{rk}(Z) \leq \hat{r}} \|ZA - I \|_F
+ \end{equation}
+ But this optimization problem has no unique minimizer. Hence the need
+ to use regularization.
+ In this paper, they propose to use
+ \begin{equation}
+ \min_{\mathrm{rk}(Z) \leq \hat{r}} \|(ZA - I)M \|^2_F + \alpha^2 \|Z\|_F^2
+ \end{equation}
+ where $M$ is a $n\times n$ invertible matrix, and $\alpha \in
+ \mathbb{R}$.  $M$ allows us to emphasize certain terms in the
+ Frobenius norm over others. Diagonal $M$ for instance can be use to
+ downweight columns of $A$ with more uncertainties.
+* Low-rank optimization problem
+** Generalized SVD of $A$ and $M^{-1}$:
+   \begin{equation}
+A = U\Sigma G^{-1} \quad M = G S^{-1} V^T
+\end{equation}
+where $U \in \mathbb{R}^{m\times m}$, $V \in \mathbb{R}^{n\times n}$
+are orthogonal, $\Sigma \in \mathbb{R}^{m \times n}$ and $S \in \mathbb{R}^{n \times n}$ are nonnegative matrices, nonzero only on their main diag, verifying
+\begin{equation}
+\Sigma^T \Sigma + S^T S = I_n
+\end{equation}
+and $G$ non-singular. It requires that $m \geq n$.
+** Optimal low-rank regularized
+Let the symmetric matrix $H$ have eigendecomposition
+\begin{equation}
+H = GS^{-4} \Sigma^T D^{-1} \Sigma G^T = \hat{V}\Lambda \hat{V}^T
+\end{equation}
+with eigenvalues ordered in decreasing order.
+A global minimizer $\hat{Z} \in \mathbb{R}^{n \times m}$
+ \begin{equation}
+ \hat{Z} \mathrm{arg}\min_{\mathrm{rk}(Z) \leq \hat{r}} \|(ZA - I)M \|^2_F + \alpha^2 \|Z\|_F^2
+ \end{equation}
+ 
+is
+\begin{equation}
+\hat{Z} = \hat{V}_{\hat{r}}\hat{V}_{\hat{r}}^T G S^{-2} \Sigma^T D^{-1} U
+\end{equation}
+where $\hat{V}_{\hat{r}}$ contains the first $\hat{r}$ columns of $\hat{V}$
+** Case $M=I$
+A global minimizer $\hat{Z} \in \mathbb{R}^{n \times m}$
+ \begin{equation}
+ \hat{Z} \mathrm{arg}\min_{\mathrm{rk}(Z) \leq \hat{r}} \|ZA - I \|^2_F + \alpha^2 \|Z\|_F^2
+ \end{equation}
+is
+\begin{equation}
+\hat{Z} = V_{\hat{r}} \Psi_{\hat{r}} U_{\hat{r}}^T
+\end{equation}
+where $\Psi_{\hat{r}} = \mathrm{diag}\left(\frac{\sigma_1}{\sigma^2_1 + \alpha^2},\dots, \frac{\sigma_{\hat{r}}}{\sigma^2_{\hat{r}} + \alpha^2}\right)$
