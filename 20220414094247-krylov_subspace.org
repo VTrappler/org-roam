@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       dc6424ca-a277-43f0-b37c-753435090ea2
+:END:
+#+title: Krylov subspace
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+* Definition
+  Let $A$ be a matrix, and $b$ a vector with concordant dimension.
+  The Krylov subpsace $\mathcal{K}_r(A, b)$ is defined as
+  \begin{equation}
+\mathrm{span} \left\{b=A^0b, Ab, A^2b,\dots, A^{r-1}b\right\}
+\end{equation}
+* Main idea
+  

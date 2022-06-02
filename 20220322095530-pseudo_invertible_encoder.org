@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       e869c66a-eeef-4335-b900-2a159668581e
+:ROAM_REFS: cite:beitler_pie_2021
+:END:
+#+title: Pseudo-Invertible Encoder
+
+
+* Restriction-Extension approach
+  Given data $x_i \in\mathcal{X} \subset \mathbb{R}^D$, where
+  $\mathcal{X}$ is supposed to be a $d$ dimensional manifold $d < D$.
+  We seek to find a mapping $G: \mathbb{R}^D \rightarrow \mathbb{R}^d$
+  invertible on $\mathcal{X}$.
+  \begin{equation}
+\left\{
+\begin{array}{rcl}
+G(\mathcal{X}) &=& \mathcal{Z} \subset \mathbb{R}^d \\
+G^{-1}(\mathcal{Z}) &=& \mathcal{X}
+\end{array}
+\right.
+\end{equation}
+Let $\mathcal{R}$ be an open set in $\mathbb{R}^{D-d}$, that we use in
+order to match the dimensionalities of the hidden and initial spaces.
+Let $g:\mathbb{R}^d \rightarrow \mathbb{R}^{D-d}$, and say that $\mathcal{R} = g(\mathcal{Z})$
+  \begin{equation}
+\left\{
+\begin{array}{rcl}
+\tilde{G}(\mathcal{X}) &=& \mathcal{Z} \times \mathcal{R} \\
+\tilde{G}^{-1}(\mathcal{Z} \times \mathcal{R}) &=& \mathcal{X}
+\end{array}
+\right.
+\end{equation}
+and $\tilde{G}$ is directly invertible
+
+We focus on $F_{\theta}:\mathbb{R}^D \rightarrow \mathbb{R}^D$ a
+parametric function, invertible on $\mathbb{R}^D$, which satisfies
+\begin{equation}
+F_{\theta}^{-1} \circ\mathrm{Pr}_{\mathbb{R}^d \times \mathcal{R}} \circ F_{\theta} = \mathrm{Id}_{\mathcal{X}} 
+\end{equation}
+where $\mathrm{Pr}_{\mathbb{R}^d \times \mathcal{R}}$ is the orthogonal projection from $\mathbb{R}^d\times \mathbb{R}^{D-d}$ to $\mathbb{R}^d\times \mathcal{R}$
+
+and
+ \begin{equation}
+\left\{
+\begin{array}{rcl}
+G(x) &=& z \\
+G^{-1}(z) &=& F_{\theta}^{-1}([z, g(z)])
+\end{array}
+\right.
+\end{equation}

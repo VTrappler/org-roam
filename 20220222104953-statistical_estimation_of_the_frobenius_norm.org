@@ -3,7 +3,8 @@
 :ROAM_REFS: cite:gratton_improved_2018
 :END:
 #+title: Statistical Estimation of the Frobenius norm
-#+LaTeX_HEADER: \newcommand{\Frob}[1]{\| #1\|_F}
+#+LaTeX_HEADER: \newcommand{\Frob}[1]{\| #1\|_\mathrm{F}}
+#+startup: latexpreview
 
 We look for an [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimator]] which verifies
 \begin{equation}

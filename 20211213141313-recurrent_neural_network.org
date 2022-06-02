@@ -38,3 +38,21 @@ y_t &= \sigma_y\left(w_y^T h_t + b_y\right) \\
 
 * Cons
  * Notoriously hard to train due to the vanishing gradient problems
+
+
+ 
+* RNN and ODE
+  Let us consider an Elman Network:
+  \begin{equation}
+h_t = \sigma(Ux_t + Wh_{t-1} + b) = f(h_{t-1}, \theta)
+\end{equation}
+where $\theta =[W, U, x]$ is the parameter vector.
+
+Let us consider the 1st order ODE
+\begin{equation}
+h^'(t) = F(h(t-1))
+\end{equation}
+The forward euler scheme gives
+\begin{equation}
+h_t = h_{t-1} + \epsilon F(h_{t-1})  \quad h_{t_0} = h(0)
+\end{equation}

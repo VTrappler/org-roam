@@ -1,0 +1,120 @@
+:PROPERTIES:
+:ID:       88f34741-c588-44c9-8de5-b8dbffe71aae
+:END:
+#+title: Saddle Point Formulation of 4DVar
+#+startup: latexpreview
+* 4Dvar formalism
+
+[[id:ea4143c4-696d-43e2-adee-f11ffce97095][4DVar]] needs to be able to solve linear systems in the inner loop.
+Modern iterative methods for linear equations are based on [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspaces]], and a consequence of Hamilton-Cayley's theorem:
+where
+\begin{equation}
+A^{-1} = \sum_{i=1}^n a_iA^i
+\end{equation}
+and the solution of $Ax=b$ can then be written as
+\begin{equation}
+\sum_{i=0}^n a_i A^ib
+\end{equation}
+
+Let
+\begin{equation}
+J(\delta \mathbf{x}^{(n)}) =  \frac12\|\delta x_0^{(n)} - b^{(n)})\|^2_{B^-1} + \frac12 \sum_{k=0}^{N-1} \|H_k^{(n)}\delta x_k^{(n)} - d^{(n)}_k\|_{R_k^{-1}} + \frac12 \sum_{k=1}^{N-1}\|\delta q_k^{(n)} - c_k^{(n)}\|_{Q_k^{-1}}
+\end{equation}
+
+Alternatively, we can express this cost function as a function of
+\begin{equation}
+\delta \mathbf{p}^{(n)} = \begin{pmatrix} \delta x_0^{(n)} \\ \delta q_1^{(n)} \\ \vdots \\ \delta q^{(n)}_{N-1}
+\end{pmatrix}
+\end{equation}
+
+and $\delta \mathbf{p}^{(n)} = \mathbf{L}^{(n)}\delta \mathbf{x}^{(n)}$ where
+\begin{equation}
+\mathbf{L} = \begin{pmatrix}
+I & & & &\\
+-M_1 & I & & &\\
+& -M_2 & I & & &\\
+& & &\ddots & \ddots \\
+& & & -M_{N-1} & I
+\end{pmatrix}
+\end{equation}
+
+
+Let us write some block diagonal matrices:
+\begin{equation}
+\mathbf{R} = \begin{pmatrix} R_0 & & & \\
+& R_1 & & \\
+& & \ddots & \\
+& & & R_{N-1}
+\end{pmatrix} \quad
+\mathbf{D} = \begin{pmatrix} B & & & \\
+& Q_1 & & \\
+& & \ddots & \\
+& & & Q_{N-1}
+\end{pmatrix} \quad
+\mathbf{H} = \begin{pmatrix} H_0 & & & \\
+& H_1 & & \\
+& & \ddots & \\
+& & & H_{N-1}
+\end{pmatrix}
+\end{equation}
+and
+\begin{equation}
+\mathbf{b} = \begin{pmatrix}b \\ c_1 \\ \vdots \\ c_{N-1}
+\end{pmatrix} \quad
+\mathbf{d} = \begin{pmatrix}d_0 \\ d_1 \\ \vdots \\ d_{N-1}
+\end{pmatrix}
+\end{equation}
+and the cost function can be rewritten as
+\begin{align}
+J(\delta \mathbf{x}) & = \|\mathbf{L}\delta \mathbf{x} \|^2_{\mathbf{D}^{-1}} + \|\mathbf{H}\delta \mathbf{x} - \mathbf{d}\|^2_{\mathbf{R}^{-1}}\\
+J(\delta \mathbf{p}) &= \| \delta \mathbf{p} - \mathbf{b} \|^2_{\mathbf{D}^{-1}} + \|\mathbf{HL}^{-1}\delta \mathbf{p} - \mathbf{d} \|^2_{\mathbf{R}^{-1}}
+\end{align}
+
+*  Saddle point formulation
+Taking the gradient of $J$ and setting it to 0 yields:
+\begin{equation}
+\nabla J = 0 = \mathbf{L^T\underbrace{D^{-1}(L\delta x -b) }_{\lambda}+ H^T\underbrace{R^{-1}(J\delta x-d)}_{\mu}}
+\end{equation}
+so in other words:
+\begin{align}
+\mathbf{D} \lambda + \mathbf{L \delta x} &= \mathbf{b}\\
+\mathbf{R} \mu + \mathbf{H \delta x} &= \mathbf{d}
+\end{align}
+
+and
+\begin{equation}
+\begin{pmatrix}
+\mathbf{D} & 0 & \mathbf{L} \\
+0 & \mathbf{R} & \mathbf{H} \\
+\mathbf{L}^T & \mathbf{H} & 0
+\end{pmatrix}
+\begin{pmatrix}
+\lambda \\ \mu \\ \delta \mathbf{x}
+\end{pmatrix} =
+\begin{pmatrix}
+\mathbf{b} \\ \mathbf{d} \\ 0
+\end{pmatrix}
+\end{equation}
+The left matrix is a saddle-point matrix (real, symmetric, but indefinite).
+
+We can get this derivation also by introducing the Lagrangian of the constrained optimization problem.
+
+* Preconditioning the Saddle Point system
+
+  One possible preconditioner is
+ \begin{equation}
+\tilde{P} = \begin{pmatrix}
+D & 0 & \tilde{L} \\
+0 & R & 0 \\
+\tilde{L}^T &0 &0 
+\end{pmatrix}
+\end{equation}
+where $\tilde{L} \approx L$
+and
+\begin{equation}
+\tilde{P}^{-1} = \begin{bmatrix}
+0 & 0 & \tilde{L}^{-T} \\
+0 & R^{-1} & 0 \\
+\tilde{L}^{-T} & 0 & -\tilde{L}^{-T}D \tilde{L}^{-T}
+\end{bmatrix}
+\end{equation}

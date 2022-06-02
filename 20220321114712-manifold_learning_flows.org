@@ -1,0 +1,162 @@
+:PROPERTIES:
+:ID:       9de9a762-beec-4eaa-9198-24e36720fb73
+:ROAM_REFS: cite:brehmer_flows_2020
+:END:
+#+title: Manifold Learning Flows
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+* Introduction
+Being able to infer a probability distribution from data is the gist
+of [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Inference]].  In ML, [[id:fcf00225-0d0a-492a-a6f5-179fc401e1b3][Variational Autoencoders (VAE)]] and
+GAN are both based on the assumption that the data lies on a
+lower-dimensional latent space, ie the data lies on a lower
+dimensional manifold, embedded in the data space.
+
+Those models allow for easy sampling, but the evaluation of the
+associated likelihood is intractable.
+
+On the other hand, [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] relies on the fact that the
+latent space has same dimensionality as the data space, thus we can
+construct analytically bijective mappings, with tractable likelihood.
+
+In cite:brehmer_flows_2020, the authors introduce
+Manifold-Learning-Flows (M-flows), which are normalizing flows based
+on an injective and invertible map from a lower-dim latent space to
+the data space.
+We can then learn
+ + the shape of the data manifold
+ + bijection between the manifold and the data space
+ + Tractable likelihood
+ + efficient sampling
+   
+* Generative models and data manifold
+  Let us assume that we have samples $x \in \mathcal{M}^*\subset X =
+  \mathbb{R}^d$ according to $x \sim p^*$, where $\mathcal{M}^*$ is a
+  $n$-dimensional [[id:863cedc6-dc85-4dd9-92e8-16be0e30e089][Manifold]] embedded in $X$, and $n <d$.  We consider
+  the problems of estimating $p^*$ as well as $\mathcal{M}^*$ given
+  some samples $\{x_i\}$.
+
+  We describe generative models with two variables: $u\in
+  U=\mathbb{R}^n$ is the latent variable and space that maps to the
+  learned manifold $\mathcal{M}$. $v \in V=\mathbb{R}^{d-n}$
+  parametrizes the remaining latent variables, "off the manifold".
+
+** Manifold-free models: "Ambient Flows": AF
+   A standard Euclidean [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] in the ambient data space is a diffeomorphism
+   \begin{equation}
+\begin{array}{rcl}
+f: U\times V &\longrightarrow &X \\
+(u,v) &\longmapsto & f(u,v)
+\end{array}
+\end{equation}
+  where the joint distribution $p_{u,v}$ is simple and tractable. The expression of the likelihood of $X$ is given by
+  \begin{equation}
+p_X(x) = p_{u,v}(f^{-1}(x)) \lvert \det J_f(f^{-1}(x)) \rvert^{-1}
+\end{equation}
+
+** Flows on a prescribed manifold: FOM
+   Let's assume that $\mathcal{M}^*$ is known, and that 
+\begin{equation}
+\begin{array}{rcl}
+g^*: U&\longrightarrow &\mathcal{M}^* \subset X \\
+u &\longmapsto & g^*(u)
+\end{array}
+\end{equation}
+is a diffeomorphism, and the sole chart for the manifold, then
+\begin{equation}
+p_{\mathcal{M}^*}(x) = p_U(g^{*,-1}(x)) \Big\lvert \det \left[J_f(g^{*,-1}(x))^TJ_f(g^{*,-1}(x))\right]\Big\rvert^{-1/2}
+\end{equation}
+
+The density $p_U(u)$ in the coordinate space can be modelled with a NF in $n$ dimensions with a diffeomorphic transformation.
+\begin{equation}
+\begin{array}{rcl}
+h: \tilde{U}&\longrightarrow & U\\
+\tilde{u} &\longmapsto & h(\tilde{u})
+\end{array}
+\end{equation}
+
+*** Sampling
+    Drawing from the base density $p_{\tilde{U}}$, mapping to the latent variable with $h$, and then to the manifold with $g^*$.
+
+
+** Learning the manifold
+*** GAN: Generative Adversarial Network
+GAN map an $n$-dim latent space to the data space:
+\begin{equation}
+\begin{array}{rcl}
+g: U&\longrightarrow &\mathcal{M} \subset X \\
+u &\longmapsto & g(u)
+\end{array}
+\end{equation}
+where $g$ is a learnable map, like a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]], and can be
+non-invertible nor injective. No restrictions means that $g$ can be
+very expressive, but render the likelihood intractable. That's why GAN
+are trained adversarialy.
+*** VAE
+    see [[id:fcf00225-0d0a-492a-a6f5-179fc401e1b3][VAE]]
+*** [[id:e869c66a-eeef-4335-b900-2a159668581e][Pseudo-Invertible Encoder]] (PIE)
+    cite:beitler_pie_2021 For PIE, we choose different base densities
+    for $u$, on the manifold variables, and $v$, off the manifold.
+    $p_{\tilde{u}}$ can be a unit gaussian, while $p_v$ is chosen so
+    that it sharply peaks around $0$, ie gaussian with small variance. It is then very similar to an ambient flow
+*** Slice of PIE
+    If the full PIE architecture defines a density $p_X$ over the full
+    data space, we can set $v=0$ to define a manifold $\mathcal{M}$.
+* M-flow
+    Let us consider a diffeomorphism as in AF and PIE:
+   \begin{equation}
+\begin{array}{rcl}
+f: U\times V &\longrightarrow &X \\
+(u,v) &\longmapsto & f(u,v)
+\end{array}
+\end{equation}
+We define the model manifold $\mathcal{M}$ through the level-set
+\begin{equation}
+\begin{array}{rcl}
+g: U &\longrightarrow &\mathcal{M} \subset X \\
+u &\longmapsto & f(u,0)
+\end{array}
+\end{equation}
+This transformation is implemented as a padding of zeros, and a
+composition of invertible transformations:
+\begin{equation}
+g = f_k \circ \dots\circ f_1 \circ \mathrm{Pad}
+\end{equation}
+where
+\begin{equation}
+\mathrm{Pad}(u) = \left(u_0, \dots, u_{n-1}, 0\dots, 0\right)^T \in \mathbb{R}^d
+\end{equation}
+so a padding from a $n$ dimensional vector to a $d$ dimensional one,
+so that the $f_i$ form a invertible flows.  $g$ maps then the latent
+space $U$ to the data space $X$, and is injective and invertible on
+its image $\mathcal{M}$.
+
+The base density $p_U$ is modelled with an $n$-dimensional $h$ which maps $u$ to $p_{\tilde{U}}$
+\begin{align}
+p_{\mathcal{M}}(x) =& p_U(g^{-1}(x)) \Big\lvert\det J_g^T(g^{-1}(x))J_g(g^{-1}(x)) \Big\rvert^{-1/2}  \\
+ =&p_{\tilde{U}}\left(h^{-1}(g^{-1}(x))\right) \lvert \det J_{h}(h^{-1}(g^{-1}(x)))\rvert^{-1} \\
+ \cdot& \Big\lvert\det J_g^T(g^{-1}(x))J_g(g^{-1}(x)) \Big\rvert^{-1/2}
+\end{align}
+
+In order to sample from an M-flow:
+ + Draw $\tilde{u} \sim p_{\tilde{U}}$
+ + Push the latent variable to the data space $u=h(\tilde{u})$
+ + Push to the manifold $g(u) = (g\circ h)(\tilde{u}) = f(u, 0) = x$ so that $x \sim p_{\mathcal{M}}$
+
+In order to evaluate arbitrary points $x \in \mathcal{X}$, possibly off the manifold:
+Since $g$ can be seen as a decoder, we can define the matching encoder $g^{-1}$, as $f^{-1}$ followed by a projection
+\begin{array}{rcl}
+g^{-1}: X & \longrightarrow & U \\
+    x & \longmapsto & g^{-1}(x) = \mathrm{Proj}(f^{-1}) = \mathrm{Proj}([u, v])= u 
+\end{array}
+
+We can then define a reconstruction error:
+\begin{equation}
+\|x - (g \circ g^{-1}) (x) \| = 0 \iff x \in \mathcal{M}
+\end{equation}
+And finally, an M-flow lets us compute
+ + The projection onto a manifold $x'=g(g^{-1}(x))$ which can be seen as a denoising operator
+ + The reconstruction error (training, anomaly detection, out-of-distribution detection)
+ + The likelihood on the manifold $p_{\mathcal{M}}(x)$
+   
