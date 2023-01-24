@@ -16,7 +16,7 @@ If it not normalized, it can be expressed as
 H_v(x) = x - 2 \frac{\langle x, v \rangle}{\|v\|} v
 \end{equation}
 
-* Householder projection matrix
+* Householder (reflection) matrix
   In terms of matrix, it can be expressed as
   \begin{equation}
  P_u = I - 2 vv^T

@@ -1,10 +1,10 @@
 :PROPERTIES:
 :ID:       4a033759-84da-4099-b6dc-1df50308f966
-:ROAM_ALIASES: SVD
+:ROAM_ALIASES: "Eckhart's-Young theorem" SVD
 :END:
 #+title: Singular Value Decomposition
 #+STARTUP: latexpreview
-#+filetags: :MatrixFactorization:DimensionReduction:
+#+filetags: :LinearAlgebra:MatrixFactorization:DimensionReduction:
 
 * Definition
 Singular Value Decomposition is a factorization method for rectangular
@@ -25,8 +25,7 @@ diagonal.
 \end{equation}
 
 ** Low-rank approximation(s)
-
-
+According to  Eckhart's Young theorem, the best low-rank approximation is given by the first singular value
 * Singular values and vectors
 $\sigma$ is called a *singular value* for $\mathbf{M}$ iff there
 exists unit-length $\mathbf{u} \in K^m$ and $\mathbf{v} \in K^n$ such

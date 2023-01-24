@@ -29,10 +29,10 @@ and finally
 
 * Examples of iterative methods based on Krylov subspace and iterated matrix vector product
 
-** Solving Linear systems
+** Solving [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear Systems]]
   - [[id:d674819d-be2b-4baf-a1b6-36867c640c2c][GMRES]]
   - [[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]]
-** Eigenvalue problem
+** [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] problem
   - [[id:9403482f-5dfc-4cac-ba0f-0876f0548f16][Power Iteration method]] (but not exactly a Krylov subspace method)
   - Lanczos Algorithm
-  - Arnoldi Iterations
+  - [[id:b34392e8-9180-4826-aafc-e8d2ffb6e82c][Arnoldi Iterations]]
