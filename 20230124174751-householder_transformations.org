@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       3db2fb4f-4600-4efc-b861-fed95ef722af
+:END:
+#+title: Householder transformations
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+*  Householder transform
+For a unit vector $v$, the Householder transformation $H$ is defined
+as the reflection across the (hyper)plane given by its normal vector $v$:
+\begin{equation}
+H_v(x) = x - 2 \langle x, v \rangle v
+\end{equation}
+If it not normalized, it can be expressed as
+\begin{equation}
+H_v(x) = x - 2 \frac{\langle x, v \rangle}{\|v\|} v
+\end{equation}
+
+* Householder projection matrix
+  In terms of matrix, it can be expressed as
+  \begin{equation}
+ P_u = I - 2 vv^T
+  \end{equation}
+So that
+$P_ux = x - 2 v (v^Tx)$

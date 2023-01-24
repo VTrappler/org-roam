@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       86b28d90-52e6-4b84-ab83-e3a1c01d717e
+:END:
+#+title: Projection matrix
+#+filetags: :LinearAlgebra:
+

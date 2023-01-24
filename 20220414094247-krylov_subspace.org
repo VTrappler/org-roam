@@ -27,3 +27,12 @@ and finally
 -\frac{\alpha_1}{\alpha_0}b  - \dots - \frac{\alpha_n}{\alpha_0}A^{n-1}b = A^{-1}b
 \end{equation}
 
+* Examples of iterative methods based on Krylov subspace and iterated matrix vector product
+
+** Solving Linear systems
+  - [[id:d674819d-be2b-4baf-a1b6-36867c640c2c][GMRES]]
+  - [[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]]
+** Eigenvalue problem
+  - [[id:9403482f-5dfc-4cac-ba0f-0876f0548f16][Power Iteration method]] (but not exactly a Krylov subspace method)
+  - Lanczos Algorithm
+  - Arnoldi Iterations

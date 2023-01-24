@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       c00cad59-76c2-4c70-bb79-1125d2dd51ba
+:END:
+#+title: Hessenberg form
+#+filetags: :LinearAlgebra:MatrixFactorization:
+
+An Hessenberg matrix is a square matrix, which is almost triangular. In the case of upper Hessenberg:
+\begin{equation}
+\begin{bmatrix}
+\times & \times & \times & \dots & \times  & \times \\
+\times & \times & \times & \dots & \times  & \times\\
+0 & \times & \times & \dots & \times  & \times\\
+\vdots \\
+0 & 0 & 0 & \dots & \times & \times 
+\end{bmatrix}
+\end{equation}
+
+* Hessenberg form
+  Any square matrix can be transformed into a Hessenberg matrix by a similarity transformaiton of [[id:3db2fb4f-4600-4efc-b861-fed95ef722af][Householder transformations]]

@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258
+:END:
+#+title: Conjugate Gradient
+#+filetags: :LinearAlgebra:
+
