@@ -68,7 +68,9 @@ and
 
 
 * Estimation
-Classical MC estimation can be performed. The estimation using the hessian (second derivatives) is sometimes called the *observed FIM*, but requires additional regularity assumptions.
+Classical MC estimation can be performed. The estimation using the
+hessian (second derivatives) is sometimes called the *observed FIM*, but
+requires additional regularity assumptions.
 
 * Links with other topics
 The FIM is the Hessian of the [[id:33a6b5ee-82e8-489a-858d-a634db231132][Relative Entropy]].

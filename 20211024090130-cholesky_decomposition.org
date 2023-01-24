@@ -3,7 +3,7 @@
 :END:
 #+title: Cholesky Decomposition
 #+STARTUP: latexpreview
-#+filetags: :MatrixFactorization:
+#+filetags: :LinearAlgebra:MatrixFactorization:
 
 
 The Cholesky decomposition is the factorization of an Hermitian ($A =

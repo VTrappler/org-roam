@@ -12,3 +12,18 @@
 \end{equation}
 * Main idea
   
+Let us assume that $A$ is a $n\times n$ matrix.  We have then that
+$\mathcal{K}_{n+1}(A, b)$ is a $n$ dimensional subspace, spanned with $n+1$
+vectors, thus there exists $\alpha_0,\dots,\alpha_n$ such that
+\begin{equation}
+ \alpha_0 b + \alpha_1 Ab + \dots + \alpha_{n}A^{n}b = 0
+\end{equation}
+\begin{equation}
+A\left(-\frac{\alpha_1}{\alpha_0}b + \dots - \frac{\alpha_n}{\alpha_0}A^{n-1}b\right) = b
+\end{equation}
+
+and finally
+\begin{equation}
+-\frac{\alpha_1}{\alpha_0}b  - \dots - \frac{\alpha_n}{\alpha_0}A^{n-1}b = A^{-1}b
+\end{equation}
+
