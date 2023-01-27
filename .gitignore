@@ -1,6 +1,7 @@
 *.org~
 *.html
 *~
+daily/confluence/**
 /ltximg/*
 *.org#
 .#*
