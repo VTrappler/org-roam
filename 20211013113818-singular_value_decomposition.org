@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       4a033759-84da-4099-b6dc-1df50308f966
-:ROAM_ALIASES: "Eckhart's-Young theorem" SVD
+:ROAM_ALIASES: Conditioning "Eckhart's-Young theorem" SVD
 :END:
 #+title: Singular Value Decomposition
 #+STARTUP: latexpreview

@@ -1,0 +1,101 @@
+:PROPERTIES:
+:ID:       2ac50dc6-be86-4344-a20f-f9aef7e0ce73
+:ROAM_ALIASES: "Lanczos Algorithm"
+:END:
+#+title: Lanczos Iteration
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+
+
+This method extracts approximations from a [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspace]], by projecting orthogonally onto
+$\mathcal{K}_r(A, q)$, ie constructing an orthogonal basis of this space starting with $q_1$
+
+ - Select initial vector $q$
+ - Construct Krylov subspace = $\mathcal{K}_r(A, q)=\mathrm{span}(q, Aq, \dots A^{r-1}q) = \mathrm{range}(K_r)$
+ - Restrict and project $A$ to the subspace by
+   - computing orthogonal basis ($Q_r=\text{QR}(K_r) = [q_1, \dots, q_r]$) and
+   - $T_r = Q_r^TAQ_r \in\mathbb{R}^{r \times r}$
+   
+$AQ_r = Q_rT_r$
+where $T_r$ is a real symmetric tridiagonal matrix
+\begin{equation}
+T_r = \begin{bmatrix}
+\alpha_1 & \beta_1 & 0 &\dots & 0 & 0 \\
+\beta_1 & \alpha_2 & \beta_2 & \dots & 0 &0  \\
+0 & \ddots & \ddots & \ddots & \ddots & \ddots\\
+0 & 0 & 0 & \dots & \beta_{r-1} & \alpha_r
+\end{bmatrix}
+\end{equation}
+
+That we can build recursively
+$\alpha_i = q_i^TAq_i$
+
+
+* Lanczos iteration
+  + $v = Aq_n$
+  + $\alpha_n = q_n^Tv$
+  + $v \gets v - \beta_{n-1}q_{n-1} - \alpha_n q_n$
+  + $\beta_n = \|v\|$
+  + $q_{n+1} = v/ \beta_n$
+
+\begin{equation}
+AQ_j = Q_jT_j + \beta_j q_{j+1} e_j^T \quad \text{ with } \quad Q_j^Tr = 0
+\end{equation}
+
+We can observe that the diagonal elements of $T_r$, ie the $\alpha_r =
+q_r^TAq_r$ are the [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][Rayleigh quotients]] with respect to $A$ and the
+vector $q_r$
+
+* Ritz Pairs for Lanczos algorithm
+  
+** Definition
+   Recalling that $T_r$ is a projection of $A$ onto the Krylov subspace
+   $\mathcal{K}_r(A, q)$, we can make the hypothesis that the
+   eigenvalues of $T_r$ are linked in some way to the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] of $A$.
+   These approximate eigenpairs are called the *primitive* [[id:af68e6f5-f24d-4157-804f-86d429d964df][Ritz Pairs]]: $(\theta_i, y_i)$ for $1 \leq i \leq r$
+   \begin{equation}
+ T_ry_i  = \theta_i y_i
+   \end{equation}
+ We can project them back to the original space so that $z_i = Q_r y_i$, and *those* are the Ritz pairs:
+ $(\theta_i, z_i = Q_ry_i)$ for $1 \leq i \leq r$
+   We applying $A$ to those pairs, we have
+   \begin{align}
+ AQ_ry_i &= Q_rT_ry_i + \beta_r q_{r+1}e_r^T y_i\\
+ Az_i &= \theta z_i + (e_r^T y_i)\beta_r q_{r+1}
+   \end{align}
+
+** Properties
+  For $1\leq i \leq r$:
+   + $Az_i &= \theta z_i + (e_r^T y_i)\beta_r q_{r+1}$
+   + The Ritz vectors are orthonormal $z_i^Tz_j = \delta_{ij}$ with $\delta$ kronecker
+   + The Ritz vectors are $A$ conjugate $z_i^TAz_j = 0$ if $i\neq j$
+   + The "next" direction is orthogonal to all the other Ritz vectors: $z_i^T q_{r+1}$
+   + All Ritz values are strictly positive
+
+
+ 
+#+begin_src python
+  import numpy as np
+
+    def lanczos_algorithm(A, q0, r):
+	V = np.empty((A.shape[0], r))
+	Tdiag = np.empty(r)
+	Tupper = np.empty(r-1)
+	V[:, 0] = q0 / np.normalize(q0)
+	w = A @ V[:, 0]
+	alpha = w.dot(V[:, 0])
+	Tdiag[0] = alpha
+	proj_w = w - alpha * V[:, 0]
+	for i in range(1, r): # start from 1
+	    beta =  np.normalize(proj_w)
+	    Tupper[i-1] = beta
+	    v = proj_w / beta
+	    V[:, i] = v
+	    w = A @ v
+	    alpha = w.dot(v)
+	    Tdiag[i] = alpha
+	    proj_w = w - alpha * v - beta * V[:, i-1]
+	    v = v - beta_im1 * q
+	return V, T
+#+end_src

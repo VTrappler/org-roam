@@ -3,6 +3,8 @@
 :END:
 #+title: Projection matrix
 #+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
 
 * General Projector properties
 Let $P$ be a linear application

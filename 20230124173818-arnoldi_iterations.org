@@ -5,5 +5,29 @@
 #+filetags: :LinearAlgebra:
 #+startup: latexpreview
 
+A more specific case for Hermitian matrices can be found in [[id:2ac50dc6-be86-4344-a20f-f9aef7e0ce73][Lanczos Iterations.]]
 
+This method extracts approximations from a [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspace]], by projecting orthogonally onto
+$\mathcal{K}_r(A, q)$, ie constructing an orthogonal basis of this space starting with $q_1$
 
+ - Select initial vector $q$
+ - Construct Krylov subspace = $\mathcal{K}_r(A, q)=\mathrm{span}(q, Aq, \dots A^{r-1}q) = \mathrm{range}(K_r)$
+ - Restrict and project $A$ to the subspace by
+   - computing orthogonal basis ($Q_r=\text{QR}(K_r) = [q_1, \dots, q_r]$) and
+   - $T_r = Q_r^TAQ_r \in\mathbb{R}^{r \times r}$
+   
+$AQ_r = Q_rT_r$
+where $T_r$ is a real symmetric tridiagonal matrix
+\begin{equation}
+T_r = \begin{bmatrix}
+\alpha_1 & \beta_1 & 0 &\dots & 0 & 0 \\
+\beta_1 & \alpha_2 & \beta_2 & \dots & 0 &0  \\
+0 & \ddots & \ddots & \ddots & \ddots & \ddots\\
+0 & 0 & 0 & \dots & \beta_{r-1} & \alpha_r
+\end{bmatrix}
+\end{equation}
+
+That we can build recursively
+\begin{equation}
+AQ_j = Q_jT_j + r e_j^T \quad \text{ with } \quad Q_j^Tr = 0
+\end{equation}

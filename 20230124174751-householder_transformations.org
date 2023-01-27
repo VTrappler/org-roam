@@ -13,7 +13,7 @@ H_v(x) = x - 2 \langle x, v \rangle v
 \end{equation}
 If it not normalized, it can be expressed as
 \begin{equation}
-H_v(x) = x - 2 \frac{\langle x, v \rangle}{\|v\|} v
+H_v(x) = x - 2 \frac{\langle x, v \rangle}{\|v\|^2} v
 \end{equation}
 
 * Householder (reflection) matrix
@@ -22,4 +22,6 @@ H_v(x) = x - 2 \frac{\langle x, v \rangle}{\|v\|} v
  P_u = I - 2 vv^T
   \end{equation}
 So that
+
+
 $P_ux = x - 2 v (v^Tx)$

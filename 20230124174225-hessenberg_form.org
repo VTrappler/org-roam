@@ -3,7 +3,7 @@
 :END:
 #+title: Hessenberg form
 #+filetags: :LinearAlgebra:MatrixFactorization:
-
+#+startup: latexpreview
 An Hessenberg matrix is a square matrix, which is almost triangular. In the case of upper Hessenberg:
 \begin{equation}
 \begin{bmatrix}
@@ -16,4 +16,10 @@ An Hessenberg matrix is a square matrix, which is almost triangular. In the case
 \end{equation}
 
 * Hessenberg form
-  Any square matrix can be transformed into a Hessenberg matrix by a similarity transformaiton of [[id:3db2fb4f-4600-4efc-b861-fed95ef722af][Householder transformations]]
+  Any square matrix can be transformed into a Hessenberg matrix by a
+  similarity transformation of [[id:3db2fb4f-4600-4efc-b861-fed95ef722af][Householder transformations]]:
+  For each $A \in \mathbb{R}^{n\times n}$,
+  there exists $Q$ orthogonal ($Q^{-1} = Q^T$) such that
+  $Q^TAQ = \text{Hessenberg form}$
+
+  

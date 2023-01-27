@@ -6,7 +6,6 @@
 
 [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] and [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]]
 
-#+COLUMNS: %25ITEM %3PRIORITY %TODO %TAGS
 * Dimensionality Reduction flows
   cite:das_dimensionnality_2019
 

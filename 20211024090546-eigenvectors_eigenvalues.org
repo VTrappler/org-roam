@@ -1,8 +1,9 @@
+#+title: Eigenvectors, eigenvalues
 :PROPERTIES:
 :ID:       bc5efd27-c136-4dc2-a014-bbe643ea1073
-:ROAM_ALIASES: Eigenvalues Eigenvectors "Generalized Eigenvectors"
+:ROAM_ALIASES: Eigenpairs Eigenvalues Eigenvectors "Generalized Eigenvectors"
 :END:
-#+title: Eigenvectors, eigenvalues
+#+filetags: :MatrixFactorization:LinearAlgebra:
 #+STARTUP: latexpreview
 
 * Definition
@@ -66,4 +67,7 @@ Av= \lambda Bv
 where $A$, $B$, are matrices. It is also called the eigenvalues
 associated with the *stencil* $(A, B)$.
 
+* [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]
+  Singular values can be seen as generalization of eigenpairs
 
+  
