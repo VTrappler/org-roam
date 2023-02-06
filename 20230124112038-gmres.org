@@ -6,7 +6,7 @@
 #+startup: latexpreview
 
 The *Generalized Minimum Residual Method* (GMRES) is a [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspace]]
-method for solving Linear Systems $Ax =b$ which computes at the r-th step
+method for solving [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear System]]s $Ax =b$ which computes at the r-th step
 the best least-squares solution $x_r \in \mathcal{K}_r(A, b)$
 * Successive Least-squares Problems
 \begin{align}
@@ -15,12 +15,40 @@ the best least-squares solution $x_r \in \mathcal{K}_r(A, b)$
 \text{Step }r \quad & \quad \min_{x_r\in\mathcal{K}_r(A, b)} \|b - Ax_r \|_2
 \end{align}
 
-Let us assume that for abny $j$, we have $Q_j$, whose columns form an orthonormal basis for $\mathcal{K}_j(A, b)$
+Let us assume that for any $j$, we have $Q_j$, whose columns form an
+orthonormal basis for $\mathcal{K}_j(A, b)$
 \begin{align}
 \text{Step }j \quad & \quad \min_{c \in \mathbb{R}^j} \| b - AQ_jc \|_2
 \end{align}
 and $x_j = Q_jc$
 
 
-At each step, we need to solve $AQ_rc =b$ for $c$, for instance using a [[id:ba103e30-a7e4-4332-b9c0-b3b07a16eb40][QR decomposition]] of $AQ_r = U_rR_r$
+At each step, we need to solve $AQ_rc =b$ for $c$, for instance using
+a [[id:ba103e30-a7e4-4332-b9c0-b3b07a16eb40][QR decomposition]] of $AQ_r = U_rR_r$
 
+* Using [[id:b34392e8-9180-4826-aafc-e8d2ffb6e82c][Arnoldi Iterations]]
+  We can use Arnoldi iterations in order to find an orthonormal basis $Q_j$ of $\mathcal{K}_j$
+  At step $n$, we can write: $x_n = x_0 + Q_ny_n$
+  \begin{equation}
+AQ_j =Q_{j+1}\tilde{H}_j
+\end{equation}
+with
+\begin{equation}
+\tilde{H}_n = \begin{bmatrix} H_n \\ [0, \dots, 0, h_{n+1 ,n}] \end{bmatrix} \in \mathbb{R}^{n+1 \times n}
+\end{equation} upper Hessenberg.
+
+The residual at step $n$ writes
+\begin{align}
+\|r_n \| &= \|b - Ax_n\| \\
+&= \|b - A(x_0 +Q_ny_n)\| \\
+&= \|r_0 -AQ_ny_n\| \\
+\end{align}
+since $r_0 = \beta q_1$, with $\beta = \|r_0\|$, and $q_1 = Q_je_1$
+\begin{align}
+\|r_n \|&= \|r_0 -AQ_ny_n\| \\
+&= \| \beta q_1 -AQ_ny_n\| \\
+&= \| \beta q_1 -Q_{n+1}\tilde{H}_n y_n\| \\
+&= \| \beta Q_{n+1}e_1 -Q_{n+1}\tilde{H}_n y_n\| \\
+&= \| Q_{n+1}\left(\beta e_1 -\tilde{H}_n y_n\right)\| \\
+&= \| \beta e_1 -\tilde{H}_n y_n\| \\
+\end{align}

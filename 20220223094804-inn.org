@@ -3,6 +3,7 @@
 :ROAM_ALIASES: "Invertible Neural Networks"
 :END:
 #+title: INN
+#+filetags: :MachineLearning:NeuralNetworks:
 
 Invertible Neural Networks are [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] which are bijective:
 \begin{align}

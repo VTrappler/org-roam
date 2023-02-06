@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       06429a75-3963-47c4-b2e5-a2b7d4122dbc
+:END:
+#+title: Polynomial Chaos Expansion
+#+filetags: :DimensionReduction:
+

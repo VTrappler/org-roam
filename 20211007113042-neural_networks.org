@@ -2,7 +2,7 @@
 :ID:       7a245cfe-dcaa-47d6-a318-5574fab3b7ac
 :END:
 #+title: Neural Networks
-#+filetags: :MachineLearning:ML:NN:
+#+filetags: :NeuralNetworks:MachineLearning:
 #+STARTUP: latexpreview
 
 A Neural network is a set of neurons, which /communicates/ with each other.

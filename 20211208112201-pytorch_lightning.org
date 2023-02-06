@@ -2,6 +2,6 @@
 :ID:       374176e2-82ec-4332-9e11-d11878d238be
 :END:
 #+title: PyTorch - Lightning
-#+filetags: :MachineLearning:
+#+filetags: :ProgrammingLanguage:MachineLearning:
 
 Lightning is a framework for easier implementation of [[id:40086648-2e0c-4bad-aaa3-ad0e146f8ee6][PyTorch]].

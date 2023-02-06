@@ -137,8 +137,8 @@ x_k^a = x_k^f + \mathbf{K}_k (y_k - H_k(x_k^f))
 :END:
 ** Dominant modes and Kalman Gain
 The RRSQRF is obtained by keeping only the $N_m$ leading [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]]
-of the covariance error matrix, through [[id:6cee23ab-0d25-40b3-9b73-ba44fc730b39][Cholesky Decomposition]] for
-instance:
+of the covariance error matrix, through [[id:6cee23ab-0d25-40b3-9b73-ba44fc730b39][Cholesky Decomposition]] or
+[[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]] for instance:
 \begin{equation}
 \mathbf{P}^f \approx \mathbf{S}_f \mathbf{S}_f^T
 \end{equation}
@@ -174,7 +174,7 @@ we have indeed $\mathbf{S}_a \mathbf{S}_a^T =\mathbf{P}^a$
 Say we performed the analysis step. How to get from $N_m$ modes to
 $N_m - N_q$ (remove $N_q$ modes) ?  We diagonalise $\mathbf{P}^a =
 \mathbf{S}_a \mathbf{S}_a^T = \mathbf{V\Lambda V}^T$, and we consider
-only the $N_m - N_q$ leading eigenvectors, put in the
+only the $N_m - N_q$ leading eigenvectos, put in the
 $\tilde{\mathbf{V}}$ matrix, of size $(N_m - N_q) \times N_x$.
 $\tilde{\mathbf{S}}_a \approx \mathbf{S}_a \tilde{\mathbf{V}}$
 ** TODO Finir

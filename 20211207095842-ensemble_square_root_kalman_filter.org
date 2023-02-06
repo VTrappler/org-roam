@@ -59,7 +59,9 @@ we have
 \end{equation}
 
 * Generating the posterior ensemble
-We want to factorise $\mathbf{P}^a = \mathbf{X}_a\mathbf{X}_a^T$. Similarly as in the derivation of the [[id:17e80e86-f937-4f56-8d35-3990d4f4ea11][Reduced Rank square root filter]], we can get
+We want to factorise $\mathbf{P}^a =
+\mathbf{X}_a\mathbf{X}_a^T$. Similarly as in the derivation of the
+[[id:17e80e86-f937-4f56-8d35-3990d4f4ea11][Reduced Rank square root filter]], we can get
 
 \begin{align}
 \mathbf{X}_a &= \mathbf{X}_f\left(\mathbf{I} + \mathbf{Y}_f^T\mathbf{R}^{-1}\mathbf{Y}_f\right)^{-1/2} \\

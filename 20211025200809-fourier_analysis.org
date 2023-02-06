@@ -3,7 +3,7 @@
 :ROAM_ALIASES: "Fourier transform" "Fourier decomposition"
 :END:
 #+title: Fourier Analysis
-
+#+startup: latexpreview
 
 * Fourier Transform
 Fourier transform is a linear tranformation of functions of a real

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ec035fcf-7108-4bba-93da-e2c1c31fdeb8
+:ROAM_ALIASES: GNN
+:END:
+#+title: Graph Neural Networks
+#+filetags: :NeuralNetworks:MachineLearning:
+
+
+A Graph [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] is a neural network which is applied on a
+graph.
+
+

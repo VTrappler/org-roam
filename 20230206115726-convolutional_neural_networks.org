@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       7c1a4f3f-891a-4cca-8e7d-2f581feb2fa4
+:ROAM_ALIASES: CNN
+:END:
+#+title: Convolutional Neural Networks
+#+filetags: :NeuralNetworks:MachineLearning:
+
+Convolutional [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] are a specialized type of artificial
+neural networks that use a mathematical operation called convolution
+in place of general matrix multiplication in at least one of their
+layers (wikipedia).
+
+

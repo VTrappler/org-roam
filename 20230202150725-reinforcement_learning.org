@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       710b7834-e583-4226-bb29-c61ac8343f37
+:ROAM_ALIASES: RL
+:END:
+#+title: Reinforcement Learning
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+RL is [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]]. It is usually based as a Markov Decision process:
+ + $S$ is the set of environment and agent state
+ + $A$ (resp. $A_s$ )is the set of actions available to the agent (given state $s$)
+ + $P_a(s, s')$ is the probability of transition from state $s$ to $s'$ under action $a$.
+ + $R_a(s, s')$ immediate reward after transition $s \rightarrow s'$ with action $a$.
+
+The goal of RL is to learn a *policy* $\pi$:
+ + $\pi: A \times S \rightarrow [0, 1]$ such that
+ + $\pi(a, s) = \mathbb{P}\left[a_t = a \mid s_t=s\right]$ the probability (at time $t$) to take action $a$ given state $s$.
+ + which maximizes cumulative expected reward

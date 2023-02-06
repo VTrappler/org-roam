@@ -4,12 +4,26 @@
 :END:
 #+title: Karhunen-Loève theorem
 #+filetags: :DimensionReduction:
+#+startup: latexpreview
 
 The KL theorem allows for the representation of a stochastic process
 as an infinite linear combination of orthogonal functions, based on
 the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] of a specific linear operator.
 
-* 
+* Stochastic process decomposition
+  Let $X_t = X(t)$ be a stochastic process defined for $t \in [a, b]$,
+  centered at $0$, ie $\mathbb{E}[X_t] = 0$,  $\forall t\in [a, b]$.
+  \begin{align}
+    X_t &= X(t) = \sum_{i=1}^{\infty} Z_k \xi_k(t)=  \sum_{i=1}^{\infty}\sqrt{\lambda_k} \xi_k \phi_k(t)  \\
+    X_t(\omega) &=\sum_{i=1}^{\infty} Z_k(\omega) \phi_k(t)
+  \end{align}
+
+  with $\mathbb{E}[Z_i Z_j] = \lambda_i\delta_{i,j}$, and $\langle \phi_i, \phi_j \rangle_{L^2([a, b])} = \delta_{i, j}$ .
+In other words, $(\phi_{k})_k$ form an orthonormal basis of $L^2$, while $\xi_i$ are zero mean, unit variance.
+
+Depending on 
+
+[[id:06429a75-3963-47c4-b2e5-a2b7d4122dbc][Polynomial Chaos Expansion]]
 
 * See also
  * [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]

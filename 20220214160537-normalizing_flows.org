@@ -2,7 +2,10 @@
 :ID:       17383d23-7ad0-4b99-a99f-660cd2984878
 :END:
 #+title: Normalizing flows
+#+filetags: :NeuralNetworks:MachineLearning:
 #+startup: latexpreview
+
+Normalizing flows are a specific case of a [[id:206abcc1-20d3-47f5-9af1-f30c86405266][Transport]] map between measures.
 
 Let us recall the equation of  change of variables:
 $p(x)\mathrm{d}x = p(y) \mathrm{d}y$
@@ -45,3 +48,4 @@ $J_{f^{-1}} =  \prod_{i=1}^N J_{f_i}$ and taking the determinants, we have
 \log |\det J_f| &= \sum_{i=1}^N \log |\det J_{f_i}| \\
 \log |\det J_{f^{-1}}| &= -\sum_{i=1}^N \log |\det J_{f_i}|
 \end{align}
+

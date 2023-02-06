@@ -2,7 +2,7 @@
 :ID:       40086648-2e0c-4bad-aaa3-ad0e146f8ee6
 :END:
 #+title: PyTorch
-#+filetags: :MachineLearning:
+#+filetags: :ProgrammingLanguage:MachineLearning:
 
 
 PyTorch is a [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python]] library for [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]].

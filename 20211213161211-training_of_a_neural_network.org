@@ -2,6 +2,7 @@
 :ID:       ee87a4bb-2518-4c38-bf15-77525e382003
 :END:
 #+title: Training of a Neural Network
+#+filetags: :NeuralNetworks:MachineLearning:
 
 
 Training of a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] usually refers to the adjustement of the weights (and

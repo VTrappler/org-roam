@@ -3,7 +3,7 @@
 :ROAM_REFS: cite:chung_optimal_2015
 :END:
 #+title: Optimal Regularized low-rank inverse approximation
-
+#+startup: latexpreview
 * Introduction
 ** Classical Low rank approximation
 
@@ -39,6 +39,8 @@
  downweight columns of $A$ with more uncertainties.
 * Low-rank optimization problem
 ** Generalized SVD of $A$ and $M^{-1}$:
+   Let us consider the [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]] of $A$, ie the
+   matrix we want to approximate, and $M$, the "weighing" matrix.
    \begin{equation}
 A = U\Sigma G^{-1} \quad M = G S^{-1} V^T
 \end{equation}

@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       fa41eb46-4983-486d-bcd5-75e26728621f
+:ROAM_ALIASES: "Moore-Penrose inverse"
+:END:
+#+title: Pseudoinverse
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+Let us consider the [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear System]] $Ax = b$, $A\in \mathbb{R}^{n \times m}$
+* Moore-Penrose inverse
+** Definition
+   $A^+$ is said to be the Moore-Penrose inverse when the following criteria are verified:
+  + $AA^+$ maps the column vectors of $A$ onto themselves: $A A^+ A = A$
+  + $A^+$ acts like a weak inverse: $A^+AA^+ = A^+$
+  + Hermitian property: $(A A^+)^T = (A A^+)$ and $(A^+A)^T = (A^+A)$
+** Construction
+   If $A^TA$ is invertible
+  + $A^+ = (A^TA)^{-1}A^T$
+** Projections
+   Let $P = A A^+$, and $Q = A^+A$. They are orthogonal [[id:86b28d90-52e6-4b84-ab83-e3a1c01d717e][projectors]]: Idempotents and hermitian.
+  - $PA = AQ = A$
+  - $A^*P = QA^+ = A^+$
+  - $P$ is the orthogonal projector onto the range of $A$
+  - $I - P$ orthogonal projector onto $\ker A$
+  - $Q$ onto the range of $A^+$
+  - $I - Q$ orthogonal projector onto $\ker A^T$
+
+    

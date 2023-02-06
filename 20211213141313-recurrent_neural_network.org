@@ -3,7 +3,7 @@
 :ROAM_ALIASES: RNN
 :END:
 #+title: Recurrent Neural Network
-#+filetags: :MachineLearning:
+#+filetags: :NeuralNetworks:MachineLearning:
 #+startup: latexpreview
 
 RNN are a class of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], where connections between nodes

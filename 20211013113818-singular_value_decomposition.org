@@ -37,7 +37,7 @@ $\mathbf{u}$, $\mathbf{v}$ are called *left-singular* and *right-singular* vecto
 
 
 
-* Eigenvalue decomposition
+*  decomposition
 
 Since
 
