@@ -33,9 +33,8 @@ a [[id:ba103e30-a7e4-4332-b9c0-b3b07a16eb40][QR decomposition]] of $AQ_r = U_rR_
 AQ_j =Q_{j+1}\tilde{H}_j
 \end{equation}
 with
-\begin{equation}
-\tilde{H}_n = \begin{bmatrix} H_n \\ [0, \dots, 0, h_{n+1 ,n}] \end{bmatrix} \in \mathbb{R}^{n+1 \times n}
-\end{equation} upper Hessenberg.
+
+$\tilde{H}_n = \begin{bmatrix} H_n \\ [0, \dots, 0, h_{n+1 ,n}] \end{bmatrix} \in \mathbb{R}^{n+1 \times n}$ upper Hessenberg.
 
 The residual at step $n$ writes
 \begin{align}

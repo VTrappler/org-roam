@@ -63,3 +63,14 @@ Derivating wrt $\mathbf{x}_1$, and setting the gradient to zero, we have
 \begin{equation}
 (\mathbf{P}^0_1)^{-1}(\mathbf{x}_1 - \mathbf{x}_1^0) - \left(\nabla_{\mathbf{x}_1} \mathcal{H}_2\left[\mathcal{M}_{12}(\mathbf{x}_1)\right]\right)^T (\mathbf{R}_2)^{-1}\left(\mathbf{y}_2 - \mathcal{H}_2\circ\mathcal{M}_{12}(\mathbf{x}_1)\right) = 0
 \end{equation}
+
+Let us assume that the solution of the minimization problem is computed iteratively.
+At iteratoin $i$, the approximation of $x_1$ is $x_1^i$.
+The Linearization of the time propagator reads, for a small increment
+\begin{equation}
+\mathcal{M}_{12}(x^{i+1}_1) = \mathcal{M}_{12}(x^i_1) + M_{12}^i(x_1^{i+1} - x_1^i) + \mathcal{O}(\|x_1^{i+1} - x_1^i\|^2)
+\end{equation}
+and
+\begin{equation}
+\nabla_{x_1} \mathcal{H}_2 \circ \mathcal{M}_{12}(x_1^{i+1}) = H_2^iM^i_{12} + \mathcal{O}(\|x_1^{i+1} - x_1^i\|)
+\end{equation}

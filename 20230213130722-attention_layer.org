@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       0980a6de-7712-4fbd-97c1-d5b04d75d09d
+:END:
+#+title: Attention Layer
+#+filetags: :MachineLearning:
+

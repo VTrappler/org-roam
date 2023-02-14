@@ -10,6 +10,9 @@
 Probabilistic PCA is a probabilistic interpretation of the [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]
 
 * Factor analysis
+  :PROPERTIES:
+  :ID:       3c5702d7-c031-4c09-b40f-f2f343a3fc91
+  :END:
 Let us assume that $y$ is a $d$ dimensional observation vector, corresponding to a $q$ dimensional latent vector $x$.
 Assuming a Linear relationship (factor analysis)
 \begin{equation}
@@ -17,7 +20,18 @@ y = Wx + \mu + \epsilon
 \end{equation}
 where
  * $W\in \mathbb{R}^{d\times q}$
- * $\mu$ allows for the model to have non-zero mean 
+ * $\mu$ allows for the model to have non-zero mean
+** Difference with [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]
+   (source: stackoverflow):In terms of a simple rule of thumb, I'd suggest that you:
+
+    Run factor analysis if you assume or wish to test a theoretical
+    model of latent factors causing observed variables.
+
+    Run principal component analysis If you want to simply reduce your
+    correlated observed variables to a smaller set of important
+    independent composite variables.
+
+
 
 ** Gaussian assumptions
 Further assumptions:

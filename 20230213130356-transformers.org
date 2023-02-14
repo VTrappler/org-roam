@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       10b80067-316a-4fe4-9c9f-c6d3f89d2c97
+:END:
+#+title: Transformers
+#+filetags: :MachineLearning:
+
+
+Transformers is a [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] technique which employs the
+mechanism of self-[[id:0980a6de-7712-4fbd-97c1-d5b04d75d09d][Attention]]: modify the relative "importance" of the input.
+
+As [[id:f73cda73-3c82-43f4-9636-b2e409682afd][Recurrent Neural Network]], they are designed for sequential data.

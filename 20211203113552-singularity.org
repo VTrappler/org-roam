@@ -10,4 +10,12 @@ Enterprise Performance Computing (EPC)
 Singularity is used in [[id:e248b998-40ed-4cba-8d7c-7b9edce38899][Jedi]]
 
 
-See also [[id:40a941fb-16c5-40c9-9954-5ac0668f872c][Docker]].
+
+* Use with Docker
+See also [[id:40a941fb-16c5-40c9-9954-5ac0668f872c][Docker]]. To construct a singularity image from a docker image:
+
+#+begin_src bash
+  singularity build --force darling.sif docker-daemon://darling:latest
+#+end_src
+
+The singularity image can then be run with [[id:ddf8d1c0-d102-47d7-914c-24a708bd34e4][Slurm]].

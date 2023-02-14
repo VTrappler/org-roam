@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       ba555986-964c-4f43-8c13-d95b432b7ac2
+:ROAM_ALIASES: FNO
+:END:
+#+title: Fourier Neural Operators
+#+filetags: :NeuralOperators:NeuralNetworks:MachineLearning:
+#+startup: latexpreview
+
+

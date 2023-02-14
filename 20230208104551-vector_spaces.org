@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       c753f247-4fd9-45ef-94b2-400bd92fd58c
+:END:
+#+title: Vector Spaces
+#+filetags: :FunctionalAnalysis:
+

@@ -17,3 +17,10 @@ ML encompasses a lot of different techniques, algorithms and methods such as
  * [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]]
  * [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoders]]
  * [[id:84864b95-b98d-4b3e-b0c2-e0d1519ca101][Random forest]]
+
+
+
+Machine Learning usually requires a large number of models, so
+different practices have been developed:
+ + Machine Learning experiments tracking tools: [[id:41c4fd7f-d06d-4133-8db5-9e13dbda0cdb][DagsHub]], [[id:4901e731-96f4-4daf-a3ac-a78fa4976df5][MLFlow]], [[id:41c4fd7f-d06d-4133-8db5-9e13dbda0cdb][DagsHub]], [[id:58e48b4a-124b-4a7b-804b-15e79a88d365][Hugging Face]]...
+ + [[id:9a6ecf31-c5e8-4c64-ac79-45a183643b06][ML Ops]]: to scale, deploy and maintain in production

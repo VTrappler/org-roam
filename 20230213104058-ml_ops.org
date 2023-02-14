@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       9a6ecf31-c5e8-4c64-ac79-45a183643b06
+:END:
+#+title: ML Ops
+#+filetags: :MLOps:
+
+
+MLOps aims at deploying and maintaining [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] models in production.
+
+
+
+[[id:58e48b4a-124b-4a7b-804b-15e79a88d365][Hugging Face]], [[id:41c4fd7f-d06d-4133-8db5-9e13dbda0cdb][DagsHub]], [[id:4901e731-96f4-4daf-a3ac-a78fa4976df5][MLFlow]]
+
+
+https://neptune.ai/blog/best-ml-experiment-tracking-tools

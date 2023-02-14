@@ -2,7 +2,7 @@
 :ID:       4901e731-96f4-4daf-a3ac-a78fa4976df5
 :END:
 #+title: MLFlow
-#+filetags: :ReproducibleResearch:Dev:
+#+filetags: :MLOps:ReproducibleResearch:Dev:
 
 MLflow is an open source tool, which allows to define projects for
 organizing and describing code.

@@ -44,3 +44,14 @@ means we ask for 5 nodes, with 16 core each (since by default 1 task ~ 1 core)
  * --gres=gpu:N: Number of GPUs by node (1 leq N leq 4)
  * --mail-type=: send email (END for end of job, BEGIN, for start, ALL for every step
  * --mail-user=: email to use
+
+* Example
+  #+begin_src bash
+    #!/bin/bash
+    #SBATCH --output=out.txt
+    #SBATCH --error=err.txt
+    #SBATCH --partition=milan7513_A100
+    #SBATCH --gpus=1
+    #SBATCH --nodes=1
+    #SBATCH --ntasks=1
+  #+end_src

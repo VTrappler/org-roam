@@ -37,7 +37,7 @@ $\mathbf{u}$, $\mathbf{v}$ are called *left-singular* and *right-singular* vecto
 
 
 
-*  decomposition
+*  [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]] decomposition
 
 Since
 

@@ -93,7 +93,7 @@ which can be rewritten as
 \end{equation}
 
 so that $G = [G_1, \cdots, G_N]^T$, $d^{(k)} = [y_1 - \mathcal{G}_1(x^{(k)}), \dots y_N - \mathcal{G}_N(x^{(k)})]^T$ and $R^{-1} = \mathrm{diag}(R_1^{-1}, \dots, R_N^{-1})$ 
-This minimization can be done by solving the linear system
+This minimization can be done by solving the [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear System]]
 
 \begin{equation}
 \left(B^{-1} + G^T R^{-1} G\right) \delta x^{(k)} = B^{-1}(x^b - x^{(k)}) + G^TR^{-1}d

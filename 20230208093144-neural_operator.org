@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       fdbd68cd-7145-486d-afd7-7543f34bedfb
+:END:
+#+title: Neural Operator
+#+filetags: :MachineLearning:NeuralOperators:
+#+startup: latexpreview
+
+
+Classical [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] focus on learning a mapping between
+finite-dimensional Euclidian spaces. Neural Operators focus instead on
+learning a mapping between Function spaces, [[id:63ea6e3d-15c7-439f-926d-f14222561d2f][Banach Space]]
+
+* Problem Definition
+
+  Let $D \subset \mathbb{R}^d$ be a bounded open set, $\mathcal{A},
+  \mathcal{D}$ be separable [[id:63ea6e3d-15c7-439f-926d-f14222561d2f][Banach Spaces]] of functions from $D$ to
+  $\mathbb{R}^{d_a}$ and to $\mathbb{R}^{d_u}$
+
+  Let $G^\dagger$ be a non linear map $\mathcal{A} \rightarrow
+  \mathcal{U}$, and suppose we have a dataset composed of $\{(a_j,
+  u_j)}$ where $a_j \sim \mu$ i.i.d. samples from [[id:ed5ca3ef-6b5c-4f01-beec-a7d42c7f6d0b][Measure]] $\mu$
+  supported on $\mathcal{A}$, and $u_j = G^{\dagger}(a_j)$ plus maybe some noise.
+
+  We want to find an approximation $G$ of $G^{\dagger}$:
+  \begin{equation}
+G: \mathcal{A} \times \Theta \longrightarrow \mathcal{U} \iff G_{\theta}: \mathcal{A} \longrightarrow \mathcal{U}\quad \theta \in \Theta
+\end{equation}
+and find $\theta^\dagger\in \Theta$ such that $G(\cdot,
+\theta^\dagger)=G_{\theta^\dagger} \approx G^{\dagger}$ which is then a minimizer of
+\begin{equation}
+\min_{\theta \in \Theta} \mathbb{E}_{a \sim \mu}\left[C(G(a, \theta), G^{\dagger}(a))\right]
+\end{equation}
+for a well chosen cost functional $C$.
+
+The dataset of functions however is only accessible pointwise, so for
+a given discretization: Let $D_j \{x_1,\dots,x_n\} \subset D$ $n$
+point discretization, $a_{j \mid D_j} \in \mathbb{R}^{n \times d_a}$,
+$u_{j \mid D_j} \in \mathbb{R}^{n \times d_u}$ But we want an operator
+to produce $u(x)$ for any $x \in D$, $x \notin D_j$ eventually.
+
+* Neural Operator
+The neural operator is defined with an iterative architecture:
+\begin{equation}
+v_0 \mapsto v_1 \mapsto \dots \mapsto v_T
+\end{equation}
+where each function $v_j$ (except for $v_T$) takes values from and to $\mathbb{R}^{d_v}$.
+In order to conform to the input and output dimensions:
+ + $v_0(x) = (P \circ a)(x)$ (local transformation)
+ + $u(x) = (Q \circ v_T)(x)$ ($Q: \mathbb{R}^{d_v} \rightarrow \mathbb{R}^{d_u}$)
+
+  For each composition, the update $v_t \mapsto v_{t+1}$ is defined as
+   the composition of a "non-local integral operator $\mathcal{K}$ and
+   a local nonlinear activation function $\sigma$.

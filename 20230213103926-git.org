@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       93a33fcb-e9d9-44e4-859b-4a5744a2f122
+:END:
+#+title: Git
+#+filetags: :Dev:
+
+Git is a distributed version control system

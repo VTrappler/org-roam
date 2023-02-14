@@ -1,22 +1,25 @@
 :PROPERTIES:
 :ID:       373e5002-e0bd-4c88-95f7-74f5b7925b10
+:ROAM_ALIASES: "Prehilbertian space"
 :END:
 #+title: Hilbert Space
 #+filetags: :FunctionalAnalysis:
 #+startup: latexpreview
 #+LaTeX_HEADER: \newcommand{\inner}[2]{\langle #1, #2 \rangle}
 
-* Definition
-An [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]] $H$ is a *complete* inner product space:
+* Definition: prehilbert/Hilbert
+A [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][prehilbert Space]] $H$ is an inner product [[id:c753f247-4fd9-45ef-94b2-400bd92fd58c][space]]:
 We have thus
  + $H$ is a (complex) vector space
  + There exists an inner product $\inner{\cdot}{\cdot}$ that satisfies
-   + Conjugate symmetry: $\inner{y}{x} = bar{\inner{x}{y}}$
+   + Conjugate symmetry: $\inner{y}{x} = \bar{\inner{x}{y}}$
    + Linearity in its first argument: $\inner{ax_1 + bx_2}{y} = a\inner{x_1}{y} + b\inner{x_2}{y}$
    + Positive definiteness: $\inner{x}{x} > 0$ if $x \neq 0$.
  + The associated norm is the real-valued function $\|x\| = \sqrt{\inner{x}{x}}$
- + $H$ is a [[id:60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d][Complete space]]  with respect to the norm $\| \cdot \|$
-   + Every [[id:60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d][Cauchy sequence]] converges to an element *in* $H$
+ + If additionally,  $H$ is a [[id:60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d][Complete space]]  with respect to the norm $\| \cdot \|$, $H$ is a [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]]
+   + Completeness: Every [[id:60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d][Cauchy sequence]] converges to an element *in* $H$
+   + $H$ is a [[id:63ea6e3d-15c7-439f-926d-f14222561d2f][Banach space]]
+
 
 * Properties
 ** Hilbert Projection theorem

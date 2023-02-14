@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       dc6424ca-a277-43f0-b37c-753435090ea2
+:ROAM_ALIASES: "Krylov Methods"
 :END:
 #+title: Krylov subspace
 #+filetags: :LinearAlgebra:
