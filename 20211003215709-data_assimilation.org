@@ -206,7 +206,11 @@ The Hessian is then the precision matrix.
 ** Non-linear observation operator
 Everything holds, by taking the tangent linear of the observation
 operator. This time instead, the Hessian depends on the evaluation point
-** Dual formalism
+** Dual Variational Data Assimilation
+   :PROPERTIES:
+   :ID:       3bfb19d4-b741-4d6e-9d9b-d4d2b731f8b1
+   :ROAM_ALIASES: PSAS
+   :END:
 Observation operator is assumed linear. Starting from the cost function, we can instead enforce the observation equation through the Lagrangian
 \begin{equation}
 J(x) = \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x)
@@ -221,7 +225,7 @@ The optimum wrt $w$ is equivalent to J(x). Using minmax theorem:
 x^* &= x^b + \mathbf{BH}^Tw \\
 \epsilon^* &= \mathbf{R}w
 \end{align}
-And this leads to the *dual* cost function
+And this leads to the [[id:b654f444-b81b-43a2-9690-1068f4da6631][Dual]] cost function
 \begin{equation}
 G(w)= - L(x^*,\epsilon^*, w) = \frac{1}{2}\left(\mathbf{R+HBH}^T\right)w - w^T\left(y - \mathbf{H}x\right)
 \end{equation}

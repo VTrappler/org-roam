@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       dbfb5f9b-4e19-4aab-9c10-fddbb6ca4065
+:ROAM_ALIASES: "Bayes Factor" BMA
+:END:
+#+title: Bayesian Model Averaging
+#+filetags: :Bayesian:
+
+Nice ref: https://journals.sagepub.com/doi/full/10.1177/2515245919898657
+
+This can be used to quantify the uncertainty across different models.
+
+* Model evidence
+Let us consider a classical [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] problem:
+\begin{equation}
+p(\theta_i \mid y, M_i) = \frac{p(y\mid \theta_i, M_i)p(\theta_i \mid M_i)}{p(y \mid M_i)}
+\end{equation}
+
+  The Model evidence is given by
+  \begin{equation}
+p(y \mid M_i) = \int_{\theta} p(y, \mid \theta, M_i)p(\theta \mid M_i) \, \mathrm{d}\theta
+\end{equation}
+
+Based on these quantities,and by assigning some prior probabilities
+for the models, we can compute posterior model probabilities:
+\begin{equation}
+p(M_i \mid y) \propto p(y\mid M_i)p(M_i)
+\end{equation}
+* Bayes' Factor
+which can be used for computing the Bayes Factor, which compares the
+expressivity of two models, comparing model $i$ and model $j$.
+
+\begin{equation}
+\text{BF}_{i,j} = \frac{p(M_i \mid y)}{p(M_j \mid y)}
+\end{equation}
+
+* BMA
+  Finally, given a QoI, say $x$ (covariate, future observation, parameter)
+  We can perform BMA in order to have a posterior distribution over all models:
+  \begin{equation}
+p(x \mid y) = \sum_{i} p(x \mid y, M_i)p(M_i\mid y)
+\end{equation}

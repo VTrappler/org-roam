@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       376e898d-36f4-4f8f-96eb-be7d0d8d8b5e
+:ROAM_ALIASES: "Score Function"
 :END:
 #+title: Fisher Information Matrix
 #+startup: latexpreview

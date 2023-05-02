@@ -3,6 +3,24 @@
 :ROAM_ALIASES: ABC
 :END:
 #+title: Approximate Bayesian Computation
+#+filetags: :Bayesian:
 #+STARTUP: latexpreview
 
-Approximate Bayesian Computation is a [[id:45750514-e78c-42cf-ba99-a98446a8b02e][Likelihood-free inference]] method
+Approximate Bayesian Computation is a [[id:45750514-e78c-42cf-ba99-a98446a8b02e][Likelihood-free inference]] method:
+We are looking for the posterior distribution of a parameter $\theta$, in a classical [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] problem:
+\begin{equation}
+p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}
+\end{equation}
+where $p(y\mid \theta) = f(\theta) + \epsilon$
+
+* Principle of algorithm
+  + Sample $\tilde{\theta} \sim p(\theta)$
+  + Compute $f(\tilde{\theta}) = \tilde{y}$
+  + If $\rho(T(y), T(\tilde{y})) \leq \eta$
+    + $\tilde{\theta}$ is "accepted" as a posterior sample
+  + Else
+    + pass
+
+      where $\rho$ is a metric, and $T$ computes a statistic of the
+      observed data. If it is an [[id:d10b444c-1253-4d39-9717-2e3f9f701e84][Exponential Family]], we can find a
+      sufficient statistic, and no further error is introduced.

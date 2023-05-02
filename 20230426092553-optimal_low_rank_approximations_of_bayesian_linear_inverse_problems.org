@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       be90e373-a593-46f0-8c11-8615a7df2d74
+:END:
+#+title: Optimal low-rank approximations of Bayesian linear inverse problems
+#+filetags: :LiteratureReview:DimensionReduction:Bayesian:
+
+* Bayesian Linear model
+  We introduce a classical linear [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] problem
+  \begin{align}
+y \mid x &\sim \mathcal{N}(Gx, R)  \\
+x & \sim \mathcal{N}(x, B)
+\end{align}
+
+The posterior distribution of $x$ is given by
+\begin{equation}
+x\mid y\sim  \mathcal{N}(\mu_{\text{pos}}(y), \Gamma_{\text{pos}})
+\end{equation}
+with
+\begin{align}
+\mu_{\text{pos}}(y) &= \Gamma_{\text{pos}} G^TR^{-1}y  \\
+\Gamma_{\text{pos}} &= (G^T R^{-1}G + B^{-1})^{-1} 	
+\end{align}
+and $H = G^TR^{-1}G$
+
+
+* Optimal Posterior Covariance approximation
+** Approximation Class
+   Since $\Gamma_{\text{pos}}^{-1} = ZZ^T + B^{-1}$ can be expressed as
+   a non-negative update of the inverse of the prior, this is what we
+   are looking for.
+
+   Using [[id:12704449-cdb1-49ab-bc77-c9de0200bb3e][Woodbury matrix identity]],
+   \begin{equation}
+ \Gamma_{\text{pos}} = B - KK^T
+ \end{equation}
+ with
+ \begin{equation}
+ KK^T = BG^T(R + GBG^T)^{-1} G B
+ \end{equation}
+
+ The approximation class is then
+ \begin{equation}
+ \mathcal{M}_r = \{B - KK^T \succ 0\quad: \quad \text{rk}(K) \leq r\}
+ \end{equation}
+
+** Loss definition
+
+*** Förstner Distance
+    :PROPERTIES:
+    :ID:       a5188361-4a8d-44ca-a9b2-33652a5a41b9
+    :END:
+ The Förstner distance is defined for SPD matrices as
+ \begin{equation}
+ d^2_\mathcal{F}(A, B) = \text{tr}\left[\log\left(A^{-1/2}BA^{-1/2}\right)^2\right] = \sum \log(\sigma_i)^2
+ \end{equation}
+ where $\sigma_i$ are the generalized eigenvalues of the pencil $(A,B)$ (ie $Av_i = \sigma_iBv_i$)
+
+**** Properties
+     There is some interesting invariance properties:
+     \begin{equation}
+ d^2_{\mathcal{F}}(A, B) =d^2_{\mathcal{F}}(B, A) =d^2_{\mathcal{F}}(A^{-1}, B^{-1}) = d^2_{\mathcal{F}}(MAM^T, MBM^T)
+ \end{equation}
+
+**** Generalization
+     The class of loss functions $\mathcal{L}$ is defined as
+     \begin{equation}
+ L(A, B) = \sum_i f(\sigma_i)
+ \end{equation}
+ for $\sigma_i$ generalized eigvals of the pencil $(A, B)$ and $f$ differentiable real valued functions on $\mathbb{R}^+$ decreasing on $]0,1]$ and increasing on $[1,+\infty[$, while going to infinity when $x \rightarrow +\infty$ 
+
+
+
+** Optimality result
+   Let $(\delta^2_i, \hat{w}_i)$ generalized [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenpairs]] of the pencil $(H, B^{-1})$:
+   ie
+   \begin{equation}
+ H\hat{w}_i = \delta^2_i B^{-1}\hat{w}_i
+ \end{equation}
+ with $\delta_i^2 \geq \delta_{i+1}^2$
+  + A minimizer $\hat{\Gamma_{\text{pos}}}$ of $\Gamma \mapsto L(\Gamma_{\text{pos}}, \Gamma)$ in $\mathcal{M}_r$ is
+ \begin{equation}
+ \hat{\Gamma}_{\text{pos}}= B - KK^T= B - \sum_{i=1}^r \frac{\delta_i^2}{1+\delta_i^2} \hat{w}_i \hat{w}_i^T
+ \end{equation}
+  + The minimal value attained is
+ \begin{equation}
+ L(\hat{\Gamma}_{\text{pos}},\Gamma_{\text{pos}}) = f(1)r + \sum_{i >r}f(\frac{1}{1+ \delta_i^2})
+ \end{equation}
+  + The minimizer is unique if the first $r$ eigenvalues are different
+
+   
+* Optimal Approximation of the posterior mean
+We seek $A$ such that $\mu_{\text{pos}}(y) \approx Ay$
+
+** Optimality results
+   $\mathbb{E}[x \mid y] = \mu_{\text{pos}}(y)$ is the minimizer of Bayes risk for squared-error loss.
+   \begin{equation}
+L(\delta(y), x) = \|\delta(y) - x\|^2_{\Gamma_{\text{pos}}^{-1}}
+\end{equation}
+
+** Approximation classes
+\begin{align}
+\mathcal{A}_r &= \{A: \text{rk}(A) \leq r\} \\
+\hat{\mathcal{A}}_r &= \{(B - M)G^TR^{-1}: \text{rk}(M) \leq r \}
+\end{align}
+
+

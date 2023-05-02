@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       858b11cf-5a27-4f82-8a85-eb870d20dde4
+:END:
+#+title: DVC
+
+* Principle
+  
+* Workflow (standalone)
+
+
+* Integration with MLflow
+
+
+  https://www.sicara.fr/blog-technique/dvc-pipeline-runs-mlflow
+  https://discuss.dvc.org/t/dvc-and-mlflow-reproduce-experiments-using-git-commit-ids/561
+
+  
+

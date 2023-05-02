@@ -45,4 +45,5 @@ Python is an interpreted programming language.
    * [[id:40a941fb-16c5-40c9-9954-5ac0668f872c][Docker]]
    * [[id:1cafa262-254a-4040-9916-7143e6d6c3c8][Singularity]]
    * Virtual environments ?
-
+** Conda vs venv
+   
