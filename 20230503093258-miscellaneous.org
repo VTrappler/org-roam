@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       4711d382-af1f-4d6b-bb0b-04657fb46c8f
+:END:
+#+title: Miscellaneous
+
+
+* Link with [[id:1b022421-0366-4ef0-99ad-89d87735d430][Simulation Based Inference]]:
+** Calibrate, Emulate, Sample
+**** http://www.umr-cnrm.fr/high-tune/ (Aurélien Ribes)
+*** NF with Physics
+***  Frank Noé
+
+
+

@@ -3,6 +3,7 @@
 :END:
 #+title: Optimal low-rank approximations of Bayesian linear inverse problems
 #+filetags: :LiteratureReview:DimensionReduction:Bayesian:
+#+startup: latexpreview
 
 * Bayesian Linear model
   We introduce a classical linear [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]] problem

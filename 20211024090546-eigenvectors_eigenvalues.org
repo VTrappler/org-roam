@@ -64,8 +64,11 @@ A generalized eigenvalue problem is the problem of finding $(v, \lambda)$ verify
 \begin{equation}
 Av= \lambda Bv
 \end{equation}
-where $A$, $B$, are matrices. It is also called the eigenvalues
-associated with the *stencil* $(A, B)$.
+where $A$, $B$, are matrices. It is also called the eigenpairs
+associated with the *pencil* $(A, B)$.
+
+** Computation
+   Compute the eigenpairs of the matrix $B^{-1}A$
 
 * [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]
   Singular values can be seen as generalization of eigenpairs
