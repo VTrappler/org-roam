@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       3761b4cf-0099-4f08-8aa2-a877daa8fdff
+:END:
+#+title: Thompson Sampling
+#+startup: latexpreview
+
+
+

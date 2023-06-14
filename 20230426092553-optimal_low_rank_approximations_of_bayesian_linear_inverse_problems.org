@@ -104,4 +104,21 @@ L(\delta(y), x) = \|\delta(y) - x\|^2_{\Gamma_{\text{pos}}^{-1}}
 \hat{\mathcal{A}}_r &= \{(B - M)G^TR^{-1}: \text{rk}(M) \leq r \}
 \end{align}
 
+** Bayes risk
+   the Bayes risk of $Ay$ subject to $A$ is defined as
+   \begin{equation}
+R(Ay, x) =  \mathbb{E}\left[\|Ay - x\|^2_{\Gamma_{\text{pos}}^{-1}}\right]
+\end{equation}
 
+Thus, for the approximation class $\mathcal{A}$, we look for $A^*$ such that
+\begin{equation}
+R_{\mathcal{A}}(A^*y, x) = \min_{A \in \mathcal{A}} R(Ay, x) =   \min_{A \in \mathcal{A}} \mathbb{E}\left[\|Ay - x\|^2_{\Gamma_{\text{pos}}^{-1}}\right]
+\end{equation}
+
+** Optimality in Ar
+ + $(\delta^2_i, \hat{w}_i)$ generalized [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenpairs]] of the pencil $(H, B^{-1})$
+ + $(-, \hat{v}_i)$ generalized eigenpairs of the pencil $(GBG^T, R)$ ([[id:3bfb19d4-b741-4d6e-9d9b-d4d2b731f8b1][Dual Variational Data Assimilation]])
+\begin{equation}
+A^* = \sum_{i=1}^r \frac{\delta_i^2}{1 + \delta_i^2}\hat{w}_i\hat{v}_i^T \in \mathcal{A}_r
+\end{equation}
+and $R_{\mathcal{A}_r}(A^*y, x) = \dim(x) + \sum_{i >r} \delta_i^2$

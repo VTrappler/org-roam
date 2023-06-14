@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       72d5a80d-e2b0-4ddf-b719-01cf0865f035
+:END:
+#+title: Proper Orthogonal Decomposition
+#+filetags: :DimensionReduction:
+#+startup: latexpreview
+
+
+
