@@ -75,7 +75,7 @@ vector $q_r$
 
 
  
-#+begin_src python
+#+begin_src python :results output
   import numpy as np
 
     def lanczos_algorithm(A, q0, r):
@@ -98,4 +98,13 @@ vector $q_r$
 	    proj_w = w - alpha * v - beta * V[:, i-1]
 	    v = v - beta_im1 * q
 	return V, T
+
+  A = np.random.normal(size=(6, 6))
+  A = A.T @ A
+  q0 = np.random.normal(size=6)
+  V, T = lanczos_algorithm(A, q0, 5)
+  print(V)
+  print(T)
 #+end_src
+
+#+RESULTS:

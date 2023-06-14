@@ -34,7 +34,7 @@ and
 \omega = 0.035\quad \lambda = 3.10^{-5}
 \end{equation}
 
-#+begin_src python :session
+#+begin_src python3.8 :session
 def nonlinear_oscillator_step(xk, xkm1, xi=None, omega=0.035, lam=3e-5):
     if xi is None:
         xi = np.random.randn(1) * np.sqrt(0.0025)
