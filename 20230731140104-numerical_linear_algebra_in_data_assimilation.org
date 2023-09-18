@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       67e5cf82-8908-47c4-a281-fa7e8dfaa7e5
+:END:
+#+title: Numerical Linear Algebra in Data Assimilation
+#+filetags: :LiteratureReview:DataAssimilation:LinearAlgebra:
+
+[[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]
+* 3.2 Inner Iteration and preconditioning
+[[id:a5dab6d7-fca6-418a-916a-2812720fb876][Preconditioner]]
+** First level preconditioning
+   Linear change of variable using the Cholesky factor of the Background error covariance matrix.:
+   \begin{equation}
+\delta x = L\delta \tilde{x}
+\end{equation}
+[28]: Approximating the Hessian by eigenpairs obtained from Lanczos procedure
+[93, 170]: More general versions of LMP
+* 5 Model Reduction and Dimension Reduction approaches
+** 5.1 Reduces rank methods
+   [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]: update from the prior to the posterior. For Gaussian posteriors, rate of decay of the eigenvalues of the Hessian of the data misfit:
+   + [[https://ieeexplore.ieee.org/document/6468442][Extreme-scale UQ for Bayesian inverse problems governed by PDEs]]
+   + [[https://epubs.siam.org/doi/10.1137/090780717][Fast Algorithms for Bayesian Uncertainty Quantification in Large-Scale Linear Inverse Problems Based on Low-Rank Partial Hessian Approximations]]
+   + [[id:be90e373-a593-46f0-8c11-8615a7df2d74][Optimal low-rank approximations of Bayesian linear inverse problems]]
+   

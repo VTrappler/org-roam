@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       f813f588-3e7a-4b2f-b1ac-cb39b3f05020
+:ROAM_ALIASES: CRPS
+:END:
+#+title: Continuous Rank Probability Score
+#+startup: latexpreview
+
+The Continuous Rank Probability Score is a [[id:1d49d9ca-3c03-4244-a330-8c610172d8b8][Scoring Rule]].  Let $y$ be
+observations, $X$ a random variable which represents the probabilistic
+forecasting at that point, with $F$ its cdf.
+
+The CRPS is computed as
+\begin{equation}
+\mathrm{CRPS}(F, y) = \int_{\mathbb{R}} \left(F(x) - 1_{x \geq y}\right)^2\,\mathrm{d}x
+\end{equation}

@@ -48,6 +48,7 @@ x_t &= \sqrt{1-\beta_t}x_{t-1} + \sqrt{\beta_t}\epsilon_{t-1} \\
 \end{align}
 
 ** Stochastic Gradient Langevin Dynamics
+   Score functions can be used to sample from the distribution:
    \begin{equation}
 x_t = x_{t-1} + \frac{\delta}{2} \nabla_x \log p(x_{t-1}) + \sqrt{\delta}\epsilon_t
 \end{equation}
@@ -65,5 +66,10 @@ p_{\theta}(x_{0:T}) = p(x_T) \prod_{t=1}^T p_{\theta}(x_{t-1} \mid x_t)
 \end{equation}
 which takes the form
 \begin{equation}
-p_{\theta}(\theta_{t-1} \mid x_t) = \mathcal{N}\left(\mu_{\theta}(x_t, t); \Sigma_{\theta}(x_t, t)\right)
+p_{\theta}(x_{t-1} \mid x_t) = \mathcal{N}\left(\mu_{\theta}(x_t, t); \Sigma_{\theta}(x_t, t)\right)
 \end{equation}
+
+So basically, we are looking for $\mu_\theta$ and $\Sigma_\theta$, and
+apply them in an autoregressive manner.
+
+

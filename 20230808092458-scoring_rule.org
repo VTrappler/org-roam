@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       1d49d9ca-3c03-4244-a330-8c610172d8b8
+:END:
+#+title: Scoring Rule
+
+A scoring rule provides a measure of the quality of probabilistic
+predictions ([[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]] for instance)

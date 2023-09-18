@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       74220f65-10a4-4bf3-8f25-939c4b9dab99
+:END:
+#+title: Generative Artificial Intelligence
+#+filetags: :MachineLearning:
+
+[[id:46609399-4c07-4bf3-b50c-3d2d81143ee5][Diffusion Models]]
+[[id:fcf00225-0d0a-492a-a6f5-179fc401e1b3][Variational Autoencoders (VAE)]]
+[[id:6c75c874-18f9-401f-83b3-2350c5baccb1][Generative Adversarial Network]]
+[[id:a9d690bf-7692-4927-8eb8-a19481efc6ed][Bayesian Neural Networks]]

@@ -1,8 +1,9 @@
+
 :PROPERTIES:
 :ID:       fcf00225-0d0a-492a-a6f5-179fc401e1b3
 :ROAM_ALIASES: VAE
 :END:
-#+title: Variational Autoencoders (VAE)
+#+title: Variational AutoEncoders
 #+STARTUP: latexpreview
 #+filetags: :DimensionReduction:MachineLearning:AutoEncoders:
 
@@ -19,19 +20,64 @@ parameters.
 
 Say we have a family of functions $f(z; \theta) = f_\theta(z)$, which
 are parameterized by parameters $\theta$, such that the transformed
-samples of $Z$ are close to samples of $X$. More precisely, we introduce the density
-$p(X \mid z,theta)$
-and we try to maximize the probability of having the data set:
+samples of $Z$ are close to samples of $X$. More precisely, we
+introduce the density $p(X \mid z,theta)$ and we try to maximize the
+probability of having the data set:
 \begin{equation}
-p(x) = \int_\mathcal{Z} p(x \mid z,\theta) p(z) \,\mathrm{d}z
+p_\theta(x) = \int_\mathcal{Z} p(x \mid z,\theta) p(z) \,\mathrm{d}z
 \end{equation}
-and in VAE,
-$p(x\mid z, \theta) = \mathcal{N}(x, \mid f(z;\theta), \sigma^2 I)$
+and in VAE, $p(x\mid z, \theta) = \mathcal{N}(x, \mid f(z;\theta),
+\sigma^2 I)$
 
-* ELBO
+* Rewritten
+Let us consider some data $x\sim p(x)$ unknown.
+We wish to model parametrically $p$ using a set of parameters: $p_\theta$.
+Per Maximum Likelihood, we want to maximize $\theta \mapsto p_\theta$
+However, we can make the assumption that
+\begin{align}
+p_\theta(x) &= \int_\mathcal{Z} p_\theta(x, z) \,\mathrm{d}z \\
+&= \int_\mathcal{Z} p_\theta(x \mid z) p_\theta(z) \,\mathrm{d}z \\
+\end{align}
+  where $z$ is the latent (or encoded) variable.
+
+** Bayesian perspective
+   \begin{align}
+z \sim & p_\theta(z)  &\text{prior}\\
+x \mid z\sim & p(x \mid z)& \text{likelihood}\\
+z \mid x \sim & p(z \mid x) &\text{posterior}
+\end{align}
+The encoding relationship: $x \mapsto z$ means sampling from the posterior
+The decoding relationship $z \mapsto x$ means sampling from the likelihood ?
+
+** Variational approximation
+
+   The "posterior" is intractable in practice, and thus is approximated using $q_\phi$ such that
+   \begin{equation}
+q_\phi(z \mid x) \approx p(z \mid x)
+\end{equation}
+
+And we can choose
+\begin{equation}
+q_\phi = \mathcal{N}\left(\mu_{\phi}(x); \Sigma_{\phi}(x)\right)
+\end{equation}
+
+We can then use the [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] to measure how muxh $q_\phi$ differs from $p(z \mid x)$
+** ELBO
+\begin{align}
+\mathrm{D}_{\mathrm{KL}}\left(q_\phi \| p(\cdot \mid x)\right) &= \mathbb{E}_{z\sim q} \left[\log \frac{q_\phi(z)}{p(z \mid x)}\right] \\
+&= \mathbb{E}_{z\sim q} \left[\log q_\phi(z)\right] - \mathbb{E}_{z\sim q} \left[\log{p(z \mid x)}\right] \\
+&= \mathbb{E}_{z\sim q} \left[\log q_\phi(z)\right] - \mathbb{E}_{z\sim q} \left[ \log {p(z, x)}\right] +\mathbb{E}_{z\sim q} \left[ \log{p(x)}\right]  \\
+&= \underbrace{\mathbb{E}_{z\sim q} \left[\log q_\phi(z)\right] - \mathbb{E}_{z\sim q} \left[\log {p(z, x)}\right]}_{\text{-ELBO}} +\log {p(x)}  \\
+\end{align}
+Since the DKL is positive, we have
+\begin{equation}
+\log p(x) \geq \text{ELBO}
+\end{equation}
+
   
 
 * Latent space
-  We make the assumption that the latent variable are normally distributed $z \sim \mathcal{N}(0, I)$
+  We make the assumption that the latent variable are normally
+  distributed $z \sim \mathcal{N}(0, I)$
 
 

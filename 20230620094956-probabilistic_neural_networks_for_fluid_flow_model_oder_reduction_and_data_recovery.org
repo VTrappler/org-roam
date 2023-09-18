@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       26854a4a-3d1c-48ff-97f4-898b053006a0
+:END:
+#+title: Probabilistic Neural Networks for Fluid Flow Model-Oder Reduction and Data Recovery
+#+filetags: :MachineLearning:NeuralNetworks:LiteratureReview:
+
+* Abstract
+  Construct surrogate model of fluid flows using Probabilistic Neural
+  Networks, by assuming that the target is sampled from a Gaussian
+  distributino conditioned on the inputs.
+
+  Application to various test cases.
+
+  
+* Intro
+  [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] can be used to adress the challenges of [[id:48049025-95eb-4405-8b63-c846feb34ddf][Model order
+  reduction]].  "Intrusive" ROM depends on "resolution of a quadratic
+  nonlinearity in [[id:72d5a80d-e2b0-4ddf-b719-01cf0865f035][POD]] space", which is challenging in high dimension
+  and when dominated by advection type behavior"
+
+  Interpretable ML is complicated, since most are based on point
+  estimates of the weights in the NN, giving an answer in a
+  deterministic fashion.
+
+  One can use [[id:a9d690bf-7692-4927-8eb8-a19481efc6ed][Bayesian Neural Networks]] to adress this problem, and get
+  a distribution of the output instead of a point estimate. However,
+  even with [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Inference]], the cost is really high in deep
+  architecture, so many approximations have been developed.
+
+Here: [[id:c6849d61-638b-4f5c-8fb8-67cf58df24fe][Mixture Density Network]]
+
+
+* Probabilistic Neural Network
+Instead of having $\mathcal{F}: x \mapsto y(x)=y_p$, we can define instead $\mathcal{F}: x \mapsto (\mu(x), \sigma(x))$ such that
+$p(y_p \mid x) = \mathcal{N}(\mu(x), \sigma(x))$
+We can also introduce mixing coefficients in order to have a Mixture density network:
+
+\begin{equation}
+p(y_p \mid x) = \sum \pi_i(x) \mathcal{N}(\mu_i(x), \sigma_i^2(x))\,\quad \text{ with } \quad \sum_i \pi_i= 1.0
+\end{equation}
+
+* Parametric surrogates
+
+** Covariance matrix
+ We want to identify a vector space 
+ \begin{equation}
+ X^f = \mathrm{span}\{\vartheta^1, \dots, \vartheta^f\}
+ \end{equation}
+ in which we can approximate any snapshot $\vartheta^i$ wrt to $L_2$.
+ The snapshot matrix is
+ \begin{equation}
+ S = \left[\hat{q}_h^1 \mid \dots \mid \hat{q}_h^{N_s}\right] \in \mathbb{R}^{N_h \times N_s}
+ \end{equation}
+ where $\hat{q}_h^i$ is a centered snapshot (with mean removed).
+
+ The covariance matrix is $C = S^TS$, and we can diagonalize it:
+ \begin{equation}
+ CW = W \Lambda
+ \end{equation}
+ where $\Lambda = \mathrm{diag}(\lambda_1,\dots, \lambda_{N_s})$ and $W$ is the eigenvector matrix (of dim $N_s \times N_s$)
+
+** POD Basis matrix
+The POD basis matrix can be obtained by:
+\begin{equation}
+\vartheta = SW \in \mathbb{R}^{N_h \times N_s}
+\end{equation}
+and
+\begin{equation}
+X^f =\mathrm{span}\{\psi^1,\dots,\psi^{N_r}\}
+\end{equation}

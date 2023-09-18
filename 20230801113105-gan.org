@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       6c75c874-18f9-401f-83b3-2350c5baccb1
+:ROAM_ALIASES: "GAN"
+:END:
+#+title: Generative Adversarial Network
+

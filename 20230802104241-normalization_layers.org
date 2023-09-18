@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       b98ebba8-981b-421c-af36-9ddb400bb1a9
+:ROAM_ALIASES: "Group Normalization" "Instance Normalization" "Layer Normalization" "Batch Normalization"
+:END:
+#+title: Normalization Layers
+#+filetags: :NeuralNetworks:MachineLearning:
+
+Let us assume that we have an input of dimension $(b \times c \times (h \times w))$
+
+#+CAPTION: https://arxiv.org/pdf/1803.08494.pdf
+#+NAME:   fig:normalization_layer
+[[C:\Users\a846735\OneDrive - Atos\Images\normalization_layers.PNG]]
+
+* Batch Normalization
+
+  
+* Layer Normalization
+
+
+* Instance Normalization
+
+  
+* Group Normalization
