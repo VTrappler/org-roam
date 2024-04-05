@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       62ffbc10-f3c6-4841-80d1-0e9083e431ec
+:END:
+#+title: Multi-objective Design Optimization Using High-Order Statistics for CFD Applications
+#+filetags: :PostdocICJ:LiteratureReview:BayesianOptimization:
+
+
+[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] and [[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][Multi-Objective Optimization]]
+
+https://link.springer.com/chapter/10.1007/978-3-319-11541-2_7

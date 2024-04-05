@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       a1b6fb5e-a840-4f53-be3a-b231d37476c0
+:END:
+#+title: Feasible Improvement
+#+filetags: :BayesianOptimization:
+
+
+[[id:b4f7efb4-5894-46f4-a8ec-e34122443d86][Acquisition function]], quite similar to [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][Expected Hypervolume Improvement]] for solving Constrained Optimization problems.

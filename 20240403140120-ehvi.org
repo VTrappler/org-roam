@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       dfe83f64-7afa-4ea2-8123-81438b4c1f4d
+:ROAM_ALIASES: "Expected Hypervolume Improvement"
+:END:
+#+title: EHVI
+#+filetags: :MOO:BayesianOptimization:
+#+startup: latexpreview
+
+Used as an [[id:b4f7efb4-5894-46f4-a8ec-e34122443d86][Acquisition function]] in [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] for [[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][Multi-Objective Optimization]].
+
+
+* Hypervolume Indicator
+Let us assume that we have a finite approximation of a [[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][Pareto Front]]
+\begin{equation}
+\mathcal{P} = \{y^{(1)}\dots,y^{(n)}\} \subset \mathbb{R}^{d}
+\end{equation}
+The *Hypervolume Indicator* (HV) of $\mathcal{P}$ is defined as the $d$-dimensional Lebesgue measure of the subspace dominated by $\mathcal{P}$ and bounded from above by a reference point $r$:
+\begin{equation}
+HV(\mathcal{P}) = \lambda_d \left(\cup_i \left[y_i, r\right]\right)
+\end{equation}
+
+* Hypervolume Improvement

@@ -1,6 +1,8 @@
 :PROPERTIES:
 :ID:       e917a64a-41b6-4eac-a0b7-f4a6c0e6e239
+:ROAM_ALIASES: Kriging
 :END:
 #+title: Gaussian Processes
 
-Semi-non parametric regression method based on [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]
+Semi-non parametric regression method based on [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]:
+We assume a prior on an unknown function $f$.

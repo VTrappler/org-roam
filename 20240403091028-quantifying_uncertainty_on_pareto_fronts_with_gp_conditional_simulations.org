@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       e03a2ad1-7f71-4ec5-835a-620d1fd8466d
+:END:
+#+title: Quantifying uncertainty on Pareto fronts with GP conditional simulations
+#+filetags: :MOO:BayesianOptimization:LiteratureReview:
+#+startup: latexpreview
+* In short
+[[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][Multi-Objective Optimization]] is a challenging problem in practice. Metamodels based on [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] and [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] can be used in order to ease the computational burden of estimation, by using for instance [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][EHVI]]. Here, Kriging is used not only for selecting new points to evaluate, but also to estimate the whole Pareto front, and the uncertainty in its estimation, using [[id:927cff34-f103-4085-9b90-b443e2f0519f][Random Set Theory]]
+
+* Notations
+Let us assume that we have a set of objective functions $(f_i)_{1\leq i \leq m}$. Each of those function is assumed to be a sample path of a random field $Y_i$, defined as
+\begin{equation}
+Y_i(\cdot) = \mathbf{g}_i(\cdot) \beta_i + Z_i(\cdot)
+\end{equation}
+in the case of Universal Kriging.
+
+
+* Uncertainty Quantification
+We assume that a GP model has been estimated for each $f_i$ using a set of $n$ observations $\mathcal{A}_n$.
+
+** Conditional Pareto Front (CPF)
+   + We simulate a finite number $N$ of vector valued GP samples: $\left\{Y_1^{(1)},\dots,Y_m^{(1)}  \right\}$, up to $\left\{Y_1^{(N)},\dots,Y_m^{(N)}  \right\}$
+evaluated at some simulation points.
+   + Among those simulationed point, we select the *non-dominated* ones and associated simulated responses to get the *Conditional Pareto Sets and Fronts*
+   + Each of these CPF is composed of *non-dominated* points in the objective space: RNP
+   
+** Random Non-dominated Point (RNP) and Attained sets
+Sets of random vectors of $\mathbb{R}^m$, non-dominated wrt each other, and with random finite cardinality. Alternatively, the set of all objective vectors dominated by a RNP is called an *attained set*
+
+** Attainment function
+The probability for a given point in the *objective* space to be dominated by a RNP set $\mathcal{X}$ is the attainment function $\alpha_\mathcal{X}= \mathbb{P}\left[x \in \mathcal{Y}\right]$
+More details in [https://www.imada.sdu.dk/u/marco/EMAA/Talks/emaa06-fonseca.pdf]
+
+
+** Empirical Attainment function
+Given $\mathcal{Y}_1 \dots \mathcal{Y}_N$ samples of attained sets, the EAF is defined as
+\begin{equation}
+\hat{\alpha}_N(z)= \frac{1}{N}\sum^{N}_{i=1} \mathbf{1}_{\{z\in \mathcal{Y}_i\}}
+\end{equation}
+
+Attained sets may not be bounded, since dominated solutions can
+possibly made arbitrarly worse, so computing [[id:927cff34-f103-4085-9b90-b443e2f0519f][Vorobev]] expectation is
+not possible.  It is then necessary to define a reference point
+$\mathbf{R}$ to bound the integration domain.  In this case, the
+Lebesgue measure of an attained set wrt $\mathbf{R}$ is the
+[[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][Hypervolume Indicator]] of the corresponding RNP, say $I_H(\cdot,
+\mathbf{R})$ This reference point can be chosen as the maximum of each
+objective reached by other conditional simulations.

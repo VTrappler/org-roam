@@ -1,0 +1,121 @@
+:PROPERTIES:
+:ID:       da2c50c4-c597-4dc1-b67c-b5c7d594b8b1
+:END:
+#+title: Sampling Criterion for constrained Bayesian Optimization with uncertainties
+#+filetags: :PostdocICJ:LiteratureReview:BayesianOptimization:
+#+STARTUP: latexpreview 
+Links:
+https://arxiv.org/abs/2103.05706
+https://arxiv.org/pdf/2103.05706.pdf
+
+[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]]
+
+
+
+* Problem Formulation
+
+Let
+\begin{equation}
+\begin{array}{rcl}
+f:  S_X \times S_U &\longrightarrow& \mathbb{R} \\
+(x, \mathbf{u}) &\longmapsto & f(x, \mathbf{u})
+\end{array}
+\end{equation}
+and $\{(g_i(x, \mathbf{u}))\}_{1 \leq i \leq l}$ be a set of constraints. Let $x$ be freely chosen, while $\mathbf{u} \sim \mathbf{U}$ with pdf $\rho_{\mathbf{U}}$
+ We want to find $x$ which minimizes $f$, while $g_i<0$
+
+\begin{equation}
+\left\{
+\begin{array}{l}
+\min_{x \in S_x} \mathbb{E}[f(x, \mathbf{U})] \\
+\text{s.t. } \mathbb{P}\left[g_i(x, \mathbf{U}) \leq 0\right] \geq 1- \alpha
+\end{array}
+\right.
+\end{equation}
+This problem can be rewritten as a deterministic constained optimization problem:
+\begin{equation}
+\left\{
+\begin{array}{l}
+\min_{x \in S_x} z(x)
+{s.t. } c(x) \leq 0
+\end{array}
+\right.
+\end{equation}
+with $z(x) = \mathbb{E}\left[f(x, \mathbf{U})\right]$ and $c(x) = 1 - \alpha - \mathbb{E}\left[\mathbf{1}_{g_i(x, \mathbf{U}) \leq 0}\right]$
+
+* BO framework
+
+** GP definitions
+Constructing $z$ and $c$ is too expensive. Instead, [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] approximations of $f$ and the $g_i$ are constructed in the joint space $S_X \times S_U$:
+
+\begin{align}
+F(x, \mathbf{u}) &\sim \mathrm{GP}(m_F(x,\mathbf{u}),k_F(x,\mathbf{u},x',\mathbf{u}'))\\
+G_i(x, \mathbf{u}) &\sim \mathrm{GP}(m_{G_i}(x,\mathbf{u}),k_{G_i}(x,\mathbf{u},x',\mathbf{u}'))
+\end{align}
+
+We denote with a superscript ${}^{(t)}$ the GP conditioned on $t$ observations obtained on the design $D^{(t)}$.
+Based on this, and the linearity of the expectation, it follows that
+\begin{equation}
+Z^{(t)}(x) = \int_{S_U} F^{(t)}(x, \mathbf{u}) \rho_{\mathbf{U}}(\mathbf{u})\,\mathrm{d}\mathbf{u}
+\end{equation}
+is still a GP with
+
+\begin{align}
+m_Z^{(t)}(x) &= \int_{S_U} m_F^{(t)}(x, \mathbf{u}) \rho_{\mathbf{U}}(\mathbf{u})\, \mathrm{d}\mathbf{u} \\
+k_Z^{(t)}(x, x') &= \int_{S_U^2} k_F^{(t)}(x, \mathbf{u}, x', \mathbf{u}') \rho_{\mathbf{U}}(\mathbf{u})\rho_{\mathbf{U}}(\mathbf{u}')\, \mathrm{d}\mathbf{u} \,\mathrm{d}\mathbf{u}'
+\end{align}
+
+
+
+For the constraints:
+\begin{equation}
+C^{(t)}(x) = 1 - \alpha - \int_{S_X} \mathbf{1}_{\cap_i \{G_i(x,u) \leq 0\}} \rho_{U}(\mathbf{u}) \,\mathrm{d}\mathbf{u}
+\end{equation}
+but it is not Gaussian.
+
+** Progress measure
+The most popular progress measure for constrained optimization is the [[id:a1b6fb5e-a840-4f53-be3a-b231d37476c0][Feasible Improvement]]:
+\begin{equation}
+\mathrm{FI}^{(t)}(x) = \mathrm{I}^{(t)}(x) \mathbf{1}_{C^{(t)}(x) \leq 0}
+\end{equation}
+which is a rv and where
+$\mathrm{I}^{(t)}(x) = \left(z^{\mathrm{feas}}_{\min} - Z^{(t)}(x)\right)^+$ 
+
+Maximizing the Expected FI gives a target $x_{\mathrm{targ}}$, and the independence of the GP processes allow us to rewrite the EFI as
+\begin{equation}
+\mathrm{EFI}(x) = \mathbb{E}[\mathrm{FI}^{(t)}(x)] = \mathrm{EI}^{(t)}(x)\mathbb{P}\left[C^{(t)}(x) \leq 0\right]
+\end{equation}
+This make the EI appear which has an analytical form while the probability can be approximated using numerical methods.
+
+** Definition of the current feasible minimum $z^{\mathrm{feas}}_{\min}$
+$z$ is not observed so its value must be defined beforehand:
+we can choose the $z$ as the minimum of the mean response, such that the constraint is satisfied in expectation:
+\begin{equation}
+z^{\mathrm{feas}}_{\min} = \min_x m_Z^{(t)}(x) \text{ s.t. } \mathbb{E}\left[C^{(t)}(x)\right] \leq 0
+\end{equation}
+
+With Fubini, and if the constraints are conditionally independent given $x$ and $u$, we can rewrite the expectation of constraints as
+\begin{equation}
+\mathbb{E}\left[C^{(t)}(x)\right] = 1-\alpha - \int_{S_U} \prod_{i=1}^l \Phi \left(-\frac{m_{G_i}^{(t)}(x,u)}{\sigma_{G_i}^{(t)}(x,u)}\right) \rho_\mathbf{U} \mathrm{d}\mathbf{u}
+\end{equation}
+which is the integral of the product of Gaussian cdf.
+
+If the definition of $z^{\mathrm{feas}}_{\min}$ does not yield any solutions, ie  $\mathbb{E}\left[C^{(t)}(x)\right] > 0$, we choose the *most feasible* point in expectation:
+\begin{equation}
+z^{\mathrm{feas}}_{\min} = m_Z^{(t)}(x^{\mathrm{mf}})
+\end{equation}
+where
+\begin{equation}
+x^{\mathrm{mf}} = \mathrm{arg} \max_x \int \prod_{i=1}^{l}\mathbb{P}\left[G_{i}^{(t)}(x,\mathbf{u} )\leq 0\right] \rho_{\mathbf{U}}(\mathbf{u}) \,\mathrm{d}\mathbf{u}
+\end{equation}
+
+** Choosing the aleatoric parameter
+In classical SUR-based methods, the next point to evaluate is usually chosen as a minimizer of the variance of the targeted point:
+\begin{equation}
+(x_{t+1}, u_{t+1}) = \mathrm{arg} \min_{x, u} \mathbb{V}\mathrm{ar}\left[I^{(t+1)}(x_\mathrm{targ})\mathbf{1}_{C^{(t+1)}(x_\mathrm{targ}) \leq 0}\right]
+\end{equation}
+where the superscript ${}^{(t+1)}$ refer to the updated quantity, when the point $x, u$ is observed.
+
+However, the authors of [23] noted that in practice, $x_{\mathrm{targ}}$ is close to the solution $x_{t+1}$. Making the assumption of equality, the optimization is easier, since it happens in a lower dimensional space. However, the variance of the feasible improvement is still difficult to evaluate.
+
+* Introducing a different sampling criterion

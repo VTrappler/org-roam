@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       dd3f58ae-558d-487b-9dd3-620c75c7f4f3
+:ROAM_ALIASES: "Pareto Front"
+:END:
+#+title: Multi-Objective Optimization
+#+filetags: :MOO:
+
+Multiobjective [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] aims at finding the Pareto-optimal
+solution of a problem, or at least finding non-dominated objective
+vectors as close as possible to the true underlying Pareto front,
+creating a discrete approximation sometimes called a Pareto front
+approximation.
+
+* Notations
+** Preorder
+Let us consider the problem of multi objective minimization: Let $f(x) = (f_1(x),\dots,f_n(x))$
+each one of those is a scalar function we want to minimize.
+A point $y'=(y'_1,\dots,y'_n)$ is said to *dominate* another point $y=(y_1,\dots,y_n)$ if
+\begin{equation}
+\forall i, y'_i \leq y_i
+\end{equation}
+and we can write $y' \prec y$
+In the search space, similar definition can be made:
+$x'$ dominates another $x$ if
+\begin{equation}
+\forall i, f_i(x') \leq f_i(x)
+\end{equation}
+ and $x' \prec_{f} x$
+
+ The set of non-dominated points $x$ is the *Pareto set*, and its image by $f$ is called the *Pareto front* 
+
+ 

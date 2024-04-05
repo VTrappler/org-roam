@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       3bd1a81b-4dee-47c8-9820-e0d494fe40ef
+:END:
+#+title: Coupling and selecting constraints in Bayesian optimization under uncertainties
+#+filetags: :PostdocICJ:LiteratureReview:BayesianOptimization:
+
+[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]]

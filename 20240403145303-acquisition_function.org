@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       b4f7efb4-5894-46f4-a8ec-e34122443d86
+:END:
+#+title: Acquisition function
+
