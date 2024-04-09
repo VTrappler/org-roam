@@ -20,3 +20,17 @@ HV(\mathcal{P}) = \lambda_d \left(\cup_i \left[y_i, r\right]\right)
 \end{equation}
 
 * Hypervolume Improvement
+Set of points $\mathcal{P}'$': the Hypervolume improvement (HVI) wrt an existing Pareto frontier $\mathcal{P}$ and $r$ is defined as
+\begin{equation}
+\mathrm{HVI}\left(\mathcal{P}' \mid \mathcal{P}, r\right) = \mathrm{HV}\left(\mathcal{P} \cup \mathcal{P}' \mid r\right) - \mathrm{HV}\left(\mathcal{P}\mid r\right)
+\end{equation}
+
+Hypervolume computations can be hard to do, with super polynomial complexity in the number of objectives.
+
+
+* Expected HVI
+Function values at an unobserved point is unknown, so the HVI as well. We have however the posterior distribution if the function is modelled using[[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][ Gaussian Processes]], say $F$
+At a new point $x$, $F(x)$ is a rv, and thus $\mathrm{HVI}(\mathcal{P} \cup \{F(x)\})$ is a rv as well.
+\begin{equation}
+\mathrm{EHVI}(x) = \mathbb{E}_{F(x)}\left[\mathrm{HVI}(\mathcal{P} \cup \{F(x)\}\right] = \int_{\mathbb{R}^d}\mathrm{HVI}(\mathcal{P}\cup\{F(x)\})\cdot p(F)\,\mathrm{d}F
+\end{equation}

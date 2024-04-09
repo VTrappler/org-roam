@@ -27,6 +27,7 @@ $x'$ dominates another $x$ if
 \end{equation}
  and $x' \prec_{f} x$
 
- The set of non-dominated points $x$ is the *Pareto set*, and its image by $f$ is called the *Pareto front* 
-
- 
+ The set of non-dominated points $x$ is the *Pareto set*, and its image by $f$ is called the *Pareto front*
+** Remarkable points
++ Nadir objective vector: $(\max f_1, \dots, \max f_n)$
++ Ideal objective vector: $(\min f_1, \dots, \min f_n)$

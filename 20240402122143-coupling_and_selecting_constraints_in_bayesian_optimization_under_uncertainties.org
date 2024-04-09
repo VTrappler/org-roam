@@ -2,6 +2,55 @@
 :ID:       3bd1a81b-4dee-47c8-9820-e0d494fe40ef
 :END:
 #+title: Coupling and selecting constraints in Bayesian optimization under uncertainties
-#+filetags: :PostdocICJ:LiteratureReview:BayesianOptimization:
+#+filetags: :Output as input:PostdocICJ:LiteratureReview:BayesianOptimization:
+#+LATEX_HEADER: \newcommand{\Ex}{\mathbb{E}} \newcommand{\Pr}{\mathbb{P}}
+* In short
+ + Problem: Constrained optimization of a function, where both the objective and the constraints are affected by uncertainties: Minimization of the mean of a stochastic function under chance constraints.
+ + Joint space formulation, use of [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] for[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][ Bayesian Optimization]]
+ + Two steps [[id:b4f7efb4-5894-46f4-a8ec-e34122443d86][Acquisition function]] is provided
+ + *Main contribution*: output as input encoding to correlate the constraints of the GP.
+   1) Account for couplings between constraints through *output as input* formulation
+   2) When objective and constraints are calculated with different codes: they can be refined independently in the random search space.
+   3) Allow the optimization algorithm to select at each iteration the constraint that provides the most information about the location of the optimum.
+* Multi-output GP
+Instead of independent models, we can construct a single multi output GP, in order to take into account the correlations to improve in turn the accuracy.
++ Output as Input
+Index input added to designate selected constraint (a bit different from most other work, which define a hierarchical relations between modelled fields)
++ Chances constraintes are aggregated through the expected [[id:a1b6fb5e-a840-4f53-be3a-b231d37476c0][Feasible Improvement]].
 
-[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]]
+* Problem formulation
+Joint space $S_X$ and $S_U$, where $x$ is the design variable, and $U$ rv with support $S_U$ and pdf $\rho_U$.
+Optimisation problem:
+\begin{align}
+\text{Find }& x^* = \mathrm{arg}\min_{x\in S_X} \mathbb{E}_U\left[f(x, U)\right]\\
+\text{Such that }& \mathbb{P}_{U}\left[g_p(x^*, U) \leq 0, \forall p\right] \geq 1- \alpha
+\end{align}
+Which can be rewritten as $1-\alpha - \mathbb{E}_U\left[\mathbf{1}_{\{g_i(x,U)\leq 0\}}\right] \leq 0$
+* GP formulations
+\begin{align}
+F(x,u) &\sim \mathrm{GP}\left(m_F(x,u);k_F((x,u), (x',u')\right) \\
+G(x,u) = \begin{pmatrix}G_1(x,u) \\ \vdots \\ G_l(x,u)\end{pmatrix} &~ \mathrm{GP}\left(m_G(x,u), k_G((x,u), (x',u')\right)
+\end{align}
+$k_F$ is scalar valued, $k_G$ is matrix valued.
+** Conditioned GPs
+\begin{align}
+m_F^{(t)}(x,u) &= m_F + \mathbf{k}_F(x,u)\mathbf{K}^{-1}_F(f^{(t)} - m_F) \\
+k_F^{(t)}((x,u), (x',u')) &= k_F((x,u), (x',u')) - \mathbf{k}_F(x,u)\mathbf{K}_F^{-1}\mathbf{k}_F^T(x',u')
+\end{align}
+with $\mathbf{k}_F(x,u) = (k_F(x,u, x^{(1)}, u^{(1)},\dots, k_F(x,u, x^{(t)}, u^{(t)})))$.
+
+Same goes for the constraints:
+\begin{align}
+m_G^{(t)}(x,u) &= m_G(x,u) + \K_G(x,u; \mathcal{D}^{(t)})(\mathbf{K}_{\mathbf{G}}(\mathcal{D}^{(t)}, \mathcal{D}^{(t)})^{-1}(g^{(t)} - M_G) \\
+\mathbf{K}_G^{(t)}(x,u; x',u') &= \mathbf{K}_G(x,u; x',u') -\mathbf{K}_G(x,u; \mathcal{D}^{(t)})\mathbf{K}_G(\mathcal{D}^{(t)}; \mathcal{D}^{(t)})^{-1} \mathbf{K}_G(x',u'; \mathcal{D}^{(t)})
+\end{align}
+
+where $\mathbf{K}_G(x,u,\mathcal{D}^{(t)})$ is the $l\times tl$ matrix containing the covariance values over  the $l$ outputs between the sample $x,u$ and the training data set.
+** Output as input
+Add a nominal integer variable ranging from $1$ to $l$:
+we add a input $p$ such that the kernel
+\begin{equation}
+k_G^{oai}((x,u,p), (x',u',p')): (S_X \times S_U \times \mathbb{N})\times (S_X \times S_U \times \mathbb{N}) \rightarrow \mathbb{R}
+\end{equation}
+* Robust Bayesian Optimization
+The authors propose to use the [[id:a1b6fb5e-a840-4f53-be3a-b231d37476c0][Feasible Improvement]]

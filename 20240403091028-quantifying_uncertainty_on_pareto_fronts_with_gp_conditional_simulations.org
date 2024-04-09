@@ -4,6 +4,7 @@
 #+title: Quantifying uncertainty on Pareto fronts with GP conditional simulations
 #+filetags: :MOO:BayesianOptimization:LiteratureReview:
 #+startup: latexpreview
+
 * In short
 [[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][Multi-Objective Optimization]] is a challenging problem in practice. Metamodels based on [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] and [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] can be used in order to ease the computational burden of estimation, by using for instance [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][EHVI]]. Here, Kriging is used not only for selecting new points to evaluate, but also to estimate the whole Pareto front, and the uncertainty in its estimation, using [[id:927cff34-f103-4085-9b90-b443e2f0519f][Random Set Theory]]
 
@@ -13,7 +14,6 @@ Let us assume that we have a set of objective functions $(f_i)_{1\leq i \leq m}$
 Y_i(\cdot) = \mathbf{g}_i(\cdot) \beta_i + Z_i(\cdot)
 \end{equation}
 in the case of Universal Kriging.
-
 
 * Uncertainty Quantification
 We assume that a GP model has been estimated for each $f_i$ using a set of $n$ observations $\mathcal{A}_n$.
@@ -31,18 +31,16 @@ Sets of random vectors of $\mathbb{R}^m$, non-dominated wrt each other, and with
 The probability for a given point in the *objective* space to be dominated by a RNP set $\mathcal{X}$ is the attainment function $\alpha_\mathcal{X}= \mathbb{P}\left[x \in \mathcal{Y}\right]$
 More details in [https://www.imada.sdu.dk/u/marco/EMAA/Talks/emaa06-fonseca.pdf]
 
-
 ** Empirical Attainment function
 Given $\mathcal{Y}_1 \dots \mathcal{Y}_N$ samples of attained sets, the EAF is defined as
 \begin{equation}
 \hat{\alpha}_N(z)= \frac{1}{N}\sum^{N}_{i=1} \mathbf{1}_{\{z\in \mathcal{Y}_i\}}
 \end{equation}
 
-Attained sets may not be bounded, since dominated solutions can
-possibly made arbitrarly worse, so computing [[id:927cff34-f103-4085-9b90-b443e2f0519f][Vorobev]] expectation is
-not possible.  It is then necessary to define a reference point
-$\mathbf{R}$ to bound the integration domain.  In this case, the
-Lebesgue measure of an attained set wrt $\mathbf{R}$ is the
-[[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][Hypervolume Indicator]] of the corresponding RNP, say $I_H(\cdot,
-\mathbf{R})$ This reference point can be chosen as the maximum of each
-objective reached by other conditional simulations.
+Attained sets may not be bounded, since dominated solutions can possibly made
+arbitrarly worse, so computing [[id:927cff34-f103-4085-9b90-b443e2f0519f][Vorobev]] expectation is not possible. It is then
+necessary to define a reference point $\mathbf{R}$ to bound the integration
+domain. In this case, the Lebesgue measure of an attained set wrt $\mathbf{R}$
+is the [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][Hypervolume Indicator]] of the corresponding RNP, say $I_H(\cdot, \mathbf{R})$
+This reference point can be chosen as the maximum of each objective reached by
+other conditional simulations.

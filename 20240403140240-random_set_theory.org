@@ -3,7 +3,7 @@
 :ROAM_ALIASES: Vorobev
 :END:
 #+title: Random Set Theory
-
+#+startup: latexpreview
 
 Let $\mathcal{Y}$ be a random closed set on a topological space $D\subset \mathbb{R}^m$ (with euclidian distance). Let $\mu$ be the Lebesgue measure on $\mathbb{R}^m$
 * Coverage function

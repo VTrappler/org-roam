@@ -2,7 +2,7 @@
 :ID:       da2c50c4-c597-4dc1-b67c-b5c7d594b8b1
 :END:
 #+title: Sampling Criterion for constrained Bayesian Optimization with uncertainties
-#+filetags: :PostdocICJ:LiteratureReview:BayesianOptimization:
+#+filetags: :EFISUR:PostdocICJ:LiteratureReview:BayesianOptimization:
 #+STARTUP: latexpreview 
 Links:
 https://arxiv.org/abs/2103.05706
@@ -85,7 +85,7 @@ Maximizing the Expected FI gives a target $x_{\mathrm{targ}}$, and the independe
 \begin{equation}
 \mathrm{EFI}(x) = \mathbb{E}[\mathrm{FI}^{(t)}(x)] = \mathrm{EI}^{(t)}(x)\mathbb{P}\left[C^{(t)}(x) \leq 0\right]
 \end{equation}
-This make the EI appear which has an analytical form while the probability can be approximated using numerical methods.
+This makes the EI appear which has an analytical form while the probability can be approximated using numerical methods.
 
 ** Definition of the current feasible minimum $z^{\mathrm{feas}}_{\min}$
 $z$ is not observed so its value must be defined beforehand:
@@ -119,3 +119,10 @@ where the superscript ${}^{(t+1)}$ refer to the updated quantity, when the point
 However, the authors of [23] noted that in practice, $x_{\mathrm{targ}}$ is close to the solution $x_{t+1}$. Making the assumption of equality, the optimization is easier, since it happens in a lower dimensional space. However, the variance of the feasible improvement is still difficult to evaluate.
 
 * Introducing a different sampling criterion
+\begin{equation}
+S(\tilde{x}, \tilde{u}) = \mathbb{V}\mathrm{ar}\left[I^{{(t+1)}}(x_{\mathrm{targ}})\right] \int_{\mathbb{R}^{m}} \mathbb{V}\mathrm{ar}\left[\mathbf{1}_{\cap_{i} \left\{G_{i}^{{(t+1)}}(x_{\mathrm{targ}}, \mathbf{u}) \leq 0\right\}}\right]\rho_{\mathbf{U}}(\mathbf{u})\mathrm{d}\,\mathbf{u}
+\end{equation}
+The first part of the above expression means that the sampling will try to reduce the uncertainty in the improvement, while the second part focuses on the averaged predicted feasibility variance.
+
+Variance of feasibility or variance of the constraints ?
+Variance of the constraints does not matter, only matters the fact that it is verified or not, so we want to reduce the uncertainty on the *feasibility*, thus reducing the variance of the Bernoulli rv $\mathbf{1}_{\cap_{i} \left\{G_{i}^{{(t+1)}}(x_{\mathrm{targ}}, \mathbf{u}) \leq 0\right\}}$
