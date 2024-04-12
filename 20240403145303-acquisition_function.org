@@ -3,3 +3,10 @@
 :END:
 #+title: Acquisition function
 
+* Multiobjective
+
+** Based on Hypervolume
+Seek to expand volume of objective space dominated by the Pareto frontier: [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][EHVI]]
+
+
+** Based on Entropy

@@ -69,10 +69,9 @@ k_Z^{(t)}(x, x') &= \int_{S_U^2} k_F^{(t)}(x, \mathbf{u}, x', \mathbf{u}') \rho_
 
 For the constraints:
 \begin{equation}
-C^{(t)}(x) = 1 - \alpha - \int_{S_X} \mathbf{1}_{\cap_i \{G_i(x,u) \leq 0\}} \rho_{U}(\mathbf{u}) \,\mathrm{d}\mathbf{u}
+C^{(t)}(x) = 1 - \alpha - \int_{S_X} \mathbf{1}_{\cap_i \{G_i(x,u) \leq 0\}} \rho_{U}(\mathbf{u}) \,\mathrm{d}\mathbf{u}= 1- \alpha - \mathbb{P}_U\left[G_i(x,u) \leq 0\right]
 \end{equation}
 but it is not Gaussian.
-
 ** Progress measure
 The most popular progress measure for constrained optimization is the [[id:a1b6fb5e-a840-4f53-be3a-b231d37476c0][Feasible Improvement]]:
 \begin{equation}
@@ -91,7 +90,7 @@ This makes the EI appear which has an analytical form while the probability can 
 $z$ is not observed so its value must be defined beforehand:
 we can choose the $z$ as the minimum of the mean response, such that the constraint is satisfied in expectation:
 \begin{equation}
-z^{\mathrm{feas}}_{\min} = \min_x m_Z^{(t)}(x) \text{ s.t. } \mathbb{E}\left[C^{(t)}(x)\right] \leq 0
+z^{\mathrm{feas}}_{\min} = \min_x m_Z^{(t)}(x) \quad \text{ s.t. } \mathbb{E}\left[C^{(t)}(x)\right] \leq 0
 \end{equation}
 
 With Fubini, and if the constraints are conditionally independent given $x$ and $u$, we can rewrite the expectation of constraints as
