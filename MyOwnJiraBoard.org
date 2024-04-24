@@ -1,0 +1,404 @@
+#+title: My Jira Board
+#+author: Victor Trappler (a846735)
+#+date: 2023:01:27
+#+startup: show1levels
+
+* Administrative stuff
+** DONE Post Poster on HAL
+** DONE [#C] Liège Reimbursement
+** DONE [#A] mail for next week MLarchi
+** DONE [#A] Submit Abstract ISDA   
+** DONE Bologna registration
+   
+* Research stuff  
+** Workflow and organisation
+*** DONE Continue using org roam to write notes
+*** DONE Refactor DA_PoC (dedicated branch)
+*** DONE Use DVC
+*** DONE Refactor GNLearning
+**** DONE Refactor hp_tuning_cli.py
+***** DONE Fixed absolute path using os.path.join
+**** CANCELED Use MLFlow/Dagshub for exp tracking ?
+**** DONE Use MLflow for experiment tracking
+     
+     
+** Preconditioners for Data Assimilation
+***  Compatibility with DA with background 
+**** TODO [#B] Validity of priorconditioner
+***** Train on GtG ? Assume B^0.5 G^TGB^0.5 + I directly ?
+*** Test Cases
+**** TODO [#C] Configuration in Bousserez Paper for high dimensional Lorenz
+**** TODO [#A] Lorenz 100 split preconditioner
+**** DOING [#A] Lorenz 40 window 20 split
+**** DONE [#A] Shallow water Configuration
+**** DONE [#A] Implement Linear Operators H, B, R to perform DA using operators
+*** DONE Work on the pseudo online-training of SVD/Preconditioners
+*** Architecture ideas
+**** DONE Conv layers 
+**** DONE Output as a vector with r features instead of fully agnostic
+*** Misc
+**** POSTPONED Push gif of training on MLFlow during training
+**** 
+*** TODO Housekeeping in git
+     
+** POSTPONED ML4DynSys (23/05/2023)
+*** POSTPONED Organize workshop
+**** Scope: : https://semestriel.framapad.org/p/ml4dynsys-9zq8?lang=fr#L1
+***** emmanuel.johnson@univ-grenoble-alpes.fr
+***** marc.schouler@inria.fr ?
+      
+** POSTPONED DARLing
+*** POSTPONED Set up and experiment with DARLing
+*** Graph input for observations ?
+    
+
+** WAITING [#C] RegretGP
+*** DONE Write scripts to make diagnostics directly
+*** POSTPONED Verify with Branin if it works well ?
+*** POSTPONED BOTorch ?
+   
+    
+** WAITING [#C] Dimension Reduction
+*** What about in the NF process: look for a sequence of $(\sigma_i)$ decreasing in certain fashion, to account for explained variance in latent space.
+**** Does it even make sense ?
+     
+     
+* Future
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
+*** UQ
+**** UQGroup (Boston, US)
+***** Contact: Youssef Marzouk
+**** DTU (Copenhagen, DK)
+***** CANCELED Mathematical Analysis and Statistical Learning for Uncertainty Quantification for Inverse Problems
+****** DONE Ask for later starting date for Postdoc at DTU
+****** [[https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/1265/?utm_medium=jobshare][Link to job posting]]
+****** Starting date cannot be after September 1st :(
+**** ETH Zürich (Zürich, CH)
+***** https://sudret.ibk.ethz.ch/the-chair/jobs.html
+**** TU Eindhoven (Eindhoven, NL)
+***** Contact: Olga Mula (via clémentine ?)
+***** https://data-driven.pages.tue.nl/
+**** CEA (Cadarache, FR)
+***** Contact: Amandine Marrel ?
+**** TUM (Munich, DE)
+***** More UQ: https://www.math.cit.tum.de/math/forschung/gruppen/scientific-computing-uncertainty-quantification/
+****** Contact: Prof. Dr. Elisabeth Ullmann + Martin Schreiber
+***** More ML: https://www.cs.cit.tum.de/daml/startseite/
+**** Rosanna Arcucci (Imperial College, UK)
+**** ECL (Lyon, FR)
+***** Apply to postdoc on OUU ?
+*** Applied Oceano/DA
+**** JCSDA (Boulder, US)
+***** Arthur ? -> Yannick Trémolet
+***** DONE Contact by email
+**** CEC/MERGE (Lund, SE)
+***** https://www.cec.lu.se/research/research-groups/uncertainty-and-evidence-lab
+***** https://www.cec.lu.se/ullrika-sahlin
+***** 
+**** ECMWF (Bonn, DE)
+***** DONE Ask for Charles Pelletier's mail adress to enquire about ECMWF
+***** DONE Enquire about ECMWF to Charles
+***** TODO Apply to job Scientist/Engineer for Machine Learning: https://jobs.ecmwf.int/Job/JobDetail?JobId=155:  
+****** deadline: 17/09/2023
+****** Responsabilities
+******* 
+****** Statement of Motivation:
+*******  Please include a summary explaining why you are applying for this vacancy:
+	
+*******  Please outline how you meet the job criteria:
+*******  If applicable, please include details of any scientific publication list here.
+*******  If there is information relevant to your application that we should be aware of, please include here
+****** Applications Questions
+******* Why are you enthusiastic about Machine Learning in Weather Forecasting?
+	Recent advances in data driven modelling of earth system has
+	shown that the latest architectures (such as GNN and
+	transformers), and given enough data, can produce accurate
+	weather predictions, for a fraction of the computational
+	resources (excluding the training). This helps
+	Taking into account the uncertainty is done more and more in regression tasks, as new tools emerge such as VAE, or BNN.
+******* How do your skills and experience meet our job criteria and help ECMWF meet its ML objectives?
+******* Please provide links of your significant contributions to git (or similar).
+******* If there is any information that you want us to be aware of and that is not covered elsewhere in your application please include here.
+******* We are looking for exceptional candidates who fit one or more of the following roles. Please select that one(s) you think you fit best and would like to be considered for (multiple selections possible): 
+******** CANCELED ML Engineer (No)
+******** TODO Observations and DA expert (to interface observations with ML algorithms)
+******** TODO ML Scientist (working to make future earth system predictions from observation data)
+******** TODO ML Scientist (working on accurate precipitation predictions with generative ML)
+
+	 
+***** TODO Apply to Scientist - Uncertainty Quantification for Destination Earth https://jobs.ecmwf.int/Job/JobDetail?JobId=156
+
+****** Responsabilities:
+******* Apply machine learning models and techniques to support uncertainty quantification for the weather-induced extremes Digital Twin 
+******* Develop verification techniques to evaluate the accuracy and physical and spatial consistency of uncertainty information in generated forecasts 
+******* Develop and test complex workflows in advanced digital technology environments on some of the largest computing and data handling infrastructures in Europe 
+******* Contribute to regular progress reports to the European Commission and supporting procured activities within DestinE
+****** Skills:
+******* experience with python for large datasets
+******* ML for earth system science
+******* PyTorch
+******* Generative Modelling: GAN, VAE, Diffusion models
+******* Meteorology and ensemble methods
+
+****** Statement of Motivation:
+*******  Please include a summary explaining why you are applying for this vacancy:
+	ECMWF is a world leader in numerical weather predictions, and
+	the Destination Earth has the potential to.  On the technical
+	aspect, the technical challenges that are to be tackled to
+	construct such a digital twin. Recently, ML based systems are
+	able to produce fast and accurate predictions, compared to
+	traditional NWP systems.
+*******  Please outline how you meet the job criteria:
+*******  If applicable, please include details of any scientific publication list here.
+*******  If there is information relevant to your application that we should be aware of, please include here
+
+****** Applications Questions:
+******* Why are you enthusiastic about Uncertainty Quantification in Weather Forecasting?:
+	I think that being able to take into account uncertainties,
+	and thus having a probabilistic view of systems is crucial in
+	many applications, especially for forecasts. Point estimates
+	are useful but often represent only a central tendency:
+	getting access to the whole predictive distributions carry
+	much more information. But being able to accurately quantify
+	the tails of the prediction distributions is not a trivial
+	task, especially when the numbers of ensemble members is
+	limited.
+
+
+Moreover, in a climate change
+	context, extreme events play an increasingly important role
+	with high social and societal impact, which explains the need
+	to be able to predict them.  Traditional uncertainty
+	quantification tools are difficult to apply to geophysical
+	problems, partly due to the complexity of the solvers, the
+	dimensionality of the quantity of interest, but ML may bring
+	new tools to tackle this kind of problems, as it did in other
+	fields.
+
+Ensemble members for instance allows to understand more closely which
+	phenomenon are well predicted, or how some uncertainties are
+	propagated through time.
+	
+******* How do your skills and experience meet our job criteria and help ECMWF meet its ML objectives?
+	During my PhD, I worked on optimization under uncertainties,
+	in order to get a point estimate which is robust (in some
+	sense) to aleatoric external uncertainties, so I had the
+	chance to familiarize myself with the field of Uncertainty
+	Quantification in the general sense. From a computational
+	point of view, all the code developed during the PhD was in
+	Python, using Numpy and scikit-learn for Gaussian Processes.
+
+	For my postdoc, 
+	
+******* Please provide a list of examples (preferably with links to code or publications) where you have applied ML methods within Earth System Science.
+***** 
+**** EUMETSAT (Darmstadt, DE)
+**** NERSC (Bergen, NO)
+***** TODO [#B] Contact ?: Julien Brajard ?
+***** https://www.data-assimilation.no/
+***** https://www.nersc.no/about/opportunities
+**** IMT Atlantique
+***** R. Fablet
+***** https://cia-oceanix.github.io/
+*** Other/Unsure
+**** IRT St Exupery (Toulouse, FR)
+***** Matthias De Lozzo
+***** Reda El Amri
+**** Météo France
+***** Laure Raynaud
+***** François Bouyssel
+***** Matthieu Plu
+* Tasks
+ * Fix problems in pipeline for loading of models etc
+ * Reproduce exp on CG with 2 days of lead time
+ * get back on regretGP ?
+ * 
+
+* 2023
+  :PROPERTIES:
+  :VISIBILITY: folded
+  :END:
+** 2023-06 juin
+*** 2023-06-02 vendredi
+**** experiments on lorenz 100 -> convolutional svd decomposition with lowrank norm learning :GNlearning:
+   Entered on [2023-06-02 ven. 10:31]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*Tasks][Tasks]]
+**** shallow water linear tangent finally working                :GNlearning:
+   Entered on [2023-06-02 ven. 13:19]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*experiments on lorenz 100 -> convolutional svd decomposition with lowrank norm learning][experiments on lorenz 100 -> convolutional svd decomposition with lowrank norm learning]]
+**** Added in test.ipynb gn matrix                               :GNlearning:
+    
+   Entered on [2023-06-02 ven. 16:58]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*shallow water linear tangent finally working][shallow water linear tangent finally working]]
+
+*** 2023-06-05 lundi
+**** why is it more difficult for Lorenz100 ?                    :GNlearning:
+   Entered on [2023-06-05 lun. 11:26]
+
+*** 2023-06-06 mardi
+**** use cma es to optimize and get m_star                         :regretGP:
+   Entered on [2023-06-06 mar. 10:08]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::+title: My Jira Board]]
+
+*** 2023-06-07 mercredi
+**** Snippet for moviepy                                            :snippet:
+     #+begin_src python
+       from moviepy.editor import ImageSequenceClip, VideoClip
+       from moviepy.video.io.bindings import mplfig_to_npimage
+       import tqdm
+       # duration = 20
+
+       def make_frame(t):
+	   fig, ax = plt.subplots()
+	   model.plot_from_control(current_state, title=t)
+	   npi = mplfig_to_npimage(fig)
+	   plt.close()
+	   return npi
+
+       # animation = VideoClip(lambda t: make_frame(t, np.random.normal(size=zero_control.shape)), duration=duration)
+       # animation.ipython_display(fps=20, loop=True, autoplay=True)
+
+
+       current_state = zero_control.copy()
+       img_seq = []
+       for t in tqdm.trange(200):
+	   current_state = model.direct(current_state, 2000)
+	   model.plot_from_control(current_state, title=t)
+	   img_seq.append(make_frame(t))
+
+       animation = ImageSequenceClip(img_seq, fps=10)
+       animation.ipython_display(fps=10, loop=True, autoplay=True)
+     #+end_src
+
+   Entered on [2023-06-07 mer. 14:30]
+**** Keybinding for org tags C-c C-q                                :snippet:
+   Entered on [2023-06-07 mer. 14:33]
+
+*** 2023-06-14 mercredi
+**** Work on 4DVar incremental optimization for Shallow water using pylops' CG
+   Entered on [2023-06-14 mer. 11:45]
+**** Should implement linear operators H, R and B
+   Entered on [2023-06-14 mer. 12:20]
+
+*** 2023-06-15 jeudi
+**** Make adjoint/TLM  tests in ipynb
+   Entered on [2023-06-15 jeu. 10:47]
+
+*** 2023-06-21 mercredi
+**** Start WG UQ                                                      :WG:UQ:
+***** Exaucé: différentes méthodes: échanges et discuter
+***** Christophe: comprendre l'intérêt sur USE-CAse + mise en application
+***** Victor: Appliquer méthodes sur use case pour first-hand experience
+***** Luca: Voir ce que on peut faire ?
+***** Hugues: On va voir ce que ça va donner
+**** How to define define metrics evaluer les distributions prédictives ?
+**** Application on Von Karman Street Vortex with Hugues' code:
+***** Travail sur les métriques de validation
+****** Mise en place du modèle
+****** A partir du dataset: étude préliminaire (POD)
+****** Objectifs:
+******* Mean Variance Estimation: reproduire résultats
+******* MDN
+******* BNN in all flavors
+***** Von Karman:
+***** Orion90
+     
+    Entered on [2023-06-21 mer. 14:11]
+
+*** 2023-06-22 jeudi
+**** Baie de stockage:                                              :snippet:
+     #+begin_src
+     /net/172.16.118.188/data/ai4sim
+     #+end_src
+
+     Entered on [2023-06-22 jeu. 11:32]
+
+*** 2023-06-28 mercredi
+**** Chabot variational data assimilation
+   Entered on [2023-06-28 mer. 11:10]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*Contacts:][Contacts:]]
+     
+** 2023-07 juillet
+*** 2023-07-04 mardi
+**** Residual norm of CG does not converge monotonically. 
+   Entered on [2023-07-04 mar. 14:42]
+  
+**** Preconditioning seems to do nothing ??!!
+   Entered on [2023-07-04 mar. 14:43]
+  
+**** why gpytorch so slow for anything on FMLE ?
+   Entered on [2023-07-04 mar. 14:44]
+  
+*** 2023-07-05 mercredi
+**** Found a paper that deals with stopping criteria, even with preconditioning https://www.ljll.math.upmc.fr/~frey/cours/references/Arioli%20M.,%20A%20stopping%20criterion%20for%20the%20CG%20algorithm.pdf
+   Entered on [2023-07-05 mer. 10:27]
+
+*** 2023-07-17 lundi
+**** Scaling arbitrarily the norm of output vectors might be a way to reduce numerical issues
+   Entered on [2023-07-17 lun. 11:16]
+
+*** 2023-07-18 mardi
+**** Apprentissage online ? avec un buffer ? pour l'estimation de paramètres :exaucé:
+     
+   Entered on [2023-07-18 mar. 13:55]
+  
+*** 2023-07-19 mercredi
+**** BBDC-MzYxNTk5NjgyMDIwOoZ8a35+43XX3vucNCodxlCQKlFE bitbucket    :snippet:
+   Entered on [2023-07-19 mer. 14:07]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*BBDC-MzYxNTk5NjgyMDIwOoZ8a35+43XX3vucNCodxlCQKlFE bitbucket][BBDC-MzYxNTk5NjgyMDIwOoZ8a35+43XX3vucNCodxlCQKlFE bitbucket]]
+**** Incertitudes pour champ reconstruit, MC pour nb composantes > 1 + représentation, LITERATE PROGRAMMING (Représentation implicite) ? :UQ:
+   Entered on [2023-07-19 mer. 14:07]
+
+*** 2023-07-25 mardi
+**** 3 méthodes de bases pour représenter une distribution
+***** Mélange Gaussiennes
+***** NF
+***** Processus Gaussiens pour la postérieure
+**** Prise en compte des paramètres de nuisance dans DKL ?
+**** 
+   Entered on [2023-07-25 mar. 13:55]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::+title: My Jira Board]]
+
+** 2023-08 août
+*** 2023-08-30 mercredi
+**** Point d'avancement WGUQ
+***** Double entrainement pour MVE, similairement à l'autodecode ?
+****** avec Hypernetwork
+***** D'un modèle entrainé -> modèle bayésien?
+***** Application à Karman Street ?
+    Entered on [2023-08-30 mer. 15:44]
+  
+      [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::+title: My Jira Board]]
+      
+** 2023-09 septembre
+*** 2023-09-05 mardi                                                 :exaucé:
+**** Exp numériques/                                                 :exaucé:
+**** CSI: a priori ok, bon à envoyer à Nicolas. Doodle pour le rdv ? :exaucé:
+**** 1h30 de créneau                                                 :exaucé:
+***** 1 temps tous ensemble
+***** 1 temps expert + doctorant
+***** 1 temps expert / encadrants
+**** Cours Exaucé: Mardi 13h30 -> 15h (TP)                           :exaucé:
+**** Début: Mars 2023
+***** Prise en main et application ECO3M: Fin d'année 2023
+***** Article Estimation ECO3M: Avril 2024
+***** Extension au cas sous incertitudes -> avril 2024
+***** Rédaction: Septembre 2025
+***** Soutenance: Mars 2026
+**** SIAMUQ24 (Mars 2024)
+**** MascotNUM (Avril 2024)
+**** UNCECOMP
+**** MEXICO
+   Entered on [2023-09-05 mar. 13:29]
+  
+     [[file:c:/Users/a846735/OneDrive - Atos/Bureau/MyOwnJiraBoard.org::*Output as a vector with r features instead of fully agnostic][Output as a vector with r features instead of fully agnostic]]
+      
