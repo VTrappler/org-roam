@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       7c00123f-48cf-45ec-805b-e13358215676
+:END:
+#+title: Random Pareto front surfaces
+#+filetags: :MOO:LiteratureReview:
+
+Use of polar parametrisation of Pareto front.
+* Notations
+ + Pareto domination
+\begin{align}
+\mathbf{y} \succeq \mathbf{y}' &\iff \mathbf{y} - \mathbf{y}' \in \mathbb{R}^{M}_{\geq0} \\
+\mathbf{y} \succ \mathbf{y}' &\iff \mathbf{y} - \mathbf{y}' \in \mathbb{R}^{M}_{\geq0} \setminus \{\mathbf{0}\} \\
+\mathbf{y} \succ\succ \mathbf{y}' &\iff \mathbf{y} - \mathbf{y}' \in \mathbb{R}^{M}_{>0}
+\end{align}
++ Domination region: collection of points which dominates a particular set of vectors $A$
+
+  \begin{equation}
+        \mathbb{D}_{\diamond}[A] =  \cup_{\mathbf{a}\in A} \left\{\mathbf{y \in \mathbb{R}^M: \mathbf{y} \diamond \mathbf{a} \right\}
+  \end{equation}
+where $\diamond$ is any partial ordering relation $\succeq, \succ, \succ\succ, \dots$
+The truncated domination region for a reference vector $\mathbf{\eta}$ is $\mathbb{D}_{\diamond, \mathbf{\eta}}[A] = \mathbb{D}_{\diamond}[A] \cap \mathbb{D}_{\succ\succ}[\{\mathbf{\eta}\}]$
++ Pareto Optimality
+  Given a bounded set of vectors $A$, a point $\mathbf{a}\in A$ is weakly or strictly Pareto optimal if there is no other point which dominates it:
+\begin{align}
+\mathcal{Y}^{\mathrm{weak}}[A] = A \cap \mathbb{D}^C_{\prec\prec}[A] \\
+\mathcal{Y}^{\mathrm{strict}}[A] = A \cap \mathbb{D}^C_{\prec}[A]
+\end{align}
+
++ Interpolated weak Pareto optimality

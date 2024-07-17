@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       22debb56-b690-4c60-96fa-b11060efb3d2
+:END:
+#+title: Input Warping for Gaussian Processes
+#+filetags: :BayesianOptimization:GP:
+
+[[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] are powerful tools to model a large class of functions, but often the assumption of stationarity is a bit too much:
+The covariance between two inputs is invariant to translation.
+The authors propose to learn and use a bijective warping of the inputs  .

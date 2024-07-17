@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       e4942647-213f-47ee-bbd5-41d9f2790685
+:END:
+#+title: Autoregressive GP
+#+filetags: :LiteratureReview:GP:
+
+Scalable multioutput GPs:
+Let us consider the problem of modelling $M$ outputs $y_{1..M}(x)$ as [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]].
+The probability distribution of $y_{1..M}$ can be factored:
+\begin{equation}
+p(y_{1..M}(x)) = p(y_1(x)) \cdot p(y_2(x) \mid y_1(x)) \cdots p(y_M(x) \mid y_{1..M-1}(x))
+\end{equation}
+
+\begin{align}
+y_1(x) &= f_1(x) &\quad f_1 \sim p(f_1) \\
+y_2(x) &= f_2(y_1(x), x)  & \quad f_2 \sim p(f_2) \\
+\vdots \\
+y_M(x) &= f_{M}(y_{1:M-1}(x), x) & \quad f_{M} \sim p(f_M)
+\end{align}

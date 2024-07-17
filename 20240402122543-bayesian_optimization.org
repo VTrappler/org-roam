@@ -5,4 +5,21 @@
 #+filetags: :BayesianOptimization:
 
 It usually refers to the use of [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Processes]] for [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] problems.
-From this metamodel, an [[id:b4f7efb4-5894-46f4-a8ec-e34122443d86][Acquisition function]] is derived, which is used as a proxy that needs to be optimized in order to select the new point of evaluation, thus enriching the metamodel.
+From this metamodel, an [[id:b4f7efb4-5894-46f4-a8ec-e34122443d86][Acquisition function]] is derived, which is used as a
+proxy that needs to be optimized in order to select the new point of evaluation,
+thus enriching the metamodel.
+
+
+* Tanguy Appriou: BO for High-dimensional problems
+In the case of black-box function: $x\mapsto y(x)$. Find surrogate $x\mapsto \hat{y}(x)$
+using GP. High dimension in $x$. For kriging, $\dim > 20$, might be hard,
+especially in the estimation of the hyperparameters.
+** Modelling the GP
++ Combination of kriging models with random length-scales:
+  $M = \sum w_i M_i$
++ Kriging using partial least squares: linear basis upon which we project the input, which maximizes the covariance. (Bouhlel et al.)
++ Additive kriging
+** Acquisition functions
++ Trust regions: defined around interesting points, increased when no improvement is found. (TREGO)
+
+  benchmark: COCO BBOB
