@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       d12e129e-6a38-429c-94fa-a79a349241b3
+:ROAM_REFS: cite:arcucci_deep_2021
+:END:
+#+title: Deep Data Assimilation
+#+startup: latexpreview
+#+filetags: :MachineLearning:DataAssimilation:
+
+
+In cite:arcucci_deep_2021, the authors proposes to use an integration of [[id:c2754736-4675-4a5c-a6e5-8886fb9f303d][Data Assimilation and Machine Learning]], based on [[id:f73cda73-3c82-43f4-9636-b2e409682afd][Recurrent Neural Network]].
+Such a network is trained with the state of the dynamical system and the result of the DA process.
+
+* "Classical DA"
+\begin{align}
+\dot{u} &= \mathfrak{M}(u, t, \theta) \\
+v &= \mathcal{H}(u) + \epsilon
+\end{align}
+For a fixed time step in the assimilation window $[0, T]$, the estimated system state at time $t_k$ is
+\begin{align}
+u_k &= Mu_{k-1} \\
+v_k &= Hu_k
+\end{align}
+where $M$ is a discretization of a 1st order approx of $\mathfrak{M}$ (TLM ?)
+
+The analysis $u^{DA}$ verifies
+\begin{align}
+v_k &= Hu^{DA} + e_{R_k} \\
+u^{DA} &= u_k + e_{B_k}
+\end{align}
+where $e_{R_k} \sim \mathcal{N}(\mu_R, R_k)$ and $e_{B_k} \sim
+\mathcal{N}(\mu_B, B_k)$ are the obs error and model error.
+
+and in a Variational context,
+\begin{equation}
+u^{DA} = \mathrm{argmin} \left\{\|u-u_k\|^2_{B^{-1}_k} + \|Hu -v_k \|^2_{R^{-1}_k}\right\}
+\end{equation}
+Let us assume that the observation covariance matrix is diagonal, with
+$\sigma_0^2$ on the diagonal,
+and let us assume that at time $t_k$, $\{u_j\}_{1\leq j \leq n_k}$ are available
+so that we can construct the background error deviation matrix:
+\begin{align}
+V_k &= \{V_{jk}\}_{1 \leq j \leq n_k} \\
+V_{jk} &= u_j - \bar{u} = u_j - \frac{1}{n_k}\sum_{i=1}^{n_k} u_i
+\end{align}
+

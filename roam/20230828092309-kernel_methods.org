@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       d45320a2-9c35-4e2a-8e53-43120907c123
+:END:
+#+title: Kernel Methods
+#+filetags: :MachineLearning:
+
+Let us consider that we have an input space $\mathcal{X}$ and an output space $\mathcal{Y}$
+
+* Linear model
+  A linear model $f$ aims at finding $f$ such that
+  \begin{equation}
+f(x) = w^Tx = \langle w, x \rangle_{\mathcal{X}}
+\end{equation}
+is approximately equal to the corresponding $y$
+
+* Kernel method
+  In many applications, such a linear relation is impossible to
+  find. One can instead rely on kernel methods: We construct a mapping
+  from $\mathcal{X}$ to $\mathcal{V}$, where in this space, we have a inner product:
+  \begin{equation}
+k(x, y) = \langle \varphi(x), \varphi(y) \rangle_{\mathcal{V}}
+\end{equation}
+
+Using [[id:36f1dc46-b6fb-4e16-b36d-f6dd10c3dace][Mercer's theorem]], if the kernel is pd, the optimal solution is
+given as a linear combination of the data points $x_n$:
+\begin{equation}
+f^*(x) = \sum_{i=1}^n w_i k(x, x_n) = \langle w, \varphi(x) \rangle_{\mathcal{V}}
+\end{equation}

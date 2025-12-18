@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       7d189b3c-3b68-46f9-9f21-5ff1b5d2372d
+:END:
+#+title: Optimization
+#+filetags: :Optimization:
+
+
+
+
+* Methods
+** Gradient-based optimization
+[[id:801eca4b-cee8-4d3c-8730-f8b282081a9a][Proximal Operator]]
+[[id:ecd2c2a8-3f6a-4374-885b-677acae5ae18][Natural Gradient]]
+** Gradient-free optimization
+ [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]]
+
+
+* Applications
+  [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Inference]]

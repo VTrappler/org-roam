@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       46609399-4c07-4bf3-b50c-3d2d81143ee5
+:END:
+#+title: Diffusion Models
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+Diffusion models are generative models, which models a
+high-dimensional data distribution $p(x)$.
+
+However, instead of $p(x)$ we are interested in the [[id:376e898d-36f4-4f8f-96eb-be7d0d8d8b5e][Score Function]]:
+$s(x) = \nabla_x \log p(x)$ By doing s:
+ + normalization is no longer needed, since $\nabla_x (\alpha p(x)) = \nabla_x p(x)$ for $\alpha \neq 0$
+ + The log derivative:
+\begin{equation}
+\langle \nabla_x \log p(x); dx \rangle \approx \log(p(x + dx) - p(x))
+\end{equation}
+
+\begin{equation}
+\frac{p(x)}{p(x + dx)} &\approx \exp\left(-\langle \nabla_x \log p(x); dx \rangle\right)	
+ \end{equation}
+ 
+* Forward Diffusion process
+Let us consider that we have a sample from the data distribution $x_0 \sim p$
+We want to have a sequence of noisy samples $x_1,\dots, x_T$
+Let $\{0< \beta_t= 1 - \alpha_t < 1 \}_t$ be a variance schedule.
+
+
+The next sample is sampled according to the conditional distribution.
+\begin{equation}
+x_{t} \sim q(\cdot \mid x_{t-1}) = \mathcal{N}( \sqrt{1 - \beta_t}x_{t-1}; \beta_t I_n )
+\end{equation}
+which is a normal distribution centered at $\sqrt{1 - \beta_t}x_{t-1}$ with covariance matrix $\beta_t I_n$
+The joint distribution of the samples si then simply
+\begin{equation}
+q(x_{1:T} \mid x_0) = \prod_{t=1}^T q(x_t \mid x_{t-1})
+\end{equation}
+
+** Recurrent relation
+\begin{align}
+x_t &= \sqrt{1-\beta_t}x_{t-1} + \sqrt{\beta_t}\epsilon_{t-1} \\
+    &=\sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t}\epsilon_{t-1} \\
+    &= \sqrt{\alpha_t}\left(\sqrt{\alpha_{t-1}}x_{t-2} +\sqrt{1-\alpha_{t-1}} \epsilon_{t-2}\right) + \sqrt{1-\alpha_t}\epsilon_{t-1} \\
+    &= \sqrt{\alpha_t \alpha_{t-1}}x_{t-2} +(\sqrt{\alpha_t(1-\alpha_{t-1}) + 1-\alpha_t}) \epsilon\\
+    &= \sqrt{\alpha_t \alpha_{t-1}}x_{t-2} +\sqrt{1-\alpha_t\alpha_{t-1}} \epsilon\\
+\dots \\
+&= \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1 - \bar{\alpha}_t}\epsilon
+\end{align}
+
+** Stochastic Gradient Langevin Dynamics
+   Score functions can be used to sample from the distribution:
+   \begin{equation}
+x_t = x_{t-1} + \frac{\delta}{2} \nabla_x \log p(x_{t-1}) + \sqrt{\delta}\epsilon_t
+\end{equation}
+
+* Reverse Diffusion process
+  The Forward Diffusion process is quite easily to grasp, since it
+  just requires to add Gaussian noise in the input.
+
+  However, if we are able to sample from $q(x_{t-1} \mid x_t)$, ie
+  reverse the diffusion process, we can start from a Gaussian noise, $x_T$, and sample from $q(x_0 \mid x_{T}, x_{T-1},\dots, x_1)$ 
+
+  Instead, we can learn a model $p_\theta$ to approximate the conditional probabilities:
+  \begin{equation}
+p_{\theta}(x_{0:T}) = p(x_T) \prod_{t=1}^T p_{\theta}(x_{t-1} \mid x_t)
+\end{equation}
+which takes the form
+\begin{equation}
+p_{\theta}(x_{t-1} \mid x_t) = \mathcal{N}\left(\mu_{\theta}(x_t, t); \Sigma_{\theta}(x_t, t)\right)
+\end{equation}
+
+So basically, we are looking for $\mu_\theta$ and $\Sigma_\theta$, and
+apply them in an autoregressive manner.
+
+
+
+
+Compare with [[id:cbb368af-671b-47bf-a079-6d8b5cfde6e9][Latent Diffusion Models]]

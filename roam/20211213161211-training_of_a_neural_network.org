@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       ee87a4bb-2518-4c38-bf15-77525e382003
+:END:
+#+title: Training of a Neural Network
+#+filetags: :NeuralNetworks:MachineLearning:
+
+
+Training of a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]] usually refers to the adjustement of the weights (and
+bias as a /unit/ neuron).  This encompasses also the addition or
+deletion of connections or neurons in the topology.
+
+Training requires a training set, which depends on the paradigm used.
+* Types of training
+** Unsupervised Learning
+ Unsupervised learning provides only the *input pattern*, and the network
+tries to identify and categorizes similar patterns
+ * [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]]
+ * Density estimation
+
+** Reinforcement learning:
+Reinforcement learning provides a feedback on the task achieved,
+   whether it is right or wrong, and possibly how much
+
+  
+** Supervised learning
+It provides the desired result, thus we can directly compute an error
+   statistic on the prediction.
+ * Classification
+ * Regression
+
+* Training in practice
+This learning is usually done by defining a loss function, which is [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][optimized]]. The gradient is often obtained through backpropagation which can be linked to the [[id:f867396d-b033-4fa7-b99a-b4dd551ae37b][Adjoint Method]].

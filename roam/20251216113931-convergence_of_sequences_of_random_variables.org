@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       55d83eee-d9e7-4042-a8c0-d9080280c109
+:ROAM_ALIASES: "Portmanteau Lemma"
+:END:
+#+title: Convergence of sequences of Random Variables
+#+filetags: :Proba:
+#+LATEX_HEADER: \newcommand{\Ex}{\mathbb{E}};\DeclareMathOperator*{\cvto}{\to};\newcommand{\Prob}{\mathbb{P}};\DeclareMathOperator*{\limsup}{\mathrm{limsup}};\DeclareMathOperator*{\liminf}{\mathrm{liminf}};\usepackage{bbm}
+
+  [[id:f16e587c-de26-47f5-8f1b-e298fd7eb3b6][Probability]]
+
+* Portmanteau Lemma
+** Statement
+Let $(M, d)$ be a Metric space, $X_n$ be a seq of rv $M$ valued:
+The Portmanteau lemma states that the following assertions are equivalent:
+ * For any $\varphi$ continuous and bounded: $\lim_n \Ex[\varphi(X_n)] = \Ex[\varphi(X)]$
+ * For any $\varphi$ uniformly continuous and bounded: $\lim_n \Ex[\varphi(X_n)] = \Ex[\varphi(X)]$
+ * For any closed set $F$ of $M$: $\limsup_n \Pr[X_n \in F] \leq \Pr[X\in F]$
+ * For any open set $O$ of $M$: $\liminf_n \Pr[X_n\in O] \geq \Pr[X\in O]$
+ * For any Borel set $A$, with $\Pr[X\in\partial A] = 0$, $\lim_n \Pr[X_n\in A] = \Pr[X\in A]$
+** Proof
+ * $1 \Rightarrow 2$ trivially
+ * A$2\Rightarrow 3$ Let $F$ be a closed set of $M$. We define $F_k=\{x\in M | d(x,F) \leq 1/k\}$
+   We define also $\varphi_k(x) = 1-k\cdot d(x,F)$ if $x\in F_k$, 0 elsewhere.
+   We have then $\mathbbm{1}_{F} \leq \varphi_k \leq \mathbbm{1}_{F_K}$. The left inequality gives us that $\limsup_n \Pr[X_n \in F] \leq \limsup_n \Ex[\varphi_k(X_n)]$
+
+   Finally, since $f$ and $x\mapsto d(x, F)$ are 1-Lipschitz, $\varphi_k$ is uniformly continuous, and thus
+\begin{equation}
+\limsup_n \Ex[\varphi_k(X_n)] = \lim_n \Ex[\varphi_k(X_n)] = \Ex[\varphi_k(X)]
+\end{equation}
+From the right inequality, we have
+\begin{equation}
+\Ex[\varphi_k(X)] \leq \Pr[X \in F_k]
+\end{equation}
+thus
+\begin{equation}
+\limsup_n \Prob[X_n \in F] \leq \Prob[X\in F_k]
+\end{equation}
+* Convergence in distribution
+We say that $X_n \cvto^d X$ , ie a sequence of real valued RV converges to $X$ if
+\begin{equation}
+F_n() \to F(x)
+\end{equation}
+that is if the CDF converges to pointwise

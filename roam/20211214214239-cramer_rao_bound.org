@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       b8a78df4-8d15-4809-ab28-15d4d41069b4
+:END:
+#+title: Cramér-Rao Bound
+#+startup: latexpreview
+
+
+The CRB expresses a lower bound on the variance of an unbiased estimator (see [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimation Theory]]).
+
+* Scalar estimator
+** Scalar and no bias
+Let us assume that we have $n$ samples $x_1, \dots, x_n$ sampled from
+a pdf $f(x;\theta)$, and we wish to estimate the unknown $\theta$.
+
+For any *unbiased* estimator $\hat{\theta}$,
+\begin{equation}
+\mathbb{V}\mathrm{ar}[\hat{\theta}] \geq \frac{1}{I(\theta)}
+\end{equation}
+where $I$ denotes the [[id:376e898d-36f4-4f8f-96eb-be7d0d8d8b5e][Fisher Information Matrix]].
+\begin{align}
+I(\theta) &= n \mathbb{E}\left[\left(\frac{\log f(x;\theta)}{\partial \theta}\right)^2\right] = n\int \left(\frac{\log f(x;\theta)}{\partial \theta}\right)^2 f(x;\theta)\,\mathrm{d}x \\
+&= -n\mathbb{E}\left[\frac{\partial^2 \log f(x;\theta)}{\partial \theta^2}\right]
+\end{align}
+
+** Scalar and biased

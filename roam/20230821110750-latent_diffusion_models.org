@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       cbb368af-671b-47bf-a079-6d8b5cfde6e9
+:END:
+#+title: Latent Diffusion Models
+#+filetags: :MachineLearning:
+
+
+Introduced in https://arxiv.org/abs/2112.10752:
+
+

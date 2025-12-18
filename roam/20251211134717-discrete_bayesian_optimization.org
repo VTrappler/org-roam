@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       f40d54ed-337e-4597-9a0b-8f17885736a7
+:END:
+#+title: Discrete Bayesian Optimization
+  [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] with discrete variables
+
+   [[id:13458133-06e4-4635-83bd-2a8ac36f3ac2][Probabilistic Reparameterization]]

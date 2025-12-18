@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       63ea6e3d-15c7-439f-926d-f14222561d2f
+:END:
+#+title: Banach Space
+#+filetags: :FunctionalAnalysis:
+#+startup: latexpreview
+
+* Definition
+  A Banach [[id:c753f247-4fd9-45ef-94b2-400bd92fd58c][Space]] is a [[id:60c0f9dc-17ab-4ea9-a3ff-f9969e1ecc0d][Complete space]] which has a norm.
+  + $(X, \| \cdot \|)$ with $\| \cdot \|$ a norm
+  + Every Cauchy sequence converges to an element in $X$.
+
+* Properties
+ + For any Normed space, there exists a L-semi-inner product such that
+   + $\|x \| = \sqrt{\langle x , x\rangle} \geq 0$
+     + Linear in 1st argument
+     + Conjugate homogeneity in 2nd $\langle f, \alpha g\rangle = \bar{\alpha} \langle f, g\rangle$
+   + In general, not conjugate symmetric: $\langle f, g\rangle \neq \bar{\langle g, f\rangle}$
+ + If there is a true inner product, then it is a [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Hilbert Space]]

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258
+:END:
+#+title: Conjugate Gradient
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+Conjugate gradient is a method based on [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspace]] which aims at
+minimizing the following quadratic function $\phi(x) = x^TAx - b^Tb$ for $A$ symmetric of size $n\times n$.
+This is equivalent to solving the linear system $Ax = b$ for $x$.
+
+At step $k$, the linear system residual is $r_k = Ax_k - b$
+* Algorithm
+  Let $x_0$, $r_0 = Ax_0 - b$, $p_0 = -r0$
+  + While $\|r_k\|\neq 0$
+    + The descent direction is $p_k$
+    + The step size is $\alpha_k = \frac{r_k^Tr_k}{p_k^TAp_k} = \frac{\langle r_k, r_k \rangle}{\langle p_k, Ap_k \rangle}$
+    + The new iterate $x_{k+1} = x_k + \alpha_k p_k$
+    + The new residual $r_{k+1} = Ax_{k+1} = Ax_k + \alpha_k A p_k = r_k + \alpha_k A p_k$
+    + $\beta_{k+1} = \frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k} = \frac{\|r_{k+1}\|^2}{\|r_k\|^2}$
+    + The new descent direction is $p_{k+1} = -r_{k+1} + \beta_{k+1} p_k$
+    + $k \gets k+1$
+      
+* Explanation
+  Let us say we have a set of orthogonal directions $p_k$.
+  We start from the fact that we want an iteration of the form $x_{k+1} = x_k + \alpha_k p_k$
+  We want the residual to be orthogonal to the current descent direction, so $r_k^Tp_k = 0$
+  \begin{align}
+p_k^Tr_{k+1} &= p_k^T\left(Ax_{k+1} - b \right) \\
+             &= p_k^T(r_k + \alpha_kAp_k) \\
+             &= p_k^Tr_k + \alpha_k p_k^TAp_k = 0 \\
+\alpha_k &= - \frac{p_k^Tr_k}{p_k^TAp_k}
+  \end{align}
+
+
+* Convergence rate
+
+Using Conjugate Gradient, the error $e_k = x_k - x^*$ can be bounded:
+\begin{align}
+    \|e_k\| &\leq 2\left(\frac{\sqrt{\kappa(A)} - 1}{\sqrt{\kappa(A)} + 1}\right)^k \|e_0\| 
+   % \\ \log \|e_k\| &\leq \log 2 + \log \| e_0 \| + k \log \left(\frac{\sqrt{\kappa(A)}-1}{\sqrt{\kappa(A)}+1}\right)
+\end{align}
+where $\kappa$ is the [[id:4a033759-84da-4099-b6dc-1df50308f966][Condition number]] of $A$.
+We have the following asymptotic equivalent:
+\begin{equation}
+\frac{\sqrt{\kappa(A)} - 1}{\sqrt{\kappa(A)} + 1} = 1 -  \frac{2}{\sqrt{\kappa}} + \mathcal{O}(\kappa^{-1})
+\end{equation}

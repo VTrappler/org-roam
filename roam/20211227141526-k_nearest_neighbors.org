@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       1d7448be-6845-4b87-b55b-22a42084bb84
+:ROAM_ALIASES: kNN
+:END:
+#+title: k-Nearest Neighbors
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+Link with  [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]]
+
+kNN is a classification algorithm. 
+ * Training: There is no training per say, but rather the storing of
+   the training set, with its associated label for each point
+
+   
+ * Classification: For a point to classify, we can compute its
+   $k$-nearest neighbors (user-defined constant) based on some metric,
+   and assign it the most common label 

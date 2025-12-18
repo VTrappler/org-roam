@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       533cb1a0-02b3-47f4-9f8b-a520e63902d3
+:END:
+#+title: Basket
+#+filetags: :BasketBall:
+
+
+* Entrainement défense
+ * 1x1 espace limité (entre postes hauts)

@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       306b8ed8-b940-4145-a00a-07c530ba4486
+:END:
+#+title: Robbins Monro Algorithm
+#+filetags: :Optimization:OUU:
+[[id:0f927232-9fc5-4b7a-b5ec-51eecdf50706][Stochastic Optimization]]

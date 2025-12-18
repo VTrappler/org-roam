@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       eb8d01db-89c7-4215-b968-aabf868a00d8
+:ROAM_ALIASES: "Balancing Preconditioner" LMP
+:END:
+#+title: Limited Memory Preconditioner
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+Limited Memory Preconditioner is a form of [[id:a5dab6d7-fca6-418a-916a-2812720fb876][preconditioner]] to solve a
+Linear system in order to improve the convergence of iterative methods
+such as [[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]].
+In the following, we consider the linear system $Ax = b$ of size $n \times n$.
+* General Expression
+  \begin{equation}
+P_S(A) = \left(I_n - S(S^TAS)^{-1}S^TA\right)\left(I_n - AS(S^TAS)^{-1}S^T\right) + S(S^TAS)^{-1}S^T
+  \end{equation}
+where $S = [s_1, \dots, s_r]$ is has linearly independent columns.
+** Spectral LMP
+   If $S$ is composed of orthonormal [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvectors]] of $A$, with
+   associated eigenvalues $\lambda_i$, the LMP can be written as
+   \begin{align}
+P_r &= I_n - \sum_{i=1}^r (1 - \lambda_i^{-1})s_is_i^T \\
+&= I_n - S(I_r - \Lambda^{-1})S^T
+   \end{align}

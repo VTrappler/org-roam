@@ -1,0 +1,121 @@
+:PROPERTIES:
+:ID:       f20c0632-b263-467a-98e6-016ac18003e5
+:ROAM_REFS: cite:ardizzone_analyzing_2019
+:END:
+#+title: Analyzing Inverse Problems with Invertible Neural Networks
+#+filetags: :MachineLearning:
+#+startup: latexpreview
+
+We place ourselves in an inverse problem framework:
+ * $x$ is the state vector
+ * $y$ is the observation
+
+Invertible Neural Networks (INN) are characterized by:
+ * The mapping inputs -> outputs is bijective
+ * Both forward and inverse mapping are efficiently computable
+ * Both mappings have a tractable jacobian, in order to allow explicit computations of posterior distributions
+
+Since the measurement space (space of $y$) is usually smaller than the
+state space ($x$), they introduce a latent variable $z$.
+
+The forward training optimizes
+\begin{equation}
+f(x) = [y, z]
+\end{equation}
+and the architecture of the network allows for explicitly determining the inverse
+\begin{equation}
+x = f^{-1}(y, z) = g(y, z)
+\end{equation}
+Furthermore, we can make sure that the latent variables are normally distributed.
+
+* Problem Definition
+
+** Problem settings
+   Let $x \in \mathbb{R}^D$ be the state vector, $y \in \mathbb{R}^M$
+   be the observed quantities.  The forward process: $s(x) = y$. The
+   intrinsic dimension $m$ of $y$ is smaller than of $x$, since there
+   is usually information loss.
+
+   We want to approximate the posterior distribution $p(x \mid y)$ by
+   $q(x\mid y)$ based on training data $(\{x_i, y_i)\}$ from the
+   forward model and a suitable prior.  We can define a deterministic
+   function $g$ which incorporates a latent random variable $z \in
+   \mathbb{R}^K$, such that
+  
+   \begin{equation}
+ x= g(y, z; \theta) \quad z \sim \mathcal{N}(0, I_K)
+   \end{equation}
+
+   At the same time as $g$, we want to learn a model $f(x; \theta)$ so that
+   \begin{equation}
+   [y, z] = f(x;\theta) = \left[f_y(x;\theta), f_z(x;\theta)\right] = g^{-1}(x ; \theta)
+   \end{equation}
+ thus $f_y(x; \theta) \approx s(x)$
+
+** Dimension constraints
+   The relation $f = g^{-1}$ is enforced by the invertible network
+   architecture, *provided that the intrinsic and nominal dimensions of
+   both sides match*.  If $m < M$, ie the intrinsic dimension is not
+   the nominal dimension of the observations, the latent variable must have dimension $K = D - m$.
+   If $M + K$ (ie dim of $y$ and dim of $z$) is greater than the nominal dimension of $x$, the input is augmented using zeros
+   $x_0 \in \mathbb{R}^{M + K - D}$ and $x \leftarrow [x, x_0]$
+
+* Bi-directional training
+  INN can be trained in order to optimize losses in both the input and output space.
+  * For forward iterations: the misfit between simulations outcomes and network predictions is measured:
+     $\mathcal{L}_y(y_i, f_y(x_i))$ where $y_i = s(x_i)$
+  * For latent variables, we penalize the mismatch between the joint
+distribution of the network outputs:
+ \begin{equation}
+q(y=f_y(x),z=f_x(x)) = p(x) / | \det J_{yz}|
+\end{equation}
+ and the product of the
+marginal distributions
+ \begin{equation}
+p(y = s(x)) = p(x) / | \det J_s |
+  \end{equation}
+    and $p(z)$
+    \begin{equation}
+\mathcal{L}_z(q(y, z), p(y)p(z))
+    \end{equation}
+    The gradient of $\mathcal{L}_z$ are blocked so that
+    $z\sim\mathcal{N}(0, I_K)$, and enforce a independance, so that
+    $y$ and $z$ do not encode the same information twice.
+    However, a small amount of dependence remains after training.
+    We can add a loss $\mathcal{L}_x$ on the input side:
+    \begin{equation}
+\mathcal{L}_x(p(x), q(x)) \quad q(x) = p(y = f_y(x))p(z = f_z(x))/ |\det J_x|
+    \end{equation}
+  
+
+
+* Invertible Architecture
+  In order to create an INN, some architectures are proposed (see [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]]).
+
+** How to inverse a neural network
+*** Residual flow
+    $x \mapsto x + f(x) = y$ and $f$ contractive
+*** Coupling layers
+    Take the input, and split it into two parts: $x = [x_1, x_2]$
+    \begin{align}
+y_1 &= x_1 \quad \text{(untouched)} \\
+y_2 &= (x_2 + t(x_1))\exp s(x_1)
+    \end{align}
+
+\begin{equation}
+\left\{
+\begin{array}{rl}
+y_1 =& x_1 + \mathrm{NN}(x_2) \\
+y_2 =& x_2
+\end{array}
+\right.
+\end{equation}
+donc en inversant
+\begin{equation}
+\left\{
+\begin{array}{rl}
+x_1 =& y_1 - \mathrm{NN}(x_2) = y_1 - \mathrm{NN}(y_2)  \\
+x_2 =& y_2
+\end{array}
+\right.
+\end{equation}

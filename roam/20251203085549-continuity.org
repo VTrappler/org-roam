@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       b7455611-38c3-4afa-9390-96bdf0cc991d
+:END:
+#+title: Continuity
+* Continuity of linear maps
+Let $L:V\to W$ be a linear map between metric spaces (see [[id:c753f247-4fd9-45ef-94b2-400bd92fd58c][Vector Spaces]]).
+$L$ is said to be continuous, if $L$ is bounded:
+There exists $M$, such that for any $x\in V$
+$\|T(x)\|\leq M \|x\|$

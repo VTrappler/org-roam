@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       4dce67fe-62bc-447b-a5d5-412e90e11dda
+:ROAM_ALIASES: "Score-based model"
+:END:
+#+title: Score Matching
+#+filetags: :NeuralNetworks:
+Score matching is called as to refer to the  [[id:376e898d-36f4-4f8f-96eb-be7d0d8d8b5e][Score Function]], ie
+the derivative of the logarithm of a pdf. However, it is not the same as in classical statistics:
+
+
+* Score function
+Let us consider a parametric pdf, $p_\theta(x)$ that we want to use to approximate a data generating pdf $p(x)$.
+One way to define $p_\theta$ is to use an [[id:691d54e5-5161-4f1a-8176-6bb20ffaf6d4][Energy-based model]]:
+$p_\theta(x) = \exp(-f_\theta(x))/Z(\theta)$.
+
+The score function is defined here as
+$s(x;\theta) = \nabla_x \log(p_\theta(x))$ where the derivative is taken with respect to $x$.
+One nice thing, is that
+$s_\theta(x) = -\nabla_x f_\theta(x)$, thus we don't need the normalization constant !
+The score as defined here can be used to sample from the original function through  [[id:c65c1dfa-53c2-485d-9552-0071d64bece1][Langevin Monte Carlo]]
+
+* Naive loss
+We can then look to optimize the following loss:
+$$\mathcal{L}(\theta)= \mathbb{E}_{p(x)} \left[\|s_\theta(x) - \nabla_x\log p(x)\|^2\right]$$
+ * True score is not attainable
+ * Expectation taken wrt p(x) means bad approximation in low density regions of the data
+* Denoising score matching
+Let us perturbate the original data with a gaussian noise of variance $\sigma^2$.
+$\tilde{x} = x + \epsilon$ where $\epsilon\sim\mathcal{N}(0, \sigma^2 I)$.
+
+The loss for the "corrupted" dataset is
+$$\mathcal{L}_{corr}(\theta) = \mathbb{E}_{q_\sigma(\tilde{x})} \left[\frac{1}{2}\|s_\theta(\tilde{x}) - \nabla_x\log q_{\sigma}(\tilde{x})\|^2\right]$$
+where $q_{\sigma}(\tilde{x})$ is the distribution of the corrupted dataset.
+
+This can be shown that the objective is equivalent to the Denoising score matching objective:
+$$\mathcal{L}_{DSM}(\theta) = \mathbb{E}_{q_\sigma(\tilde{x},x)} \left[\frac{1}{2}\|s_\theta(\tilde{x}) - \nabla_x\log q_{\sigma}(\tilde{x}|x)\|^2\right]$$
+over the joint density $q_\sigma(\tilde{x},x) = q_\sigma(\tilde{x}|x)p(x)$
+
+Now the gradient $\nabla_x\log q_{\sigma}(\tilde{x}|x)$ is easy to compute for a fixed $x$ since $\tilde{x} \sim \mathcal{N}(x, \sigma^2I)$
+and is equal to $(x - \tilde{x}) / \sigma^2$
+* Noise Conditional Score-based model
+Now how to choose the variance ?
+We can choose $L$ levels of increasing noise: $\sigma_1 <\sigma_2 < \dots < \sigma_L$,
+and define for the level $i$:
+
+$$\mathcal{L}_{DSM}(\theta, i) = \mathbb{E}q_{\sigma_i}(\tilde{x},x)} \left[\frac{1}{2}\|s_\theta(\tilde{x}, i) - \nabla_x\log q_{\sigma_i}(\tilde{x}|x)\|^2\right]$$
+
+And we can optimize the total loss as
+$$\mathcal{L}_{NCSM}(\theta) = \sum_{i=1}^L \lambda_i\mathcal{L}_{DSM}(\theta, i)$$

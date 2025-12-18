@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       b1dc7a2a-1c38-4af3-aaeb-1fc8791bfe8e
+:ROAM_REFS: cite:mcinnes_umap_2018
+:ROAM_ALIASES: UMAP
+:END:
+#+title: Uniform Manifold Approximation and Projection
+#+startup: latexpreview
+#+filetags: :MachineLearning:DimensionReduction:
+
+
+[[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]] algorithms tend to fall in two categories:
+ * Those who preserve distance structure over all samples ([[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]])
+ * Those who favor local distance over global distance
+
+   
+UMAP is based on three assumptions:
+ * There exists a manifold on which the data would be uniformly distributed
+ * This manifold is locally connected
+ * The Main goal is to preserve the *topological* structure.

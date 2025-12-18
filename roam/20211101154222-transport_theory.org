@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       206abcc1-20d3-47f5-9af1-f30c86405266
+:ROAM_ALIASES: "Optimal transport" Transport
+:END:
+#+title: Transport Theory
+#+STARTUP: latexpreview
+#+filetags: :MeasureTheory:Transport:
+
+Transport theory is linked to [[id:ed5ca3ef-6b5c-4f01-beec-a7d42c7f6d0b][Measure Theory]], especially [[id:70c7bb7b-a147-42b3-adf5-cd17b22dce7f][pushforward measure]]
+It looks for the most /efficient/ transport from a measure to another.
+
+* Optimal transport map
+** Monge Formulation
+Let $X$, $Y$ be separable metric spaces, and $c: X \times Y
+\rightarrow \mathbb{R}^+$ a Borel-measurable function.  Let $\mu$ be a
+measure on $X$, $\nu$ measure on $Y$.
+
+\begin{equation}
+\label{Monge_optimal}
+\inf_{T} \left\{\int_{X} c(x, T(x)) \,\mathrm{d} \mu(x) \mid T_{\sharp}(\mu) = \nu\right\}
+\end{equation}
+
+A map which attains the infimum is called an *optimal transport map.*
+** Kantorovich Formulation
+
+\begin{equation}
+\label{Kantorovich_optimal}
+\inf_{T} \left\{\int_{X\times Y} c(x, y) \,\mathrm{d} \gamma(x,y) \mid \gamma \in \Gamma(\mu, \nu)\right\}
+\end{equation}
+
+Where $\Gamma(\mu, \nu)$ is the set of all probability measures on $X
+\times Y$ with marginals $\mu$ on $X$ and $\nu$ on $Y$.  $c$ can be
+seen as the cost of moving a unit of mass from $x$ to $y$.
+
+** Uniqueness
+In cite:marzouk_introduction_2016, it is evoked that if $c$ is
+quadratic, and $\mu$ is atomless, then the optimal transport map
+*exists* and is *unique*, and monotone (as a gradient of a convex function).
+
+* Knothe-Rosenblatt rearrangement
+A lower triangular map has the form
+\begin{equation}
+T(x) =
+\begin{bmatrix}
+  T^1(x_1) \\
+  T^2(x_1, x_2) \\
+  \vdots \\
+  T^n(x_1, \dots,x_n)
+\end{bmatrix}
+\end{equation}
+
+If $\mu$ abd $\nu$ are absolutely continuous, a unique lower
+triangular map satisfies $T_{\sharp} \mu = \nu$, it is the
+Knothe-Rosenblatt rearrangement.
+Triangular maps are of interest because:
+ * Triangular structure means that it is constructible
+ * Map inversion efficient
+

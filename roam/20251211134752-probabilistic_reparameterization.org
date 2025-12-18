@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       13458133-06e4-4635-83bd-2a8ac36f3ac2
+:END:
+#+title: Probabilistic Reparameterization
+#+filetags: :BayesianOptimization:Bayesian:
+Used in  [[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]] to treat discrete and categorical variables
+[cite:@daulton_bayesian_2022]
+
+Let $z$ be the discrete variable
+* Continuous relaxation and discretization
+| Type        | Domain       | Relaxation           | discretization |
+| Binary      | $\{0,1\}$    | $z'\in[0,1$]          | round          |
+| Ordinal     | $\{0\dots C-1\}$ | $z'\in [-0.5, C-0.5]$ | round          |
+| Categorical | $\{0\dots C-1\}$ | one-hot              | argmax z'^{(c)}   |
+
+But it can be suboptimal, low exploration within an acquisition function.
+
+* Probabilistic Reparameterization
+Instead, we can introduce $Z$ which is a rv that models $z$, which depends on $\theta$ a vector of continuous parameters. The support of $Z$ is exclusively that of $z$.
+Given this reparameterization, we define the Probabilistic Objective (PO) as
+$$\mathbb{E}_{Z\mid \theta} [\alpha(x,Z)]$$
+where $\alpha$ is the acquisition function.
+Once we maximize the PO wrt $x$ and $\theta$, we select $z_n \sim p(Z\mid\theta)$
+
+Since $Z$ has a discrete support, the expectation of the AF can be rewritten as a linear combination:
+$$\mathbb{E}_{Z|\theta}[\alpha(x,Z)] = \sum_{z\in\mathcal{Z}} p(z|\theta)\alpha(x,z)$$
+| Parameter type | RV                                                      | Continuous Parameter |
+|----------------+---------------------------------------------------------+----------------------|
+| Binary         | Bernoulli \theta                                             | $\theta\in[0,1]$           |
+| Ordinal        | Z = floor($\theta$) + $B$, $B\sim$ Bernoulli($\theta$ - floor($B$)) | $\theta\in[0, C-1]$        |
+| Categorical    | $Z\sim$ Categorical(\theta_1,\theta_2...)                           | $\theta\in \Delta^{C-1}$ |
+
+* Theoretical guarantee
+Suppose that $\alpha$ is continuous wrt $x$ for any $z$. Let $\mathcal{H}^*$ be the
+set of maximizers of $\alpha(x,z)$, and $\mathcal{J}^*$ the set of maximizers of the
+PO.
+Finally, let $\hat{\mathcal{H}}^* = \{(x,\tilde{z}) ; (x,\theta)\in \mathcal{J}^*, \tilde{z}\sim p(z|\theta)\}$, then $\hat{\mathcal{H}}^* = \mathcal{H}^*$

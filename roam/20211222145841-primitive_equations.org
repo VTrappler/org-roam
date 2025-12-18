@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       f8d097df-a37c-4bc7-bffe-5409cb9432ed
+:END:
+#+title: Primitive Equations
+#+filetags: :CFD:
+#+startup: latexpreview
+
+The Primitive equations (atmospheric or oceanic) are obtained by considering the [[id:8a455d77-49ee-43a3-bcd7-33464b94c837][Navier-Stokes Equations]] with a few additional assumptions, specific to the system studied.
+
+* Hydrostatic Balance
+The vertical component of the pressure gradient must balance the gravitational force:
+
+\begin{equation}
+\rho g = -\frac{\partial p}{\partial z}
+\end{equation}
+Or, by introducing the *geopotential height* $\Phi=gz$:
+\begin{equation}
+\frac{\partial \Phi}{\partial z} = -\frac{1}{\rho_0} \frac{\partial p}{\partial z}
+\end{equation}
+
+* Conservation equation
+For a tracer $c$, ie a quantity which is conserved, the conservation equation is written as
+\begin{equation}
+\frac{\partial c}{\partial t} + \nabla \cdot (\mathbf{U} c) = 0
+\end{equation}
+
+** Example: mass conservation
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\mathbf{U} \rho) = 0
+\end{equation}
+
+
+* Momentum equations
+According to Newton's second law, we have
+
+\begin{equation}
+\rho \frac{\mathrm{D} \mathbf{U}}{\mathrm{D} t} = - \frac{\partial p}{\partial z} - \rho g + \nu \nabla^2 \mathbf{U} + \mathrm{Friction}
+\end{equation}
+where $\nu \nabla^2 \mathb{U}$ represents the viscosity term.

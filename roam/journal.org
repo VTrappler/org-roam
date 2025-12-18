@@ -1,0 +1,36 @@
+#+TITLE: Journal
+#+author: Victor Trappler
+
+
+* 2024
+** 2024-04 avril
+*** 2024-04-09 mardi
+**** [2024-04-09 mar. 14:22]
+Measure of risk in a MOO setting
+*** 2024-04-10 mercredi
+**** [2024-04-10 mer. 13:14]
+***** Réunion encadrant
+https://miro.com/app/board/uXjVKWScRjk=/
+****** TODO Étendre critère EFISUR au MultiObj
+******* Avec Expectation et EHVI en premiere abord
+******* Pertinence de [[id:dfe83f64-7afa-4ea2-8123-81438b4c1f4d][EHVI]]  pour mesure vis à vis du front de Pareto
+****** TODO LitReview
+******* Formulation du problème
+******* Bayesian MultiObjective Optimization
+******* Multiobjective Optimization under uncertainties
+******* Quantifying uncertainty in Pareto
+****** Pareto rank ?
+*** 2024-04-12 vendredi
+**** [2024-04-12 ven. 09:01] i
+Use of [[id:a792ab31-2d66-43de-a7a4-aa407f023bea][BOtorch]]
+
+[[file:~/Documents/literature_review.org::*References][References]]
+*** 2024-04-17 mercredi
+**** [2024-04-17 mer. 10:53]
+***** Jobs
+https://www.gerad.ca/fr/job_offers
+***** https://www.gerad.ca/Sebastien.Le.Digabel/
+*** 2024-04-18 jeudi
+**** [2024-04-18 jeu. 15:31]
++ Usually, an acquisition function is function which returns a scalar, a measure of the progress. We discussed if we could use an acquisition function which returns a vector, for which we can estimate the Pareto front and select of batch of points to sample.
+[[file:~/Documents/literature_review.org::*Multioutput GP as surrogates of objective and constraints][Multioutput GP as surrogates of objective and constraints]]

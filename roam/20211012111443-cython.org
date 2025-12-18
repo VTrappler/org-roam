@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       d301bcd7-1fdc-4c49-a79f-0d503bf003fd
+:END:
+#+title: Cython
+#+filetags: :ProgrammingLanguage:
+
+Link between [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python Language]] and C for performances

@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       3bf80b43-d721-4dc6-8ef5-f0c945f8c647
+:ROAM_ALIASES: "Compound distribution"
+:END:
+#+title: Mixture distribution
+#+filetags: :MeasureTheory:
+#+startup: latexpreview
+
+* Finite and countable mixtures
+Let $p_1, \dots, p_n$ be $n$ pdf, and $(w_1, \dots, w_n)$ be positive weights, such that $\sum w_i = 1$.
+The (finite) mixture distribution is defined as
+\begin{equation}
+p(x) = \sum_{i=1}^n w_i p_i(x)
+\end{equation}
+
+* Uncountable Mixtures
+Let $p(x;\theta)$ be pdf, parametrized by $\theta$. Given a pdf $w$ on $\theta$,
+\begin{equation}
+f(x) = \int_{\Theta} p(x;\theta) w(\theta) \,\mathrm{d}\theta
+\end{equation}
+

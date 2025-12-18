@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       c65c1dfa-53c2-485d-9552-0071d64bece1
+:ROAM_ALIASES: "Langevin Dynamics" MALA
+:END:
+#+title: Langevin Monte Carlo
+#+filetags: :Bayesian:
+
+Let $\pi$ be a pdf on $\mathbb{R}^d$. We want to [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][Sampling methods]] iid samples from it.
+
+The Langevin diffusion of a function $f$ twice differentiable is
+\begin{equation}
+dX_t = - \nabla f(X_t)dt + \sqrt{2}dB_t
+\end{equation}
+
+Using Fokker Planck equation, the diffusion process defined is equivalent to
+\begin{equation}
+\partial_t \mu_t(x) = \nabla [\mu_t(x)\nabla f(x)] + \Delta \mu_t(x)
+\end{equation}
+where $\mu_t$ is the pdf of $X_t$.
+
+We define $\nu(x) = c e^{-f(x)}$:
+$\Delta\nu = -\nabla (\nabla f(x)\nu)^{}$ Hence $\nu$ is the stationary distribution of the SDE

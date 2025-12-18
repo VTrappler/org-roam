@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bc60fd85-fd24-4c7f-8932-bb52d9d6704b
+:ROAM_REFS: cite:cui_data-free_2021
+:END:
+#+title: Data-free Likelihood-informed Dimension Reduction of Bayesian Inverse Problems
+#+filetags: :DimensionReduction:Bayesian:
+ [[id:2ebe5ba7-5c85-4d2b-9121-afee1d9d7223][Inverse Problem]]
+
+ [[id:9ff95f2d-88c7-4d67-a72a-5248f65235e6][Certified Dimension Reduction]]

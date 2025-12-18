@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       f732e09f-c8a7-46ff-a49d-a7f9baa4c178
+:END:
+#+title: Javascript Language
+#+filetags: :ProgrammingLanguage:
+

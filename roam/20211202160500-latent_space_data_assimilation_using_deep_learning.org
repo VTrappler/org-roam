@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       8bb3c55b-aa88-4763-bcec-e3e73227992a
+:ROAM_REFS: cite:peyron_latent_2021
+:END:
+#+title: Latent Space Data Assimilation using Deep Learning
+#+filetags: :DataAssimilation:MachineLearning:
+#+startup: latexpreview
+
+[[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]
+[[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Latent Space]], [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoders]]
+
+The main idea between this method is
+ * An AE ($\phi$, $\psi$) which aims at encoding the data $x$ in a latent space: $(\psi\circ\phi)(x)\approx Id$
+ * Train a surrogate $\mathcal{S}$ which encodes the dynamic *in* the latent space:
+   $(\psi \circ \mathcal{S} \circ\phi)(x_k) \approx x_{k+1}$
+
+ For stability, we adjust our loss functions in order to take into
+ account the prediction of $C$ consecutive states:
+
+ \begin{equation}
+\mathcal{L}_{AE}(x_{k+1:k+C}) = \frac{1}{C}\sum_c \mathrm{MSE}((\psi \circ \phi)(x_{k+c}), x_{k+c}))
+\end{equation}
+\begin{equation}
+\mathcal{L}_{Sur}(x_{k:k+C}) = \frac{1}{C}\sum_c \mathrm{MSE}(\mathcal{T}^c(x_k), x_{k+c})
+\end{equation}
+with
+\begin{equation}
+\mathcal{T}^c = \psi \circ \mathcal{S}^c \circ \phi
+\end{equation}
+
+
+And the loss function is then a linear combination of those two.
+
+

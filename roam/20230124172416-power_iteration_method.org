@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       9403482f-5dfc-4cac-ba0f-0876f0548f16
+:ROAM_ALIASES: "Von Mises iteration"
+:END:
+#+title: Power Iteration method
+#+filetags: :LinearAlgebra:
+
+The Power Iteration (or power method) is an eigenvalue algorithm,
+which gives the greatest eigenvalue and associated eigenvector.
+
+* Pseudocode
+  - Let $b_0$ be a starting vector
+  - While not converged
+    - Set $b_{k+1} = \frac{Ab_k}{\|Ab_k\|}$
+
+ And it converges with geometric rate, with ratio $|\lambda_2 /
+ \lambda_1|$ where $\lambda_2$ is the second largest eigenvalue.

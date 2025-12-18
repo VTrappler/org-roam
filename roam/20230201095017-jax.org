@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       4c31b97c-4676-40ae-bbed-1e5ac9c23b9e
+:END:
+#+title: Jax
+#+filetags: :ProgrammingLanguage:
+
+JAX is NumPy on the CPU, GPU, and TPU, with great automatic
+differentiation for high-performance machine learning research.
+
+It is the basis for [[id:68a1ceea-769b-4b8f-84cc-edce5e1a4974][NumPyro]]

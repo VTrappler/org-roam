@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       dddc086f-5b0e-4087-aee0-594f8a3db158
+:END:
+#+title: Hessian Matrix vs GN Hessian Matrix
+#+filetags: :Optimization:
+#+startup: latexpreview
+
+
+Let us consider the NLLS problem:
+\begin{equation}
+f(\theta) = \sum f_i(\theta) = \sum_{i=1}^m r^2(x_i, \theta)
+\end{equation}
+where we want to minimize with respect to $\theta \ in\mathbb{R}^n$.
+Each term $f_i(\theta)$ is associated with a constraint $r^2(x_i, \theta)$.
+
+ * If there are less than $n$ terms, problem is *underdetermined*: infinite solutions which gives $0$
+ * when $n$ independent constraints, unique minimum $0$
+ * More than $n$ constraints, parameter $\theta$ can be estimated by minimizing the cost function.
+
+ + For a single constraint associated with $f_i(\theta)$,
+   $f_i(\theta)=0$ holds on a $(n-1)$ dimensional manifold.
+
+Definition: Let $f\geq 0$. We call it *zero-on-* $(n-1)$ *-D* if
+$f(\theta)=0$ holds on an $(n-1)$ dimensional manifold
+[[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Gauss-Newton method]]
+* Newton type algorithms
+[[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Gauss-Newton method]]
+  \begin{equation}
+f(\theta_0 + \delta \theta) \approx f(\theta_0) + b^T \delta \theta + \frac{1}{2} \delta \theta^T H \delta \theta
+  \end{equation}
+where $b = \frac{\partial f}{\partial \theta}$ is the gradient vector,
+and $H$ is the Hessian matrix.
+
+Using this approximation, the increment to use in order to get the minimum is
+\begin{equation}
+\hat{\delta \theta} = -H^{-1}b
+\end{equation}
+
+** Approximations of the Hessian
+   The full Hessian matrix of $f$ is
+   \begin{equation}
+H_N = 2 \left(\sum \frac{\partial r_i}{\partial \theta} \left(\frac{\partial r_i}{\partial \theta}\right)^T + r_i \frac{\partial^2 r_i}{\partial \theta^2}\right)
+   \end{equation}
+The Gauss-Newton approximation omits the second order terms
+   \begin{equation}
+H_{GN} = 2 \sum \frac{\partial r_i}{\partial \theta} \left(\frac{\partial r_i}{\partial \theta}\right)^T
+   \end{equation}
+
+   Newton type methods may take step sizes which are too long, Levenberg-Marquardt:
+  \begin{equation}
+H_{LM}= H_{GN} + \lambda I
+   \end{equation}
+   if $\lambda > 0$, is small (much smaller than the least nonzero
+   singular value of $H_{GN}$), it is almost the GN method, while if
+   $\lambda$ is large, then it is closer to steepest descent.  This
+   value of $\lambda$ can be changed inbetween iterations.
+
+   
+** Comparisons of Newton vs GN
+   * Newton's method using the full Hessian matrix should have better performances, since it includes higher-order derivatives
+     * *However*, GN matrix is preferred to the Hessian, especially when data is highly corrupted by noise (see refs [1, 27])
+     * Second derivative can be destabilizing if the model fits badly [31]
+     * But experiments show that the noise as a similar effect on GN and N
+   * Large residuals: GN performs poorer on Brown function an trig functions: second order term non negligible.
+     * On the other hand, Newton performs poorer than GN on early iterations (with high residuals)
+
+** Quadratic approximations
+   An $H$ quadratic approximation of $f$ is defined as
+   \begin{equation}
+\mathfrak{f}_H(x_0 + \delta x) = f(x_0) + b^T\delta x + \frac12 \delta x^T H \delta x
+   \end{equation}
+  with $H$ symmetric.
+
+

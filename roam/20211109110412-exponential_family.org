@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       d10b444c-1253-4d39-9717-2e3f9f701e84
+:END:
+#+title: Exponential Family
+
+The exponential family is a parametric set of distributions, which have a specific form
+
+* Formulation
+** Scalar parameter
+A single-parameter $\theta$ exponential family is a distribution whose density can be expressed as
+\begin{align}
+f_X(x \mid \theta) &= h(x) \exp \left[\eta(\theta)T(x) + A(\theta)\right]\\
+                   &=h(x) \exp\left(A(\theta)\right) \exp \left[\eta(\theta)T(x)\right]\\
+                   &=\exp \left[\eta(\theta)T(x) + A(\theta) + \ln h(x)\right]
+\end{align}
+Its nature allows for factorization, with functions only of the data
+$x$ and the parameter $x$.
+
+** Vector parameter
+For a vector parameter: $\theta = (\theta_1, \dots,\theta_s)$, we have can trivially extend the previous definition.
+
+\begin{align}
+f_X(x\mid \theta) &= h(x) \exp\left[\langle \eta(\theta); T(x) \rangle - A(\theta)\right] \\
+&=
+\end{align}
+
+The exponential family is said to be
+ * Canonical if $\eta(\theta) = \theta$ (no tranformation of the parameter)
+ * Curved if $\dim \eta(\theta) > \dim \theta$
+
+* Usage
+** Interpretation
+ * $T(x)$ is a *sufficient statistic* of the distribution
+ * $\eta$ is called the *natural parameter*.
+ * $A(\eta)$ is the *log-partition function*
+** Properties
+ * They have a *sufficient statistic*
+ * They have a conjugate prior (see [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]])
+
+
+* Examples
+ * Normal
+ * Log-normal
+ * Exponential
+ * Gamma
+ * $\chi^2$
+ * Beta
+ * Bernoulli
+ * Dirichlet
+ * Poisson
+ * Categorical
+ * Geometric
+ * Inverse Gaussian
+

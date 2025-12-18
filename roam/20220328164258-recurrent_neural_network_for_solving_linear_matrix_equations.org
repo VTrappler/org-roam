@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       c4a38c8c-6de4-41a3-8b46-dd013101f4f4
+:ROAM_REFS: cite:wang_recurrent_1993
+:END:
+#+title: Recurrent Neural Network for Solving Linear Matrix Equations
+#+filetags: :MachineLearning:
+
+The author propose to use [[id:f73cda73-3c82-43f4-9636-b2e409682afd][Recurrent Neural Networks]] in order to solve
+a system of matrix equations
+
+* Generic configuration
+  A linear matrix equation can be described as
+  \begin{equation}
+G(S) = 0
+\end{equation}
+where $S\in\mathbb{R}^{m\times n}$ is the solution matrix, and $G$ is
+a $p\times q$ matrix of linear functions. This equation is then a
+problem of constraint satisfaction problem.
+It is then equivalent to solving
+\begin{equation}
+\min_V E\left(G(V)\right) = \sum_{i=1}^p\sum_{j=1}^q e_{i,j}(g_{i,j}(V))
+\end{equation}
+$E$ is a matrix of function which measures by how much the constraint
+$g_{i,j}(V)$ is violated.
+
+The dynamical equation of a RNN:
+\begin{equation}
+\frac{\mathrm{d} v_{i,j}}{\mathrm{d}t}(t) = -\mu \sum_{k=1}^p\sum_{l=1}^q \frac{\partial g_{k,l}}{\partial v_{i,j}}(V(t))  f_{k,l}(g_{k,l}(V))
+\end{equation}
+with

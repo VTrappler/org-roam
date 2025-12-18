@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       02bb393e-a570-464c-94d8-3a3e2e28ec87
+:END:
+#+title: Sampling using transport maps
+
+[[id:206abcc1-20d3-47f5-9af1-f30c86405266][Transport Theory]]
+[[id:70c7bb7b-a147-42b3-adf5-cd17b22dce7f][Pushforward Measure]]

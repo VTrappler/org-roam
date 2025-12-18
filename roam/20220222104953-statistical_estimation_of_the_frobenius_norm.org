@@ -1,0 +1,77 @@
+:PROPERTIES:
+:ID:       41ffa2aa-c1b6-4320-b461-0f2447cc43f4
+:ROAM_REFS: cite:gratton_improved_2018
+:END:
+#+title: Statistical Estimation of the Frobenius norm
+#+LaTeX_HEADER: \newcommand{\Frob}[1]{\| #1\|_\mathrm{F}}
+#+startup: latexpreview
+
+We look for an [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimator]] which verifies
+\begin{equation}
+\mathbb{P}\left[\frac{\Frob{B}}{\tau} \leq \mathrm{estimator}_k(B) \leq \tau \Frob{B}\right] \geq 1 - \delta(k, \tau)
+\end{equation}
+where $k$ is the number of samples, and $\delta(k,\tau) \rightarrow 0$
+when $k$ increases and/or the tolerance $\tau > 1$ increases.
+* Gaussian Estimator and GKL estimator
+** Gaussian estimator
+*** Definition
+    Let $Z$ be an $z \times k$ matrix, $k \leq n$.
+    The Gaussian estimator of $\Frob{B}$ is defined as
+    \begin{equation}
+  \psi_k(B) = \frac{1}{\sqrt{k}} \Frob{BZ}
+  \end{equation}
+*** Properties
+    $\psi^2_k(B)$ is a linear combination of independent $\chi^2$ variables with $k$ dof:
+    \begin{equation}
+ \phi^2_k(B) = \frac{1}{k} \sum_{i=1}^r \sigma^2_i \chi^2_i(k)
+ \end{equation}
+ where $\sigma_1 \geq \dots \geq \sigma_r > 0$ are the non-zero singular values of $B$. Thus
+ \begin{align}
+ \mathbb{E}\left[\psi_k^2(B)\right] =& \Frob{B}^2  \\
+ \mathbb{V}\mathrm{ar}\left[\psi_k^2(B)\right] =& \frac{2}{k}\sum_{i=1}^r \sigma_i^4 \leq \frac{2}{k} \Frob{B}^4
+ \end{align}
+ For small-sample estimation, $k \ll n$
+** GKL estimator
+*** Definition
+   The GKL estimator is
+   \begin{equation}
+   \eta_k(B) = \frac{\sqrt{n}}{\sqrt{k}} \Frob{BQ}
+   \end{equation}
+   where $Q$ is the $n\times k$ thin factor of the QR decomposition of $Z$, such that
+   \begin{equation}
+   Z = QR \text{ with } Q \text{ unitary} \in\mathbb{R}^{n\times k}
+   \end{equation}
+*** Properties
+    if $B$ has rank $r$,
+     \begin{equation}
+     \mathbb{P}\left[\frac{\Frob{B}}{\tau} \leq \eta_k(B) \leq \tau \Frob{B}\right] \geq 1 - r\left(1 - \mathcal{I}(\frac{k \tau^2}{n}) + \mathcal{I}(\frac{k}{n\tau^2})\right)
+     \end{equation}
+     
+     where $\mathcal{I}(\alpha) = 1$ if $\alpha \geq 1$ and a regularized
+     beta function if $0 < \alpha < 1$.  This bound is interesting if the
+     rank of $B$ is close to 1, but can be very pessimistic if it is not.
+     Since the rank is not known before, we usually choose $r = \min \{m, n\}$
+** Equivalence
+   For any $B\in \mathbb{R}^{m \times n}$ and any $\tau > 0$, the estimators satisfy
+   \begin{equation}
+\mathbb{P}\left[1 - \frac{\sqrt{k} + \tau}{\sqrt{n}} \leq \frac{\psi_k(B)}{\eta_k(B)} \leq 1 + \frac{\sqrt{k} + \tau}{\sqrt{n}}\right] \geq 1 - 2 \exp\left(-\frac{\tau^2}{2}\right)
+\end{equation}
+This is proven by deriving
+\begin{equation}
+\psi_k(B) \leq \eta_k(B)\frac{\|Z\|^2}{\sqrt{n}}
+\end{equation}
+and
+\begin{equation}
+\eta_k(B) \leq \psi_k(B) \frac{\sqrt{n}}{\sigma_{\min}(Z)}
+\end{equation}
+
+
+* Improved Convergence Bounds
+** Stable rank
+
+   The stable rank of a matrix $B$ is defined as
+   \begin{equation}
+\rho(B) = \frac{\Frob{B}^2}{\|B\|^2_2} = \frac{\sum_i
+\sigma_i^2}{\max_i \sigma_i^2}
+\end{equation}
+   where $\sigma_i$ are the singular values of $B$

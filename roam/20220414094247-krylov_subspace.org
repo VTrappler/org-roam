@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       dc6424ca-a277-43f0-b37c-753435090ea2
+:ROAM_ALIASES: "Krylov Methods"
+:END:
+#+title: Krylov subspace
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+* Definition
+  Let $A$ be a matrix, and $b$ a vector with concordant dimension.
+  The Krylov subpsace $\mathcal{K}_r(A, b)$ is defined as
+  \begin{equation}
+\mathrm{span} \left\{b=A^0b, Ab, A^2b,\dots, A^{r-1}b\right\}
+\end{equation}
+* Main idea
+  
+Let us assume that $A$ is a $n\times n$ matrix.  We have then that
+$\mathcal{K}_{n+1}(A, b)$ is a $n$ dimensional subspace, spanned with $n+1$
+vectors, thus there exists $\alpha_0,\dots,\alpha_n$ such that
+\begin{equation}
+ \alpha_0 b + \alpha_1 Ab + \dots + \alpha_{n}A^{n}b = 0
+\end{equation}
+\begin{equation}
+A\left(-\frac{\alpha_1}{\alpha_0}b + \dots - \frac{\alpha_n}{\alpha_0}A^{n-1}b\right) = b
+\end{equation}
+
+and finally
+\begin{equation}
+-\frac{\alpha_1}{\alpha_0}b  - \dots - \frac{\alpha_n}{\alpha_0}A^{n-1}b = A^{-1}b
+\end{equation}
+
+* Examples of iterative methods based on Krylov subspace and iterated matrix vector product
+
+** Solving [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear Systems]]
+  - [[id:d674819d-be2b-4baf-a1b6-36867c640c2c][GMRES]]
+  - [[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]]
+** [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] problem
+  - [[id:9403482f-5dfc-4cac-ba0f-0876f0548f16][Power Iteration method]] (but not exactly a Krylov subspace method)
+  - Lanczos Algorithm
+  - [[id:b34392e8-9180-4826-aafc-e8d2ffb6e82c][Arnoldi Iterations]]

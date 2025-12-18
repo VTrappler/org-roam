@@ -1,0 +1,79 @@
+:PROPERTIES:
+:ID:       17383d23-7ad0-4b99-a99f-660cd2984878
+:ROAM_ALIASES: NF CNF "Continuous Normalizing Flows"
+:END:
+#+title: Normalizing flows
+#+filetags: :NeuralNetworks:MachineLearning:
+#+startup: latexpreview
+
+Normalizing flows are a specific case of a [[id:206abcc1-20d3-47f5-9af1-f30c86405266][Transport]] map between measures, constructed using [[id:2cc78129-f7ba-4f06-890e-c0a15838990a][Invertible Neural Networks]]
+ and [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]]
+
+* Change of variable and pushforward
+Let us recall the equation of  change of variables:
+$p(x)\mathrm{d}x = p(y) \mathrm{d}y$
+for a given random variable $x$ with pdf $p_X$, we can write the pdf of $y = f(x)$
+\begin{equation}
+p_X(x) = p_Y(f(x)) \left|\frac{\mathrm{d}f}{\mathrm{d}x}(x)\right|
+\end{equation}
+Taking logarithms, and going in multidimensional space, we have
+
+\begin{equation}
+\log p_X(x) = \log p_Y(f(x)) + \log \left|\det J_f(x) \right|
+\end{equation}
+where $J_f$ is the jacobian matrix of $f$.
+
+Using [[id:70c7bb7b-a147-42b3-adf5-cd17b22dce7f][Pushforward Measure]] notation, we have that the measure $p_X$ is pushforward by $f$, giving $p_Y$
+\begin{equation}
+f_{\sharp} p_X = p_Y
+\end{equation}
+and for any measurable set $B$ (measurable with respect to $p_X$)
+\begin{equation}
+f_{\sharp} p_X(B) = p_Y(B) = p_X(f^{-1}(B))
+\end{equation}
+
+* Generative direction
+  When $p_X$ is "simple", $f$ flows in the generative direction, and
+  keeping the transformation invertible
+  \begin{equation}
+\log p_Y(y) =\log p_X(f^{-1}(y)) + \log | \det J_{f^{-1}}(y) |
+  \end{equation}
+
+  If $f = f_N \circ \dots \circ f_1$, that is a composition of simple non-linear bijective functions, we have $f^{-1} = f_1^{-1} \circ \dots \cric f^{-1}_N$,
+  and $J_{f^{-1}} = J_{f}^{-1}$, thus since
+  \begin{equation}
+J_f = J_{f_N}J_{f_{N-1}} \cdots J_{f_1} 
+  \end{equation}
+we have
+$J_{f^{-1}} =  \prod_{i=1}^N J_{f_i}$ and taking the determinants, we have
+
+\begin{align}
+\log |\det J_f| &= \sum_{i=1}^N \log |\det J_{f_i}| \\
+\log |\det J_{f^{-1}}| &= -\sum_{i=1}^N \log |\det J_{f_i}|
+\end{align}
+* Training
+* C1-Diffeomorphism
+
+
+
+
+* Continuous Normalizing Flows
+:PROPERTIES:
+:ID:       05c2bb50-5d53-496e-a3b1-a9d8b757da4a
+:END:
+We define the probability density path $(t,x)\in[0,1]\times\mathbb{R}^d\mapsto p_t(x)$ which is a time-dependent pdf, ie that $\int p_t(x)dx = 1$ for all $t$.
+
+We define a time-dependent vector field $(t,x)\in[0,1]\times\mathbb{R}^d\mapsto v_t(x)\in\mathbb{R}^d$.
+The flow associated is the time-dependent diffeomorphic map $(t,x)\in[0,1]\times\mathbb{R}^d \mapsto \phi_t(x)\in\mathbb{R}^d$ which is defined via the following ODE:
+\begin{align}
+\frac{d}{dt} \phi_t(x) &= v_t(\phi_t(x)) \\
+\phi_0(x) &= x
+\end{align}
+
+By modelling the vector field $v_t(x)$ with a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Network]], we have a deep parameteric model of the flow $\phi_t$, which is called a Continuous Normalizing flow.
+
+The CNF can be used to reshape a prior density $p_0$ to a complex one $p_1$ by [[id:70c7bb7b-a147-42b3-adf5-cd17b22dce7f][Pushforward.]]
+\begin{align}
+        p_t &= (\phi_t)_{\sharp}p_0\\
+        p_t(x) &= p_0(\phi_{t}^{-1}(x))\det \left(\frac{\partial\phi_{t}^{-1}}{\partial x}(x)\right)
+\end{align}

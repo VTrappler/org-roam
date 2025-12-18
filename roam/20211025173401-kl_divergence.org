@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       33a6b5ee-82e8-489a-858d-a634db231132
+:ROAM_ALIASES: "Relative Entropy"
+:ROAM_REFS: cite:kullback_information_1951
+:END:
+#+title: KL-divergence
+
+KL divergence is a dissimilarity measyre
+
+

@@ -1,0 +1,192 @@
+:PROPERTIES:
+:ID:       57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b
+:ROAM_ALIASES: PCA
+:END:
+#+title: Principal Component Analysis
+#+filetags: :DimensionReduction:PCA:
+#+STARTUP: latexpreview
+
+* Overview
+PCA is used in order to
+  - *Describe* data
+  - *Decorrelate* them
+  - *Denoise* them
+  - Reduce the dimension
+
+* Ressources:
+https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
+
+
+* Derivation
+** Matrix form
+Let's consider $N$ random variables $X_1,\dots, X_N$, known through $K$ realisations
+This can be summarised as a matrix of $N$ columns and $K$ rows.
+\begin{equation}
+M = 
+\begin{bmatrix}
+X_{1, 1} &\dots & X_{1, N} \\
+\vdots & \vdots & \vdots \\
+X_{K, 1} & \dots & X_{K, N}
+\end{bmatrix}
+\end{equation}
+
+Let $g=(\bar{X}_{1}, \dots,\bar{X}_N)$ the center of mass of the matrix
+
+The centered matrix is then
+\begin{equation}
+\bar{M} = M - 1 g^T =
+\begin{bmatrix}
+X_{1, 1} - \bar{X}_1 &\dots & X_{1, N} - \bar{X}_N \\
+\vdots & \vdots & \vdots \\
+X_{K, 1} - \bar{X}_1 & \dots & X_{K, N} - \bar{X}_N
+\end{bmatrix}
+\end{equation}
+
+
+The covariance matrix is then
+\begin{equation}
+C = \frac{1}{(K-1)}\bar{M}^T \bar{M}
+\end{equation}
+
+This matrix $\bar{M}^T \bar{M}$ can then be diagonalized, since it is symmetric, and
+\begin{equation}
+\bar{M}^T \bar{M} = W \Lambda W^T
+\end{equation}
+
+Where $W$ is the matrix containing the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvectors]] as columns, and
+$\Lambda$ is a diagonal matrix of the associated eigenvalues, and we can assume that they are arranged in descending order.
+
+** An an optimisation problem
+\begin{align}
+w_1 &= \operatorname{\mathrm{argmax}}_{\|w\|=1} \{\|Xw\|^2\} \\
+&= \operatorname{\mathrm{argmax}}_{\|w\|=1} \{w^T X^TX w\} \\
+&= \operatorname{\mathrm{argmax}} \left\{\frac{w^T X^TX w}{w^Tw}\right\} \\
+&= \operatorname{\mathrm{argmax}} R(X^TX, w)
+\end{align}
+which is a [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][Rayleigh quotient]].
+
+and iteratively, the $k$-th component can be found by substracting the previous $k-1$ rank-1 matrices:
+\begin{equation}
+\tilde{X}_k = X - \sum_{i=1}^{{k-1}} Xw_i w_i^T
+\end{equation}
+and
+\begin{equation}
+w_k = \operatorname{\mathrm{argmax}} \left\{\frac{w^T\tilde{X}_k^T\tilde{X}_kw}{w^Tw}\right\}
+\end{equation}
+
+** Probabilistic PCA
+See [[id:171c9790-a2d1-41aa-8d31-e21650e9830f][Probabilistic PCA]]
+
+ 
+* Usage: dimensionality reduction
+By truncating the PCA, this can be used as a [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]] method.
+The transformation $T = WX$ maps an original data vector (of $N$ components) 
+
+
+
+* See also
+[[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]]
+
+
+* Python example
+
+#+begin_src python :session :results value
+  import numpy as np
+  import matplotlib.pyplot as plt
+  plt.close()
+  #rng = np.random.RandomState(012)
+  X1 = np.random.random(size=(2, 2)) * 3 #+ 3
+  X2 = np.random.normal(size=(2, 200)) #* 3 - 1 
+  data = np.dot(X1, X2).T
+  data.shape
+#+end_src
+
+#+RESULTS:
+| 200 | 2 |
+
+#+begin_src python :session :results output
+  X = data - data.mean(0)
+  C = np.matmul(X.T, X)
+  w, v = np.linalg.eig(C)
+  print(w)
+  print(v)
+#+end_src
+
+#+RESULTS:
+: [   4.20095532 2601.05264849]
+: [[-0.75718781 -0.65319723]
+:  [ 0.65319723 -0.75718781]]
+
+#+begin_src python :session :results output
+  T = np.matmul(X, v)
+  print(X.var(0), T.var(0))
+  print(X.var(0).sum(), T.var(0).sum())
+#+end_src
+
+#+RESULTS:
+: [5.56095447 7.46531355] [ 0.02100478 13.00526324]
+: 13.026268019080781 13.026268019080778
+
+#+begin_src python :session :results file
+  def draw_vector(v0, v1, ax=None):
+      ax = ax or plt.gca()
+      arrowprops=dict(arrowstyle='->',
+		      linewidth=2,
+		      shrinkA=0, shrinkB=0)
+      ax.annotate('', v1, v0, arrowprops=arrowprops)
+      print('vector drawn')
+
+
+  plt.subplot(1, 2, 1)
+  plt.plot(X[:, 0], X[:, 1], '.', alpha=0.2)
+  for (vec, vari) in zip(v.T, T.var(0)):
+      v_ = vec * 3 * np.sqrt(vari)
+      print(v_)
+      draw_vector([0, 0], v_)
+  #draw_vector([0, 0], [1, 1])
+  plt.subplot(1, 2, 2)
+  plt.plot(T[:, 0], T[:, 1], '.')
+  plt.xlabel(r'$x_1$')
+  fname = '/home/victor/org-roam/images/PCA_samples.png'
+  plt.savefig(fname)
+  plt.close()
+  fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/PCA_samples.png]]
+#+begin_src python :session :results output
+  print(v)
+  print(pca.components_)
+  print(pca.mean_)
+#+end_src
+
+#+RESULTS:
+: [[-0.75718781 -0.65319723]
+:  [ 0.65319723 -0.75718781]]
+: [[-0.95694116 -0.29028197]
+:  [ 0.29028197 -0.95694116]]
+: [-1.33226763e-16 -2.10942375e-17]
+
+
+#+begin_src python :session :results file
+
+  from sklearn.decomposition import PCA
+  pca = PCA(n_components=2)
+  pca.fit(X)
+  plt.plot(X[:, 0], X[:, 1], '.', alpha=0.2)
+  for length, vector in zip(pca.explained_variance_, pca.components_):
+      v_ = vector * 3 * np.sqrt(length)
+      draw_vector(pca.mean_, pca.mean_ + v_)
+      print(v_)
+  plt.axis('equal')
+  fname = '/home/victor/org-roam/images/PCA_samples_scikit.png'
+  plt.savefig(fname)
+  plt.close()
+  fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/PCA_samples_scikit.png]]
+
+

@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       39889361-e97d-4535-bf89-1547908c4ff4
+:END:
+#+title: SEEDS: Emulation of Weather Forecast Ensembles with Diffusion Models
+#+filetags: :NWP:LiteratureReview:MachineLearning:
+
+
+* Summary
+Ensemble methods are a proxy for Monte-Carlo methods in order to
+quantify the uncertainty of predictions. The number of members is the
+limiting factor for accuracy.  The authors (Google) propose to use
+[[id:74220f65-10a4-4bf3-8f25-939c4b9dab99][Generative Artificial Intelligence]] (GAI) in order to generate (new)
+ensemble members from a reduced set of existing members using [[id:46609399-4c07-4bf3-b50c-3d2d81143ee5][Probabilistic Diffusion Models]].
+*Scalable Ensemble Envelope Diffusion Samples (SEEDS)*
+
+* Learning tasks
+  Let $v$ be the atmospheric state variables.
+  In both tasks, we have:  $v_1, \dots, v_K \sim p(v)$ true samples from a the wanted pdf $p(v)$
+ + Generative Ensemble Emulation In GEE, we want to use those $K$
+   samples to conditionally generate $N
+> K$ additional samples, hopefully from $p(v)$
+ + Generative Post-Processing In GPP, the sampler generates $N > K$
+   samples from a *mixture* distribution $\alpha p(v) + (1-\alpha)p'(v)$
+   This task aims at augmenting the ensemble size, and also to bias
+   the new samples towards $p'(v)$ which is "a distribution that more
+   closely resembles actual weather"

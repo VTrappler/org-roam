@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       257a4547-2966-46c9-b0b3-d7a6027fd7e7
+:END:
+#+title: Topological spaces
+#+filetags: :FunctionalAnalysis:
+
+* Definition
+
+Topological spaces are a family of [[id:c753f247-4fd9-45ef-94b2-400bd92fd58c][Vector Spaces]]
+
+#+BEGIN_SRC emacs-lisp
+(org-add-link-type
+ "image-url"
+ (lambda (path)
+   (let ((img (expand-file-name
+           (concat (md5 path) "." (file-name-extension path))
+           temporary-file-directory)))
+     (if (file-exists-p img)
+     (find-file img)
+       (url-copy-file path img)
+       (find-file img)))))
+#+END_SRC
+
+#+RESULTS:
+: Created image-url link.
+
+[[https://www.researchgate.net/profile/Alina-Meresescu/publication/330466383/figure/fig1/AS:716264196567042@1547782100306/Topological-spaces-and-their-connections-in-a-functional-analysis-setting.png]]
+
+* Separable Space
+  :PROPERTIES:
+  :ID:       257671b2-77e1-46fc-bac6-92f36a4ad7de
+  :END:
+A separable space is a topological space which contains a *countable* and *dense* subset.

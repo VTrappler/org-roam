@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       1e877da6-7c82-4a7a-8c0f-8f42fa3b332b
+:ROAM_ALIASES: "Fourier transform" "Fourier decomposition"
+:END:
+#+title: Fourier Analysis
+#+startup: latexpreview
+
+* Fourier Transform
+Fourier transform is a linear tranformation of functions of a real
+argument, and it produces a continuous function in the *frequency* domain
+
+** Definition
+Let $f: \mathbb{C} \rightarrow \mathbb{R}$ be an integrable function.
+The Fourier transform is defined as
+\begin{equation}
+\hat{f}(\xi) = \int_{-\infty}^{+\infty} f(x) e^{-2i\pi x \xi} \,\mathrm{d} x
+\end{equation}
+
+The inverse Fourier transform is then
+\begin{equation}
+f(x) = \int_{-\infty}^{+\infty} \hat{f}(\xi) e^{2i\pi x \xi} \, \mathrm{d} \xi
+\end{equation}

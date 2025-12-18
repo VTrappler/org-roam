@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       691d54e5-5161-4f1a-8176-6bb20ffaf6d4
+:ROAM_ALIASES: EBM
+:END:
+#+title: Energy-based model
+#+filetags: :MachineLearning:
+* EBM for inference
+The goal of Energy based model is to get a function $F$, which maps the how pairs $(x,y)$ fit together:
+$x$ can be the input, $y$ the output for instance.
+This function $F$ is called the energy function:
+\begin{equation}
+F: \mathcal{X}\times\mathcal{Y}\to\mathbb{R}
+\end{equation}
+and the inference can be described as
+\begin{equation}
+\hat{y} = \mathrm{argmin}_y F(x,y)
+\end{equation}
+
+This can be formalized using Gibbs posterior:
+\begin{equation}
+p(y |x) = \exp(-\beta F(x,y)) / Z_{x}
+\end{equation}
+where $Z_x$ is the normalization constant
+* Latent EBM
+* Contrastive methods for training
+
+For pairs $(x,y)$ in the dataset, we want to "push down" $F(x,y)$,
+while "pushing up" $F(x,y')$ for $y \neq y'$

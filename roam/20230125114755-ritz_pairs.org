@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       af68e6f5-f24d-4157-804f-86d429d964df
+:END:
+#+title: Ritz Pairs
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+Ritz pairs are a kind of approximation of the [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenpairs]] problem.
+
+Ritz pairs can be computed as a byproduct of [[id:2ac50dc6-be86-4344-a20f-f9aef7e0ce73][Lanczos Algorithm]]
+
+* Residual of the approximation
+Let $A$ ve a $n\times n$ symmetric matrix. We want to estimate
+eigenpairs of $A$ from a subspace $S$.
+
+Let ($\theta, z \in S$) be such an approximation,
+The residual of this approximation is
+\begin{equation}
+r = Az - \theta z 
+\end{equation}
+
+In the case of Hilbert space, we then want this residual to be orthogonal to $S$,
+* Galerkin Approach
+  Let us assume that we have an orthonormal basis of $S$, $Q = [q_1, \dots, q_r]$.
+  $z \in S = \mathrm{rg}(Q)$.
+  The last condition can be translated as
+  \begin{equation}
+Q^Tr = 0 = Q^TAz - \theta Q^Tz
+  \end{equation}
+But we have $z = Qy$ with $y \in \mathbb{R}^{r}$
+\begin{equation}
+Q^TAQy - \theta Q^TQy = 0
+\end{equation}
+We can orthonormalize the basis, so finally
+\begin{equation}
+Q^TAQy = \theta y
+\end{equation}
+
+The *primitive* Ritz pairs are the eigenvalues of $Q^TAQ$, while the
+*Ritz* pairs are $Qy = z \in S \subset\mathbb{R}^n$
+
+

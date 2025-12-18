@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       ea4143c4-696d-43e2-adee-f11ffce97095
+:ROAM_ALIASES: "Variational Data Assimilation"
+:END:
+#+title: 3DVar and 4DVar
+#+filetags: :DataAssimilation:
+#+STARTUP: latexpreview
+
+In [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]] we cover 3D-Var as the equivalent variational
+paradigm for the BLUE, which can be readily adapted for non-linear cases.
+
+4D-Var combines some aspects of the Kalman filter (especially for its
+sequential aspect), while adopting a variational approach
+
+* Cost function in the 3D-Var and 4D-Var
+
+\begin{align}
+  J_{3D}(x) &= \frac{1}{2}\left(x-x^b\right)^T\mathbf{B}^{-1}\left(x-x^b\right) + \frac{1}{2}(y - \mathbf{H}x)^T\mathbf{R}^{-1}(y - \mathbf{H}x) \\
+J_{4D}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2
+\end{align}
+The quadratic error associated with the background knowledge (ie the prior) can be seen as a
+$L_2$ [[id:4fe0221e-366f-4442-ac99-542bc63f2eb4][Regularization]].
+
+
+* Weak-constraint 4D-Var
+\begin{align}
+J_{4D,\mathrm{Strong}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 \\
+J_{4D,\mathrm{Weak}}(x) &= \frac{1}{2}\|x_0 - x_0^b \|^2_{\mathbf{B}_0^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathbf{H}_k x_k\|_{\mathbf{R_k}^{-1}}^2 + \frac{1}{2}\sum_{k=1}^{K} \|x_k - \mathbf{M}_k x_{k-1}\|_{\mathbf{Q_k}^{-1}}^2
+\end{align}
+The weak constraint 4DVar incorporates the model error in the cost
+function.  In the case of strong constraints, the "model" is a strong
+constraint: $x_{k+1} = M(x_k)$, while this equality is relaxed in the
+weak constrained case.
+
+* Optimisation
+The [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] of the cost function can be performed with
+gradient-based methods, gradient obtained using the [[id:f867396d-b033-4fa7-b99a-b4dd551ae37b][Adjoint Method]] for
+instance.
+
+** Getting the gradient in the linear case: example of derivation
+We assume that $x_{k+1} = M_{k+1} x_k$, so that $M_{k+1}$ is linear
+
+Let us write the [[id:713b6a9f-24f1-4bf2-9dd9-92af579c3a35][Lagrangian]] of the optimisation problem:
+\begin{equation}
+L(x, \Lambda) = J(x) + \sum_{k=1}^K \Lambda_k^T \left(x_k - M_kx_{k-1}\right)
+\end{equation}
+We can then write
+\begin{equation}
+x_k = M_k M_{k-1} \dots M_1 x_0
+\end{equation}
+Let us compute the gradient of $J$ wrt $x_0$.
+Let
+\begin{align}
+d_k &= y_k - H_k [M_k M_{k-1} \dots M_1]x_0 \\
+\Delta_k &= R_k^{-1}d_k
+\end{align}
+so $d_k$ is the innovation vector, and $\Delta$ is a normalized
+innovation vector. Setting aside the background term, we have
+\begin{align}
+\delta J(x_0) &= \frac{1}{2}\sum_{k=0}^K \delta d_k^T R_k^{-1}d_k + \frac{1}{2}\sum_{k=0}^K  d_k^T R_k^{-1}\delta d_k \\
+&= \sum_{k=0}^K  (\delta d_k)^T R_k^{-1}d_k\\
+&=- \sum_{k=0}^K  \left(H_k [M_k M_{k-1} \dots M_1]\delta x_0\right)^T \Delta_k\\
+&= - \delta x_0^T\sum_{k=0}^K  \left[M_0^T M^T_{1} \dots M_k^T\right] H_k^T\Delta_k\\
+&= \langle \delta x_0 ;-\sum_{k=0}^K  \left[M_0^T M^T_{1} \dots M_k^T\right] H_k^T\Delta_k
+\end{align}
+So
+\begin{align}
+\nabla_{x_0} J &= -\sum_{k=0}^K  \left[M_0^T M^T_{1} \dots M_k^T\right] H_k^T\Delta_k\\
+&= -\left(H_0^T \Delta_0 + M_1^T\left[H_1^T \Delta_1 + M_2^T\left[H_2^T \Delta_2 \dots [M_K^TH_K^T\Delta_K]\right]\right]\right)
+\end{align}
+
+
+
+
+
+* Incremental 4DVar
+\begin{align}
+J(x) &= \frac{1}{2}\|x - x_0^b \|^2_{\mathbf{B}^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathcal{H}_k\circ \mathcal{M}_k (x_k)\|_{\mathbf{R_k}^{-1}}^2 \\
+J(x) &= \frac{1}{2}\|x - x^b \|^2_{\mathbf{B}^{-1}} + \frac{1}{2}\sum_{k=0}^{K} \|y_k - \mathcal{G}_k (x)\|_{\mathbf{R_k}^{-1}}^2 
+\end{align}
+
+Let us linearize $\mathcal{G}_k$ around $x$:
+\begin{equation}
+\mathcal{G}_k(x + \delta x) \approx \mathcal{G}_k(x) + G_k\delta x
+\end{equation}
+and we can solve (iteratively) the linearized problem:
+\begin{equation}
+\min_{\delta x^{(k)}} \frac{1}{2} \|x^{(k)} + \delta x^{(k)} - x^b\|_{B^{-1}} + \frac{1}{2} \sum_{j=0}^{N} \|\mathcal{G}_j(x^{(k)}) + G_j \delta x^{(k)} - y_j \|_{R^{-1}_j}
+\end{equation}
+which can be rewritten as
+\begin{equation}
+\min_{\delta x^{(k)}} \frac{1}{2} \|\delta x^{(k)} + (x^{(k)}- x^b)\|^2_{B^{-1}} + \frac{1}{2}\|G \delta x^{(k)} - d^{(k)} \|^2_{R^{-1}}
+\end{equation}
+
+so that $G = [G_1, \cdots, G_N]^T$, $d^{(k)} = [y_1 - \mathcal{G}_1(x^{(k)}), \dots y_N - \mathcal{G}_N(x^{(k)})]^T$ and $R^{-1} = \mathrm{diag}(R_1^{-1}, \dots, R_N^{-1})$ 
+This minimization can be done by solving the [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear System]]
+
+\begin{equation}
+\left(B^{-1} + G^T R^{-1} G\right) \delta x^{(k)} = B^{-1}(x^b - x^{(k)}) + G^TR^{-1}d
+\end{equation}

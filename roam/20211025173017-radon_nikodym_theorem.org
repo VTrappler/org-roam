@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       721678f4-dccf-41ed-b678-d111f8903007
+:ROAM_ALIASES: "Radon-Nikodym derivative"
+:END:
+#+title: Radon-Nikodym theorem
+#+filetags: :MeasureTheory:
+#+STARTUP: latexpreview
+
+
+Radon-Nikodym theorem is a theorem of [[id:ed5ca3ef-6b5c-4f01-beec-a7d42c7f6d0b][Measure Theory]] that allows to construct [[id:f16e587c-de26-47f5-8f1b-e298fd7eb3b6][Probability]] density functions

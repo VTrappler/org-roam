@@ -1,0 +1,72 @@
+:PROPERTIES:
+:ID:       171c9790-a2d1-41aa-8d31-e21650e9830f
+:ROAM_ALIASES: PPCA
+:ROAM_REFS: cite:tipping_probabilistic_1999
+:END:
+#+title: Probabilistic PCA
+#+startup: latexpreview
+#+filetags: :DimensionReduction:PCA:
+
+Probabilistic PCA is a probabilistic interpretation of the [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]
+
+* Factor analysis
+  :PROPERTIES:
+  :ID:       3c5702d7-c031-4c09-b40f-f2f343a3fc91
+  :END:
+Let us assume that $y$ is a $d$ dimensional observation vector, corresponding to a $q$ dimensional latent vector $x$.
+Assuming a Linear relationship (factor analysis)
+\begin{equation}
+y = Wx + \mu + \epsilon
+\end{equation}
+where
+ * $W\in \mathbb{R}^{d\times q}$
+ * $\mu$ allows for the model to have non-zero mean
+** Difference with [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]]
+   (source: stackoverflow):In terms of a simple rule of thumb, I'd suggest that you:
+
+    Run factor analysis if you assume or wish to test a theoretical
+    model of latent factors causing observed variables.
+
+    Run principal component analysis If you want to simply reduce your
+    correlated observed variables to a smaller set of important
+    independent composite variables.
+
+
+
+** Gaussian assumptions
+Further assumptions:
+ * $x \sim\mathcal{N}(0, I)$
+ * $\epsilon \sim \mathcal{N}(0, \Psi)$
+
+   and thus
+\begin{equation}
+y\sim \mathcal{N}(\mu, WW^T + \Psi)
+\end{equation}
+
+The key motivation for the factor analysis model is that by
+contraining $\Psi$ to be diagonal, the observed $y_i$ are
+conditionally independent given $x$.
+The matrix $W$ is then estimated by MLE.
+
+* From FA to PCA
+Let us assume then that $\Psi = \sigma^2 I$
+so
+\begin{equation}
+y \mid x \sim \mathcal{N}(Wx + \mu, \sigma^2 I)
+\end{equation}
+and given that $x \sim\mathcal{N}(0, I)$, $t\sim \mathcal{N}(\mu, C)$ with $C = WW^T + \sigma^2 I$.
+The log-likelihood $\mathcal{L} = \ell(\mu, C; y)$ is then
+\begin{equation}
+\mathcal{L} = -\frac{N}{2} \{d\log 2\pi + \log |C| + \mathrm{tr}(C^{-1}S)\}
+\end{equation}
+where
+\begin{equation}
+S = \frac{1}{N}\sum_{i=1}^N (y_n -\mu)(y_n - \mu)^T
+\end{equation}
+
+Using [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayes' theorem]], and matrix inversion lemmas for manipulating the covariance matrices, we have
+\begin{align}
+x \mid y &\sim \mathcal{N}(M^{-1} W^T (y-\mu), \sigma^2M^{-1}) \\
+M &= W^TW + \sigma^2I
+\end{align}
+$M$ is of dimension $q\times q$, while $C$ is of dimension $d \times d$.

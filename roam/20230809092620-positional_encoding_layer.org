@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       aa018475-83c5-4805-819a-1121b58aa268
+:END:
+#+title: Positional Encoding Layer
+#+filetags: :MachineLearning:
+
+Positional encoding appears mostly in [[id:10b80067-316a-4fe4-9c9f-c6d3f89d2c97][Transformers]]
+
+#+begin_src mermaid :file test.png
+flowchart TD
+    input(input\nembedding) --> sum{sum}
+    position(positional\nembedding) --> sum
+    sum --> attention(attention layer)
+#+end_src
+
+Since it should encode the position of tokens in sentences of various
+length, it should verify a few properties: (https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)
+ + Each position in the sentence should correspond to a unique encoding
+ + Distance between tokens should be *consistent* between sentences of different lengths
+ + Generalizes easily to different length so it must be *bounded*
+ + Deterministic
+
+   The author in Attention is All you need propose to use:
+   It is defined as
+\begin{equation}
+p_t = \begin{bmatrix}
+\sin(\omega_1 t) \\
+\cos(\omega_1 t) \\
+\vdots \\
+\sin(\omega_{d/2} t) \\
+\cos(\omega_{d/2} t)
+\end{bmatrix}
+\end{equation}
+where $d$ (even) is the dimension of the embedding, and
+\begin{equation}
+\omega_k = \frac{1}{10000^{2k/d}}
+\end{equation}

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       93b80440-6adf-4fef-aca1-ff14aa57c1eb
+:END:
+#+title: Material derivative
+#+startup: latexpreview
+#+filetags: :CFD:
+The material derivative describes the rate of change of a quantity of a material element subjected to space and time dependent velocity field $\mathbf{u}$:
+
+\begin{equation}
+\frac{\mathrm{D}y}{\mathrm{D}t} = \frac{\partial y}{\partial t} + \mathbf{u} \cdot \nabla y
+\end{equation}
+

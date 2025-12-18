@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       9a8f5099-3fcd-4e1d-89a1-016b92191f35
+:END:
+#+title: Local Ensemble Transform Kalman Filter
+#+filetags: :DataAssimilation:
+
+ [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]]

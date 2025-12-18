@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       1be5da95-0bff-4b35-bca1-3cd7c9dba340
+:END:
+#+title: Hessian-based convariance approximations in variational data assimilation
+#+filetags: :DataAssimilation:LiteratureReview:LinearAlgebra:
+#+startup: latexpreview
+
+Gejadze et al. 2018
+
+
+[[id:ea4143c4-696d-43e2-adee-f11ffce97095][Variational Data Assimilation]] is equivalent to finding the MAP in a [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian]] setting.
+
+* VarDA
+  + State variable $X$
+  + Model inputs (control): $U$
+  + Model: control to state mapping: $\mathcal{M}: \mathcal{U} \rightarrow \mathcal{X}$
+  + Perfect model assumption: $\bar{X} = \mathcal{M}(\bar{U})$
+    But in practice, $\bar{U}$ contains uncertainties $\epsilon$ (background error)
+  + Best available approximation: $U^* = \bar{U} + \epsilon$ (background/prior)
+  + Predicted state $X \mid U^*^= \mathcal{M}(U^*)$ contains an error wrt to $\bar{X}$
+  + $\delta X = \mathcal{M}(U^*) - \mathcal{M}(\bar{U})$
+  + Observation operator $C: \mathcal{X} \rightarrow \mathcal{Y}$
+    + $Y = C(X) = C(\mathcal{M}(X))= G(U)$
+  + Noisy obesrvations
+    + $Y^* = \bar{Y} + \xi$
+
+
+  + The MAP $\hat{U}$ minimizes the cost function $J(U) = \frac{1}{2} \|R^{-1/2}\left(G(U) - Y^*)\right)\|^2 + \frac12 \|B^{-1/2}(U - U^*)\|^2$
+
+    The gradient of $J$ is
+  $J'(U) = G'(U)^T R^{-1}\left(G(U) - Y^* \right) + B^{-1}(U - U^*)$

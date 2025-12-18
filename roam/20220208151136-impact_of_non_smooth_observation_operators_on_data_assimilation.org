@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       7ad2237a-70a2-4a88-bdff-5c4d5c2e3739
+:ROAM_REFS: cite:steward_impact_2012
+:END:
+#+title: Impact of non-smooth observation operators on Data Assimilation
+#+filetags: :DataAssimilation:
+
+Data Assimilation with discontinuous observation operators is relevant to many applications:
+ * [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]] of "all-sky" satellite radiance observations
+ * Sea-ice modelling
+ * Discontinuities in the parametrizations, or at least non-differentiable

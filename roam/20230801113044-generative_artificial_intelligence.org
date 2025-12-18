@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       74220f65-10a4-4bf3-8f25-939c4b9dab99
+:ROAM_ALIASES: "Generative Modelling"
+:END:
+#+title: Generative Artificial Intelligence
+#+filetags: :MachineLearning:
+
+Generative Modelling aims at learning a unknown distribution based on samples
+
+
+* Adversarial methods
+[[id:6c75c874-18f9-401f-83b3-2350c5baccb1][Generative Adversarial Network]]
+
+* Likelihood based inference
+[[id:38787dd9-17b6-47a5-8310-f47966f239a0][Variational Autoencoders]]
+[[id:a9d690bf-7692-4927-8eb8-a19481efc6ed][Bayesian Neural Networks]]
+
+* Noising/Denoising processes
+[[id:4dce67fe-62bc-447b-a5d5-412e90e11dda][Score Matching]]
+[[id:46609399-4c07-4bf3-b50c-3d2d81143ee5][Diffusion Models]]
+* Transforming samples iteratively
+[[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]]
+[[id:eb85ef4d-f81a-463c-9ea0-d0a0f2ba1317][Flow Matching]]

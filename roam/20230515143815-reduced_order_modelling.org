@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       48049025-95eb-4405-8b63-c846feb34ddf
+:END:
+#+title: Reduced Order Modelling
+#+filetags: :DimensionReduction:
+
+Link with  [[id:72d5a80d-e2b0-4ddf-b719-01cf0865f035][Proper Orthogonal Decomposition]]
+This is a [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]]

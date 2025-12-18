@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       b022c937-c379-4bdf-8d0e-f8d56e42e6f5
+:END:
+#+title: Optimization under Uncertainties
+#+filetags: :OUU:Optimization:
+  [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]]
+
+
+[[id:0f927232-9fc5-4b7a-b5ec-51eecdf50706][Stochastic Optimization]]
+
+[[id:e889e431-e65c-4703-bc1e-dd7fa3147a55][Robust Optimization]]

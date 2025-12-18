@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       d64056c7-f969-484c-baf5-d5f2726ce4ba
+:END:
+#+title: Linear System
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+
+A linear system is usually given in the form $Ax = b$, where $A$ is a
+matrix, $x$ and $b$ are vectors of appropriate dimensions.
+* Existence of solutions
+** Square matrices
+Let us say that $A \in \mathbb{R}^{n \times n}$
+*** Full-rank matrices
+
+The following propositions are equivalent
+ - The linear system $Ax = b$ has a unique solution $A^{-1}b$
+ - $A$ is full rank, its columns spans $\mathbb{R}^{n}$
+ - $\det A \neq 0$
+ - All [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]] of $A$ are non-negative
+ - All [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Values]] are strictly positive
+   
+** Rectangular matrices
+
+
+* Solving linear systems
+
+[[id:ba103e30-a7e4-4332-b9c0-b3b07a16eb40][QR decomposition]], [[id:dc6424ca-a277-43f0-b37c-753435090ea2][Krylov subspace]], [[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]], [[id:d674819d-be2b-4baf-a1b6-36867c640c2c][GMRES]]
+
+* Special cases
+
+[[id:12704449-cdb1-49ab-bc77-c9de0200bb3e][Woodbury matrix identity]]

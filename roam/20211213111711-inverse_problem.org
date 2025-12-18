@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       2ebe5ba7-5c85-4d2b-9121-afee1d9d7223
+:ROAM_REFS: cite:tarantola_inverse_2005
+:END:
+#+title: Inverse Problem
+#+filetags: :Bayes:
+
+
+Inverse problems can be linked to [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]].

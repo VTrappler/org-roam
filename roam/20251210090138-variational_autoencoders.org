@@ -1,0 +1,73 @@
+:PROPERTIES:
+:ID:       38787dd9-17b6-47a5-8310-f47966f239a0
+:END:
+#+title: Variational Autoencoders
+#+filetags: :AutoEncoders:DimensionReduction:ML:Bayesian:
+#+startup: latexpreview
+
+We follow Kingma derivation
+
+Say we have a parameterized distribution $p_\theta$
+
+* Latent variables
+Let $z$ be a latent variable, we are interested by the marginal distribution
+\begin{equation}
+p_\theta(x) = \int p_{\theta}(x,z)dz
+\end{equation}
+This is called the marginal likelihood, or model evidence (wrt $\theta$)
+See also [[id:3bf80b43-d721-4dc6-8ef5-f0c945f8c647][Compound distribution]]
+
+* Deep Latent Variable Models
+DLVM denote the latent variable model $p_\theta(x,z)$, where the distributions are parameterized by [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]].
+This can be further conditioned by some context or other thing $y$ for instance.
+
+Even when each individual factors are "simple", the marginal distrib can be complex.
+The simplest DLVM may be
+$p_\theta(x,z) = p_\theta(x |z)p_\theta(z)$
+
+** Difficulties
+$p_{\theta}(x) = \int p_\theta(x,z)dz$ is not analytic, and is not easy to estimate. The intractability of this quantity is related to the intractability of $p_\theta(z|x)$.
+* Encoder = Approximate Posterior
+The posterior of the latent variable given the data is $p_\theta(z|x)$ but it is intractable.
+We introduce a parametric *inference model*: $q_\phi(z|x)$. This is an encoder.
+
+We want to optimize the variational parameters $\phi$ such that $q_{\phi}(z |x) \approx p_{\theta}(z | x)$.
+The variational parameters can be anything, we can choose
+\begin{align}
+(\mu, \log \sigma) &= \mathrm{EncoderNN}(x;\phi) \\
+q_{\phi}(z|x) \sim \mathcal{N}(z; \mu, \sigma)
+\end{align}
+The strategy of sharing the variational parameters $\phi$ for all datapoints is called *amortized variational inference*.
+* ELBO derivation
+For any variational parameters $\phi$, we can rewrite the log evidence:
+\begin{align}
+\log p_{\theta}(x) &= \mathbb{E}_{q_\phi(z|x) }[\log p_{\theta}(x)] \\
+         &= \mathbb{E}_{q_\phi(z|x)}[\log \frac{p_{\theta}(x,z)}{p_\theta(z|x)}] \\
+&= \mathbb{E}_{q_\phi(z|x)}[\log \frac{p_{\theta}(x,z)}{q_\phi(z|x)}\frac{q_\phi(z|x)}{p_\theta(z|x)}] \\
+&= \mathbb{E}_{q_\phi(z|x)}[\log \frac{p_{\theta}(x,z)}{q_\phi(z|x)}] + \mathbb{E}_{q_\phi(z|x)}\frac{q_\phi(z|x)}{p_\theta(z|x)}] \\
+&= \mathrm{ELBO}(\theta,\phi) + \mathrm{DKL}(q_\phi(\cdot | x) || p_\theta(\cdot | x)) \\
+\end{align}
+
+
+
+* Alternative derivation
+
+$z$ latent, $x$ observed variables
+
+The joint distribution is given by
+$$p(x,z) = p(x\mid z) p(z)$$
+
+Let us consider a family of distribution on $Z$: $P_Z$ where $p(z) \in P_Z$
+and the family of conditional distributions: $P_{X|Z}$ where $p_\theta(x | z) \in P_{X|Z}$.
+
+The class of generative models is the set of all combinations $P_{X,Z}$.
+The task is:
+ * "Given a data set of $x$, find the best $p\in P_{X,Z}$ that best fit the data"
+ * Given a sample $x$, and the model $p$ what is the $p(z | x)$ ? (encoder) ?
+
+** Minimizing KL div
+The distribution that best fit the data is given by the optimization problem:
+\begin{equation}
+\min_{p\in P_{X,Z}} D_{KL} (p_{data} || p) = \min \int \log \frac{p_{data}(x)}{p(x)} p_{data}(x)dx
+\end{equation}
+with $p(x) = \int p(x,z)dz$

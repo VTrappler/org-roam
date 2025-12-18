@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       228dad8b-4c39-4a2e-9e05-4a9dea4775a1
+:ROAM_REFS: cite:lunz_learned_2020
+:END:
+#+title: Learned Operator Correction in Inverse Problems
+#+startup: latexpreview
+
+In many [[id:2ebe5ba7-5c85-4d2b-9121-afee1d9d7223][Inverse Problem]], the accurate forward models of the physic is
+expensive to evaluate. That is why in many applications, approximate
+models are used, at the cost of handling gracefully the *approximation*
+error. When model reduction techniques lead to a known approximation
+error, it can be mitigated *explicitly*.
+
+In the recent years, [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] techniques have been used. In
+this case, the approximate mode is embedded in iterative scheme, the
+model correction is performed *implicitly*.
+
+In this paper, the authors investigate the possibility of correcting
+such approximation errors *explicitly*.
+
+* Setting and notations
+  We assume a linear model,
+  \begin{equation}
+Ax = y
+\end{equation}
+where $x\in X$ is the unknown qoi, $y\in Y$ the measurements.
+The approximate model $\tilde{A}$ verifies
+\begin{equation}
+\tilde{A}x = \tilde{y}
+\end{equation}
+Leading to a systematic model error $\delta y = y - \tilde{y}$.
+
+The corrections take the form of a mapping $F_{\Theta}$ ([[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] for instance), giving
+\begin{equation}
+A_{\Theta} = F_{\Theta} \circ \tilde{A}
+\end{equation}
+and the correction is chosen so that $A_\Theta(x) \approx Ax$
+
+In a variational context,
+\begin{equation}
+x^\star = \mathrm{arg}\min_{x\in X} \frac12 \|A_{\Theta}(x) - y \|_Y^2 + \lambda R(x)
+\end{equation}
+From the study, it shows that a good correction does not necessarily provide a good reconstruction.
+
+** The case of Implicit correction
+  We focus on *learned* gradient schemes:
+  we train the networks to perform an iterative update
+  \begin{equation}
+x_{k+1} = \Lamba_\Theta \left(\nabla_x \frac12 \| Ax_k - y\|_Y, x_k\right)
+\end{equation}
+
+* Approximation error method (AEM) (Bayesian Error modelling)
+  Let $\delta y = \epsilon$
+  \begin{equation}
+y = \tilde{A}x + \underbrace{\epsilon}_{\text{model error}} + \underbrace{e}_{\text{obs noise}}
+\end{equation}
+and assuming everything is Gaussian, $n = e + \epsilon \sim
+\mathcal{N}(\eta_n, \Gamma_n)$, and with $L_n^TL_n = \Gamma_n^{-1}$,
+we have
+\begin{equation}
+p(y\mid x) \sim \exp\left(-\frac{1}{2}\|L_n(\tilde{A}x-y + \eta_n)\|_Y^2\right)
+\end{equation}
+
+* General model Correction
+
+  Let
+  \begin{equation}
+\| A - A_{\Theta} \|_{X \rightarrow Y} = \sup_{\|x\|=1} \|Ax - A_{\Theta}(x) \|_Y
+\end{equation}
+
+$\mathrm{Ker}~ \tilde{A} \neq \mathrm{Ker}~A$, so there may exist $v\in \mathrm{Ker}~\tilde{A}$, but not in $\mathrm{Ker}~A$,
+so
+\begin{align}
+\|A-A_{\Theta}\| &\geq \max\{\|Av - F_{\Theta}(0)\|, \|A(-v) - F_{\Theta}(0)\|\}  \\
+ & \geq \min_y \max \{\|Av - y\|, \|-Av - y\| \} = \|Av\|
+\end{align}

@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       48b02f70-914f-4887-a18d-45a928e51c45
+:ROAM_REFS: cite:sakov_iterative_2012 cite:sakov_iterative_2018
+:END:
+#+title: Iterative EnKF
+#+filetags: :DataAssimilation:
+#+startup: latexpreview
+The [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][Ensemble Kalman Filter]] can be modified to be "iterative" in order
+to be more efficient for strongly non-linear dynamical systems.  The
+term *iterative* in this context means that iterations of the Newton's
+method are performed in order to find a root of a specific functional.
+
+More precisely, it filters the state vector with lag 1, since the
+observations at time $t_{n+1}$ are used to get information at time $t_{n}$.
+
+* IEnKF scheme
+
+The ensemble comprising $m$ members is modelled using $\mathbf{E} \in
+\mathbb{R}^{n \times m}$ where $n$ is the dimension of the state
+vector.
+
+The model state estimate $x$ is
+carried using the ensemble mean:
+\begin{equation}
+\mathbf{x} = \frac{1}{m}\mathbf{E} \mathbf{1}
+\end{equation}
+The model state error covariance estimate $\mathbf{P}$ is
+\begin{equation}
+\mathbf{P} = \frac{1}{m-1} \mathbf{AA}^T
+\end{equation}
+
+where $\mathbf{A}$ is the matrix of ensemble anomalies
+\begin{equation}
+\mathbf{A} = \mathbf{E} - \mathbf{x1}^T
+\end{equation}
+
+
+Let us consider the assimilation cycle from $t_1 \rightarrow
+t_2$. Subscript indicates time, while superscript indicates the
+iteration number within the assimilation cycle. When omitted, it means
+that it is the finalized instance.  The initial state of the system in
+this cycle is $\mathbf{E}_1^0$, while the final state (analyzed
+ensemble) is $\mathbf{E}_2$.  The initial estimate of the system state
+at the end of the cycle $\mathbf{E}^0_2$ is the forecast.
+
+The iterative process is formalized by means of the Newton Method.
+The nonlinear propagator is
+\begin{equation}
+\mathbf{x}_2 = \mathcal{M}_{12}(\mathbf{x}_1)
+\end{equation}
+
+Let $\mathbf{y}_2$ be observations available at time $t_2$, and
+$\mathcal{H}_2$ the associated observation operator.
+$\mathbf{x}_1$ is solution of
+
+\begin{align}
+\mathbf{x}_1 &= \mathrm{argmin}_{\mathbf{x}_1}\left\{ \quad\|\mathbf{x}_1 - \mathbf{x}_1^0\|^2_{{\mathbf{P}_1^0}^{-1}} + \|\mathbf{y}_2 - \mathcal{H}_2(\mathbf{x}_2) \|^2_{\mathbf{R}_2^{-1}}\right\} \\
+&= \mathrm{argmin}_{\mathbf{x}_1}\left\{ \quad\|\mathbf{x}_1 - \mathbf{x}_1^0\|^2_{{\mathbf{P}_1^0}^{-1}} + \|\mathbf{y}_2 - \mathcal{H}_2(\mathcal{M}_{12}({x}_1)) \|^2_{\mathbf{R}_2^{-1}}\right\}
+\end{align}
+
+Derivating wrt $\mathbf{x}_1$, and setting the gradient to zero, we have
+
+\begin{equation}
+(\mathbf{P}^0_1)^{-1}(\mathbf{x}_1 - \mathbf{x}_1^0) - \left(\nabla_{\mathbf{x}_1} \mathcal{H}_2\left[\mathcal{M}_{12}(\mathbf{x}_1)\right]\right)^T (\mathbf{R}_2)^{-1}\left(\mathbf{y}_2 - \mathcal{H}_2\circ\mathcal{M}_{12}(\mathbf{x}_1)\right) = 0
+\end{equation}
+
+Let us assume that the solution of the minimization problem is computed iteratively.
+At iteratoin $i$, the approximation of $x_1$ is $x_1^i$.
+The Linearization of the time propagator reads, for a small increment
+\begin{equation}
+\mathcal{M}_{12}(x^{i+1}_1) = \mathcal{M}_{12}(x^i_1) + M_{12}^i(x_1^{i+1} - x_1^i) + \mathcal{O}(\|x_1^{i+1} - x_1^i\|^2)
+\end{equation}
+and
+\begin{equation}
+\nabla_{x_1} \mathcal{H}_2 \circ \mathcal{M}_{12}(x_1^{i+1}) = H_2^iM^i_{12} + \mathcal{O}(\|x_1^{i+1} - x_1^i\|)
+\end{equation}

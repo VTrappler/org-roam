@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       64ffacea-1c8f-4338-81a4-c6e1daffccba
+:END:
+#+title: GO Language
+#+filetags: :ProgrammingLanguage:
+

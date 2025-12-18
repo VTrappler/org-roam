@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       f2b3c10e-39d4-4bde-bc9f-764952fa697e
+:ROAM_REFS: cite:schraudolph_fast_2002
+:END:
+#+title: Second-order Gradient Descent
+#+filetags: :Optimization:
+
+Second order gradient descent typically have updates of the form
+\begin{equation}
+\theta^{i+1}  = \theta^i - (\bar{C})^{-1} \mathrm{grad}
+\end{equation}
+
+where $\bar{C}$ contains local curvature information.
+ * Hessian -> [[id:c3cbe92c-47c5-464d-97fa-ac508e593b82][Newton's method]]
+ * Approximation of the Hessian -> [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Quasi-Newton]], [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Gauss-Newton method]]
+ * [[id:376e898d-36f4-4f8f-96eb-be7d0d8d8b5e][Fisher Information Matrix]] -> Natural Gradient

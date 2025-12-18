@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       a4a6afea-b952-4813-bb78-9ffa037d2afc
+:END:
+#+title: Kernel trick
+#+filetags: :RKHS:
+
+
+The kernel trick is the idea of choosing a positive definite kernel so
+that the data is then embedded in a [[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][RKHS]].
+Linear algorithm can then be used directly in a non-linear case, such as in the [[id:4554a057-750e-47ae-b184-2d2a5a7bebbf][Kernel PCA]].

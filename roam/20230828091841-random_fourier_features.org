@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       af394d83-e88a-4e7b-8d03-89e1742d6c30
+:ROAM_ALIASES: RFF
+:END:
+#+title: Random Fourier Features
+#+filetags: :MachineLearning:
+
+In Random features, the basis is [[id:d45320a2-9c35-4e2a-8e53-43120907c123][Kernel Methods]]:
+
+Say we have a kernel:
+Using [[id:36f1dc46-b6fb-4e16-b36d-f6dd10c3dace][Mercer's theorem]], if the kernel is pd, the optimal solution is
+given as a linear combination of the data points $x_n$:
+
+\begin{equation}
+f^*(x) = \sum_{i=1}^n w_i k(x, x_n) = \langle w, \varphi(x) \rangle_{\mathcal{V}}
+\end{equation}
+* Random Features
+The main idea behind Random Features is to approximate the kernel:
+
+\begin{equation}
+k(x, y) = \langle \varphi(x), \varphi(y) \rangle_{\mathcal{V}} \approx r(x)^Tr(y)
+\end{equation}
+with $r: \mathbb{R}^n \rightarrow \mathbb{R}^r$ where $r < n$
+
+
+

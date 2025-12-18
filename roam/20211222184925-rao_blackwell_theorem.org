@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       b49d879b-bf82-490b-9cb3-e0f208ce55d2
+:END:
+#+title: Rao-Blackwell theorem
+#+startup: latexpreview
+Rao-Blackwell theorem is an important theorem of [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimation Theory]].
+
+Given an unbiased estimator $\delta$, and an exhaustive statistic $S$,
+then the estimator given by $\mathbb{E}(\delta \mid S)$ has lower
+variance than $\delta$.
+This variance can then be compared with the [[id:b8a78df4-8d15-4809-ab28-15d4d41069b4][Cramér-Rao Bound]].

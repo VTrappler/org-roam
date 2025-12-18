@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       ecd2c2a8-3f6a-4374-885b-677acae5ae18
+:END:
+#+title: Natural Gradient
+#+filetags: :Optimization:

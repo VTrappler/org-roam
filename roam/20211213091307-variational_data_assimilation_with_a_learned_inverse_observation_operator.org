@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       d542b406-1897-4d11-8d95-9f223cecf575
+:ROAM_REFS: cite:frerix_variational_2021
+:END:
+#+title: Variational Data Assimilation with a Learned Inverse Observation Operator
+#+filetags: :MachineLearning:DataAssimilation:
+#+startup: latexpreview
+
+
+* In this paper
+
+In some cases, forecasts can be improved by replacing the full system
+using ML. However, it lacks some guarantees of generalization,
+interpretability and physical consistency.
+Consequently, a more promising approach may be to
+*augment physical models with machine learning*
+
+In this paper:
+ * augmentation of a traditional variational data assimilation algorithm with ML
+ * ML is used only to improve the optimization problem for calculating the inital state
+ * Transformation of the objective function to be better behaved
+
+
+* Related work
+
+ * cite:geer_learning_2020: ML and DA can be viewed in a Bayesian framework
+ * cite:mack_attention-based_2020: Variational DA in [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Latent Space]] by training an [[id:fdf7c607-fef1-41cd-902e-bcc74a404b67][Autoencoder]].
+
+
+* Variational DA
+[[id:ea4143c4-696d-43e2-adee-f11ffce97095][3DVar and 4DVar]] rely on the minimization of an objective function of the form
+\begin{align}
+J(x_0) &= \|x_0 - x^b \|^2_{\mathbf{B}^{-1}} + \sum_{t=0}^T \|\mathcal{H}(x_t) - y_t \|^2_{\mathbf{R}^{-1}} \\
+ x_{t+1} &= \mathcal{M}(x_t)
+\end{align}
+or from a Bayesian point of view:
+\begin{align}
+x_0 \sim \mathcal{N}(x^b, \mathbf{B}) \\
+y_t \sim \mathcal{N}(\mathcal{H}(x_t), \mathbf{R})
+\end{align}
+Two main drawbacks:
+ * $\mathcal{M}$ is generally non-linear, even possibly chaotic
+ * $\mathcal{H}$ which reduces the information is usually non-invertible, and non-linear as well.
+
+The simplified problem we are going to consider is
+\begin{align}
+J(x_0) &= \sum_{t=0}^T \| \mathcal{H}(x_t) - y_t \|^2_2 \\
+x_{t+1} &= \mathcal{M}(x_t)
+\end{align}
+and we are going to learn an approximate *inverse* of $\mathcal{H}$.
+
+* Learning of an Inverse Observation Operator
+Let $\mathcal{P} \ni x$ be the *physics space*, and $\mathcal{O} \ni y$
+the *observation space*, and $\mathcal{H}: \mathcal{P} \rightarrow
+\mathcal{O}$ The variational DA problem introduced above is formulated
+in the observation space, but the non-invertibility of $\mathcal{H}$ poses problem.
+
+ * Parametrize an approximate inverse $h_\theta: \mathcal{O} \rightarrow \mathcal{P}$, such that $h_\theta(y_t) \approx x_t$
+
+The reformulated objective is
+\begin{equation}
+\tilde{J}(x_0) = \sum_{t=0}^T \| x_t - h_\theta(y_t) \|^2
+\end{equation}
+The objective functions are not equivalent, so the authors introduce an hybrid method:
+ 1. Minimize the reformulated objective $\tilde{J}$ in the physics space
+ 2. Use the optimization result to initialize the original minimization problem in the observations space
+										    

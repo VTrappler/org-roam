@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       049b807b-eb09-4bcb-8ec6-69a6a126b72b
+:END:
+#+title: Gibbs Sampling
+#+startup: latexpreview
+
+Gibbs [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][Sampling]] is a [[id:b055093c-ed5e-4e0e-b285-458744821241][MCMC]] algorithm, which can be seen as a particuliar
+case of the [[id:63d4a8c6-f142-47e1-9865-9db05b18a3ea][Metropolis-Hastings]].
+
+
+Let $p$ be an unknown /high-dimensional/ pdf, of dimension $n$, from
+which we want to sample $K$ samples $(x^{(1)}, \dots, x^{(K)})$
+
+* Principle
+Given the previous sample $x^{(i-1)} = (x^{(i-1)}_1, x^{(i-1)}_2,\dots ,x^{(i-1)}_n)$
+ * $x^{(i)}_1 \sim p(x_1 \mid x^{(i-1)}_2,\dots ,x^{(i-1)}_n)$
+ * $x_2^{(i)} \sim p(x_2 \mid x_1^{(i)},x_3^{(i-1)},\dots x_n^{(i-1)})$
+ * $x_j^{(i)} \sim p(x_j \mid x_1^{(i)},\dots, x_{j-1}^{(i-1)}, x_{j+1}^{(i)},\dots x_n^{(i-1)})$

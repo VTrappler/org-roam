@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       6e703a9d-5c97-420f-b1e0-01b3587f7327
+:ROAM_REFS: cite:zahm_model_2015
+:END:
+#+title: Interpolation of the inverse of a matrix using Frobenius norm
+
+Here, the author proposes an interpolation of the matrix-valued
+function $\xi \mapsto A(\xi^{-1})=$ for given interpolation points.
+* Projection using Frobenius Norm
+** Definition
+  We use here [[id:af81e00e-4613-497d-b8f8-8ecdc9ce7ab3][Matrix Norms]] to define the projection:
+  We introduce the subspace $Y_m = \mathrm{span}\{P_1, \dots, P_m\}$, ie the points where the inverse has been already computed.
+  An approximation $P_m(\xi)$ of $A(\xi)^{-1}$ is given by
+  \begin{equation}
+ P_m(\xi) = \mathop{\mathrm{argmin}_{P \in Y_m}} \| I - PA(\xi)\|_F
+  \end{equation}
+** Properties
+
+   \begin{equation}
+(1-\alpha_m(\xi))^2 \leq \| I - P_m(\xi)A(\xi) \|_F^2 \leq n(1-\alpha_m(\xi)^2)
+   \end{equation}
+where $\alpha_m(\xi)$ is the lowest singular value of $P_m(\xi)A(\xi)$ verifying $0 \leq \alpha_m(\xi) \leq 1$.
+We also have a bound for the condition number:
+\begin{equation}
+\kappa\left(P_m(\xi)A(\xi)\right) \leq \frac{\sqrt{n - (n-1)\alpha^2_m(\xi)}}{\alpha_m(\xi)}
+\end{equation}
+and if $\|I - P_m(\xi)A(\xi) \| < 1$, we can deduce that
+\begin{equation}
+\kappa(P_m(\xi)A(\xi)) \leq \frac{\sqrt{n - (n-1)(1-\|I - P_m(\xi)A(\xi) \|)^2}}{1-\|I - P_m(\xi)A(\xi) \|}
+\end{equation}
+** Solution
+   Let us consider a lincear combination of $P_i$.
+   For any $\lambda \in \mathbb{R}^m$,
+   \begin{align}
+\| I - \sum_i^m \lambda_i P_i A(\xi)\|^2_F &= n - 2\lambda^T S(\xi) + \lambda^T M(\xi) \lambda \\
+M_{i,j}(\xi) &= \mathrm{tr}\left(A^T(\xi)P_i^T P_jA(\xi)\right) \\
+S_i(\xi) &= \mathrm{tr}\left(P_iA(\xi)\right)
+   \end{align}
+
+   Thus the solution verifies
+   \begin{equation}
+ M(\xi)\lambda(\xi) = S(\xi)
+   \end{equation}
+* Projection using Frobenius semi-norm
+  \begin{equation}
+ P_m(\xi) = \mathop{\mathrm{argmin}_{P \in Y_m}} \|\left( I - PA(\xi)\right)\Theta\|_F
+  \end{equation}
+where $\Theta \in \mathbb{R}^{n \times K}$. $B \mapsto \|B\Theta\|_F$
+defines a semi-norm, and we assume that $P \mapsto PA(\xi)\Theta$ is
+injective, so that the solution is unique. This requires that $K \geq
+m$ and is satisfied whe, $\mathrm{rk}(\Theta) \geq m$
+See also [[id:41ffa2aa-c1b6-4320-b461-0f2447cc43f4][Statistical Estimation of the Frobenius norm]]

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       d6593167-1c49-4683-ae36-942ac0b517c9
+:END:
+#+title: Keras
+#+filetags: :ProgrammingLanguage:
+
+
+While [[id:f911293a-f546-4d0e-bf50-da69cd99e00b][TensorFlow]] is an infrastructure layer for differentiable
+programming, dealing with tensors, variables, and gradients, Keras is
+a user interface for deep learning, dealing with layers, models,
+optimizers, loss functions, metrics, and more.

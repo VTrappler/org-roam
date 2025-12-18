@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       b9614cd5-d80f-4cde-8571-5cbf24eb003a
+:END:
+#+title: Introduction to Geophysical Fluid Dynamics
+#+filetags: :FluidDyn:LiteratureReview:
+ [[id:8a455d77-49ee-43a3-bcd7-33464b94c837][Navier-Stokes Equations]]
+
+* Introduction
+
+ 
+** GFD: "only" concerned with large-scale systems.
+   GFD: typically
+  rotating-stratified fluid dynamics, weather and climate dynamics,
+  wave and eddies and currents
+** Importance of rotation
+ + Ambient rotation rate: $\Omega = 2\pi/(\text{time of one
+   revolution})$ If the fluids motion evolves on a time scale similar
+   or greated of $\Omega$, then it will probably be affected:
+   $\omega = \text{time of one rev}/\text{motion time scale} = 2\pi / \Omega T$
+   What about the velocity of a particle ?
+   \begin{equation}
+\epsilon = \frac{\text{time of one rev.}}{\text{time taken to cover distance L at speed U}} = \frac{2\pi U}{\Omega L}
+ \end{equation}
+ + $\epsilon \leq 1$ rotation important
+   
+** Importance of stratification 
+   Geophysical Fluids (GF) consists of fluids of different densities,
+   which arrange themselves in vertical stacks due to gravity. (Min potential
+   energy). But motion disturbs this equilibrium thus,
+   + Increase in Potential energy $\iff$ Decrease of Kinetic energy
+   + Let $\Delta \rho$ be the scale of density variation for the height scale $H$
+     + Raising an element of fluid of density $\rho_0 + \Delta \rho$
+       over $H$ increases the potential energy of $(\rho_0 + \Delta \rho)gH$
+     + For volume conservation, lowering a fluid of density $\rho_0$ down of $H$: $\rho_0 g H$
+     + Per unit volume, the change of pot. energy is $(\rho_0 + \Delta \rho)gH - \rho_0gH=\Delta \rho g H$
+   + The kinetic energy available per unit volume is $\frac{1}{2}\rho_0 U^2$
+   + $\sigma = \frac{\frac{1}{2}\rho_0U^2}{\Delta \rho g H}$
+     + $\sim 1$: Flow field modified by the stratification: stratification is important
+     + $\ll 1$: too much stratification, it constrains the flow
+     + $\gg 1$: stratification does not affect the flow
+
+
+** Rotation and Stratification roughly equal
+ $\epsilon \sim 1$, and $\sigma \sim 1$ means that
+ \begin{align}
+L \sim& \frac{U}{\Omega}  \\
+U \sim & \sqrt{\frac{\Delta \rho}{\rho_0}gH}	
+\end{align}
+
+\begin{equation}
+L \sim \frac{1}{\Omega}\sqrt{\frac{\Delta \rho}{\rho_0}gH}
+\end{equation}
+
+This gives an idea of in which the natural length and velocity scales of fluid motion.
+
+|--------------------+-------+--------------------+--------|
+| $L_{\text{atmo}}$  | 500km | $U_{\text{atmo}}$  | 30 m/s |
+|--------------------+-------+--------------------+--------|
+| $L_{\text{ocean}}$ | 60km  | $U_{\text{ocean}}$ | 4m/s   |
+|                    |       |                    |        |
+|--------------------+-------+--------------------+--------|
+
+
+* Coriolis Force
+  + Fixed frame of reference: $(X, Y)$ with unit vecs: $(I, J)$
+  + Rotating frame of reference $(x, y)$, $(i, j)$
+\begin{align}
+i&= I \cos(\Omega t) + J\sin (\Omega t) \\
+j &= -I \sin(\Omega t) + J\cos (\Omega t)
+\end{align}
+so the coordinates become
+\begin{align}
+i&= X \cos(\Omega t) + Y\sin (\Omega t) \\
+j &= -X \sin(\Omega t) + Y\cos (\Omega t)
+\end{align}
+

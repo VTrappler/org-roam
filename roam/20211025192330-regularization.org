@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       4fe0221e-366f-4442-ac99-542bc63f2eb4
+:END:
+#+title: Regularization
+#+filetags: :DimensionReduction:
+
+
+Regularization is the process of adding information in order to solve
+an ill-posed problem, or prevent overfitting.
+
+* Regularization as prior information
+[[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]
+* Ridge Regression
+Or Thikhonov cite:tikhonov_solutions_1977
+* Sparsity
+** $L_0$ norm
+\begin{equation}
+\|x\|_0 = \# \{\text{non-zero elements of }x \}
+\end{equation}
+
+but NP-hard problem
+** LASSO
+Least absolute shrinkage and selection operator
+Laplace prior
+** Elastic-net
+\begin{equation}
+R = \lambda\|x\|_1 + (1-\lambda)\|x\|_2
+\end{equation}
+

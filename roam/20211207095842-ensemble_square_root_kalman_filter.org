@@ -1,0 +1,79 @@
+:PROPERTIES:
+:ID:       5032deea-65f3-42b2-a5be-bf0054e94ee5
+:ROAM_ALIASES: "Deterministic Ensemble Kalman Filter" "Ensemble Transform Kalman Filter" ETKF
+:END:
+#+title: Ensemble Square Root Kalman Filter
+#+startup: latexpreview
+#+filetags: :DataAssimilation:
+The Ensemble Square Root Kalman Filter is a variation of the
+(stochastic) [[id:e82fb2bb-6b38-4cb9-9d02-ad02c82575cb][EnKF]], which avoids perturbating the observations.
+
+* Algebra in the Ensemble Space
+We define the normalised anomalies $\mathbf{X}_f$ as a $n\times m$
+matrix, where $n$ is the dimension of the state space, and $m$ the
+ensemble size:
+\begin{equation}
+[\mathbf{X}_f]_i = \frac{\mathbf{x}_i^f - \bar{\mathbf{x}}^f}{\sqrt{m-1}}
+\end{equation}
+so that
+
+\begin{equation}
+\mathbf{P}^f = \mathbf{X}_f \mathbf{X}_f^T
+\end{equation}
+
+The analysis belongs then in the affine space $\{\bar{\mathbf{x}}^f +
+\mathbf{X}_f \mathbf{w} \mid \mathbf{w} \in\mathbb{R}^{m}\}$ called
+the *ensemble space*.
+In a similar fashion,
+\begin{equation}
+[\mathbf{Y}_f]_i = \frac{H(\mathbf{x}_i^f) - \bar{\mathbf{y}}^f}{\sqrt{m-1}} \quad \bar{\mathbf{y}}^f = \frac{1}{m}\sum H(\mathbf{x}^f_i)
+\end{equation}
+is called the *observation anomalies*.
+If the observation operator is linear, $\mathbf{Y}_f = \mathbf{HX}_f$
+
+* Analysis in the ensemble space
+
+The analysis takes the form
+\begin{align}
+\bar{\mathbf{x}}^a &= \bar{\mathbf{x}}^f + \mathbf{K}^*\left(\mathbf{y} - H(\bar{\mathbf{x}}^f\right) \\
+\mathbf{K}^* &= \mathbf{P}^f \mathbf{H}^T\left(\mathbf{HP}^f\mathbf{H}^T + \mathbf{R}\right)^{-1}
+\end{align}
+
+We write the analysis in the ensemble space, so
+\begin{equation}
+\mathbf{x}^a= \bar{\mathbf{x}}^f + \mathbf{X}_f \mathbf{w}^a
+\end{equation}
+and
+\begin{equation}
+\bar{\mathbf{x}}^f + \mathbf{X}_f\mathbf{w}^a = \bar{\mathbf{x}}^f + \mathbf{X}_f\mathbf{X}_f^T \mathbf{H}^T\left(\mathbf{H}\mathbf{X}_f\mathbf{X}_f^T\mathbf{H}^T + \mathbf{R}\right)^{-1} \delta
+\end{equation}
+where $\delta = \mathbf{y} - \overline{H(\mathbf{x}^f)}$
+so finally
+\begin{equation}
+\mathbf{w}^a = \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1} \delta
+\end{equation}
+and using [[id:12704449-cdb1-49ab-bc77-c9de0200bb3e][Woodbury matrix identity]],
+we have
+\begin{equation}
+\mathbf{w}^a = \left(\mathbf{I}_e + \mathbf{Y}_f^T\mathbf{R}^{-1}\mathbf{Y}_f\right)^{-1} \mathbf{Y}_f^T \mathbf{R}^{-1} \delta
+\end{equation}
+
+* Generating the posterior ensemble
+We want to factorise $\mathbf{P}^a =
+\mathbf{X}_a\mathbf{X}_a^T$. Similarly as in the derivation of the
+[[id:17e80e86-f937-4f56-8d35-3990d4f4ea11][Reduced Rank square root filter]], we can get
+
+\begin{align}
+\mathbf{X}_a &= \mathbf{X}_f\left(\mathbf{I} + \mathbf{Y}_f^T\mathbf{R}^{-1}\mathbf{Y}_f\right)^{-1/2} \\
+&= \mathbf{X}_f \mathbf{T}
+\end{align}
+Since
+\begin{equation}
+[\mathbf{X}_a]_i = \frac{\mathbf{x}^a_i - \bar{\mathbf{x}}^a}{\sqrt{N_e - 1}}
+\end{equation}
+
+the posterior ensemble is
+\begin{align}
+\mathbf{x}_i^a &= \bar{\mathbf{x}}^a + \sqrt{N_e-1}\mathbf{X}_f [\mathbf{T}]_i \\
+&= \bar{\mathbf{x}} + \mathbf{X}_f\left(\mathbf{w}^a + \sqrt{N_e -1}[\mathbf{T}]_i\right)
+\end{align}

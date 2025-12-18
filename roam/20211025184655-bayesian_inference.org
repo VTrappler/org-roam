@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       8dcedd6a-85dc-4af5-afde-5936cef961d6
+:ROAM_ALIASES: "Bayes Theorem" "Bayes' theorem" Bayes
+:END:
+#+title: Bayesian Inference
+#+STARTUP: latexpreview
+#+filetags: :Proba:Bayes:
+
+
+Bayes theorem and Bayesian inference is a cornerstone of [[id:f16e587c-de26-47f5-8f1b-e298fd7eb3b6][Probability]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       3e5e2dc3-4a6b-4f97-9a1e-c2bb5f37ca59
+:END:
+#+title: Feature Selection
+#+filetags: :DimensionReduction:
+
+Feature selection is a [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension Reduction]] technique, based on the
+selection of a subset of input variables.
+This selection can be performed for instance using 

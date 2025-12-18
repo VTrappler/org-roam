@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       a9d690bf-7692-4927-8eb8-a19481efc6ed
+:ROAM_ALIASES: BNN
+:END:
+#+title: Bayesian Neural Networks
+#+filetags: :NeuralNetworks:MachineLearning:
+#+startup: latexpreview
+
+cite:jospin_hands-bayesian_2022
+
+Bayesian Neural Networks are some kind of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], where the
+weights are treated as r.v.
+* Principle
+Given a dataset $\mathcal{D} = \{(x_i, y_i)\}$, and a neural network
+with weights $w$, associated with a prior $p(w)$.
+** Training a NN as a Bayesian inference problem
+Training is equivalent to looking for the posterior, [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][as per Bayes' theorem]]:
+\begin{equation}
+ p(w \mid \mathcal{D}) = \frac{p(\mathcal{D}\mid w)p(w)}{p(\mathcal{D})}
+\end{equation}
+When we look for the Maximum a Posteriori, or the Maximum likelihood, we get a point estimate.
+** Making prediction
+Given an input $x$, the posterior predictive distribution is
+\begin{equation}
+p(y \mid x, \mathcal{D}) = \int p(y \mid x, w)p(w \mid \mathcal{D})\,\mathrm{d}w
+\end{equation}
+or, using the notation $\hat{y}(x)$ for the prediction
+\begin{equation}
+p(\hat{y}(x) \mid \mathcal{D}) = \int p(y \mid x, w)p(w \mid \mathcal{D})\, \mathrm{d}w
+\end{equation}
+
+
+** Uncertainty quantification
+  + The epistemic uncertainty is quantified by $p(w \mid \mathcal{D})$: $\mathbb{E}_{p(w \mid \mathcal{D})}\left[D_{\mathrm{KL}}\left(p(Y \mid x, w)\|p(Y\mid x, \mathcal{D} \right)\right]$
+  + The aleatoric uncertainty is quantified by $p(y \mid x, \mathcal{D})$, with entropy $H(Y \mid x, w, \mathcal{D}) = \mathbb{E}_{p(w\mid \mathcal{D})}\left[H(Y \mid x, w)\right]$
+    We can use Monte Carlo samples to estimate the uncertainty:
+    + Sample $w^{(i)} \sim p(w \mid \mathcal{D})$
+    + $y(x)^{(i)} = f_{w^{(i)}}(x)$
+    + and compute ensemble statistics 
+* How to train a BNN
+ + [[id:f413aa4f-c6d9-497a-b02f-f0b4e5ff0c4e][Variational Inference]]
+   + Using for instance independent weights: $w = (w_1,\dots, w_l)$,
+     and $p(w_i) \sim \mathcal{N}(\mu_i, \sigma_i^2)$ and optimize over $(\mu_i, \sigma_i)$ for $1 \leq i \leq l$
+ + [[id:b055093c-ed5e-4e0e-b285-458744821241][MCMC]]
+ + 

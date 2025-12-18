@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       863cedc6-dc85-4dd9-92e8-16be0e30e089
+:ROAM_ALIASES: Chart Manifold
+:END:
+#+title: Differential Geometry
+* Manifold
+  $M$ is said to be a topological Manifold of dimension $n$, if
+  each of its point admits a open neighbourhood, and a
+  homeomorphism from this neighborhood to the Euclidian $\mathbb{R}^n$
+  \begin{equation}
+\forall x \in M, \exists U_x, \phi_x: U_x \rightarrow \phi_x(U_x) \subset \mathbb{R}^n
+\end{equation}
+$(U_x, \phi_x)$ is a local chart of $M$.
+An atlas is a family of local charts which cover the whole manifold $M$
+
+

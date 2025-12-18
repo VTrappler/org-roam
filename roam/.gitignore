@@ -1,0 +1,9 @@
+*.org~
+*.html
+*~
+daily/confluence/**
+daily/ltximg/*
+/ltximg/*
+*.org#
+.#*
+confluence/**

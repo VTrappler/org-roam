@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       2ad2fbae-6291-4b02-a56c-dfa1b0873941
+:END:
+#+title: Rayleigh quotient
+#+STARTUP: latexpreview
+
+* Short def
+For any Hermitian matrix $M$ (or symmetric for real matrices), the
+Rayleigh quotient for a non-zero vector $x$ is
+
+\begin{equation}
+R(M,x) = \frac{x^*Mx}{x^*x} = \frac{\langle x, Mx \rangle}{\langle x, x\rangle}
+\end{equation}
+
+* Properties
+ * For any non-zero vector $x$, $R(M,x) \in [\lambda_{\min}, \lambda_{\max}]$
+ * The bounds are attained at their corresponding eigenvectors
+
+* Proof
+
+Since the Rayleigh quotient is invariant under scaling $x \mapsto cx$, 
+We look for the *critical points* of
+\begin{equation}
+R(M,x) = x^TMx \quad \text{ with } x^Tx = 1
+\end{equation}
+Introducing the [[id:713b6a9f-24f1-4bf2-9dd9-92af579c3a35][Lagrangian]], we are looking for the critical points of
+\begin{align}
+\mathcal{L}(x) &= x^TMx - \lambda (x^Tx -1 )\\
+\frac{\mathrm{d} \mathcal{L}}{\mathrm{d}x}(x) &= 2x^TM - 2\lambda x^T = 0\\
+\Rightarrow Mx &= \lambda x
+\end{align}
+
+The eigenvectors $v_1, \dots v_n$ are the critical points of the
+Rayleigh quotient, and the corresponding eigenvalues are the ones
+taken by the quotient.
+
+
+* Generalized Rayleigh quotient
+The Generalized Rayleigh quotient of the matrix pencil $(A, B)$ is defined as
+\begin{equation}
+R((A,B),x) = \frac{x^*Ax}{x^*Bx} = \frac{\langle x, Ax \rangle}{\langle x, Bx\rangle}
+\end{equation}
+It is then tied to the generalized [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalue]] problem of the pencil.
+ 

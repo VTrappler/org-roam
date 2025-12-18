@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       58e48b4a-124b-4a7b-804b-15e79a88d365
+:END:
+#+title: Hugging Face
+#+filetags: :Dev:MLOps:
+
+[[https://huggingface.co/][Hugging Face website]]
+its platform that allows users to share [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] models and dataset

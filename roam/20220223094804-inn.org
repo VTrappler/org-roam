@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       2cc78129-f7ba-4f06-890e-c0a15838990a
+:ROAM_ALIASES: "Invertible Neural Networks"
+:END:
+#+title: INN
+#+filetags: :MachineLearning:NeuralNetworks:
+
+Invertible Neural Networks are [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] which are bijective:
+\begin{align}
+x &\mapsto f_\theta(x)=y \\
+y &\mapsto f^{-1}_\theta(y) = x
+\end{align}
+where $x$ and $y$ have the same dimension.
+* Examples of INN
+** i-ResNets
+   invertible [[id:bfc9e8e6-312e-43ed-bd9e-e1de91b9dcda][Residual NN]] are invertible if for each residual layer,
+   the increment has a Lipschitz constant smaller than 1 (Banach-fixed point theorem)
+** Normalizing flows
+   [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]] make the best use of a change of variable
+   formula, by imposing some particular form of the Jacobian, in order
+   to keep its determinant easily tractable.
+
+
+   

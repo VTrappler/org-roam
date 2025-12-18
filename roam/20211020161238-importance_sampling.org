@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       5067b3e2-838b-4ca6-a765-a28fc640fd29
+:ROAM_ALIASES: "Sampling Importance Resampling" IS
+:END:
+#+title: Importance Sampling
+#+STARTUP: latexpreview
+
+Importance sampling is a variance reduction technique that can be used
+in the Monte-Carlo method, thus is a [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][sampling method]].
+
+
+* Numerical integration
+Let us assume that we want to estimate the integral
+\begin{equation}
+\mu = \int f(x)p(x)\,\mathrm{d}x = \mathbb{E}_p\left[f(X)\right]
+\end{equation}
+for $X$ a r.v. whose distribution is $p$ 
+
+Let $q$ be another distribution.
+\begin{align}
+\mu &= \int f(x)p(x)\,\mathrm{d}x = \int f(x)q(x)\frac{p(x)}{q(x)}\,\mathrm{d}x \\
+    &= \int \frac{f(x)p(x)}{q(x)} q(x) \,\mathrm{d}x \\
+    &= \mathbb{E}_q\left[\frac{f(x)p(x)}{q(x)}\right]
+\end{align}
+
+The *importance sampling estimate* of $\mu = \mathbb{E}_p[f(X)]$ is
+\begin{equation}
+\hat{\mu}_q = \frac{1}{n}\sum_{i=1}^n\frac{f(x_i)p(x_i)}{q(x_i)},\quad x_i \sim q
+\end{equation}
+
+* Self-normalized IS
+Let us suppose that we have an unnormalized version of $p$ and $q$:
+$p_u$ and $q_u$.
+We can write $w_u(x) = \frac{p_u(x)}{q_u(x)} = \alpha \frac{p(x)}{q(x)}$
+and the self-normalizing IS estimate is
+\begin{equation}
+\hat{\mu}_q = \frac{\sum_{i=1}^n f(x_i) w_u(x_i)}{\sum_{i=1}^n w_u(x_i)}
+\end{equation}
+

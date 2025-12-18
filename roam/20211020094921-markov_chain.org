@@ -1,0 +1,69 @@
+:PROPERTIES:
+:ID:       463a3501-d30d-4a4d-81b3-664ee6a2063e
+:END:
+#+title: Markov Chain
+#+STARTUP: latexpreview
+
+* Definition
+Let us consider a state process $\mathbf{X} = \{\mathbf{X}_k\}_k$,
+with values in a continuous state space $\mathcal{X}$.
+The distribution of $\mathbf{X} = \{\mathbf{X}_k\}_k$ is $p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k})$
+Using conditional probabilities, we have
+\begin{align}
+p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k}) = p_{\mathbf{X}_{0}}(\mathbf{x}_0) &\cdot p_{\mathbf{X}_1 \mid \mathbf{X}_0}(\mathbf{x}_1 \mid \mathbf{x}_0) \\ & \cdot p_{\mathbf{X}_2 \mid \mathbf{X}_{0:1}}(\mathbf{x}_2 \mid \mathbf{x}_{0:1}) \\ \dots & \cdot p_{\mathbf{X}_k \mid \mathbf{X}_{0:(k-1)}}(\mathbf{x}_k \mid \mathbf{x}_{0:(k-1)})
+\end{align}
+
+The process is said to be *Markovian* when
+
+\begin{equation}
+p_{\mathbf{X}_k \mid \mathbf{X}_{0:(k-1)}}(\mathbf{x}_k \mid \mathbf{x}_{0:(k-1)}) = p_{\mathbf{X}_k \mid \mathbf{X}_{k-1}}(\mathbf{x}_k \mid \mathbf{x}_{k-1})
+\end{equation}
+and thus
+\begin{equation}
+p_{\mathbf{X}_{0:k}}(\mathbf{x}_{0:k}) = p_{\mathbf{X}_{0}}(\mathbf{x}_0) \prod_{l=1}^{k}  p_{\mathbf{X}_l \mid \mathbf{X}_{l-1}}(\mathbf{x}_l \mid \mathbf{x}_{l-1})
+\end{equation}
+
+* Properties
+A Markov chain is then uniquely defined by 
++ its initial state distribution $p_{\mathbf{X}_0}$
++ the transition probabilities $p_{\mathbf{X}_l \mid \mathbf{X}_{l-1}}(\mathbf{x}_l \mid \mathbf{x}_{l-1})$
+
+* Markov Kernels
+** Definition
+A Markov kernel is a function $P(x, A)$, defined as
+\begin{align}
+P(x,A) &= \mathbb{P}\left[x_{t+1} \in A \mid x_t = x\right] \\
+&= \int_A p_{x_{t+1} \mid x_t}(x_{t+1} \mid x_t)\,\mathrm{d}x_{t+1}
+\end{align}
+Such kernels may contain atoms, so that the probability of staying in place is not null:
+\begin{equation}
+P(x, \{x\}) \neq 0
+\end{equation}
+
+
+Say that the distribution of $x_t$ is $p_{x_t}$, then the distribution of the next point in the chain $y=y_{t+1}$ is
+\begin{equation}
+p_{x_{t+1}}(y)\,\mathrm{d}y = \int_{\mathcal{X}} p_{x_t}(x) P(x, \mathrm{d}y) \,\mathrm{d}x
+\end{equation}
+** Invariant Measures
+A [[id:ed5ca3ef-6b5c-4f01-beec-a7d42c7f6d0b][Measure]] $\pi$ is said to be invariant wrt to the Markov Kernel if
+\begin{equation}
+\pi(y) \,\mathrm{d}y = \int_{\mathcal{X}} \pi(x)P(x,\mathrm{d}y)\,\mathrm{d}x
+\end{equation}
+
+Let us add some assumptions
+ * The chain is aperiodic ("connected graph")
+ * and irreducible (no loops)
+then 
+ * There exists an unique invariant measure $\pi$
+ * The marginal distribution of an element $x_t$ converges toward $\pi$ when $t\rightarrow \infty$
+
+Because of this convergence property, we can try to construct
+appropriate Markov Chains, thus appropriate Markov Kernels in order to
+converge toward specific distributions, as in [[id:63d4a8c6-f142-47e1-9865-9db05b18a3ea][Metropolis-Hastings]].
+
+** Reversible kernel
+A kernel is said to be reversible if $\pi(x)\rho(x,y) = \pi(y)\rho(y,x)$
+
+* Markovian property
+[[id:24be8ceb-d6db-467e-acec-76c9cc19c981][Probabilistic Graphical Models]]

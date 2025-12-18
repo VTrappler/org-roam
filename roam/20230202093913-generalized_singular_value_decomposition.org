@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       6b7525f6-de37-4ce9-ac70-829a73821486
+:ROAM_ALIASES: GSVD
+:END:
+#+title: Generalized Singular Value Decomposition
+#+filetags: :LinearAlgebra:MatrixFactorization:
+#+startup: latexpreview
+
+The Generalized Singular Value Decomposition (GSVD) is a decomposition
+of a pair of matrices, with same number of columns.
+* Definition
+  Let $A \in \mathbb{R}^{n\times p}$, $B \in \mathbb{R}^{m \times p}$
+  The GSVD of $A$ and $B$ is
+  \begin{align}
+A &= U \Sigma_1 Z Q^T \\
+B &= V \Sigma_2 Z Q^T
+  \end{align}
+ + $U \in \mathbb{R}^{n \times n}$
+ + $V \in \mathbb{R}^{m \times m}$
+ + $Q \in \mathbb{R}^{p\times p}$
+ + $Z = \left[W^TD, 0_D\right] \in \mathbb{R}^{k \times p}$
+   + $D \in \mathbb{R}^{k \times k} = \text{diag}(\sigma_1 \geq \sigma_2 \dots \geq \sigma_k)$, non zeros [[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Values]] of $C =\begin{bmatrix}A \\B \end{bmatrix}$
+   + $W \in \mathbb{R}^{k \times k}$ unitary
+   + $0_D \in \mathbb{R}^{k \times (p-k)$
+ + $\Sigma_1 = [I_A, S_1, 0_A] \in \mathbb{R}^{n \times k}$
+   \begin{equation}
+     \Sigma_1 =
+	\begin{bmatrix}
+	  \begin{bmatrix} I_r \end{bmatrix} & 0 & 0 \\
+	  0 &
+	  \begin{bmatrix} \alpha_{r+1}  & & \\
+	    & \ddots & \\
+	    & & \alpha_{r+s}
+	  \end{bmatrix} & 0 \\
+	  0& 0& \begin{bmatrix} 0_A \end{bmatrix}
+       \end{bmatrix}
+     \end{equation}

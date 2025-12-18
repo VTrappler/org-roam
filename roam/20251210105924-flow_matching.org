@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       eb85ef4d-f81a-463c-9ea0-d0a0f2ba1317
+:END:
+#+title: Flow Matching
+#+filetags: :GenerativeModelling:
+#+startup: latexpreview
+[cite:@lipman_flow_2024]
+
+
+
+This relies on [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Continuous Normalizing Flows.]]
+Let $X_1$ be a rv according to some unknown data distribution $q(X_1)$
+We are looking for $p_t$, a probability density path, such that
+$p=p_0$ is a simple distribution, and $p_1$ is approximately equal to $q$.
+Flow matching is designed to construct such a probability density path, that allows to flow from $p_0$ to $p_1$.
+* Flow Matching Objective
+
+Given a target probability density path $p_t(x)$, which correspond to a vector field $u_t(x)$, the flow matching objective is
+
+\begin{equation}
+        \mathcal{L}(\theta) = \mathbb{E}_{t \sim U([0,1], x\sim p_t(x)}\left[\|v_t(x) - u_t(x)\|\right]^2
+\end{equation}
+where $\theta$ refers to parameters of the candidate vector field $v_t(x)$.
+Nice, but what are appropriate $p_t$ and $u_t$, $v_t$ ? Many appropriate choices can give $p_1\approx q$, $u_t$ is unknown.
+* Constructing probability density paths and vector fields
+A simple way to construct a target probabliity path is using a mixture of simpler proba paths.
+
+We are going to construct $p_t$ as the aggregation of conditional proba paths $p_{t|1}(x|x_1)$, each conditioned on one of the data example $x_1$ of the training dataset.
+The marginal pdpath is then
+\begin{equation}
+p_t(x) = \int p_{t|1}(x|x_1) q(x_1)dx_1
+\end{equation}
+where $p_{t|1}(\cdot | x_1) \sim \mathcal{N}(tx_1, (1-t)^2 I)$
+This is the *conditional optimal-transport*  [[id:206abcc1-20d3-47f5-9af1-f30c86405266][Transport]] or linear path.
+We define the rv $X_t$ by sampling $X_0\sim p$, and $X_1 \sim q$ by linear interpolation:
+\begin{equation}
+X_t = tX_1 + (1-t)X_0 \sim p_t
+\end{equation}
+
+Instead of the hard loss defined above, we can first condition the loss at the observed sample $x_1$. The probability density path "collapses" the initial distribution $p_0$ to the single observation $x_1$.
+
+In this case $\frac{d}{dt}X_{t|1} = u_t(X_{t|1}|x_1)$ gives the conditional velocity
+field: $$u_t(x |x_1) = \frac{1}{1-t} (x_1-x)$$ Indeed, if $X_{t|1} = tx_1 +
+(1-t)X_0$, then $\frac{d}{dt}X_{t|1} = x_1 - X_0$, and $X_0 = (X_{t|1}-tx_1)/(1-t)$ so
+$(d/dt)X_{t|1} =((1-t)x_1 -X_{t|1} +tx_1) / (1-t) = (x_1 - X_{t|1})/(1-t)$
+
+We can then define the Conditional Flow Matching loss:
+$$
+\mathcal{L}_{CFM}(\theta) = \mathbb{E}_{t,X_t,X_1}\left[\|u^{\theta}_t(X_t) - u_t(X_t |X_1)\|^2\right]
+$$
+where $t\sim U([0,1])$, $X_0\sim p$, $X_1\sim q$, and
+then replacing the conditional velocity field by its expression, we get
+$$\mathcal{L}_{CFM}^{OT}(\theta) = E[\|u_t^\theta(X_t) - (X_1-X_0) \|^2] $$

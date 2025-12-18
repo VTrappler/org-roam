@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       66fb30f6-08d8-4885-a8a7-ca69a342ca93
+:END:
+#+title: Tangent Linear Model
+#+startup: latexpreview
+
+Let $\mathcal{G}$ be a multidimensional function
+
+\begin{array}{rcl}
+\mathcal{G}: \mathbb{R}^n & \longrightarrow & \mathbb{R}^m \\
+   x  & \longmapsto & \mathcal{G}(x)
+\end{array}
+
+The Jacobian matrix of $\mathcal{G}$ at a point $x$ is defined as
+\begin{equation}
+G(x) \in \mathcal{R}^{m \times n}
+\end{equation}
+aka a linear application from $\mathbb{R}^n$ to $\mathbb{R}^m$, which verifies
+\begin{equation}
+\mathcal{G}(x + \delta x) = \mathcal{G}(x) + G(x)(\delta x) + \mathcal{O}(\|\delta x\|)
+\end{equation}
+
+We can write
+\begin{equation}
+L(x, \delta x) = G(x)\delta x
+\end{equation}
+and $L$ is linear wrt to its second argument.
+
+* JVP, VJP
+  Constructing $G$ explicitly is often complicated, since in many
+  models, the TLM is constructed using line-by-line differentiation
+  (manually, or using an automatic differentiation tool), thus only
+  $L$ is accessible.
+  
+ * One could get the matrix $G$, by evaluating $L(x, e_i)$ for every
+   canonical vectors, but this would defeat the purpose of the TLM.
+
+
+ 

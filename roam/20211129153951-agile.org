@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       8aa5aa47-aaed-40ad-b713-a8213ebbdd1b
+:END:
+#+title: Agile
+#+filetags: :Management:
+

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       39ee4930-274a-40bb-ada6-d845af8d5012
+:END:
+#+title: Integral Probability Metrics
+#+filetags: :Proba:
+
+
+We consider the task of comparing two distribution
+[[id:789c1a15-15c7-4691-bd10-b01cd4c1d692][Stochastic Order]]

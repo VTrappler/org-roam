@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       79fb417d-66ad-4815-9092-1b8adb1eb6d9
+:ROAM_ALIASES: "Markov inequality"
+:END:
+#+title: Concentration inequalities
+#+filetags: :Proba:
+startup:latexpreview
+A concentration inequality refers to a bound (in [[id:f16e587c-de26-47f5-8f1b-e298fd7eb3b6][Probability]]) on the deviation of a random variable to some value (typically the  expected value)
+
+* Markov Inequality
+Let $X$ be a non negative r.v., then, for every $a>0$,
+$P[X\geq a] \leq E[X]/a$
+Proof:
+Let's consider $a1_{X>a}$, that is $a$ when $X>a$, 0 elsewhere. Since $X$ is positive a.s., $X\geq a1_{X>a}$ a.s, and then
+$E[X] \geq E[a1_{X>a}]$ so $E[X] \geq aP[X>a]$
+
+Other bounds:
+[[id:633fe042-6e29-4563-ac16-7a671794db00][Chernoff bounds]]

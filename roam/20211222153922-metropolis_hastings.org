@@ -1,0 +1,91 @@
+:PROPERTIES:
+:ID:       63d4a8c6-f142-47e1-9865-9db05b18a3ea
+:END:
+#+title: Metropolis-Hastings
+#+startup: latexpreview inlineimages
+#+filetags: :Bayes:
+
+Metropolis Hastings method is a [[id:b055093c-ed5e-4e0e-b285-458744821241][MCMC]] method based on random walks,
+which is the basis of many more [[id:4c2833a0-5351-4fba-b25e-4985acbd205f][Sampling methods]].
+
+It relies on the knowledge of a target pdf, known up to a normalising
+constant (as it is often the case in [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]), in order to
+generate samples.
+
+
+
+* Setting and principle
+ * $p$ unnormalized positive function, and $\pi$ the normalized version (unattainable)
+ * $q$ a *proposal distribution*, which gives the pdf of a new sample given the current one
+
+At step $n$, given the current sample $x_n$:
+ * Sample $x^* \sim q( \cdot \mid x_n)$
+ * Compute $A =\min\left(1; \frac{p(x^*)q(x^* \mid x_n)}{p(x_n)q(x_n \mid x^*)}\right)$
+ * Draw $u\sim \mathcal{U}([0, 1])$
+ * If $u \leq A$: $x_{n+1} = x^*$, else $x_{n+1} = x_n$
+
+
+* Proof
+The proof relies on [[id:463a3501-d30d-4a4d-81b3-664ee6a2063e][Markov Chains]]: We construct a transition kernel
+such that the stationary distribution is $\pi$, given $p$ and $q$.
+We will search for a kernel in the form of
+\begin{equation}
+P(x, \mathrm{d}y) = \rho(x,y)\mathrm{d}y + r(x)\delta_x(dy)
+\end{equation}
+so that $x$ stays at $x$ with probability $r(x)$, otherwise is distributed according to a pdf proportional to $\rho(x,y)$
+
+* Python example
+
+#+begin_src python :session
+import numpy as np
+import matplotlib.pyplot as plt
+#+end_src
+
+#+RESULTS:
+
+#+begin_src python :session
+def p(x):
+    return 0.3 * np.exp(-0.2 * x**2) + 0.7 * np.exp(-np.sqrt((x-7)**2))
+
+def q_sample(xprime, sigma=1):
+    return np.random.normal(xprime, 1, size=1)
+
+def q_pdf(x, xprime, sigma=1):
+    return np.exp(-(x-xprime)**2 / (2 * sigma**2)) / np.sqrt(2 * np.pi * sigma)
+#+end_src
+
+#+RESULTS:
+
+
+#+begin_src python :session
+def Metropolis_Hastings(x0, p, q_sample, q_pdf, sigma, N):
+    x = np.empty(N + 1)
+    x[0] = x0
+    for i in range(N):
+        candidate = q_sample(x[i], sigma)
+        A = p(candidate) * q_pdf(candidate, x[i]) / (p(x[i]) * q_pdf(x[i], candidate))
+        print(A)
+        if np.random.uniform() < A:
+            x[i + 1] = candidate
+        else:
+            x[i + 1] = x[i]
+    return x
+#+end_src
+
+#+RESULTS:
+
+#+begin_src python :session :results file
+x_samples = Metropolis_Hastings(x0=0, p=p, q_sample=q_sample, q_pdf=q_pdf, sigma=0.5, N=10000)
+plt.figure(figsize=(4, 4))
+plt.hist(x_samples, density=True)
+x_ls = np.linspace(-5, 10, 200)
+dx = x_ls[1] - x_ls[0]
+plt.plot(x_ls, p(x_ls)/ (np.sum(p(x_ls)) * dx))
+fname='/home/victor/org-roam/images/MH.png'
+plt.savefig(fname)
+plt.close()
+fname
+#+end_src
+
+#+RESULTS:
+[[file:/home/victor/org-roam/images/MH.png]]

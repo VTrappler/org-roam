@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       1b022421-0366-4ef0-99ad-89d87735d430
+:ROAM_ALIASES: SBI
+:ROAM_REFS: cranmer_frontier_2020
+:END:
+#+title: Simulation Based Inference
+
+
+Simulation-based inference (SBI) is a class of methods that infer the
+input parameters and unobservable latent variables in a simulator from
+observational data. SBI is different from traditional statistical
+inference or machine learning because simulators are typically not
+differentiable and their likelihoods are intractable
+
+ SOTA Paper: https://www.pnas.org/doi/10.1073/pnas.1912789117
+Simulation based inference:
+ + [[id:4a5d9fa2-2475-4e3a-bc37-77ae75c40b27][Approximate Bayesian Computation]]
+ + [[id:45750514-e78c-42cf-ba99-a98446a8b02e][Likelihood-free inference]]
+ + [[id:17383d23-7ad0-4b99-a99f-660cd2984878][Normalizing flows]]
+
+
+
+ http://www.umr-cnrm.fr/high-tune/ (Aurélien Ribes)

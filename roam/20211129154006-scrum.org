@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       c53674d3-a057-4a46-a41b-50b1bce645a9
+:END:
+#+title: Scrum
+#+filetags: :Management:
+
+Scrum is a *lightweight*, *iterative*, and *incremental* framework for software developement
+[[id:8aa5aa47-aaed-40ad-b713-a8213ebbdd1b][Agile]], [[id:aad864b7-58a9-4da2-bcb5-35fecab9060b][Kanban]]
+
+

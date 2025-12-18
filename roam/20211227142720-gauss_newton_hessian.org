@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       c3cbe92c-47c5-464d-97fa-ac508e593b82
+:END:
+#+title: Newton's method
+#+startup: latexpreview
+
+Newton's method is a root finding/[[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] algorithm
+
+* 1D Case
+
+Let $f$ be a real function, twice differentiable, and let us consider
+the problem of finding $f(x)=0$.
+At step $k$, around a point $x_k$, we have
+So the next point to be considered can be chosen so that the linear
+approximation of $f$ at $x_k$ is equal to zero, so that
+
+\begin{equation}
+f(x_k + h) = f(x_k) + hf'(x_k) + o(h)
+\end{equation}
+\begin{equation}
+0 = f(x_k) + (x_{k+1} - x_k) f'(x_k) 
+\end{equation}
+so
+\begin{equation}
+x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
+\end{equation}
+
+* ND case
+At step $k$, around a point $x_k$, we have
+\begin{equation}
+f(x_k + (x_{k+1} - x_k)) \approx f(x_k) + \nabla f(x_k) (x_{k+1} - x_k)
+\end{equation}
+So
+\begin{equation}
+x_{k+1} = x_k - (\nabla f(x_k))^{-1} f(x_k)
+\end{equation}
+
+
+* Optimization
+Let us now change the notation, so that we are minimizing a function $g: x\mapsto f(x)^T f(x)$ (Nonlinear least-squares)
+We are then trying to find a root of $\nabla g$, so the iteration becomes
+\begin{align}
+x_{k+1} &= x_k - (\nabla^2 g(x_k))^{-1} \nabla g(x_k) \\
+        &=x_k - \left(2(\nabla f(x))^T (\nabla f(x)) + \sum_i f^{''}_i(x)f_i(x)\right)^{-1} \left(2 (\nabla f(x))^T f(x))\right) \\
+        &= x_k - \underbrace{\left((\nabla f(x))^T (\nabla f(x)) + \sum_i f^{''}_i(x)f_i(x)\right)^{-1}}_{H^{-1}} \nabla g(x_k)
+\end{align}
+
+* Quasi-Newton methods
+Since the Hessian is difficult to get in practice, it is often replaced by an approximation $B_{k+1}$, which should satisfy the *quasi-newton condition*, or secant equation
+\begin{equation}
+B_{k+1} (x_{k+1} - x_k) = \nabla g(x_{k+1})- \nabla g(x_k)
+\end{equation}
+And we want $B_{k+1}$ to be positive definite.
+
+* Gauss-Newton
+See 
+A more in-depth study of Gauss-Newton is introduced in [[id:6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8][Approximate GN methods for non-linear least-square problems]]
+The increment considered in the Gauss-Newton method is
+\begin{align}
+x_{k+1} &= x_k - \underbrace{2\left(\nabla f(x)^T \nabla f(x)\right)^{-1}}_{H_{GN}^{-1}} \nabla g(x_k)
+\end{align}
+
+

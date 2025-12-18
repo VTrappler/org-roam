@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       8a455d77-49ee-43a3-bcd7-33464b94c837
+:END:
+#+title: Navier-Stokes Equations
+#+filetags: :CFD:
+#+startup: latexpreview
+
+
+* Eulerian formulation
+ * $\rho$: density
+ * $\mathbf{V}$: velocity field
+ * $E$: energy
+ * $\Sigma$: tensor of viscose constraints
+ * $p$ pressure field
+ * $\vec{g}$: acceleration due to the gravity
+ * $q$: heat flux due to the thermal conduction
+ * $q_R$: heat flux due to radiations
+** Continuity equation
+
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{V}) = 0
+\end{equation}
+or
+
+using the [[id:93b80440-6adf-4fef-aca1-ff14aa57c1eb][Material derivative]].
+** Momentum equation
+\begin{align}
+\frac{\partial (\rho \mathbf{V})}{\partial t} + \nabla \cdot \left(\rho \mathbf{V}\mathbf{V}\right) &= \nabla \cdot P + \rho \vec{g} \\
+&=- \nabla p + \nabla \Sigma + \rho \vec{g}
+\end{align}
+
+** Energy equation
+
+\begin{equation}
+\frac{\partial (\rho E)}{\partial t} + \nabla \cdot \left((\rho E)\mathbf{V}\right) = \nabla \cdot (P \cdot \mathbf{V}) + \rho \vec{g}\cdot \mathbf{V} + \nabla (q + q_R)
+\end{equation}
+
+

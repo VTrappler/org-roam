@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       d0af3cfc-b0b2-4fc0-a19c-741dddeef62e
+:END:
+#+title: Simulated Annealing
+#+filetags: :Optimization:
+#+startup: latexpreview
+#+LATEX_HEADER: \newcommand{\Ex}{\mathbb{E}};\newcommand{\Prob}{\mathbb{P}}
+
+Simulated Annealing is an  [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]] method which is a special instance of the  [[id:63d4a8c6-f142-47e1-9865-9db05b18a3ea][Metropolis-Hastings]] method
+* Pseudocode
+1. Apply random perturbation $\epsilon$ to current point $x$
+2. Compute $\Delta = f(x + \epsilon) - f(x)$
+3. if $f(x + \epsilon) < f(x) \iff \Delta < 0$
+   * Accept new point $x \gets x + \epsilon$
+4. else if $f(x + \epsilon) \geq f(x) \iff \Delta \geq 0$
+   * Accept new point with probability $p =\exp(-\Delta/T)$
+     where $T$ the temperature is chosen according to a schedule
+* Statistical interpretation
+At fixed $T$, Simulated Annealing generates a  [[id:463a3501-d30d-4a4d-81b3-664ee6a2063e][Markov Chain]] with invariant distribution proportional to $\exp(-f(x)/T)$

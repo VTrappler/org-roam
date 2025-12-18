@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       a6c0f2cf-ed35-44f4-bf02-35d2d909f5df
+:END:
+#+title: Maximum Likelihood Estimation
+MLE appears naturally when considering the [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]] between a statistical model and the empirical distribution
+ [[id:0bf81a71-2733-4c22-8bad-ae65378a66dd][Estimation Theory]]
+*   [[id:33a6b5ee-82e8-489a-858d-a634db231132][KL-divergence]]
+
+We consider some data $y\sim Y$, which is sampled according to a random variable of pdf $p_{t}$
+We want to explain the data using a statistical model, parameterized by $\theta$, $p(\cdot,\theta)$
+
+We can compute the DKL between the truth and the parameterized model:
+\begin{equation}
+D_{KL}(p_t \| p(\cdot; \theta)) = \mathbb{E}_Y[\log p_t(Y) - \log p(Y;\theta)]
+\end{equation}
+Minimizing the DKL wrt $\theta$ yields
+\begin{equation}
+\mathrm{argmin}_{\theta} D_{KL}(p_t \| p(\cdot; \theta)) = \mathrm{argmin}_\theta - \mathbb{E}_Y[\log p(Y;\theta)]
+\end{equation}
+Since we don't have access to the truth distribution, we can instead consider the empirical distribution of data samples:
+\begin{equation}
+-\mathbb{E}_Y[\log p(Y;\theta)] \approx -\frac{1}{n}\sum \log(y_i;\theta)
+\end{equation}

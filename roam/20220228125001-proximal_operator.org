@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       801eca4b-cee8-4d3c-8730-f8b282081a9a
+:END:
+#+title: Proximal Operator
+#+filetags: :Optimization:
+#+startup: latexpreview
+
+* Definition
+  The proximal mapping is an operator associated with a *lower semi-continuous* *convex* function $f$, and is defined as
+  \begin{equation}
+\mathrm{prox}_f(v) = \mathrm{arg}\min_{x} \left(f(x) + \frac12 \|x-v\|^2_2\right)
+\end{equation}
+
+ [[id:7d189b3c-3b68-46f9-9f21-5ff1b5d2372d][Optimization]]

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       e248b998-40ed-4cba-8d7c-7b9edce38899
+:END:
+#+title: Jedi
+#+filetags: :DataAssimilation:
+
+Jedi ([[https://jointcenterforsatellitedataassimilation-jedi-docs.readthedocs-hosted.com/en/latest/overview/index.html][Website]])
+stands for *Joint Effort for [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]] Integration.* In weather
+prediction, accuracy relies on two major components:
+ * The current and past state of the atmosphere and ocean
+ * A reliable computer model that can predict the evolution.
+   

@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       fdf7c607-fef1-41cd-902e-bcc74a404b67
+:ROAM_ALIASES: "Latent Space" "Encoder Decoder"
+:END:
+#+title: Autoencoders
+#+STARTUP: latexpreview
+#+filetags: :DimensionReduction:MachineLearning:AutoEncoders:
+
+An autoencoder is a type of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] used for unsupervised
+learning.  This relies on the training at the same time of an *encoder*,
+which learns a representation of the data (akin to [[id:99cd54d1-bb93-4a2e-b6e2-ffb81fafa2e0][Dimension
+Reduction]]) and of a *decoder*, which regenerates the data from the encoding.
+https://en.wikipedia.org/wiki/Autoencoder
+
+* Architecture
+ * $\mathcal{X}$: Data space
+ * $\mathcal{F}$: Feature space
+ * $\phi: \mathcal{X} \rightarrow \mathcal{F}$: encoder
+ * $\psi: \mathcal{F} \rightarrow \mathcal{X}$: decoder
+
+The encoder and decoder are then defined as
+\begin{align}
+\left(\phi, \psi\right) &= \mathrm{argmin}_{\phi,\psi} \| \mathcal{X} - (\psi \circ \phi)\mathcal{X} \| \\
+ &= \mathrm{argmin}_{\phi,\psi} \| (\mathcal{I}d - (\psi \circ \phi))\mathcal{X} \|
+\end{align}
+
+
+* Latent space in practice
+
+[[id:8bb3c55b-aa88-4763-bcec-e3e73227992a][Latent Space Data Assimilation using Deep Learning]] for instance.
+
+

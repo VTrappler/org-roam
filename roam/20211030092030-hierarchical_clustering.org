@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       77b3e6a8-0c59-49b9-b6ff-95d422542537
+:END:
+#+title: Hierarchical Clustering
+#+filetags: :Clustering:
+
+Hierarchical [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]] is a clustering methods based on a metric.
+

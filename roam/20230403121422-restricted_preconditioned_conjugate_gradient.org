@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       a65262fb-83a9-46dd-bbf2-6234eda7dd11
+:END:
+#+title: Restricted Preconditioned Conjugate Gradient
+#+filetags: :LinearAlgebra:
+#+startup: latexpreview
+[[id:c1c24a72-cdd2-4f19-a0f1-a4a2cb3d9258][Conjugate Gradient]] for solving [[id:d64056c7-f969-484c-baf5-d5f2726ce4ba][Linear Systems]] in [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]

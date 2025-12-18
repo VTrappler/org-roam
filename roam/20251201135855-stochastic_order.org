@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       789c1a15-15c7-4691-bd10-b01cd4c1d692
+:END:
+#+title: Stochastic Order
+#+filetags: :Proba:
+We can use [[id:39ee4930-274a-40bb-ada6-d845af8d5012][Integral Probability Metrics]] in order to define a stochastic order

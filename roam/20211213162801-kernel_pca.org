@@ -1,0 +1,80 @@
+:PROPERTIES:
+:ID:       4554a057-750e-47ae-b184-2d2a5a7bebbf
+:END:
+#+title: Kernel PCA
+#+filetags: :PCA:DimensionReduction:
+#+startup: latexpreview
+
+Kernel PCA is an extension of [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][PCA]] using techniques of [[id:a4a6afea-b952-4813-bb78-9ffa037d2afc][Kernel]] methods. The linear operations of PCA are performed in a [[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][RKHS]].
+
+* Principle
+Let us assume that we have a dataset of $N$ points $\{x_i\}_{1\leq i \leq N}$, where $x_i \in \mathbb{R}^{d}$
+
+If we map them to a $N$ dimensional space ($N > d$ then) with
+\begin{equation}
+\Phi: \mathbb{R}^d \rightarrow \mathbb{R}^N
+\end{equation}
+it is then easy to construct a hyperplane that divides the points into
+clusters.  Indeed, each point is projected to a point $\Phi(x_i)$ in
+the feature space of higher dimension.
+
+* Construction of the Kernel Matrix
+The function $\Phi$ is never evaluated explicitly, since it is
+high-dimensional and we don't want to work in the *feature space*. We
+make use however of its properties.
+
+We assume that the projected new features are centered:
+$frac{1}{N}\sum_{i=1}^N \Phi(x_i) = 0$
+
+We create the $N\times N$ kernel:
+\begin{equation}
+k(x, y) = \langle \Phi(x), \Phi(y)\rangle = \Phi(x)^T\Phi(y)
+\end{equation}
+
+The covariance matrix of the projected features is
+\begin{align}
+C &= \frac{1}{N}\sum_{i=1}^{N} \Phi(x_i) \Phi(x_i)^T \in\mathbb{R}^{N \times N}\\
+&= \left(k(x_i, x_j)\right)_{1\leq i,j \leq N}
+\end{align}
+
+Its eigenpairs $(\lambda_k, v_k)$ for $1 \leq k \leq N$ verifies
+\begin{equation}
+Cv_k = \lambda_k v_k
+\end{equation}
+Writing fully the matrix $C$,
+\begin{align}
+Cv_k &= \frac{1}{N}\sum_{i=1}^{N} \Phi(x_i) \Phi(x_i)^Tv_k = \lambda_k v_k\\
+&= \sum_{i=1}^{N} \Phi(x_i) \langle\frac{1}{N}\Phi(x_i); v_k \rangle
+\end{align}
+By writing $v_k$ onto the Hilbertian base
+\begin{equation}
+v_k = \sum_{i=1}^N a_{ki}\Phi(x_i)
+\end{equation}
+\begin{align}
+\frac{1}{N}\sum_{i=1}^{N} \Phi(x_i) \Phi(x_i)^T\sum_{j=1}^N a_{kj}\Phi(x_j)&= \lambda_k \sum_{i=1}^N a_{ki}\Phi(x_i)\\
+\frac{1}{N}\sum_{i=1}^{N} \Phi(x_i) \sum_{j=1}^N a_{kj}\Phi(x_i)^T\Phi(x_j)&= \lambda_k \sum_{i=1}^N a_{ki}\Phi(x_i)
+\end{align}
+So by multiplying by $N\Phi(x_l)^T$,
+\begin{equation}
+\sum_{i=1}^{N} k(x_l, x_i) \sum_{j=1}^N a_{kj}k(x_i,x_j)&= N\lambda_k \sum_{i=1}^N a_{ki}k(x_l, x_i)
+\end{equation}
+Or, in matrix notation,
+\begin{equation}
+C^2a_k = N\lambda_kCa_k
+\end{equation}
+
+
+
+
+The values of the $a_k = [a_{k1}\quad a_{k2} \dots a_{kN}]^T$, which
+is a $N$ vector can be obtained by solving
+\begin{equation}
+Ca_k = \lambda_k N a_k
+\end{equation}
+
+Thus the Kernel PCA components can be computed
+\begin{equation}
+y_k(x) = \Phi(x)^Tv_k= \sum_{i=1}^N a_{ki}k(x, x_i)
+\end{equation}
+
+

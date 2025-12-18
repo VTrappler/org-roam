@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       5e64328a-6e7f-418b-ae5f-499f15e598df
+:END:
+#+title: AI4Sim - Structure of Model Collection Repo
+
+Given a Use-case, the same directory structure is used in order to make everything concordant with [[id:374176e2-82ec-4332-9e11-d11878d238be][PyTorch - Lightning]] philosophy.
+   
+ + configs/ contains the experiments configuration files in the Lightning CLI format. An experiment designates a specific training run with a specific model and a specific dataset + split.
+ + data/ contains the raw and processed data, including normalization factors and explicit train / val / test split files.
+ + tests/ contains unit tests modules.
+ + notebooks/ contains example Jupyter notebooks, to illustrate the use case code usage.
+   
+ + config.py exposes global paths and path specific to current experiment.
+ + data.py deals with dataset and datamodule creation.
+ + models.py deals with model and module creation, including training logic. Declare models to the Lightning Model Registry. Users should only expose arguments that they wish to perform HPO on in their model constructor.
+ + plotters.py takes care of plots generation for the test set.
+ + trainer.py is the main entrypoint responsible for creating a Trainer object, a CLI, and saving artifacts in the experiment directory.
+ + noxfile.py is the Nox build tool configuration file that defines all targets available for the use case.
+
+

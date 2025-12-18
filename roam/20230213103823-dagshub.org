@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       41c4fd7f-d06d-4133-8db5-9e13dbda0cdb
+:END:
+#+title: DagsHub
+#+filetags: :Dev:ReproducibleResearch:MLOps:
+
+*  Dagshub
+DagsHub is a platform for tracking and versioning datasets, trained [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]] models.
+Integrates with [[id:93a33fcb-e9d9-44e4-859b-4a5744a2f122][Git]]
+[[https://dagshub.com/dashboard][DagsHub website]]
+
+* Principle
+  Dagshub is to host, version, and manage code, data, models, experiments.
+  + Source code versioning and hosting is done via [[id:93a33fcb-e9d9-44e4-859b-4a5744a2f122][Git]]
+  + The versioning of the data is done by [[id:858b11cf-5a27-4f82-8a85-eb870d20dde4][DVC]] (Data Version Control)
+  + Experiment tracking and model registry using [[id:4901e731-96f4-4daf-a3ac-a78fa4976df5][MLFlow]]
+
+ 
+
+

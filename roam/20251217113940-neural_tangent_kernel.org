@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       12a1f1c6-106a-4d2d-9c52-b187528564eb
+:ROAM_ALIASES: NTK
+:END:
+#+title: Neural Tangent Kernel
+#+filetags: :MachineLearning:ToStudy:
+
+In [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]], especially in the study of [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]], the Neural Tangent Kernel is a [[id:d45320a2-9c35-4e2a-8e53-43120907c123][Kernel]] which describes the evolution of a Neural Network during [[id:ee87a4bb-2518-4c38-bf15-77525e382003][Training]].
+* Informal properties
+Let $f(x,\theta)$ a NN parameterized by $\theta$, applied to input $x$.
+The Neural Tangent Kernel is defined as
+\begin{equation}
+\Theta(x,x';\theta) =\nabla_\theta f(x;\theta) \nabla_\theta f(x';\theta)
+\end{equation}
+so the kernel is defined with the gradient as the [[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][Feature map]], and the NTK is symmetric and psd.
+
+Let us consider the initialization of the weights as random, thus $\theta$ is a zero-mean random variable.
+We can thus use a "ensemble" of NN, chosen as different samples of the weights.
+** Infinite width limit
+In the infinite width limit
+ * At the initialization, the NN ensemble is a zero-mean  [[id:e917a64a-41b6-4eac-a0b7-f4a6c0e6e239][Gaussian Process]].
+ *

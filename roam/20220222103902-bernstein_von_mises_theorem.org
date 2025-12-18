@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       81ba3da1-343b-4289-a82f-493b23a3b328
+:END:
+#+title: Bernstein-Von Mises Theorem
+
+The posterior distribution of $\sqrt{n}(\theta - \theta_0)$ (where
+$\theta_0$ is the true value), converges in distribution to a normal
+distribution of mean 0 and covariance given by the inverse of the [[id:376e898d-36f4-4f8f-96eb-be7d0d8d8b5e][Fisher
+Information Matrix]]

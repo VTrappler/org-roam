@@ -1,0 +1,180 @@
+:PROPERTIES:
+:ID:       6677e8d8-70de-4236-ab2f-3ac48dfba2a4
+:END:
+#+title: Kalman Filter
+#+startup: latexpreview
+#+filetags: :DataAssimilation:
+
+The Kalman filter is an essential method of [[id:30f05970-bcf5-4fb2-b6d7-13fa4209e968][Data Assimilation]]. It
+relies on linearity and Gaussian assumptions. 
+
+* Kalman Filter
+** Stochastic modelling
+Such a system is described by
+\begin{equation}
+\left\{
+  \begin{array}{rcl}
+    x_k&=& M_k(x_{k-1}) + w_k \\
+    y_k&=& H_k(x_k) + v_k
+  \end{array}\right.
+\end{equation}
+
++ First equation is the forecast step
+  + $x_k$ is the system state at time $t_k$
+  + $M_k$ simulates the system from time $t_{k-1}$ to $t_k$
+  + $w_k$ is the model error within $M_k$, unbiased, *uncorrelated in time*
+  + $\mathbb{E}[w_k] = 0$ and $\mathbb{E}[w_k w_l^T] = \mathbf{Q}_k \cdot \delta_{kl}$ (kronecker delta)
++ Second equation: observation equation
+  + $H_k$ observation operator at time $t_k$
+  + $v_k$ is the observation error, unbiased, *uncorrelated in time*
+  + $\mathbb{E}[v_k] = 0$ and $\mathbb{E}[v_k v_l^T] = \mathbf{R}_k \cdot \delta_{kl}$ (kronecker delta)
++ $\mathbb{E}[v_k w_l^T] = 0$: no correlation between model and observation error.
+[[xournalpp:images/kalman_filter.xop.xopp][Illustration of notations for the kalman filter]]
+** Analysis step
++ At $t_k$, we have $x_k^f$ forecast, assumed unbiased, that acts as a background
++ Associated covariance matrix is $\mathbf{P}^f_k$.
+
++ Observation $y_k$
+
+BLUE analysis results in
+\begin{equation}
+x_k^a= x_k^f + \mathbf{K}_k\left(y_k - \mathbf{H}_k x_k^f\right)
+\end{equation}
+
++ Analysis covariance matrix:
+\begin{equation}
+\mathbf{P}_k^a = (\mathbf{I} - \mathbf{K}_k\mathbf{H}_k)\mathbf{P}_k^f(\mathbf{I} - \mathbf{K}_k\mathbf{H}_k)^T + \mathbf{K}_k \mathbf{R}_k \mathbf{K}_k^T
+\end{equation}
+
+Optimal gain matrix (=Kalman gain) is given by
+\begin{equation}
+\mathbf{K}^*_k = \mathbf{P}^f_k\mathbf{H}_k^T(\mathbf{H}_k\mathbf{P}^f_k\mathbf{H}_k^T + \mathbf{R}_k)^{-1}
+\end{equation}
+
+and finally the /optimal/ analysis covariance matrix is
+\begin{equation}
+\mathbf{P}_k^a = (\mathbf{I} - \mathbf{K}_k^*\mathbf{H}_k)\mathbf{P}^f_k
+\end{equation}
+** Forecast step
+
+Because of the linearity, we can use
+\begin{equation}
+x_{k+1}^f = \mathbf{M}_{k+1}x^a_k
+\end{equation}
+ as a prediction since it is then unbiased
+
+ 
+The forecast error cov matrix is given by
+
+\begin{equation}
+\mathbf{P}_{k+1}^f = \mathbf{M}_{k+1} \mathbf{P}^a_k \mathbf{M}_{k+1}^T + \mathbf{Q}_{k+1}
+\end{equation}
+
+** Algorithm
+
+*** Initialisation
++ Initial system state $x_0^f$ and error covariance matrix $P_0^f$
+  
+*** At every step $k$
+
+**** Analysis
++ Compute optimal gain
++ Compute analysis $x_{k}^a$ using the observation $y_k$
++ Compute error covariance matrix $\mathbf{P}_k^a$
+
+**** Forecast
++ Compute forecast $x_{k+1}^f$ (based on the analysis)
++ Compute error covariance matrix $\mathbf{P}_{k+1}^f$
+
+
+
+** Limits
+Relies on linearity assumptions
++ What if observation operator *non-linear* ?
++ What if evolution model *non-linear* ?
+  
+* Extended Kalman Filter
+:PROPERTIES:
+:ID:       4938fc89-e82a-4477-8031-3ca42430e755
+:ROAM_ALIASES: EKF
+:END:
+We can linearize the forecast and analysis step, and use the tangent linear as approximation
+
+** Forecast
+The forecast step stays unchanged for the state vector
+\begin{equation}
+x_{k+1}^f = M_{k+1}(x_k^a)
+\end{equation}
+However, let us write $\mathbf{M}_k$ the TL matrix of $M_k$ at $x_k$.
+The forecast error is then
+\begin{align}
+e^f_{k+1} &= x^f_{k+1} - x_{k+1} = M_{k+1}(x_k^a) - x_{k+1} \\
+   &= M_{k+1}(x_k + (x_k^a - x_k)) - x_{k+1} \\
+   &\approx M_{k+1}(x_k) + \mathbf{M}_k(x_k^a - x_k) - x_{k+1} \\
+& \approx \mathbf{M}_k e_k^a - w_{k+1}
+\end{align}
+So finally, we obtain
+\begin{equation}
+\mathbf{P}_{k+1}^f = \mathbf{M}_{k+1} \mathbf{P}^a_k \mathbf{M}_{k+1}^T + \mathbf{Q}_{k+1}
+\end{equation}
+as before
+** Analysis
+
+\begin{equation}
+\label{}
+x_k^a = x_k^f + \mathbf{K}_k (y_k - H_k(x_k^f))
+\end{equation}
+
+
+
+
+
+
+* Reduced Rank square root filter
+:PROPERTIES:
+:ID:       17e80e86-f937-4f56-8d35-3990d4f4ea11
+:ROAM_ALIASES: RRSQRF
+:END:
+** Dominant modes and Kalman Gain
+The RRSQRF is obtained by keeping only the $N_m$ leading [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Eigenvalues]]
+of the covariance error matrix, through [[id:6cee23ab-0d25-40b3-9b73-ba44fc730b39][Cholesky Decomposition]] or
+[[id:4a033759-84da-4099-b6dc-1df50308f966][Singular Value Decomposition]] for instance:
+\begin{equation}
+\mathbf{P}^f \approx \mathbf{S}_f \mathbf{S}_f^T
+\end{equation}
+where $\mathbf{S}_f$ is of reduced rank.
+By defining $\mathbf{Y}_f = \mathbf{H}\mathbf{S}_f$,
+the Kalman gain can be written as
+\begin{equation}
+\mathbf{K}^* = \mathbf{S}_f \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}
+\end{equation}
+
+The gain can be used directly to get the analysis $\mathbf{x}^a$.
+** Posterior ensemble
+The analysis error covariance matrix can then be written as
+\begin{align}
+ \mathbf{P}^a &= \left(\mathbf{I} - \mathbf{K}^* \mathbf{H}\right)\mathbf{P}_f \\
+&= \left(\mathbf{I} - \mathbf{S}_f \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}\mathbf{H}\right)\mathbf{S}_f\mathbf{S}_f^T \\
+&= \left(\mathbf{S}_f - \mathbf{S}_f \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}\mathbf{H}\mathbf{S}_f\right)\mathbf{S}_f^T \\
+&= \mathbf{S}_f \left(\mathbf{I} - \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}\mathbf{Y}_f\right)\mathbf{S}_f^T
+\end{align}
+
+So, by defining
+\begin{equation}
+\mathbf{S}_a = \mathbf{S}_f\left(\mathbf{I} - \mathbf{Y}_f^T\left(\mathbf{Y}_f\mathbf{Y}_f^T + \mathbf{R}\right)^{-1}\mathbf{Y}_f\right)^{1/2} \in \mathbb{R}^{N_x \times N_m}}
+\end{equation}
+where $N_x$ is the dimension of the state vector and $N_m$ is the number of leading modes
+we have indeed $\mathbf{S}_a \mathbf{S}_a^T =\mathbf{P}^a$
+*** Pros
+    * $\mathbf{S}_a$ represents a collection of $m$ state vectors $\rightarrow$ a posterior ensemble.
+    * No need to compute the error covariance matrices.
+    * The matrix for which we need to compute a square root is of
+      dimension $N_m \times N_m$, so it is not that costly.
+** Dimension reduction
+Say we performed the analysis step. How to get from $N_m$ modes to
+$N_m - N_q$ (remove $N_q$ modes) ?  We diagonalise $\mathbf{P}^a =
+\mathbf{S}_a \mathbf{S}_a^T = \mathbf{V\Lambda V}^T$, and we consider
+only the $N_m - N_q$ leading eigenvectos, put in the
+$\tilde{\mathbf{V}}$ matrix, of size $(N_m - N_q) \times N_x$.
+$\tilde{\mathbf{S}}_a \approx \mathbf{S}_a \tilde{\mathbf{V}}$
+** TODO Finir

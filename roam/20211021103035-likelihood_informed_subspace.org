@@ -1,0 +1,166 @@
+:PROPERTIES:
+:ID:       516b5f8f-6158-47eb-b7f9-757cc5402c35
+:ROAM_ALIASES: LIS
+:ROAM_REFS: cite:cui_likelihood-informed_2014
+:END:
+#+title: Likelihood Informed Subspace
+#+filetags: :DimensionReduction:
+#+STARTUP: latexpreview
+
+* Short intro
+LIS methods aims at finding a subspace where the changes from the
+prior distribution to the posterior distribution is the largest, as
+introduced in cite:cui_likelihood-informed_2014
+
+* Bayesian Formulation of inverse problems
+**  Bayes' theorem
+The parameter of interest $x$ is linked to the data $y$ by the model $G$:
+\begin{equation}
+y = G(x) +e
+\end{equation}
+where $e$ is the error introduced by the model (either observational or intrinsic)
+In a [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inverse Problem]] setting, we have
+\begin{equation}
+\pi(x\mid y) \propto \pi(y \mid x)\pi_0(x)
+\end{equation}
+** Gaussian assumptions
+
+- We assume a normal prior on $x$: $X \sim \mathcal{N}(\mu_{pr}, \Gamma_{pr})$
+- We model the additive noise with gaussian as well: $e\sim \mathcal{N}(0, \Gamma_{obs})$
+
+  
+As such, the likelihood $\pi(y \mid x) \propto \exp(-\eta(x))$  where
+\begin{equation}
+\eta(x) = \frac{1}{2}\|\Gamma_{obs}^{-1/2}\left(G(x) - y\right)\|^2
+\end{equation}
+
+* The linear case: Optimal Dimension reduction
+** Posterior distribution
+Let us assume that $G(x) = Gx$. The posterior is then Gaussian as
+well, with $\pi(x \mid y) = \mathcal{N}(\mu_{pos}, \Gamma_{pos})$
+
+\begin{align}
+\mu_{pos} &= \Gamma_{pos}\left(\Gamma_{pr}^{-1} \mu_{pr} + G^T \Gamma_{obs}^-1 y\right) \\
+\Gamma_{pos} &= \left( H +\Gamma_{pr}^{-1}\right)^{-1}
+\end{align}
+where $H = G^T \Gamma_{obs}^{-1} G$ is the Hessian of $\eta$
+** Projection
+We are looking for an approximation $\tilde{\pi}$ of the posterior, taking the form
+\begin{equation}
+ \tilde{\pi}(x \mid y) \propto \pi(y | P_r x) \pi_0(x)
+\end{equation}
+where $P_r$ is a rank-r projector, and $\pi(y | P_r x)$ approximates
+the original likelihood function.
+In this case: *the update due to the likelihood is only on a space of dim $r$*
+
+** Optimality
+- Let $\Gamma_{pr} = L L^T$ be a symmetric decomposition ([[id:6cee23ab-0d25-40b3-9b73-ba44fc730b39][Cholesky Decomposition]]) of the prior
+cov matrix.
+- Let $(\lambda_i, v_i)$ be the eigenpairs of $L^T H L$
+  (prior-preconditionned Hessian), such that $\lambda_i \geq
+  \lambda_{i+1}$
+- We define $u_i = L v_i$ and $w_i = L^{-T}v_i$, and the matrices
+   $U_r == [u_1,\dots,u_r]$ and $W_r=[w_1, \dots,w_r]$.
+
+The optimal projector is then
+\begin{equation}
+P_r = U_rW_r^T
+\end{equation}
+
+where optimality stems from the fact that the covariance matrix of
+$\tilde{\pi} \sim \mathcal{N}(\mu_{pos}^{(r)}, \Gamma_{pos}^{(r)})$
+minimizes a specific distance from the exact posterior, and the mean
+minimizes the Bayes' risk over the class of all linear transformation
+of the data with rank $r$. cite:spantini_optimal_2015 provides proof
+and discussion on optimality
+
+
+** Likelihood-informed subspace
+
+The likelihood-informed subspace is defined as $\mathrm{span}(u_1,
+\dots, u_r)$, which is the range of the projector.  We can formulate
+the $u_i$ as [[id:bc5efd27-c136-4dc2-a014-bbe643ea1073][Generalized Eigenvectors]] of the stencil $(H,
+\Gamma_{pr}^{-1})$
+\begin{align}
+(L^T H L) v_i &= \lambda_i v_i  \\
+L(L^T H u_i) &= L(\lambda_i v_i) \\
+\Gamma_{pr} H u_i &= \lambda_i L v_i \\
+H u_i &= \lambda_i \Gamma_{pr}^{-1} u_i
+\end{align}
+
+The $u_i$ are then maximizers of the [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][Rayleigh quotient]]
+\begin{equation}
+\mathcal{R}(u)= \frac{\langle u, Hu\rangle}{\langle u, \Gamma_{pr}^{-1} u \rangle}
+\end{equation}
+over $\mathbb{X} \setminus \mathrm{span}(u_1, \dots, u_{i-1})$
+
+$U_r$ diagonalizes both $H$ and $\Gamma_{pr}^{-1}$
+* LIS construction for non-linear inverse problems
+** Local LIS
+The model is assumed to be differentiable.  The linearized forward
+model at a parameter $x$ is $J(x) = \nabla G(x)$ where $J(x) \in
+\mathbb{R}^{d\times n}$
+The [[id:c3cbe92c-47c5-464d-97fa-ac508e593b82][Gauss-Newton]] approximation of the Hessian of $\eta$ is now
+\begin{equation}
+H(x) = J(x)^T \Gamma_{obs}^{-1} J(x)
+\end{equation}
+The [[id:2ad2fbae-6291-4b02-a56c-dfa1b0873941][local Rayleigh quotient]] can be defined as
+\begin{equation}
+\mathcal{R}(u;x) = \frac{\langle u, H(x)u\rangle}{\langle u, \Gamma_{pr}^{-1} u \rangle}
+\end{equation}
+or by using $v = L^{-1}u$, we have
+
+#+name: localrayleigh
+\begin{equation}
+\tilde{\mathcal{R}}(v;x) = \frac{\langle v, (L^TH(x)L)v\rangle}{\langle v, v \rangle} = \mathcal{R}(Lv;x)
+\end{equation}
+
+which is useful to quantify the local impact of the likelihood
+(numerator) relative to the prior (denominator).
+
+We can then choose a truncation threshold, and select the base vectors
+whose eigenvalues are above the threshold.  If $\tilde{R}(u;x)=1$, the
+directions are balances, so we would typically choose a threshold less
+than $1$.
+** Global LIS
+*** Monte-Carlo approximation and expectations of the Rayleigh quotient
+
+We consider the expectation of the local Rayleigh quotient [[localrayleigh][(See eq)]] over the *posterior*
+\begin{equation}
+\mathbb{E}_{\pi(x\mid y)}\left[\mathcal{R}(u;x)\right] = \mathbb{E}_{\pi}\left[\tilde{\mathcal{R}}(v;x)\right] = \frac{\langle v, Sv \rangle}{\langle v, v \rangle}
+\end{equation}
+where
+\begin{equation}
+S =\int_{\mathbb{X}} L^T H(x) L \pi(\mathrm{d}x\mid y)
+\end{equation}
+
+and the derivation is the same as in the local, through the eigendecomposition of $S$.
+
+$S$ can be approximated using the Monte-Carlo estimator
+\begin{equation}
+\hat{S}_n = \frac{1}{n}\sum_{k=1}^n L^T H(x^{(k)})L
+\end{equation}
+where the $x^{(k)} \sim \pi(x\mid y)$ are posterior samples.
+*** Construction of the global LIS
+Since the local Hessian $H(x^{(k)})$ is not explicitly available, and
+too large to store in practice, we can use the *prior-conditioned
+low-rank approximation*:
+For each posterior sample $x^{(k)}$, we use the [[id:57ae6377-3b1d-4e27-8ec4-785ee6d6dc1b][low-rank approximation]]:
+\begin{equation}
+L^TH(x^{(k)})L \approx \sum_{i=1}^{l(k)} \lambda_i^{(k)} v_i^{(k)} {v_i^{(k)}}^T
+\end{equation}
+where $l(k)$ is the index corresponding to the smallest eigenvalue
+above the threshold (for the sample $x^{(k)}$)
+
+Now, to construct the global LIS, we consider the eigendecomposition
+of the Monte-carlo estimator of the low-rank approximation of $S$
+
+\begin{equation}
+\left(\frac{1}{m}\sum_{k=1}^m \sum_{i=1}^{l(k)} \lambda_i^{(k)} v_i^{(k)} v_i^{(k)T}\right) \psi_j = \gamma_j \psi_j
+\end{equation}
+
+The global LIS has the non-orthogonal basis $\Phi_r = L \Psi_r = L [\psi_1,\dots,\psi_r]$.
+
+
+* Data-free version ?
+cite:cui_data-free_2021

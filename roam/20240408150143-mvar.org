@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       c6242a33-4e4b-4be5-9762-a3d101e4f015
+:END:
+#+title:  MVaR
+
+The MVaR is the Multidimensional Value at Risk, which is defined for[[id:dd3f58ae-558d-487b-9dd3-620c75c7f4f3][ Multi-Objective Optimization]] under uncertainties:
+
+It maps a random variable to a non-dominated set of vectors in the outcome space that are dominated by a fraction $\alpha$ of all possible realization.
+Each vector in the MVaR set correspond to an objective specification that a design will meet with probability $\geq \alpha$
+
+For a given point $x$:
+\begin{equation}
+\mathrm{MVaR}_{\alpha}\left[f(x, U)\right]=\mathrm{Pareto}\left(\{z\in \mathbb{R}^{M},\quad\mathbb{P}_U\left[f(x,U) \leq z\right] \geq \alpha\}\right)
+\end{equation}

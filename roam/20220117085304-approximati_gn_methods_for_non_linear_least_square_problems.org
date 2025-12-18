@@ -1,0 +1,116 @@
+:PROPERTIES:
+:ID:       6d779bf7-10b4-46d0-b9d2-b4c1e0c328c8
+:ROAM_REFS: cite:gratton_approximate_2007
+:ROAM_ALIASES: Quasi-Newton "Gauss-Newton method"
+:END:
+#+title: Approximate GN methods for non-linear least-square problems
+#+startup: latexpreview
+
+* Introduction/Principle
+The nonlinear least squares problem (NLSP) is defined as
+\begin{equation}
+\min_x \phi(x) = \frac{1}{2}\|f(x)\|^2_2
+\end{equation}
+where $x\in \mathbb{R}^n$, $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$
+
+The Gauss-Newton method consists in "solving a sequence of *linearized*
+least-square approximations to the NLSP problem. Each one of those
+approximations can be solved efficiently by an inner direct or
+iterative process.  An advantage is that it does not require
+computations of the second derivatives of $f$.
+
+* Exact Gauss-Newton method
+Let $J(x) = f^\prime(x)$
+\begin{align}
+\nabla \phi(x) &= J^T(x) f(x) \\
+\nabla^2 \phi(x) &= J^T(x)J(x) + Q(x)
+\end{align}
+where
+\begin{equation}
+Q(x) = \sum_{i=1}^m f_i(x) \nabla^2f_i(x)
+\end{equation}
+
+denotes the 2nd order terms.
+
+Minimizing $\phi$ $\Rightarrow$ Stationary points of $\phi$
+$\Rightarrow$ $\nabla \phi(x) = J^T(x)f(x) = F(x)=0$ This is then a
+root-finding problem, hence Newton's method. However, the $Q$ term
+involves the second order terms, so GN method consists in discarding
+these terms.
+
+** Algorithm
+   1. Choose initial $x_0 \in \mathbb{R}^n$
+   2. while not converged
+      1. Solve $J^T(x_k)J(x_k)s_k = -J^T(x_k)f(x_k)$
+      2. Set $x_{k+1} = x_k + s_k$
+	 
+** Equivalent representation
+ *  At each iteration, we solve
+\begin{equation}
+\min_s \frac{1}{2}\|J(x_k) s + f(x_k) \|^2_2
+\end{equation}
+which is the linearized version of the initial least-square problem: $f(x_{k+1}) \approx f(x_k) + J(x_k) (x_{k+1} - x_k) = f(x_k) + J(x_k)s$
+ * The GN method can be seen as a fixed-point iteration of
+\begin{equation}
+x_{k+1} = G(x_k)
+\end{equation}
+with
+
+\begin{align}
+G(x) &= x - J^+(x)f(x) \\
+J^+(x)&= (J^T(x)J(x))^{-1}J^T(x)
+\end{align}
+where $J^+$ is the Moore-Penrose inverse
+
+** Convergence properties
+Let us assume that
+ 1. There exists $x^*$ which verifies $J^T(x^*)f(x^*)=0$
+ 2. $J(x^*)$ has full rank
+
+and let $\rho(A)$ be the spectral radius of a square matrix $A$ (the largest eigenvalue), and let
+\begin{equation}
+\varrho = \rho \left(\left(J(x^*)^TJ(x^*)\right)^{-1}Q(x^*)\right)
+\end{equation}
+
+*** Theorem1
+if $\varrho<1$, the GN method converges locally to $x^*$, ie there exist a basin of attraction $\mathcal{D} = \{ x \mid \|x - x^*\|<\epsilon\}$ so that it converges for all $x_0 \in \mathcal{D}$
+In other words, is in terms of eigenvalues, the product $J J^T$ is "larger" than $Q$, its fine.
+* Truncated Gauss-Newton (TGN)
+Each *outer* iteration $k$ of the GN method implies the resolution of
+the linearized method. However, since $f$ is non linear, and $x_k$ far
+from $x^*$, it is not worth solving it to high resolution. We can stop
+when the relative residual is below a certain tolerance.
+** Algorithm
+   1. Choose initial $x_0 \in \mathbb{R}^n$
+   2. while not converged
+      1. Find $s_k$ so that $J^T(x_k)J(x_k)s_k = -J^T(x_k)f(x_k) + r_k$ where $\|r_k\|_2 \leq \beta_k \|J^T(x_k)f(x_k)\|_2$
+      2. Set $x_{k+1} = x_k + s_k$
+
+
+* Perturbed Gauss-Newton method (PGN)
+The PGN relies on the approximation of the true jacobian $J$ by an
+approximation $\tilde{J}$, which is easier to compute. *The non-linear function $f$ is not approximated*
+
+** Algorithm
+   1. Choose initial $x_0 \in \mathbb{R}^n$
+   2. while not converged
+      1. Find $s_k$ so that $\tilde{J}^T(x_k)\tilde{J}(x_k)s_k = -\tilde{J}^T(x_k)f(x_k)$
+      2. Set $x_{k+1} = x_k + s_k$
+      
+** Interpretation
+For that purpose, we introduce
+\begin{equation}
+\tilde{F}(x) = \tilde{J}^T(x)f(x)
+\end{equation}
+whose first derivative is
+\begin{equation}
+\tilde{F}^{\prime}(x) = \tilde{J}^T(x) J(x) + \tilde{Q}(x)
+\end{equation}
+The PGN algorithm can then be considered as a fixed point algorithm to
+solve $\tilde{F}(x) = 0$, thus it is an inexact Newton's method.
+Here, the second order terms $\tilde{Q}$ are ignored as well, and the
+first order term is approximated, so that the fixed point iteration is again a sequence of linear lest-squares problems
+
+
+* Truncated Perturbated GN method
+

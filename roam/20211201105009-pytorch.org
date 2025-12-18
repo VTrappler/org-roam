@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       40086648-2e0c-4bad-aaa3-ad0e146f8ee6
+:END:
+#+title: PyTorch
+#+filetags: :ProgrammingLanguage:MachineLearning:
+
+
+PyTorch is a [[id:503edbd9-35d0-4352-89a5-b0fe2613b878][Python]] library for [[id:c0b12568-1f49-4871-b9a5-604548a59a4e][Machine Learning]].
+
+It relies on Tensors, which are very similar to numpy.ndarray, except
+that they are very well suited to work on GPUs using CUDA (NVidia), hence providing an
+acceleration of the computations.
+
+
+
+#+begin_src python
+  import torch
+  from torch import nn
+#+end_src
+
+* Creating a model
+** Neural Network structure
+In order to create a [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]] with a specific topology, we need
+to create a class that inherits from =nn.Module=.
+An example would be:
+#+begin_src python
+  class NeuralNetwork(nn.Module):
+      def __init__(self):
+	  super(NeuralNetwork, self).__init__()
+	  self.stack = nn.Sequential(
+	      ## Put layers
+	      )
+
+      def forward(self, x):
+	  return self.stack(x)
+#+end_src
+
+The =self.forward= method is the one called on the data.
+
+** Layers
+Layers and their types are directly implemented in pytorch
+
+*** Linear Layers
+ * =nn.Linear=: $x\mapsto xA^t + b$ classical linear combination with weights
+ * =nn.Identity=: $x \mapsto x$
+ * =nn.LazyLinear=: same as Linear, except that the number of input features is inferrend
+
+*** Activation Layers:
+ * =nn.ReLU, nn.Sigmoid, nn.Tanh=: see
+
+   
+*** Transformer Layers:
+ * 

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       8a9b6e20-3544-4066-9790-b3e66d88bcdf
+:END:
+#+title: K-means clustering
+#+filetags: :Clustering:
+
+K-means [[id:adda3fa2-9f8c-4d00-8897-9caf1c90517a][Clustering]] is a clustering technique that aims to partition
+$n$ observations into $k$ clusters.

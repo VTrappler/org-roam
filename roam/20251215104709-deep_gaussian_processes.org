@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       29660a8d-a686-4cc2-bfbf-73d5e26cf3df
+:END:
+#+title: Deep Gaussian Processes
+#+filetags: :MachineLearning:GP:
+* Analogy with  [[id:7a245cfe-dcaa-47d6-a318-5574fab3b7ac][Neural Networks]]
+Let $x$ be an input, we can model the DNN as
+\begin{align}
+h_1 &= \sigma(W_1x) \\
+h_2 &= \sigma(W_2h_1) \\
+h_3 &= \sigma(W_3h_2) \\
+f&=w_4^Tx
+\end{align}
+** Bottleneck layers
+In order to reduce the number of parameters to train, we can add bottleneck layers, where we project in lower dimensional space:
+\begin{align}
+z_1 &= V_1^Tx\\
+z_2 &= V_2^T\sigma(U_1z_1) \\
+z_3 &= V_3^T\sigma(U_2z_2)\\
+f &= w_4^Tz_3
+\end{align}

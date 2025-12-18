@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       e917a64a-41b6-4eac-a0b7-f4a6c0e6e239
+:ROAM_ALIASES: Kriging
+:END:
+#+title: Gaussian Processes
+#+filetags: :Bayes:GP:Bayesian:Proba:
+
+Semi-non parametric regression method based on [[id:8dcedd6a-85dc-4af5-afde-5936cef961d6][Bayesian Inference]]:
+We assume a prior on an unknown function $f$.
+* Probabilistic point of view
+* Statistical point of view
+* RKHS
+[[id:2c88b6ee-ba2b-42ab-a830-7199d018d7c8][RKHS]]
+By the Moore-Aronszajn theorem, for every pd kernel $k$, there exists a unique RKHS $\mathcal{H}_k$ for which $k$ is the reproducing kernel.
+
+Given this kernel, we can define $\mathcal{H}_0$ the linear span of feature vectors:
+$$\mathcal{H}_0 = \{f = \sum_{i=1}^n c_i k(\cdot,x_i)\quad \text{ for }n\in \mathbb{N}, c_1,\dots,c_n \in\mathbb{R},x_1,\dots,x_n\in X \}$$
+This [[id:c753f247-4fd9-45ef-94b2-400bd92fd58c][Vector Spaces]] can be made a [[id:373e5002-e0bd-4c88-95f7-74f5b7925b10][Prehilbertian space]], by defining the inner product as
+
+$$\langle f,g \rangle_{\mathcal{H}_0} = \sum_{i=1}^n \sum_{j=1}^m a_ib_j k(x_i,y_j)$$
+The RKHS $\mathcal{H}_k$ is defined as the closure of $\mathcal{H}_0$,
+$$\mathcal{H}_k =\bar{\mathcal{H}_0} = \{f = \sum_{i=1}^{\infty }c_i k(\cdot,x_i) \mid \|f\|^2_{\mathcal{H}_k} = \lim_{n\to\infty} \|\sum_{i=1}^n c_i k(\cdot,x_i)\|^2_{\mathcal{H}_0} = \sum_{i,j=1}^n c_ic_jk(x_i,x_j) < \infty \}$$
+* Gaussian Measure on the space of functions

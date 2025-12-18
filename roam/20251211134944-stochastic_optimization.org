@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       0f927232-9fc5-4b7a-b5ec-51eecdf50706
+:END:
+#+title: Stochastic Optimization
+#+filetags: :OUU:
+
+ [[id:789c1a15-15c7-4691-bd10-b01cd4c1d692][Stochastic Order]]
+[[id:4f615672-6a6d-4511-a38c-f5c7b88eeb60][Bayesian Optimization]]

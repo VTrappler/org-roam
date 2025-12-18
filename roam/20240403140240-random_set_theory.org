@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       927cff34-f103-4085-9b90-b443e2f0519f
+:ROAM_ALIASES: Vorobev
+:END:
+#+title: Random Set Theory
+#+startup: latexpreview
+
+Let $\mathcal{Y}$ be a random closed set on a topological space $D\subset \mathbb{R}^m$ (with euclidian distance). Let $\mu$ be the Lebesgue measure on $\mathbb{R}^m$
+* Coverage function
+The coverage function $p_\mathcal{Y}$
+\begin{equation}
+\begin{array}{rcl}
+p_\mathcal{Y}: D &\longrightarrow& [0, 1] \\
+x &\longmapsto & \mathbb{P}\left[x \in \mathcal{Y}\right]
+\end{array}
+\end{equation}
+* beta-quantiles
+The $\beta$-quantile $\mathcal{Q}_\beta$ is defined as
+\begin{equation}
+\mathcal{Q}_\beta = \left\{z \in D,\quad p_\mathcal{Y}(z) \geq \beta \right\}
+\end{equation}
+
+For $\alpha < \beta$, $\mathcal{Q}_{\beta} \subset \mathcal{Q}_{\alpha}$
+* Vorob'ev definitions
+** Vorob'ev expectation
+Assuming that $\mathbb{E}\left[\mu(\mathcal{Y})\right] < +\infty$ the Vorob'ev expectation is the $\beta^*$ -quantile $\mathcal{Q}_{\beta^*}$ such that
+\begin{equation}
+\mathbb{E}\left[\mu(\mathcal{Y})\right] = \mu\left(\mathcal{Q}_{\beta^*}\right)
+\end{equation}
+if it has a solution, otherwise, it is defined as
+\begin{equation}
+\mu\left(\mathcal{Q}_{\beta}\right)< \mathbb{E}\left[\mu(\mathcal{Y})\right] \leq \mu\left(\mathcal{Q}_{\beta^*}\right)
+\end{equation}
+for any $\beta > \beta^*$
+** Vorob'ev deviation
+Defined as
+\begin{equation}
+\mathbb{E}\left[\mu\left(\mathcal{Q}_{\beta^*} \triangle \mathcal{Y}\right)\right] \in \mathbb{R}
+\end{equation}
+** Properties
+The Vorob'ev expectation is a global minimizer of the deviation among all closed sets with volume equal to the average volume of $\mathcal{Y}$:
+For any $M\subset D$ with $\mu(M) = \mathbb{E}\left[\mu(\mathcal{Y})\right]$
+\begin{equation}
+\mathbb{E}\left[\mu\left(\mathcal{Q}_{\beta^*} \triangle \mathcal{Y}\right)\right] \leq \mathbb{E}\left[\mu\left(M \triangle \mathcal{Y}\right)\right]
+\end{equation}
+
